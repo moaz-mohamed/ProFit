@@ -1,0 +1,125 @@
+// import 'package:calory_calc/blocs/auth/bloc.dart';
+// import 'package:calory_calc/providers/local_providers/userProvider.dart';
+
+// import 'package:calory_calc/models/dbModels.dart';
+// import 'package:calory_calc/utils/dataLoader.dart';
+// import 'package:flutter_bloc/flutter_bloc.dart';
+//
+// import 'widgets/forms/forms.dart';
+
+import 'package:flutter/material.dart';
+import 'package:profit/widgets/goal_achieved_form.dart';
+
+void main() => runApp(const MyApp());
+
+
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return const MaterialApp(
+      title: 'Flutter App',
+      home: IntroPage(),
+    );
+  }
+
+}
+class IntroPage extends StatefulWidget {
+  const IntroPage({Key? key}) : super(key: key);
+
+  @override
+  State<IntroPage> createState() => _IntroPageState();
+
+}
+
+class _IntroPageState extends State<IntroPage> {
+
+  final _pageController = PageController();//It controls the pages of the physical paramters input entry.
+  // final _nameController = TextEditingController();
+  // final _surnameController = TextEditingController();
+  // final _weightController = TextEditingController();
+  // final _heightController = TextEditingController();
+  // final _ageController = TextEditingController();
+
+  // late double _activityLevel;//It represents the fitness workmodel that will be included in the BMR calculation(workmodel)
+  late int _goalAchieved;//It represents the goal of the user whether it is to lose/maintenance/build muscle.
+  // late bool _gender;//Male or Female
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        FocusScope.of(context).requestFocus(
+          FocusNode(),
+        );
+      },
+      child: Scaffold(
+        body: PageView(
+          controller: _pageController,
+          allowImplicitScrolling: true,
+          physics: const NeverScrollableScrollPhysics(),
+          children: [
+            //Abdelnasser on boarding screen widget
+            GoalAchievedForm(
+              // It is the form of the users goal whether it to lose/maintenance/build muscle.
+              onComplete: (int goalAchieved) {
+                setState(() => _goalAchieved = goalAchieved);
+                _advancingNextPage();
+              },
+            ),
+            // PhysicalParametersForm( //It is the form widget responsible for taking the user age,height,weight
+            //   ageController: _ageController,
+            //   heightController: _heightController,
+            //   weightController: _weightController,
+            //   onCompleted: (
+            //       String weight,
+            //       String height,
+            //       String age,
+            //       bool gender,
+            //       ) {
+            //     setState(() => _gender = gender);
+            //     _advancingNextPage();
+            //   },
+            // ),
+            // ActivityLevelForm(
+            //   onComplete: (double activityLevel) {
+            //     setState(() => _activityLevel = activityLevel);
+            //     _advancingNextPage();
+            //   },
+            // ),
+            // NameForm(
+            //   nameController: _nameController,
+            //   surnameController: _surnameController,
+            //   onCompleted: (String name, String surname) async {
+            //     User user = User(
+            //       name: name,
+            //       surname: surname,
+            //       weight: double.tryParse(_weightController.text),
+            //       height: double.tryParse(_heightController.text),
+            //       age: double.tryParse(_ageController.text),
+            //       gender: _gender,
+            //       workModel: _workModel,
+            //       workFutureModel: _futureWorkModel,
+            //     );
+            //     registrationAtLocalDB(user);
+            //   },
+            // ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  // void registrationAtLocalDB(User user) {
+  //   BlocProvider.of<AuthBloc>(context).add(Authorize(user: user));
+  // }
+
+  void _advancingNextPage() {//switches the page with an animation
+    _pageController.animateToPage(
+      _pageController.page!.toInt() + 1,
+      duration: const Duration(milliseconds: 300),
+      curve: Curves.bounceInOut,
+    );
+  }
+}
