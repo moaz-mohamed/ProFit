@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:profit/design/ThemeUI.dart';
+import 'package:profit/models/user_data.dart';
 
 
 
@@ -106,16 +107,20 @@ class GoalAchievedFormState extends State<GoalAchievedForm> {
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 15.0),
-            child: TextButton(
+            child: SizedBox(
+              width: 200,
+              child: TextButton(
               style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all(FitnessAppTheme.nearlyBlue),
-                foregroundColor:  MaterialStateProperty.all(FitnessAppTheme.white)
+                  foregroundColor:  MaterialStateProperty.all(FitnessAppTheme.white)
               ),
               child: const Text(
                 'Agree',
               ),
               onPressed: () => widget.onComplete(goalAchieved),
             ),
+            ),
+
           )
         ],
       ),
@@ -181,15 +186,3 @@ class RadioItem extends StatelessWidget {
   }
 }
 
-class UserModel {
-  bool isSelected;
-  final int dietNumber;//It represents which diet you should use(fats,proteins,carbs) depending on the model you choose
-
-  final String icon;//it is the icon that will be in assets folder icons represented by the id of the box
-  final String title;//Lose weight,maintain weight,build muscle
-  final String subtitle;//description of the title
-  final double padding;
-
-  UserModel(this.isSelected, this.dietNumber, this.icon, this.title,
-      this.subtitle, this.padding);
-}
