@@ -10,15 +10,19 @@
 import 'package:flutter/material.dart';
 import 'package:profit/widgets/goal_achieved_form.dart';
 
+import 'design/ThemeUI.dart';
+
 void main() => runApp(const MyApp());
 
 
 class MyApp extends StatelessWidget {
+
   const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter App',
       home: IntroPage(),
     );
@@ -55,6 +59,7 @@ class _IntroPageState extends State<IntroPage> {
         );
       },
       child: Scaffold(
+      backgroundColor: FitnessAppTheme.background,
         body: PageView(
           controller: _pageController,
           allowImplicitScrolling: true,

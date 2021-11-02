@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:profit/design/custom_theme.dart';
-import 'package:profit/design/theme.dart';
+import 'package:profit/design/ThemeUI.dart';
+
 
 
 class GoalAchievedForm extends StatefulWidget {
@@ -59,23 +59,21 @@ class GoalAchievedFormState extends State<GoalAchievedForm> {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
+
     return Padding(
       padding: const EdgeInsets.all(40.0).copyWith(left: 25.0, right: 25.0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Column(
-            children: [
+            children: const [
               Text(
                 "ProFit",
-                style: CustomTheme.title,
+                style: FitnessAppTheme.headlineBlue,
               ),
               Text(
                 "Choose your goal to achieve",
-                style: CustomTheme.subtitle.copyWith(
-                  color: theme.primaryColor,
-                ),
+                style: FitnessAppTheme.subtitle,
               ),
             ],
           ),
@@ -109,9 +107,12 @@ class GoalAchievedFormState extends State<GoalAchievedForm> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 15.0),
             child: TextButton(
-              child: Text(
+              style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all(FitnessAppTheme.nearlyBlue),
+                foregroundColor:  MaterialStateProperty.all(FitnessAppTheme.white)
+              ),
+              child: const Text(
                 'Agree',
-                style: theme.textTheme.button,
               ),
               onPressed: () => widget.onComplete(goalAchieved),
             ),
@@ -130,15 +131,15 @@ class RadioItem extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         boxShadow: _item.isSelected
-        ? [DesignTheme.selectorShadow]
-            : [DesignTheme.transperentShadow],
+        ? [FitnessAppTheme.selectorShadow]
+            : [FitnessAppTheme.transperentShadow],
         color: _item.isSelected
-            ? DesignTheme.whiteColor
-            : DesignTheme.selectorGrayBackGround,
+            ? FitnessAppTheme.white
+            : FitnessAppTheme.selectorGrayBackGround,
         border: Border.all(
             width: 1.0,
             color:
-            _item.isSelected ? CustomTheme.mainColor : Colors.transparent),
+            _item.isSelected ? FitnessAppTheme.nearlyBlue : Colors.transparent),
         borderRadius: const BorderRadius.all(Radius.circular(12.0)),
       ),
       margin: const EdgeInsets.all(15).copyWith(top: 0.0),
@@ -154,10 +155,10 @@ class RadioItem extends StatelessWidget {
               Text(
                 _item.title,
                 style: _item.isSelected
-                    ? DesignTheme.selectorBigTextAction
-                    : DesignTheme.selectorBigText,
+                    ? FitnessAppTheme.selectorBigTextAction
+                    : FitnessAppTheme.selectorBigText,
               ),
-              Text(_item.subtitle, style: DesignTheme.selectorMiniLabel)
+              Text(_item.subtitle, style: FitnessAppTheme.selectorMiniLabel)
             ],
           ),
           Padding(
