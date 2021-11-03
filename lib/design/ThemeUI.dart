@@ -97,18 +97,20 @@ class FitnessAppTheme {
     letterSpacing: 0.2,
     color: lightText, // was lightText
   );
-  static BoxShadow get selectorShadow => BoxShadow(//The selected shadow of the box in goalAchieved form
-    // color: CustomTheme.mainColor.withOpacity(0.25),
-    color: FitnessAppTheme.nearlyWhite.withOpacity(0.25),
-    blurRadius: 8.0,
-    spreadRadius: 2.0,
-    offset: const Offset(
-      0.0,
-      4.0,
-    ),
-  );
-  static const BoxShadow transperentShadow = BoxShadow(//The unselected shadow of the box in goalAchieved for
-    color:FitnessAppTheme.nearlyWhite,
+  static BoxShadow get selectorShadow => BoxShadow(
+        //The selected shadow of the box in goalAchieved form
+        // color: CustomTheme.mainColor.withOpacity(0.25),
+        color: FitnessAppTheme.nearlyWhite.withOpacity(0.25),
+        blurRadius: 8.0,
+        spreadRadius: 2.0,
+        offset: const Offset(
+          0.0,
+          4.0,
+        ),
+      );
+  static const BoxShadow transperentShadow = BoxShadow(
+    //The unselected shadow of the box in goalAchieved for
+    color: FitnessAppTheme.nearlyWhite,
     blurRadius: 15.0,
     spreadRadius: 2.0,
     offset: Offset(
@@ -117,13 +119,15 @@ class FitnessAppTheme {
     ),
   );
 
-  static TextStyle get selectorBigTextAction => TextStyle(//Selected big text
-    fontFamily: 'Montserrat',
-    fontWeight: FontWeight.w600,
-    fontSize: 16,
-    color: FitnessAppTheme.nearlyBlue,
-  );
-  static const TextStyle selectorBigText = TextStyle(//unselected big text
+  static TextStyle get selectorBigTextAction => TextStyle(
+        //Selected big text
+        fontFamily: 'Montserrat',
+        fontWeight: FontWeight.w600,
+        fontSize: 16,
+        color: FitnessAppTheme.nearlyBlue,
+      );
+  static const TextStyle selectorBigText = TextStyle(
+    //unselected big text
     fontFamily: 'Montserrat',
     fontWeight: FontWeight.w500,
     fontSize: 16,
