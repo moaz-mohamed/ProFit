@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:profit/design/ThemeUI.dart';
 import 'package:profit/models/user_data.dart';
 
-
-
 class GoalAchievedForm extends StatefulWidget {
-    const GoalAchievedForm({Key? key, required this.onComplete}) : super(key: key);
+  const GoalAchievedForm({Key? key, required this.onComplete})
+      : super(key: key);
 
   final Function(int futureWorkModel) onComplete;
 
@@ -22,7 +21,7 @@ class GoalAchievedFormState extends State<GoalAchievedForm> {
   @override
   void initState() {
     super.initState();
-    _initializeData();//It is the home default screen where he initially selects the first model as default
+    _initializeData(); //It is the home default screen where he initially selects the first model as default
   }
 
   void _initializeData() {
@@ -60,7 +59,6 @@ class GoalAchievedFormState extends State<GoalAchievedForm> {
 
   @override
   Widget build(BuildContext context) {
-
     return Padding(
       padding: const EdgeInsets.all(40.0).copyWith(left: 25.0, right: 25.0),
       child: Column(
@@ -84,7 +82,8 @@ class GoalAchievedFormState extends State<GoalAchievedForm> {
                 height: MediaQuery.of(context).size.height / 2,
                 child: ListView.builder(
                   itemCount: dataModels.length,
-                  itemBuilder: (BuildContext context, int index){ //converts each item to widget
+                  itemBuilder: (BuildContext context, int index) {
+                    //converts each item to widget
                     return InkWell(
                       highlightColor: Colors.transparent,
                       focusColor: Colors.transparent,
@@ -95,7 +94,7 @@ class GoalAchievedFormState extends State<GoalAchievedForm> {
                             element.isSelected = false;
                           }
                           dataModels[index].isSelected = true;
-                           goalAchieved= dataModels[index].dietNumber;
+                          goalAchieved = dataModels[index].dietNumber;
                         });
                       },
                       child: RadioItem(dataModels[index]),
@@ -110,17 +109,17 @@ class GoalAchievedFormState extends State<GoalAchievedForm> {
             child: SizedBox(
               width: 200,
               child: TextButton(
-              style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(FitnessAppTheme.nearlyBlue),
-                  foregroundColor:  MaterialStateProperty.all(FitnessAppTheme.white)
+                style: ButtonStyle(
+                    backgroundColor:
+                        MaterialStateProperty.all(FitnessAppTheme.nearlyBlue),
+                    foregroundColor:
+                        MaterialStateProperty.all(FitnessAppTheme.white)),
+                child: const Text(
+                  'Continue',
+                ),
+                onPressed: () => widget.onComplete(goalAchieved),
               ),
-              child: const Text(
-                'Agree',
-              ),
-              onPressed: () => widget.onComplete(goalAchieved),
             ),
-            ),
-
           )
         ],
       ),
@@ -136,19 +135,21 @@ class RadioItem extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         boxShadow: _item.isSelected
-        ? [FitnessAppTheme.selectorShadow]
+            ? [FitnessAppTheme.selectorShadow]
             : [FitnessAppTheme.transperentShadow],
         color: _item.isSelected
             ? FitnessAppTheme.white
             : FitnessAppTheme.selectorGrayBackGround,
         border: Border.all(
             width: 1.0,
-            color:
-            _item.isSelected ? FitnessAppTheme.nearlyBlue : Colors.transparent),
+            color: _item.isSelected
+                ? FitnessAppTheme.nearlyBlue
+                : Colors.transparent),
         borderRadius: const BorderRadius.all(Radius.circular(12.0)),
       ),
       margin: const EdgeInsets.all(15).copyWith(top: 0.0),
-      padding: const EdgeInsets.only(left: 20, right: 20, top: 7.5, bottom: 7.5),
+      padding:
+          const EdgeInsets.only(left: 20, right: 20, top: 7.5, bottom: 7.5),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         mainAxisSize: MainAxisSize.max,
@@ -171,13 +172,13 @@ class RadioItem extends StatelessWidget {
             child: Container(
               child: _item.isSelected
                   ? Image.asset(
-                "assets/selector/" + _item.icon + "Color.png",
-                height: 80,
-              )
+                      "assets/selector/" + _item.icon + "Color.png",
+                      height: 80,
+                    )
                   : Image.asset(
-                "assets/selector/" + _item.icon + ".png",
-                height: 80,
-              ),
+                      "assets/selector/" + _item.icon + ".png",
+                      height: 80,
+                    ),
             ),
           )
         ],
@@ -185,4 +186,3 @@ class RadioItem extends StatelessWidget {
     );
   }
 }
-

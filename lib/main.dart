@@ -9,14 +9,13 @@
 
 import 'package:flutter/material.dart';
 import 'package:profit/widgets/goal_achieved_form.dart';
+import 'package:profit/widgets/physical_paramters_form.dart';
 
 import 'design/ThemeUI.dart';
 
 void main() => runApp(const MyApp());
 
-
 class MyApp extends StatelessWidget {
-
   const MyApp({Key? key}) : super(key: key);
 
   @override
@@ -27,28 +26,28 @@ class MyApp extends StatelessWidget {
       home: IntroPage(),
     );
   }
-
 }
+
 class IntroPage extends StatefulWidget {
   const IntroPage({Key? key}) : super(key: key);
 
   @override
   State<IntroPage> createState() => _IntroPageState();
-
 }
 
 class _IntroPageState extends State<IntroPage> {
-
-  final _pageController = PageController();//It controls the pages of the physical paramters input entry.
+  final _pageController =
+      PageController(); //It controls the pages of the physical paramters input entry.
   // final _nameController = TextEditingController();
   // final _surnameController = TextEditingController();
-  // final _weightController = TextEditingController();
-  // final _heightController = TextEditingController();
-  // final _ageController = TextEditingController();
-
-  // late double _activityLevel;//It represents the fitness workmodel that will be included in the BMR calculation(workmodel)
-  late int _goalAchieved;//It represents the goal of the user whether it is to lose/maintenance/build muscle.
-  // late bool _gender;//Male or Female
+  final _weightController = TextEditingController();
+  final _heightController = TextEditingController();
+  final _ageController = TextEditingController();
+  late double
+      _activityLevel; //It represents the fitness workmodel that will be included in the BMR calculation(workmodel)
+  late int
+      _goalAchieved; //It represents the goal of the user whether it is to lose/maintenance/build muscle.
+  late bool _gender; //Male or Female
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +58,7 @@ class _IntroPageState extends State<IntroPage> {
         );
       },
       child: Scaffold(
-      backgroundColor: FitnessAppTheme.background,
+        backgroundColor: FitnessAppTheme.background,
         body: PageView(
           controller: _pageController,
           allowImplicitScrolling: true,
@@ -73,20 +72,22 @@ class _IntroPageState extends State<IntroPage> {
                 _advancingNextPage();
               },
             ),
-            // PhysicalParametersForm( //It is the form widget responsible for taking the user age,height,weight
-            //   ageController: _ageController,
-            //   heightController: _heightController,
-            //   weightController: _weightController,
-            //   onCompleted: (
-            //       String weight,
-            //       String height,
-            //       String age,
-            //       bool gender,
-            //       ) {
-            //     setState(() => _gender = gender);
-            //     _advancingNextPage();
-            //   },
-            // ),
+            PhysicalParametersForm(
+              //It is the form widget responsible for taking the user age,height,weight
+              ageController: _ageController,
+              heightController: _heightController,
+              weightController: _weightController,
+              onCompleted: (
+                String weight,
+                String height,
+                String age,
+                bool gender,
+              ) {
+                setState(() => _gender = gender);
+
+                _advancingNextPage();
+              },
+            ),
             // ActivityLevelForm(
             //   onComplete: (double activityLevel) {
             //     setState(() => _activityLevel = activityLevel);
@@ -120,7 +121,8 @@ class _IntroPageState extends State<IntroPage> {
   //   BlocProvider.of<AuthBloc>(context).add(Authorize(user: user));
   // }
 
-  void _advancingNextPage() {//switches the page with an animation
+  void _advancingNextPage() {
+    //switches the page with an animation
     _pageController.animateToPage(
       _pageController.page!.toInt() + 1,
       duration: const Duration(milliseconds: 300),
