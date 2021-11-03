@@ -32,6 +32,10 @@ class _PhysicalParametersFormState extends State<PhysicalParametersForm> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
     final theme = Theme.of(context);
     return Padding(
       padding: const EdgeInsets.all(40),
