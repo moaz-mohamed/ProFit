@@ -37,31 +37,82 @@ class _PhysicalParametersFormState extends State<PhysicalParametersForm> {
       DeviceOrientation.portraitDown,
     ]);
     final theme = Theme.of(context);
-    return Padding(
-      padding: const EdgeInsets.all(40),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-          Column(
-            children: const [
-              Text(
-                'ProFit',
-                style: FitnessAppTheme.headlineBlue,
-              ),
-              Text(
-                'Enter your physical information',
-                style: FitnessAppTheme.subtitle,
-              ),
-            ],
-          ),
-          Form(
-            key: _formKey,
-            child: Column(
-              children: [
-                TextFormField(
+    return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () => Navigator.of(context).pop(),
+        ),
+        centerTitle: true,
+        title: const Text("ProFit"),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.fromLTRB(40, 10, 40, 10),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            Column(
+              children: const [
+                Text(
+                  'Physical Parameters',
+                  style: FitnessAppTheme.headlineBlue,
+                ),
+                Text(
+                  'Enter your physical information',
+                  style: FitnessAppTheme.subtitle,
+                ),
+              ],
+            ),
+            Form(
+              key: _formKey,
+              child: Column(
+                children: [
+                  TextFormField(
+                      onTap: () {},
+                      controller: widget.weightController,
+                      cursorColor: theme.primaryColor,
+                      keyboardType: TextInputType.number,
+                      inputFormatters: [
+                        FilteringTextInputFormatter.allow(
+                            RegExp("[1-9][0-9]*")),
+                        FilteringTextInputFormatter.digitsOnly
+                      ],
+                      decoration: const InputDecoration(
+                        labelText: "Weight",
+                        hintText: "Enter your weight in kilograms",
+                        hintStyle: TextStyle(fontSize: 13, color: Colors.grey),
+                      ),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Weight is required';
+                        }
+                      }),
+                  SizedBox(height: 10),
+                  TextFormField(
                     onTap: () {},
-                    controller: widget.weightController,
+                    controller: widget.heightController,
+                    cursorColor: theme.primaryColor,
+                    keyboardType: TextInputType.number,
+                    //style: TextStyle(color: Colors.blueGrey),
+                    inputFormatters: [
+                      FilteringTextInputFormatter.allow(RegExp("[1-9][0-9]*")),
+                      FilteringTextInputFormatter.digitsOnly
+                    ],
+                    decoration: const InputDecoration(
+                        labelText: "Height",
+                        hintText: "Enter your height in centimeters",
+                        hintStyle: TextStyle(fontSize: 13, color: Colors.grey)),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Weight is required';
+                      }
+                    },
+                  ),
+                  const SizedBox(height: 10),
+                  TextFormField(
+                    onTap: () {},
+                    controller: widget.ageController,
                     cursorColor: theme.primaryColor,
                     keyboardType: TextInputType.number,
                     inputFormatters: [
@@ -69,80 +120,39 @@ class _PhysicalParametersFormState extends State<PhysicalParametersForm> {
                       FilteringTextInputFormatter.digitsOnly
                     ],
                     decoration: const InputDecoration(
-                      labelText: "Weight",
-                      hintText: "Enter your weight in kilograms",
+                      labelText: "Age",
+                      hintText: "Enter your age",
                       hintStyle: TextStyle(fontSize: 13, color: Colors.grey),
                     ),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return 'Weight is required';
+                        return 'Age is required';
                       }
-                    }),
-                SizedBox(height: 10),
-                TextFormField(
-                  onTap: () {},
-                  controller: widget.heightController,
-                  cursorColor: theme.primaryColor,
-                  keyboardType: TextInputType.number,
-                  //style: TextStyle(color: Colors.blueGrey),
-                  inputFormatters: [
-                    FilteringTextInputFormatter.allow(RegExp("[1-9][0-9]*")),
-                    FilteringTextInputFormatter.digitsOnly
-                  ],
-                  decoration: const InputDecoration(
-                      labelText: "Height",
-                      hintText: "Enter your height in centimeters",
-                      hintStyle: TextStyle(fontSize: 13, color: Colors.grey)),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Weight is required';
-                    }
-                  },
-                ),
-                const SizedBox(height: 10),
-                TextFormField(
-                  onTap: () {},
-                  controller: widget.ageController,
-                  cursorColor: theme.primaryColor,
-                  keyboardType: TextInputType.number,
-                  inputFormatters: [
-                    FilteringTextInputFormatter.allow(RegExp("[1-9][0-9]*")),
-                    FilteringTextInputFormatter.digitsOnly
-                  ],
-                  decoration: const InputDecoration(
-                    labelText: "Age",
-                    hintText: "Enter your age",
-                    hintStyle: TextStyle(fontSize: 13, color: Colors.grey),
+                    },
                   ),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Age is required';
-                    }
-                  },
-                ),
-                const SizedBox(height: 50),
-                _buildGenderPicker(),
-              ],
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15.0),
-            child: SizedBox(
-              width: 200,
-              child: TextButton(
-                style: ButtonStyle(
-                    backgroundColor:
-                        MaterialStateProperty.all(FitnessAppTheme.nearlyBlue),
-                    foregroundColor:
-                        MaterialStateProperty.all(FitnessAppTheme.white)),
-                child: const Text(
-                  'Continue',
-                ),
-                onPressed: _onButtonPressed,
+                  const SizedBox(height: 50),
+                  _buildGenderPicker(),
+                ],
               ),
             ),
-          ),
-        ],
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 15.0),
+              child: SizedBox(
+                width: 200,
+                child: TextButton(
+                    style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all(
+                            FitnessAppTheme.nearlyBlue),
+                        foregroundColor:
+                            MaterialStateProperty.all(FitnessAppTheme.white)),
+                    child: const Text(
+                      'Continue',
+                    ),
+                    onPressed: () => _onButtonPressed),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

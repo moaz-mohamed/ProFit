@@ -57,62 +57,34 @@ class _IntroPageState extends State<IntroPage> {
           FocusNode(),
         );
       },
-      child: Scaffold(
-        backgroundColor: FitnessAppTheme.background,
-        body: PageView(
-          controller: _pageController,
-          allowImplicitScrolling: true,
-          physics: const NeverScrollableScrollPhysics(),
-          children: [
-            //Abdelnasser on boarding screen widget
-            GoalAchievedForm(
-              // It is the form of the users goal whether it to lose/maintenance/build muscle.
-              onComplete: (int goalAchieved) {
-                setState(() => _goalAchieved = goalAchieved);
-                _advancingNextPage();
-              },
-            ),
-            PhysicalParametersForm(
-              //It is the form widget responsible for taking the user age,height,weight
-              ageController: _ageController,
-              heightController: _heightController,
-              weightController: _weightController,
-              onCompleted: (
-                String weight,
-                String height,
-                String age,
-                bool gender,
-              ) {
-                setState(() => _gender = gender);
-
-                _advancingNextPage();
-              },
-            ),
-            // ActivityLevelForm(
-            //   onComplete: (double activityLevel) {
-            //     setState(() => _activityLevel = activityLevel);
-            //     _advancingNextPage();
-            //   },
-            // ),
-            // NameForm(
-            //   nameController: _nameController,
-            //   surnameController: _surnameController,
-            //   onCompleted: (String name, String surname) async {
-            //     User user = User(
-            //       name: name,
-            //       surname: surname,
-            //       weight: double.tryParse(_weightController.text),
-            //       height: double.tryParse(_heightController.text),
-            //       age: double.tryParse(_ageController.text),
-            //       gender: _gender,
-            //       workModel: _workModel,
-            //       workFutureModel: _futureWorkModel,
-            //     );
-            //     registrationAtLocalDB(user);
-            //   },
-            // ),
-          ],
-        ),
+      child: MaterialApp(
+        theme: ThemeData(backgroundColor: FitnessAppTheme.background),
+        initialRoute: '/',
+        routes: {
+          // When navigating to the "/" route, build the HomeScreen widget.
+          '/': (context) => GoalAchievedForm(
+                // It is the form of the users goal whether it to lose/maintenance/build muscle.
+                onComplete: (int goalAchieved) {
+                  setState(() => _goalAchieved = goalAchieved);
+                  // _advancingNextPage();
+                },
+              ),
+          // When navigating to the "/second" route, build the SecondScreen widget.
+          '/physical': (context) => PhysicalParametersForm(
+                //It is the form widget responsible for taking the user age,height,weight
+                ageController: _ageController,
+                heightController: _heightController,
+                weightController: _weightController,
+                onCompleted: (
+                  String weight,
+                  String height,
+                  String age,
+                  bool gender,
+                ) {
+                  setState(() => _gender = gender);
+                },
+              ),
+        },
       ),
     );
   }
@@ -121,12 +93,4 @@ class _IntroPageState extends State<IntroPage> {
   //   BlocProvider.of<AuthBloc>(context).add(Authorize(user: user));
   // }
 
-  void _advancingNextPage() {
-    //switches the page with an animation
-    _pageController.animateToPage(
-      _pageController.page!.toInt() + 1,
-      duration: const Duration(milliseconds: 300),
-      curve: Curves.bounceInOut,
-    );
-  }
 }

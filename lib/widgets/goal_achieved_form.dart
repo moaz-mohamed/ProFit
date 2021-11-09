@@ -59,69 +59,78 @@ class GoalAchievedFormState extends State<GoalAchievedForm> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(40.0).copyWith(left: 25.0, right: 25.0),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Column(
-            children: const [
-              Text(
-                "ProFit",
-                style: FitnessAppTheme.headlineBlue,
-              ),
-              Text(
-                "Choose your goal to achieve",
-                style: FitnessAppTheme.subtitle,
-              ),
-            ],
-          ),
-          Column(
-            children: <Widget>[
-              SizedBox(
-                height: MediaQuery.of(context).size.height / 2,
-                child: ListView.builder(
-                  itemCount: dataModels.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    //converts each item to widget
-                    return InkWell(
-                      highlightColor: Colors.transparent,
-                      focusColor: Colors.transparent,
-                      splashColor: Colors.transparent,
-                      onTap: () {
-                        setState(() {
-                          for (var element in dataModels) {
-                            element.isSelected = false;
-                          }
-                          dataModels[index].isSelected = true;
-                          goalAchieved = dataModels[index].dietNumber;
-                        });
-                      },
-                      child: RadioItem(dataModels[index]),
-                    );
-                  },
+    return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: Text("ProFit"),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(10.0).copyWith(left: 25.0, right: 25.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Column(
+              children: const [
+                Text(
+                  "Goal Achieved",
+                  style: FitnessAppTheme.headlineBlue,
                 ),
-              ),
-            ],
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15.0),
-            child: SizedBox(
-              width: 200,
-              child: TextButton(
-                style: ButtonStyle(
-                    backgroundColor:
-                        MaterialStateProperty.all(FitnessAppTheme.nearlyBlue),
-                    foregroundColor:
-                        MaterialStateProperty.all(FitnessAppTheme.white)),
-                child: const Text(
-                  'Continue',
+                Text(
+                  "Choose your goal to achieve",
+                  style: FitnessAppTheme.subtitle,
                 ),
-                onPressed: () => widget.onComplete(goalAchieved),
-              ),
+              ],
             ),
-          )
-        ],
+            Column(
+              children: <Widget>[
+                SizedBox(
+                  height: MediaQuery.of(context).size.height / 2,
+                  child: ListView.builder(
+                    itemCount: dataModels.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      //converts each item to widget
+                      return InkWell(
+                        highlightColor: Colors.transparent,
+                        focusColor: Colors.transparent,
+                        splashColor: Colors.transparent,
+                        onTap: () {
+                          setState(() {
+                            for (var element in dataModels) {
+                              element.isSelected = false;
+                            }
+                            dataModels[index].isSelected = true;
+                            goalAchieved = dataModels[index].dietNumber;
+                          });
+                        },
+                        child: RadioItem(dataModels[index]),
+                      );
+                    },
+                  ),
+                ),
+              ],
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 15.0),
+              child: SizedBox(
+                width: 200,
+                child: TextButton(
+                  style: ButtonStyle(
+                      backgroundColor:
+                          MaterialStateProperty.all(FitnessAppTheme.nearlyBlue),
+                      foregroundColor:
+                          MaterialStateProperty.all(FitnessAppTheme.white)),
+                  child: const Text(
+                    'Continue',
+                  ),
+                  onPressed: () => [
+                    widget.onComplete(goalAchieved),
+                    Navigator.pushNamed(context, '/physical')
+                  ],
+                ),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
