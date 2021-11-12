@@ -8,6 +8,7 @@
 // import 'widgets/forms/forms.dart';
 
 import 'package:flutter/material.dart';
+import 'package:profit/widgets/activity_level.dart';
 import 'package:profit/widgets/goal_achieved_form.dart';
 import 'package:profit/widgets/physical_paramters_form.dart';
 
@@ -84,6 +85,10 @@ class _IntroPageState extends State<IntroPage> {
                   setState(() => _gender = gender);
                 },
               ),
+          '/activity': (context) =>
+              ActivityLevelForm(onComplete: (double level) {
+                setState(() => _activityLevel = level);
+              }),
         },
       ),
     );
