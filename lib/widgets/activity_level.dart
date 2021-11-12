@@ -30,7 +30,7 @@ class _ActivityLevelFormState extends State<ActivityLevelForm> {
         title: const Text("ProFit"),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(40),
+        padding: const EdgeInsets.all(7),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,

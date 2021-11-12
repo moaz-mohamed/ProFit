@@ -45,7 +45,7 @@ class CustomRadioState extends State<CustomRadioActivity> {
           style: FitnessAppTheme.headlineBlue,
         ),
         Padding(
-          padding: const EdgeInsets.symmetric(vertical: 20.0),
+          padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 40),
           child: Column(
             children: sampleData
                 .map(
