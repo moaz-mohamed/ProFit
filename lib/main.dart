@@ -22,7 +22,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      debugShowCheckedModeBanner: false,
       title: 'Flutter App',
       home: IntroPage(),
     );
@@ -59,6 +58,7 @@ class _IntroPageState extends State<IntroPage> {
         );
       },
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         theme: ThemeData(backgroundColor: FitnessAppTheme.background),
         initialRoute: '/',
         routes: {
