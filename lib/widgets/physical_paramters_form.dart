@@ -148,10 +148,22 @@ class _PhysicalParametersFormState extends State<PhysicalParametersForm> {
                     child: const Text(
                       'Continue',
                     ),
-                    onPressed: () => [
-                          _onButtonPressed,
-                          Navigator.pushNamed(context, '/activity')
-                        ]),
+                    onPressed: () {
+                      print("i got here");
+                      final weight = widget.weightController.text;
+                      final height = widget.heightController.text;
+                      final age = widget.ageController.text;
+                      print(age);
+                      print(weight);
+
+                      if (_formKey.currentState!.validate()) {
+                        {
+                          widget.onCompleted(weight, height, age, _gender);
+                          Navigator.pushNamed(context, '/activity');
+                        }
+                      }
+                    }),
+ 
               ),
             ),
           ],
@@ -210,6 +222,7 @@ class _PhysicalParametersFormState extends State<PhysicalParametersForm> {
     if (_formKey.currentState!.validate()) {
       {
         widget.onCompleted(weight, height, age, _gender);
+
       }
     }
   }
