@@ -40,6 +40,8 @@ class OnBoardingScreen extends StatelessWidget {
         globalHeader: buildImage('assets/onboarding/Logo.png', 100),
         globalFooter: Text(''),
         showNextButton: true,
+        nextFlex: 1,
+        nextColor: Colors.white,
         next: ElevatedButton(
           onPressed: null,
           child: Icon(
@@ -49,8 +51,8 @@ class OnBoardingScreen extends StatelessWidget {
           ),
           style: nextButtonStyle,
         ),
-        nextColor: Colors.white,
         showSkipButton: true,
+        skipFlex: 1,
         skip: ElevatedButton(
           onPressed: null,
           child: Text(
@@ -61,6 +63,7 @@ class OnBoardingScreen extends StatelessWidget {
         ),
         onSkip: null,
         dotsDecorator: dotsDecorator,
+        dotsFlex: 1,
         showDoneButton: true,
         done: ElevatedButton(
           onPressed: null,
@@ -86,7 +89,7 @@ class OnBoardingScreen extends StatelessWidget {
 
   final PageDecoration pageDecoration = PageDecoration(
     pageColor: Colors.white,
-    imageFlex: 0,
+    imageFlex: 2,
     imagePadding: EdgeInsets.fromLTRB(0, 80, 0, 0),
     titlePadding: EdgeInsets.fromLTRB(0, 0, 0, 0),
     descriptionPadding: EdgeInsets.fromLTRB(0, 10, 0, 0),
