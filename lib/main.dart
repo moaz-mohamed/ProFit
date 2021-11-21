@@ -8,6 +8,7 @@
 // import 'widgets/forms/forms.dart';
 
 import 'package:flutter/material.dart';
+import 'package:profit/widgets/onboarding_screen.dart';
 import 'package:profit/widgets/activity_level.dart';
 import 'package:profit/widgets/goal_achieved_form.dart';
 import 'package:profit/widgets/physical_paramters_form.dart';
@@ -63,7 +64,8 @@ class _IntroPageState extends State<IntroPage> {
         initialRoute: '/',
         routes: {
           // When navigating to the "/" route, build the HomeScreen widget.
-          '/': (context) => GoalAchievedForm(
+          '/': (context) => OnBoardingScreen(),
+          '/goal': (context) => GoalAchievedForm(
                 // It is the form of the users goal whether it to lose/maintenance/build muscle.
                 onComplete: (int goalAchieved) {
                   setState(() => _goalAchieved = goalAchieved);
