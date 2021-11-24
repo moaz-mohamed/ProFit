@@ -38,6 +38,9 @@ dependencies:
   # Introduction screen for onboarding
   introduction_screen: ^2.1.0
 
+  # Splash screen
+  animated_splash_screen: ^1.1.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -65,6 +68,8 @@ flutter:
     #    - assets/selector/slim.svg
     #    - assets/svg/noMeal.svg
     #    - assets/svg/dev.svg
+
+    - assets/splash/
 
     - assets/onboarding/
 

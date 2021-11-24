@@ -12,8 +12,9 @@ import 'package:profit/widgets/onboarding_screen.dart';
 import 'package:profit/widgets/activity_level.dart';
 import 'package:profit/widgets/goal_achieved_form.dart';
 import 'package:profit/widgets/physical_paramters_form.dart';
-
 import 'design/ThemeUI.dart';
+import 'package:animated_splash_screen/animated_splash_screen.dart';
+import 'package:page_transition/page_transition.dart';
 
 void main() => runApp(const MyApp());
 
@@ -24,7 +25,26 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       title: 'Flutter App',
-      home: IntroPage(),
+      // Call the splash screen first
+      // Which calls next the intro page
+      home: SplashScreen(),
+    );
+  }
+}
+
+//--->>> Splash screen
+class SplashScreen extends StatelessWidget {
+  const SplashScreen({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedSplashScreen(
+      nextScreen: const IntroPage(),
+      splash: 'assets/splash/Logo.png',
+      //duration: ,
+      splashTransition: SplashTransition.fadeTransition,
+      //animationDuration: ,
+      //pageTransitionType: ,
     );
   }
 }
@@ -96,8 +116,8 @@ class _IntroPageState extends State<IntroPage> {
     );
   }
 
-  // void registrationAtLocalDB(User user) {
-  //   BlocProvider.of<AuthBloc>(context).add(Authorize(user: user));
-  // }
+// void registrationAtLocalDB(User user) {
+//   BlocProvider.of<AuthBloc>(context).add(Authorize(user: user));
+// }
 
 }
