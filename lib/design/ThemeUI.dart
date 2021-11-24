@@ -166,4 +166,12 @@ class FitnessAppTheme {
     letterSpacing: 0.27,
     color: Colors.lightBlue,
   );
+
+  static const TextStyle Go = TextStyle(
+    //fontFamily: fontName,
+    fontWeight: FontWeight.w600,
+    fontSize: 20,
+    letterSpacing: 0.27,
+    color: Colors.lightBlue,
+  );
 }
