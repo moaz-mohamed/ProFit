@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class FitnessAppTheme {
   FitnessAppTheme._();
+
   static const Color nearlyWhite = Color(0xFFFAFAFA);
   static const Color white = Color(0xFFFFFFFF);
   static const Color background = Color(0xFFF2F3F8);
@@ -97,6 +98,7 @@ class FitnessAppTheme {
     letterSpacing: 0.2,
     color: lightText, // was lightText
   );
+
   static BoxShadow get selectorShadow => BoxShadow(
         //The selected shadow of the box in goalAchieved form
         // color: CustomTheme.mainColor.withOpacity(0.25),
@@ -138,5 +140,30 @@ class FitnessAppTheme {
     fontWeight: FontWeight.w400,
     fontSize: 12,
     color: selectorGrayText,
+  );
+
+  // Onboarding screen fonts
+  static const TextStyle page_title = TextStyle(
+    //fontFamily: fontName,
+    fontWeight: FontWeight.w800,
+    fontSize: 26,
+    letterSpacing: 0.27,
+    color: Colors.lightBlue,
+  );
+
+  static const TextStyle page_body = TextStyle(
+    //fontFamily: fontName,
+    fontWeight: FontWeight.w400,
+    fontSize: 24,
+    letterSpacing: 0.27,
+    color: Colors.black,
+  );
+
+  static const TextStyle skip_intro = TextStyle(
+    //fontFamily: fontName,
+    fontWeight: FontWeight.w600,
+    fontSize: 16,
+    letterSpacing: 0.27,
+    color: Colors.lightBlue,
   );
 }
