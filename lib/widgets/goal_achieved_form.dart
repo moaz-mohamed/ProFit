@@ -62,7 +62,7 @@ class GoalAchievedFormState extends State<GoalAchievedForm> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text("ProFit"),
+        title: const Text("ProFit"),
       ),
       body: Padding(
         padding: const EdgeInsets.all(10.0).copyWith(left: 25.0, right: 25.0),

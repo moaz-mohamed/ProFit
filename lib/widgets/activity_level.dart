@@ -54,22 +54,20 @@ class _ActivityLevelFormState extends State<ActivityLevelForm> {
                 });
               },
             ),
-            Container(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 15.0),
-                child: SizedBox(
-                  width: 200,
-                  child: TextButton(
-                      style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all(
-                              FitnessAppTheme.nearlyBlue),
-                          foregroundColor:
-                              MaterialStateProperty.all(FitnessAppTheme.white)),
-                      child: const Text(
-                        'Continue',
-                      ),
-                      onPressed: () => widget.onComplete(_activityLevel)),
-                ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 15.0),
+              child: SizedBox(
+                width: 200,
+                child: TextButton(
+                    style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all(
+                            FitnessAppTheme.nearlyBlue),
+                        foregroundColor:
+                            MaterialStateProperty.all(FitnessAppTheme.white)),
+                    child: const Text(
+                      'Continue',
+                    ),
+                    onPressed: () => widget.onComplete(_activityLevel)),
               ),
             ),
           ],

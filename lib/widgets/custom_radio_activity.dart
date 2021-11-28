@@ -26,8 +26,8 @@ class CustomRadioState extends State<CustomRadioActivity> {
       1.2,
       'Sedentary: Little or no excerise, desk job',
     ));
-    sampleData.add(RadioItem(
-        false, 1.375, 'Lightly Active: Light exercise,sports 1-3 days/week'));
+    sampleData
+        .add(RadioItem(false, 1.375, 'Lightly Active: sports 1-3 days/week'));
     sampleData
         .add(RadioItem(false, 1.55, 'Moderately Active ,sports 6-7 days/week'));
     sampleData

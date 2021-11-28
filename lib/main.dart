@@ -7,7 +7,10 @@
 //
 // import 'widgets/forms/forms.dart';
 
+// ignore_for_file: unused_label
+
 import 'package:flutter/material.dart';
+import 'package:profit/utils/calculate_calories.dart';
 import 'package:profit/widgets/onboarding_screen.dart';
 import 'package:profit/widgets/activity_level.dart';
 import 'package:profit/widgets/goal_achieved_form.dart';
@@ -24,6 +27,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter App',
       // Call the splash screen first
       // Which calls next the intro page
@@ -57,8 +61,8 @@ class IntroPage extends StatefulWidget {
 }
 
 class _IntroPageState extends State<IntroPage> {
-  final _pageController =
-      PageController(); //It controls the pages of the physical paramters input entry.
+  // final _pageController =
+  //     PageController(); //It controls the pages of the physical paramters input entry.
   // final _nameController = TextEditingController();
   // final _surnameController = TextEditingController();
   final _weightController = TextEditingController();
@@ -68,7 +72,8 @@ class _IntroPageState extends State<IntroPage> {
       _activityLevel; //It represents the fitness workmodel that will be included in the BMR calculation(workmodel)
   late int
       _goalAchieved; //It represents the goal of the user whether it is to lose/maintenance/build muscle.
-  late bool _gender; //Male or Female
+  late bool _gender;
+  //Male or Female
 
   @override
   Widget build(BuildContext context) {
@@ -81,15 +86,17 @@ class _IntroPageState extends State<IntroPage> {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(backgroundColor: FitnessAppTheme.background),
+        // i want a boolean from DB of authenticate or not to change my inital route
         initialRoute: '/',
+
         routes: {
           // When navigating to the "/" route, build the HomeScreen widget.
           '/': (context) => OnBoardingScreen(),
+
           '/goal': (context) => GoalAchievedForm(
                 // It is the form of the users goal whether it to lose/maintenance/build muscle.
                 onComplete: (int goalAchieved) {
                   setState(() => _goalAchieved = goalAchieved);
-                  // _advancingNextPage();
                 },
               ),
           // When navigating to the "/second" route, build the SecondScreen widget.
@@ -110,14 +117,16 @@ class _IntroPageState extends State<IntroPage> {
           '/activity': (context) =>
               ActivityLevelForm(onComplete: (double level) {
                 setState(() => _activityLevel = level);
+                CalculateCalories(
+                    _goalAchieved,
+                    _ageController,
+                    _heightController,
+                    _weightController,
+                    _gender,
+                    _activityLevel);
               }),
         },
       ),
     );
   }
-
-// void registrationAtLocalDB(User user) {
-//   BlocProvider.of<AuthBloc>(context).add(Authorize(user: user));
-// }
-
 }

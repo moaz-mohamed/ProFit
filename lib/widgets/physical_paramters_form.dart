@@ -32,6 +32,9 @@ class _PhysicalParametersFormState extends State<PhysicalParametersForm> {
 
   @override
   Widget build(BuildContext context) {
+    final weight = widget.weightController.text;
+    final height = widget.heightController.text;
+    final age = widget.ageController.text;
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
@@ -40,7 +43,7 @@ class _PhysicalParametersFormState extends State<PhysicalParametersForm> {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back),
           onPressed: () => Navigator.of(context).pop(),
         ),
         centerTitle: true,
@@ -88,7 +91,7 @@ class _PhysicalParametersFormState extends State<PhysicalParametersForm> {
                           return 'Weight is required';
                         }
                       }),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   TextFormField(
                     onTap: () {},
                     controller: widget.heightController,
@@ -149,13 +152,6 @@ class _PhysicalParametersFormState extends State<PhysicalParametersForm> {
                       'Continue',
                     ),
                     onPressed: () {
-                      print("i got here");
-                      final weight = widget.weightController.text;
-                      final height = widget.heightController.text;
-                      final age = widget.ageController.text;
-                      print(age);
-                      print(weight);
-
                       if (_formKey.currentState!.validate()) {
                         {
                           widget.onCompleted(weight, height, age, _gender);
@@ -163,7 +159,6 @@ class _PhysicalParametersFormState extends State<PhysicalParametersForm> {
                         }
                       }
                     }),
- 
               ),
             ),
           ],
@@ -214,16 +209,15 @@ class _PhysicalParametersFormState extends State<PhysicalParametersForm> {
     );
   }
 
-  void _onButtonPressed() {
-    final weight = widget.weightController.text;
-    final height = widget.heightController.text;
-    final age = widget.ageController.text;
+  // void _onButtonPressed() {
+  //   final weight = widget.weightController.text;
+  //   final height = widget.heightController.text;
+  //   final age = widget.ageController.text;
 
-    if (_formKey.currentState!.validate()) {
-      {
-        widget.onCompleted(weight, height, age, _gender);
-
-      }
-    }
-  }
+  //   if (_formKey.currentState!.validate()) {
+  //     {
+  //       widget.onCompleted(weight, height, age, _gender);
+  //     }
+  //   }
+  // }
 }

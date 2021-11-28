@@ -8,7 +8,7 @@ class OnBoardingScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     //--->>> Status bar
     SystemChrome.setSystemUIOverlayStyle(
-      SystemUiOverlayStyle(statusBarColor: Colors.lightBlue),
+      const SystemUiOverlayStyle(statusBarColor: Colors.lightBlue),
     );
 
     //--->>> Introduction screen
@@ -19,7 +19,8 @@ class OnBoardingScreen extends StatelessWidget {
           PageViewModel(
             image: buildImage('assets/onboarding/Page1.png', 600),
             title: 'Get the body you want',
-            body: 'Packed with\nour recommendations of\ndiet and workout plans',
+            body:
+                'Packed with\nour recommendations of\ndiet and workout plans', //Can you decrease the size of text
             decoration: pageDecoration,
           ),
           PageViewModel(
@@ -47,7 +48,7 @@ class OnBoardingScreen extends StatelessWidget {
         //-->> Global screen
         globalBackgroundColor: Colors.white,
         globalHeader: buildImage('assets/onboarding/Logo.png', 100),
-        globalFooter: Text('PROFIT GRADUATION PROJECT DEMO'),
+        // globalFooter: Text('PROFIT GRADUATION PROJECT DEMO'),
         //-->> Next button
         showNextButton: true,
         nextFlex: 1,
@@ -64,7 +65,7 @@ class OnBoardingScreen extends StatelessWidget {
         onSkip: null,
         skip: ElevatedButton(
           onPressed: null,
-          child: Text(
+          child: const Text(
             'Skip',
             style: FitnessAppTheme.skip_intro,
           ),
@@ -78,7 +79,7 @@ class OnBoardingScreen extends StatelessWidget {
         doneColor: FitnessAppTheme.white,
         done: ElevatedButton(
           onPressed: null,
-          child: Text(
+          child: const Text(
             'Go',
             style: FitnessAppTheme.Go,
           ),
@@ -100,7 +101,7 @@ class OnBoardingScreen extends StatelessWidget {
     );
   }
 
-  final PageDecoration pageDecoration = PageDecoration(
+  final PageDecoration pageDecoration = const PageDecoration(
     pageColor: Colors.white,
     imageFlex: 2,
     imagePadding: EdgeInsets.fromLTRB(0, 80, 0, 0),
@@ -112,7 +113,7 @@ class OnBoardingScreen extends StatelessWidget {
     bodyTextStyle: FitnessAppTheme.page_body,
   );
 
-  final DotsDecorator dotsDecorator = DotsDecorator(
+  final DotsDecorator dotsDecorator = const DotsDecorator(
     color: Colors.grey,
     shape: CircleBorder(),
     activeColor: Colors.lightBlue,
@@ -123,23 +124,23 @@ class OnBoardingScreen extends StatelessWidget {
   );
 
   final ButtonStyle nextButtonStyle = ButtonStyle(
-    shape: MaterialStateProperty.all(CircleBorder()),
+    shape: MaterialStateProperty.all(const CircleBorder()),
     backgroundColor:
         MaterialStateProperty.all(FitnessAppTheme.selectorGrayBackGround),
-    fixedSize: MaterialStateProperty.all(Size(60, 60)),
+    fixedSize: MaterialStateProperty.all(const Size(60, 60)),
     elevation: MaterialStateProperty.all(6),
     shadowColor: MaterialStateProperty.all(Colors.lightBlue),
     side: MaterialStateProperty.all(
-        BorderSide(color: Colors.lightBlue, width: 2)),
+        const BorderSide(color: Colors.lightBlue, width: 2)),
   );
 
   final ButtonStyle skipButtonStyle = ButtonStyle(
     backgroundColor:
         MaterialStateProperty.all(FitnessAppTheme.selectorGrayBackGround),
-    fixedSize: MaterialStateProperty.all(Size(160, 45)),
+    fixedSize: MaterialStateProperty.all(const Size(160, 45)),
     elevation: MaterialStateProperty.all(6),
     shadowColor: MaterialStateProperty.all(Colors.lightBlue),
     side: MaterialStateProperty.all(
-        BorderSide(color: Colors.lightBlue, width: 2)),
+        const BorderSide(color: Colors.lightBlue, width: 2)),
   );
 }
