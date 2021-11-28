@@ -33,7 +33,7 @@ class CustomRadioState extends State<CustomRadioActivity> {
     sampleData
         .add(RadioItem(false, 1.725, 'Very Active: Hard excerise everyday'));
     sampleData.add(
-        RadioItem(false, 1.9, 'Extra Active: Hard excerise 2 or more per day'));
+        RadioItem(false, 1.9, 'Extra Active: Hard excerise 2 or more/day'));
   }
 
   @override
@@ -45,14 +45,14 @@ class CustomRadioState extends State<CustomRadioActivity> {
           style: FitnessAppTheme.headlineBlue,
         ),
         Padding(
-          padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 40),
+          padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 52.7),
           child: Column(
             children: sampleData
                 .map(
                   (e) => InkWell(
-                    highlightColor: FitnessAppTheme.nearlyBlack,
-                    focusColor: FitnessAppTheme.nearlyBlack,
-                    splashColor: FitnessAppTheme.nearlyBlack,
+                    highlightColor: FitnessAppTheme.nearlyBlue,
+                    focusColor: FitnessAppTheme.nearlyBlue,
+                    splashColor: FitnessAppTheme.nearlyBlue,
                     onTap: () {
                       setState(() {
                         sampleData
