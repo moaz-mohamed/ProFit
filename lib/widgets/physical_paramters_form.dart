@@ -133,7 +133,7 @@ class _PhysicalParametersFormState extends State<PhysicalParametersForm> {
                       }
                     },
                   ),
-                  const SizedBox(height: 50),
+                  const SizedBox(height: 15),
                   _buildGenderPicker(),
                 ],
               ),
