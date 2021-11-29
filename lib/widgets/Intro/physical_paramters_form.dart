@@ -91,7 +91,7 @@ class _PhysicalParametersFormState extends State<PhysicalParametersForm> {
                           return 'Weight is required';
                         }
                       }),
-                  const SizedBox(height: 10),
+                  const SizedBox(height: 5),
                   TextFormField(
                     onTap: () {},
                     controller: widget.heightController,
@@ -112,7 +112,7 @@ class _PhysicalParametersFormState extends State<PhysicalParametersForm> {
                       }
                     },
                   ),
-                  const SizedBox(height: 10),
+                  const SizedBox(height: 5),
                   TextFormField(
                     onTap: () {},
                     controller: widget.ageController,
@@ -133,7 +133,7 @@ class _PhysicalParametersFormState extends State<PhysicalParametersForm> {
                       }
                     },
                   ),
-                  const SizedBox(height: 15),
+                  const SizedBox(height: 5),
                   _buildGenderPicker(),
                 ],
               ),
