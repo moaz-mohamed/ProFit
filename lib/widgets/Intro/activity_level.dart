@@ -59,17 +59,21 @@ class _ActivityLevelFormState extends State<ActivityLevelForm> {
               child: SizedBox(
                 width: 200,
                 child: TextButton(
-                    style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all(
-                            FitnessAppTheme.nearlyBlue),
-                        foregroundColor:
-                            MaterialStateProperty.all(FitnessAppTheme.white)),
-                    child: const Text(
-                      'Continue',
-                    ),
-                    onPressed: () => widget.onComplete(_activityLevel)),
+                  style: ButtonStyle(
+                      backgroundColor:
+                          MaterialStateProperty.all(FitnessAppTheme.nearlyBlue),
+                      foregroundColor:
+                          MaterialStateProperty.all(FitnessAppTheme.white)),
+                  child: const Text(
+                    'Continue',
+                  ),
+                  onPressed: () {
+                    widget.onComplete(_activityLevel);
+                    Navigator.pushNamed(context, '/signup');
+                  },
+                ),
               ),
-            ),
+            )
           ],
         ),
       ),
