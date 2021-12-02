@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
-import '../loginsucess.dart';
+import 'package:profit/widgets/intro/loginsucess.dart';
 
 class AuthenticationService {
   FirebaseAuth auth = FirebaseAuth.instance;
@@ -96,14 +96,7 @@ class AuthenticationService {
             await auth.signInWithCredential(credential);
         user = await auth.currentUser;
         // user = userCredential.user;
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) {
-              return Sucess();
-            },
-          ),
-        );
+        Navigator.pushNamed(context, '/sucess');
         print(user);
       } on FirebaseAuthException catch (e) {
         if (e.code == 'account-exists-with-different-credential') {
@@ -140,7 +133,7 @@ class AuthenticationService {
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
-                child: Text('Okay'),
+                child: const Text('Okay'),
               )
             ],
           );
