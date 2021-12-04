@@ -1,11 +1,15 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:profit/design/ThemeUI.dart';
 import 'package:profit/utils/calculate_calories.dart';
 import 'package:profit/widgets/Intro/activity_level.dart';
 import 'package:profit/widgets/Intro/goal_achieved_form.dart';
+import 'package:profit/widgets/Intro/login_screen.dart';
+import 'package:profit/widgets/Intro/loginsucess.dart';
 import 'package:profit/widgets/Intro/onboarding_screen.dart';
 import 'package:profit/widgets/Intro/physical_paramters_form.dart';
+import 'package:profit/widgets/Intro/signup_screen.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -45,8 +49,24 @@ class _IntroPageState extends State<IntroPage> {
   late bool _gender;
   //Male or Female
 
+  checkAuthentication() async {
+    FirebaseAuth.instance.authStateChanges().listen((_user) {
+      if (_user != null) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) {
+              return Sucess();
+            },
+          ),
+        );
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    checkAuthentication();
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).requestFocus(
@@ -95,6 +115,10 @@ class _IntroPageState extends State<IntroPage> {
                     _gender,
                     _activityLevel);
               }),
+          '/login': (context) => const LoginScreen(),
+
+          '/signup': (context) => SignupScreen(),
+          '/sucess': (context) => Sucess()
         },
       ),
     );
