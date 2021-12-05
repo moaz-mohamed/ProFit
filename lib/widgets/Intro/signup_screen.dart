@@ -98,9 +98,15 @@ class _BodyState extends State<Body> {
                   controller: _emailController,
                   obscureText: false,
                   decoration: const InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(10.0),
+                      ),
+                    ),
                     contentPadding: EdgeInsets.symmetric(horizontal: 10),
                     labelText: "Email",
-
+                    hintText: "Enter your Email",
+                    hintStyle: TextStyle(fontSize: 13, color: Colors.grey),
                     labelStyle: TextStyle(
                       color: Colors.grey,
                     ),
@@ -118,11 +124,19 @@ class _BodyState extends State<Body> {
                     }
                   },
                 ),
+                const SizedBox(height: 15),
                 TextFormField(
                   obscureText: false,
                   controller: _nameController,
                   decoration: const InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(10.0),
+                      ),
+                    ),
                     contentPadding: EdgeInsets.symmetric(horizontal: 10),
+                    hintText: "Enter your Name",
+                    hintStyle: TextStyle(fontSize: 13, color: Colors.grey),
                     labelText: "Name",
                     labelStyle: TextStyle(
                       color: Colors.grey,
@@ -140,11 +154,19 @@ class _BodyState extends State<Body> {
                     }
                   },
                 ),
+                const SizedBox(height: 15),
                 TextFormField(
                   controller: _passController,
                   obscureText: true,
                   decoration: const InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(10.0),
+                      ),
+                    ),
                     contentPadding: EdgeInsets.symmetric(horizontal: 10),
+                    hintText: "Enter your Password",
+                    hintStyle: TextStyle(fontSize: 13, color: Colors.grey),
                     labelText: "Password",
                     labelStyle: TextStyle(
                       color: Colors.grey,
@@ -165,12 +187,20 @@ class _BodyState extends State<Body> {
                     }
                   },
                 ),
+                const SizedBox(height: 15),
                 TextFormField(
                     controller: _confirmPassController,
                     obscureText: true,
                     decoration: const InputDecoration(
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(10.0),
+                        ),
+                      ),
                       contentPadding: EdgeInsets.symmetric(horizontal: 10),
                       labelText: "Re-Password",
+                      hintText: "Re-Enter your Password",
+                      hintStyle: TextStyle(fontSize: 13, color: Colors.grey),
                       labelStyle: TextStyle(
                         color: Colors.grey,
                       ),
@@ -179,14 +209,13 @@ class _BodyState extends State<Body> {
                         color: FitnessAppTheme.nearlyBlue,
                       ),
                     ),
-                    //controller: _confirmPass,
                     keyboardType: TextInputType.text,
                     validator: (val) {
                       if (val!.isEmpty) return 'Enter Correct Password';
                       if (val != _passController.text) return 'Not Match';
                       return null;
                     }),
-                const SizedBox(height: 40),
+                const SizedBox(height: 120),
                 ElevatedButton(
                     child: const Text('SIGN UP'),
                     onPressed: signup,
@@ -195,28 +224,29 @@ class _BodyState extends State<Body> {
                       padding: const EdgeInsets.symmetric(horizontal: 30),
                       textStyle: const TextStyle(
                           fontSize: 20, fontWeight: FontWeight.bold),
-                      fixedSize: const Size(150, 50),
+                      fixedSize: const Size(140, 40),
                       shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(50)),
+                          borderRadius: BorderRadius.circular(40)),
                     )),
                 TextButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) {
-                            return const LoginScreen();
-                          },
-                        ),
-                      );
-                    },
-                    child: const Text(
-                      'Already have an Account? Login',
-                      style: TextStyle(
-                        fontSize: 15,
-                        color: FitnessAppTheme.nearlyDarkBlue,
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return const LoginScreen();
+                        },
                       ),
-                    ))
+                    );
+                  },
+                  child: const Text(
+                    'Already have an Account? Login',
+                    style: TextStyle(
+                      fontSize: 15,
+                      color: Colors.grey,
+                    ),
+                  ),
+                )
               ]))),
     );
   }
