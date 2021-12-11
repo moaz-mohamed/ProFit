@@ -5,8 +5,6 @@ import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:profit/services/validate.dart';
 import 'package:profit/services/auth.dart';
 import 'package:profit/themes/ThemeUI.dart';
-import 'package:profit/widgets/intro/loginsucess.dart';
-import 'package:profit/widgets/intro/signup_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
