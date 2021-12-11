@@ -2,9 +2,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'dart:ui';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
-import 'package:profit/design/ThemeUI.dart';
 import 'package:profit/services/validate.dart';
 import 'package:profit/services/auth.dart';
+import 'package:profit/themes/ThemeUI.dart';
 import 'package:profit/widgets/intro/loginsucess.dart';
 import 'package:profit/widgets/intro/signup_screen.dart';
 

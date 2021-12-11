@@ -1,7 +1,7 @@
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:introduction_screen/introduction_screen.dart';
-import 'package:profit/design/ThemeUI.dart';
+import 'package:profit/themes/ThemeUI.dart';
 
 class OnBoardingScreen extends StatelessWidget {
   @override
@@ -23,16 +23,16 @@ class OnBoardingScreen extends StatelessWidget {
                 'Packed with\nour recommendations of\ndiet and workout plans', //Can you decrease the size of text
             decoration: pageDecoration,
             footer: TextButton(
-                    onPressed: () {
-                       Navigator.pushNamed(context, '/login');
-                    },
-                    child: const Text(
-                      'Already have an Account? Login',
-                      style: TextStyle(
-                        fontSize: 15,
-                        color: FitnessAppTheme.nearlyDarkBlue,
-                      ),
-                    )),
+                onPressed: () {
+                  Navigator.pushNamed(context, '/login');
+                },
+                child: const Text(
+                  'Already have an Account? Login',
+                  style: TextStyle(
+                    fontSize: 15,
+                    color: FitnessAppTheme.nearlyDarkBlue,
+                  ),
+                )),
           ),
           PageViewModel(
             image: buildImage('assets/onboarding/Page2.png', 600),

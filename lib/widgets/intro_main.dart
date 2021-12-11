@@ -1,7 +1,7 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:profit/design/ThemeUI.dart';
+import 'package:profit/themes/ThemeUI.dart';
 import 'package:profit/utils/calculate_calories.dart';
 import 'package:profit/widgets/Intro/activity_level.dart';
 import 'package:profit/widgets/Intro/goal_achieved_form.dart';

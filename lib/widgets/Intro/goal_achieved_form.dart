@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:profit/design/ThemeUI.dart';
 import 'package:profit/models/user_data.dart';
+import 'package:profit/themes/ThemeUI.dart';
 
 class GoalAchievedForm extends StatefulWidget {
   const GoalAchievedForm({Key? key, required this.onComplete})

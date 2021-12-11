@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:profit/design/ThemeUI.dart';
 import 'package:profit/services/auth.dart';
+import 'package:profit/themes/ThemeUI.dart';
 import 'package:profit/widgets/Intro/login_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -17,16 +17,16 @@ class _SucessState extends State<Sucess> {
   checkAuthentication() async {
     auth.authStateChanges().listen((User? user) {
       if (user == null) {
-   //Navigator.pushNamedAndRemoveUntil(context, '/login', (route) => true);
-       // Navigator.pop(context);
-       // Navigator.pushReplacementNamed(context, '/login');
-       Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(builder: (context) => LoginScreen()),
-                  ModalRoute.withName('/sucess'),
-                );
-   //   Navigator.pushNamedAndRemoveUntil
-     // Navigator.pushNamedAndRemoveUntil(context, '/login', ModalRoute.withName('/'));
+        //Navigator.pushNamedAndRemoveUntil(context, '/login', (route) => true);
+        // Navigator.pop(context);
+        // Navigator.pushReplacementNamed(context, '/login');
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (context) => LoginScreen()),
+          ModalRoute.withName('/sucess'),
+        );
+        //   Navigator.pushNamedAndRemoveUntil
+        // Navigator.pushNamedAndRemoveUntil(context, '/login', ModalRoute.withName('/'));
 
 //Navigator.of(context).pushNamedAndRemoveUntil('/login', (Route<dynamic> route) => false);
 //Navigator.push(context,  MaterialPageRoute(builder: (context) => LoginScreen()));
@@ -57,21 +57,18 @@ class _SucessState extends State<Sucess> {
     await checkAuthentication();
   }
 
-
-
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: ()async{
+      onWillPop: () async {
         return false;
       },
       child: Scaffold(
         backgroundColor: FitnessAppTheme.selectorGrayBackGround,
         appBar: AppBar(
-          automaticallyImplyLeading: false ,
+          automaticallyImplyLeading: false,
           backgroundColor: FitnessAppTheme.selectorGrayBackGround,
-          iconTheme: IconThemeData(color: Colors.black ),
-
+          iconTheme: IconThemeData(color: Colors.black),
           title: const Text('Signed in',
               textAlign: TextAlign.left,
               style: TextStyle(
