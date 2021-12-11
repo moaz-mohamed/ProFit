@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:profit/design/ThemeUI.dart';
 import 'package:profit/services/auth.dart';
 import 'package:profit/services/validate.dart';
+import 'package:profit/themes/ThemeUI.dart';
 import 'package:profit/widgets/intro/login_screen.dart';
 import 'package:profit/widgets/intro/loginsucess.dart';
 import 'dart:ui';
