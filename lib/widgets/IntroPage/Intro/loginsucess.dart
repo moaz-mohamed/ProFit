@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:profit/services/auth.dart';
 import 'package:profit/themes/ThemeUI.dart';
-import 'package:profit/widgets/Intro/login_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:profit/widgets/IntroPage/Intro/login_screen.dart';
 
 class Sucess extends StatefulWidget {
   @override

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:profit/themes/ThemeUI.dart';
-import 'package:profit/widgets/IntroPage/Intro/custom_radio_activity.dart';
+import 'custom_radio_activity.dart';
 
 class ActivityLevelForm extends StatefulWidget {
   const ActivityLevelForm({

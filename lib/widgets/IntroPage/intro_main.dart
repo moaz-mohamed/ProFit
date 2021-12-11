@@ -4,12 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:profit/themes/ThemeUI.dart';
 import 'package:profit/utils/calculate_calories.dart';
 import 'package:profit/widgets/Intro/activity_level.dart';
-import 'package:profit/widgets/Intro/goal_achieved_form.dart';
-import 'package:profit/widgets/Intro/login_screen.dart';
-import 'package:profit/widgets/Intro/loginsucess.dart';
-import 'package:profit/widgets/Intro/onboarding_screen.dart';
-import 'package:profit/widgets/Intro/physical_paramters_form.dart';
-import 'package:profit/widgets/Intro/signup_screen.dart';
+import 'package:profit/widgets/IntroPage/Intro/goal_achieved_form.dart';
+import 'package:profit/widgets/IntroPage/Intro/login_screen.dart';
+import 'package:profit/widgets/IntroPage/Intro/loginsucess.dart';
+import 'package:profit/widgets/IntroPage/Intro/onboarding_screen.dart';
+import 'package:profit/widgets/IntroPage/Intro/physical_paramters_form.dart';
+import 'package:profit/widgets/IntroPage/Intro/signup_screen.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({Key? key}) : super(key: key);
