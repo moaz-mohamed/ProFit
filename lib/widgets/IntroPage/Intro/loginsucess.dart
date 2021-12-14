@@ -17,18 +17,30 @@ class _SucessState extends State<Sucess> {
   checkAuthentication() async {
     auth.authStateChanges().listen((User? user) {
       if (user == null) {
-        //Navigator.pushNamedAndRemoveUntil(context, '/login', (route) => true);
+       // Navigator.pushNamedAndRemoveUntil(context, '/login', (route) => true);
         // Navigator.pop(context);
-        // Navigator.pushReplacementNamed(context, '/login');
+       // Navigator.pushReplacementNamed(context, '/login');
+        
+        // Navigator.push(
+        //   context,
+        //   MaterialPageRoute(
+        //     builder: (context) {
+        //       return LoginScreen();
+        //     },
+        //   ),
+        // );
+    //  Navigator.removeRoute(context, (Route<dynamic> route) => false)
         Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(builder: (context) => LoginScreen()),
           ModalRoute.withName('/sucess'),
         );
+   // Navigator.of(context).popUntil(ModalRoute.withName('/sucess'));
+        
         //   Navigator.pushNamedAndRemoveUntil
-        // Navigator.pushNamedAndRemoveUntil(context, '/login', ModalRoute.withName('/'));
+        //Navigator.pushNamedAndRemoveUntil(context, '/login', ModalRoute.withName('/success'));
 
-//Navigator.of(context).pushNamedAndRemoveUntil('/login', (Route<dynamic> route) => false);
+//Navigator.of(context).pushNamedAndRemoveUntil('/login', ModalRoute.withName('/success'));
 //Navigator.push(context,  MaterialPageRoute(builder: (context) => LoginScreen()));
 
       }

@@ -17,7 +17,7 @@ class GoalAchievedForm extends StatefulWidget {
 class GoalAchievedFormState extends State<GoalAchievedForm> {
   List<UserModel> dataModels = <UserModel>[];
   int goalAchieved = 1;
-
+  Map<String,dynamic> userProfile = {} ;
   @override
   void initState() {
     super.initState();
@@ -124,6 +124,7 @@ class GoalAchievedFormState extends State<GoalAchievedForm> {
                   ),
                   onPressed: () => [
                     widget.onComplete(goalAchieved),
+           //         userProfile['goal'] = goalAchieved,
                     Navigator.pushNamed(context, '/physical')
                   ],
                 ),

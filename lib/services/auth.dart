@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -8,6 +9,7 @@ class AuthenticationService {
   FirebaseAuth auth = FirebaseAuth.instance;
   final GoogleSignIn googleSignIn = GoogleSignIn();
   static String message = "";
+  final CollectionReference users = FirebaseFirestore.instance.collection('users');
 //signup with email and password
   Future<void> signUpWithEmailAndPassword({
     required String name,
@@ -24,7 +26,13 @@ class AuthenticationService {
           .user;
       _user!.updateDisplayName(name);
       message = 'Register success!';
+     // message = _user.toString();
       // showMessage(message, context);
+      users.doc(_user.uid).set({
+        "name" : _user.displayName,
+        "email" : _user.email,
+
+      });
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         message = 'The password provided is too weak.';
@@ -36,13 +44,10 @@ class AuthenticationService {
       } else {
         message = e.message!;
       }
+     // message = _user.toString();
     }
+    
 
-    // if (_errorMessage != null) {
-    //   return _errorMessage;
-    // }
-
-    // return 'Register success!';
   }
 
 //---------------------------------------
@@ -51,18 +56,19 @@ class AuthenticationService {
   Future<void> signInWithEmailAndPassword({
     required String email,
     required String password,
+    
   }) async {
     User? _user;
-    // sharedPreferences = await SharedPreferences.getInstance();
+    UserCredential? userCredential;
+    
     try {
       _user = (await auth.signInWithEmailAndPassword(
               email: email, password: password))
           .user!;
-      message = 'Register success!';
-      // sharedPreferences.setBool('isLogin', true);
-      // sharedPreferences.setString('displayName', _user.displayName);
-      // sharedPreferences.setString('email', _user.email);
-      // sharedPreferences.setBool('isVerified', _user.emailVerified);
+         // _user.uid;s
+      message = 'Login success!';
+     // message = _user.toString();
+
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         message = 'No user found with the credential.';
@@ -73,11 +79,17 @@ class AuthenticationService {
       } else {
         message = e.message!;
       }
+  
+    
     }
+    
+    
   }
 
-  Future<void> signInWithGoogle({required BuildContext context}) async {
-    User? user;
+  Future<void> signInWithGoogle(
+   // {required BuildContext context}
+    ) async {
+    User? _user;
 
     final GoogleSignInAccount? googleSignInAccount =
         await googleSignIn.signIn();
@@ -85,19 +97,21 @@ class AuthenticationService {
     if (googleSignInAccount != null) {
       final GoogleSignInAuthentication googleSignInAuthentication =
           await googleSignInAccount.authentication;
-
+     
       final AuthCredential credential = GoogleAuthProvider.credential(
         accessToken: googleSignInAuthentication.accessToken,
         idToken: googleSignInAuthentication.idToken,
       );
+      
 
       try {
         final UserCredential userCredential =
             await auth.signInWithCredential(credential);
-        user = await auth.currentUser;
-        // user = userCredential.user;
-        Navigator.pushNamed(context, '/sucess');
-        print(user);
+      // _user =  auth.currentUser;
+       _user = userCredential.user;
+     
+       message = 'sign in with Google success';
+     // message = _user.toString();
       } on FirebaseAuthException catch (e) {
         if (e.code == 'account-exists-with-different-credential') {
           message = e.code;
@@ -106,19 +120,17 @@ class AuthenticationService {
         }
       }
     }
-
-    //  return user;
+   // message = _user.toString();
+    
   }
 
   Future<void> signOut() async {
     await auth.signOut();
-    print('Normal sign out');
+    
   }
 
   Future<void> signOutGoogle() async {
     await googleSignIn.signOut();
-
-    print('sign out');
   }
 
   static Future<void> showMessage(String message, BuildContext context) async {
@@ -127,7 +139,7 @@ class AuthenticationService {
         builder: (context) {
           return AlertDialog(
             title: const Text('ProFit Message'),
-            content: Text(message),
+            content:Text(message),
             actions: <Widget>[
               TextButton(
                 onPressed: () {
