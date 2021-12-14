@@ -1,5 +1,5 @@
 // ignore: non_constant_identifier_names
-void CalculateCalories(_goalAchieved, _ageController, _heightController,
+double CalculateCalories(_goalAchieved, _ageController, _heightController,
     _weightController, _gender, _activityLevel) {
   final weight = double.tryParse(_weightController.text);
   final height = double.tryParse(_heightController.text);
@@ -26,29 +26,26 @@ void CalculateCalories(_goalAchieved, _ageController, _heightController,
       {
         caloriesDaily = TDEE - 200;
 
-        print(caloriesDaily);
+       return caloriesDaily;
+       
       }
-      break;
+      
     case 2:
       {
         caloriesDaily = TDEE;
 
-        print(caloriesDaily);
+         return caloriesDaily;
       }
-      break;
-
     case 3:
       {
         caloriesDaily = TDEE + 200;
 
-        print(caloriesDaily);
+         return caloriesDaily;
       }
-      break;
-
-    default:
-      {
-        print(TDEE);
-      }
-      break;
+     
+ default: {
+   return 0;
+ }
+   
   }
 }

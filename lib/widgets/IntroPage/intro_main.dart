@@ -47,6 +47,7 @@ class _IntroPageState extends State<IntroPage> {
   late int
       _goalAchieved; //It represents the goal of the user whether it is to lose/maintenance/build muscle.
   late bool _gender;
+  late double calories;
   //Male or Female
 
   checkAuthentication() async {
@@ -107,7 +108,7 @@ class _IntroPageState extends State<IntroPage> {
           '/activity': (context) =>
               ActivityLevelForm(onComplete: (double level) {
                 setState(() => _activityLevel = level);
-                CalculateCalories(
+               calories = CalculateCalories(
                     _goalAchieved,
                     _ageController,
                     _heightController,
@@ -115,10 +116,17 @@ class _IntroPageState extends State<IntroPage> {
                     _gender,
                     _activityLevel);
               }),
-          '/login': (context) => const LoginScreen(),
+          '/login': (context) =>  LoginScreen(),
 
-          '/signup': (context) => SignupScreen(),
-          '/sucess': (context) => Sucess()
+          '/signup': (context) =>  SignupScreen(activityLevel: _activityLevel,
+                                                age: _ageController.text,
+                                                calories:calories,
+                                                gender: _gender,
+                                                weight: _weightController.text,
+                                                goal: _goalAchieved,
+                                                height: _heightController.text,
+                                                ),
+          '/success': (context) => Sucess()
         },
       ),
     );

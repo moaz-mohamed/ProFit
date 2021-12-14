@@ -17,6 +17,8 @@ class OnBoardingScreen extends StatelessWidget {
         //-->> Pages
         pages: [
           PageViewModel(
+            
+            
             image: buildImage('assets/onboarding/Page1.png', 600),
             title: 'Get the body you want',
             body:
@@ -30,7 +32,7 @@ class OnBoardingScreen extends StatelessWidget {
                   'Already have an Account? Login',
                   style: TextStyle(
                     fontSize: 15,
-                    color: FitnessAppTheme.nearlyDarkBlue,
+                    color: Colors.grey,
                   ),
                 )),
           ),
