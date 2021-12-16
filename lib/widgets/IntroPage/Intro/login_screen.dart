@@ -170,18 +170,18 @@ class _LoginScreenState extends State<LoginScreen> {
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(50)),
                     )),
-                TextButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/signup');
-                  },
-                  child: const Text(
-                    'Dont\'t have an account? Create New One',
-                    style: TextStyle(
-                      fontSize: 15,
-                      color: Colors.grey,
-                    ),
-                  ),
-                ),
+                // TextButton(
+                //   onPressed: () {
+                //     Navigator.pushNamed(context, '/signup');
+                //   },
+                //   child: const Text(
+                //     'Dont\'t have an account? Create New One',
+                //     style: TextStyle(
+                //       fontSize: 15,
+                //       color: Colors.grey,
+                //     ),
+                //   ),
+                // ),
                 const SizedBox(height: 40),
                 SignInButton(
                   Buttons.Google,
