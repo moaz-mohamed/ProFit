@@ -108,7 +108,7 @@ class _IntroPageState extends State<IntroPage> {
           '/activity': (context) =>
               ActivityLevelForm(onComplete: (double level) {
                 setState(() => _activityLevel = level);
-               calories = CalculateCalories(
+                calories = CalculateCalories(
                     _goalAchieved,
                     _ageController,
                     _heightController,
@@ -116,16 +116,17 @@ class _IntroPageState extends State<IntroPage> {
                     _gender,
                     _activityLevel);
               }),
-          '/login': (context) =>  LoginScreen(),
+          '/login': (context) => LoginScreen(),
 
-          '/signup': (context) =>  SignupScreen(activityLevel: _activityLevel,
-                                                age: _ageController.text,
-                                                calories:calories,
-                                                gender: _gender,
-                                                weight: _weightController.text,
-                                                goal: _goalAchieved,
-                                                height: _heightController.text,
-                                                ),
+          '/signup': (context) => SignupScreen(
+                age: _ageController.text,
+                activityLevel: _activityLevel,
+                calories: calories,
+                gender: _gender,
+                weight: _weightController.text,
+                goal: _goalAchieved,
+                height: _heightController.text,
+              ),
           '/success': (context) => Sucess()
         },
       ),

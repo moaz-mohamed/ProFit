@@ -15,7 +15,7 @@ class ActivityLevelForm extends StatefulWidget {
 }
 
 class _ActivityLevelFormState extends State<ActivityLevelForm> {
-  late double _activityLevel;
+ double _activityLevel = 1.25;
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +48,7 @@ class _ActivityLevelFormState extends State<ActivityLevelForm> {
               ],
             ),
             CustomRadioActivity(
-              onSelect: (double activityLevel) {
+              onSelect: ( activityLevel) {
                 setState(() {
                   _activityLevel = activityLevel;
                 });
