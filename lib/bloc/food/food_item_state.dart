@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:profit/food_data.dart';
+import 'package:profit/models/food_data.dart';
 
 @immutable
 abstract class FoodItemState {}

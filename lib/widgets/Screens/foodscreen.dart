@@ -154,11 +154,9 @@ class FoodSearch extends SearchDelegate<List?> {
       child: BlocBuilder<SearchBloc, SearchState>(
         builder: (BuildContext context, SearchState state) {
           if (state is SearchLoaded) {
-            print("SearchLoaded");
             items = (state).recipes;
             AllHintsItems = items.hints;
-            print("hjkhkjhjhakhkahskahkas");
-            print(AllHintsItems[4]);
+
             if (state.recipes.hints.isEmpty) {
               return const Center(
                 child: Text('No Results'),
@@ -167,13 +165,21 @@ class FoodSearch extends SearchDelegate<List?> {
             return ListView.builder(
               itemBuilder: (BuildContext context, int index) {
                 return Card(
-                  margin: const EdgeInsets.all(10.0),
+                  margin: const EdgeInsets.all(20.0),
                   child: InkWell(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(state.recipes.hints[index].food.label),
-                      ],
+                    child: ListTile(
+                      leading: const Icon(Icons.food_bank_outlined),
+                      title: Text(
+                        state.recipes.hints[index].food.label,
+                        style: const TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.blueGrey),
+                      ),
+                      subtitle: Text(state
+                          .recipes.hints[index].food.nutrients.ENERCKCAL
+                          .toString()),
+                      trailing: const Icon(Icons.keyboard_arrow_right),
                     ),
                   ),
                 );
@@ -183,7 +189,6 @@ class FoodSearch extends SearchDelegate<List?> {
               itemCount: AllHintsItems.length,
             );
           } else if (state is SearchInitial) {
-            print("SearchUninitialized");
             return const Center(child: CircularProgressIndicator());
           } else if (state is SearchError) {
             return const Center(
@@ -221,47 +226,3 @@ class FoodDetail extends StatelessWidget {
     );
   }
 }
-// class Home extends StatelessWidget {
-//   const Home({Key? key}) : super(key: key);
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: const Text('All Foods'),
-//       ),
-//       body: Center(
-//         child: BlocBuilder<FoodBloc, FoodItemState>(
-//           builder: (context, state) {
-//             if (state is FoodItemLoading) {
-//               return const CircularProgressIndicator();
-//             } else if (state is FoodItemLoaded) {
-//               return Column(
-//                 children: <Widget>[
-//                   // buildSeacrh(),
-//                   Expanded(
-//                       child: ListView.builder(
-//                           itemCount: state.items.hints.length,
-//                           itemBuilder: (context, i) {
-//                             return Card(
-//                               margin: const EdgeInsets.all(10.0),
-//                               child: ListTile(
-//                                 title: Text(state.items.hints[i].food.label),
-//                                 subtitle: Text(state
-//                                     .items.hints[i].food.nutrients.ENERCKCAL
-//                                     .toString()),
-//                               ),
-//                             );
-//                           }))
-//                 ],
-//               );
-//             } else if (state is FoodItemError) {
-//               return Text(state.message);
-//             }
-//             return const CircularProgressIndicator();
-//           },
-//         ),
-//       ),
-//     );
-//   }
-// }

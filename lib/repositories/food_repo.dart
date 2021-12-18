@@ -8,7 +8,6 @@ class FoodRepository {
 
   Future<Items> searchFoods(String food) async {
     final fooditems = foodWebServices.getItem(food);
-    // print(fooditems);
     return fooditems;
   }
 }

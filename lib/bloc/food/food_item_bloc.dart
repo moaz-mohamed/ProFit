@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
-import 'package:profit/bloc/food_item_event.dart';
-import 'package:profit/food_repo.dart';
-import 'package:profit/bloc/food_item_state.dart';
+import 'package:profit/bloc/food/food_item_event.dart';
+import 'package:profit/bloc/food/food_item_state.dart';
+import 'package:profit/repositories/food_repo.dart';
 
 class FoodBloc extends Bloc<FoodItemEvent, FoodItemState> {
   final FoodRepository repository;

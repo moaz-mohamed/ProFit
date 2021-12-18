@@ -10,11 +10,8 @@ const baseApi =
 class SearchWebServices {
   Future<Items> searchItem(String query) async {
     String api = baseApi + '&ingr=$query';
-    print(api);
     Response itemResponse = await get(Uri.parse(api));
-    print(itemResponse.body);
     if (itemResponse.statusCode == 200) {
-      print(itemResponse.body.toString());
       return Items.fromJson(json.decode(itemResponse.body));
     } else {
       throw Exception('Cant retrieve this item');

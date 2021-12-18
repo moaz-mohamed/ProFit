@@ -7,10 +7,8 @@ class SearchRepository {
   SearchRepository(this.searchWebServices);
 
   Future<Items> searchFoods(String food) async {
-    print("object");
     final fooditems = searchWebServices.searchItem(food);
-    print(food);
-    print("object2");
+
     return fooditems;
   }
 }

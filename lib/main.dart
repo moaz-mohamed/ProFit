@@ -34,5 +34,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-//--->>> Splash screen

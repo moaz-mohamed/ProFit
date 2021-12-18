@@ -24,31 +24,3 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
     }
   }
 }
-
-/*
-class FoodBloc extends Bloc<FoodItemEvent, FoodItemState> {
-  final FoodRepository repository;
-
-  FoodBloc(this.repository) : super(FoodItemInitial());
-
-  String foodToSearch;
-
-  @override
-  Stream<FoodItemState> mapEventToState(
-    FoodItemEvent event,
-  ) async* {
-    if (event is FoodItemEvent) {
-      yield FoodItemLoading();
-      try {
-        final items = await repository.searchFoods('rice');
-        yield FoodItemLoaded(items);
-      } catch (e) {
-        yield FoodItemError(e.toString());
-      }
-    }
-  }
-}
-*/
-
-
-//final recipes = await searchRepository.searchFoods(event.query);
