@@ -1,14 +1,17 @@
 class Items {
   late String text;
+  late List<Parsed> parsed;
 
   late List<Hints> hints;
   Items({
     required this.text,
+    required this.parsed,
     required this.hints,
   });
 
   Items.fromJson(Map<String, dynamic> json) {
     text = json['text'];
+    parsed = List.from(json['parsed']).map((e) => Parsed.fromJson(e)).toList();
     hints = List.from(json['hints']).map((e) => Hints.fromJson(e)).toList();
   }
 
@@ -18,6 +21,16 @@ class Items {
   //   _data['hints'] = hints.map((e) => e.toJson()).toList();
   //   return _data;
   // }
+}
+
+class Parsed {
+  Food? food;
+
+  Parsed({this.food});
+
+  Parsed.fromJson(Map<String, dynamic> json) {
+    food = json['food'] != null ? Food.fromJson(json['food']) : null;
+  }
 }
 
 class Food {
