@@ -18,7 +18,7 @@ double CalculateCalories(_goalAchieved, _ageController, _heightController,
     TDEE = BMR * activityLevel;
   } else {
     BMR = (10 * weight!) + (6.25 * height!) - (5 * age!) - 161;
-    TDEE = BMR * activityLevel; //Depending on the goal achieved
+    TDEE = BMR * activityLevel; //Depending on the user activity level
 
   }
   switch (goalAcieheved) {
@@ -26,26 +26,25 @@ double CalculateCalories(_goalAchieved, _ageController, _heightController,
       {
         caloriesDaily = TDEE - 200;
 
-       return caloriesDaily;
-       
+        return caloriesDaily;
       }
-      
+
     case 2:
       {
         caloriesDaily = TDEE;
 
-         return caloriesDaily;
+        return caloriesDaily;
       }
     case 3:
       {
         caloriesDaily = TDEE + 200;
 
-         return caloriesDaily;
+        return caloriesDaily;
       }
-     
- default: {
-   return 0;
- }
-   
+
+    default:
+      {
+        return 0;
+      }
   }
 }
