@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:profit/services/auth.dart';
+import 'package:profit/services/firestore_database.dart';
 import 'package:profit/themes/ThemeUI.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:profit/widgets/IntroPage/Intro/login_screen.dart';
+// import firestore
 
 class Sucess extends StatefulWidget {
   @override
@@ -17,10 +19,10 @@ class _SucessState extends State<Sucess> {
   checkAuthentication() async {
     auth.authStateChanges().listen((User? user) {
       if (user == null) {
-       // Navigator.pushNamedAndRemoveUntil(context, '/login', (route) => true);
+        // Navigator.pushNamedAndRemoveUntil(context, '/login', (route) => true);
         // Navigator.pop(context);
-       // Navigator.pushReplacementNamed(context, '/login');
-        
+        // Navigator.pushReplacementNamed(context, '/login');
+
         // Navigator.push(
         //   context,
         //   MaterialPageRoute(
@@ -29,14 +31,14 @@ class _SucessState extends State<Sucess> {
         //     },
         //   ),
         // );
-    //  Navigator.removeRoute(context, (Route<dynamic> route) => false)
+        //  Navigator.removeRoute(context, (Route<dynamic> route) => false)
         Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(builder: (context) => LoginScreen()),
           ModalRoute.withName('/sucess'),
         );
-   // Navigator.of(context).popUntil(ModalRoute.withName('/sucess'));
-        
+        // Navigator.of(context).popUntil(ModalRoute.withName('/sucess'));
+
         //   Navigator.pushNamedAndRemoveUntil
         //Navigator.pushNamedAndRemoveUntil(context, '/login', ModalRoute.withName('/success'));
 
@@ -102,6 +104,21 @@ class _SucessState extends State<Sucess> {
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
                         color: Colors.black),
+                  ),
+                  const SizedBox(height: 40),
+                  //make a button with on click function
+                  ElevatedButton(
+                    onPressed: () {
+                      AddDinnerToFirestoreUser(
+                          id: FirebaseAuth.instance.currentUser!.uid,
+                          name: "lunch23",
+                          calories: 2.1,
+                          quantity: 3.2,
+                          protein: 777.7,
+                          fat: 5.5,
+                          carbs: 6.2);
+                    },
+                    child: Text('Add Meals to Current User'),
                   ),
                   const SizedBox(height: 40),
                   ElevatedButton(

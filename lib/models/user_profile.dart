@@ -1,5 +1,7 @@
+import 'package:profit/widgets/IntroPage/Intro/activity_level.dart';
+
 class UserProfile {
- // late String _id;
+  // late String _id;
   late String _name;
   late String _email;
   late int _goal;
@@ -8,10 +10,16 @@ class UserProfile {
   late String _weight;
   late bool _gender;
   late double _activityLevel;
-  late double _calories;
+  late double calories;
+  double remainingCalories = 0;
+  double eatenCalories = 0;
+  double burnedCalories = 0;
+  List<Map<String, dynamic>> breakfast = [];
+  List<Map<String, dynamic>> lunch = [];
+  List<Map<String, dynamic>> dinner = [];
 
   UserProfile(dynamic obj) {
-  //  _id =  obj['id'];
+    //  _id =  obj['id'];
     _name = obj['name'];
     _email = obj['email'];
     _goal = obj['goal'];
@@ -20,8 +28,12 @@ class UserProfile {
     _weight = obj['weight'];
     _gender = obj['gender'];
     _activityLevel = obj['activityLevel'];
-    _calories = obj['calories'];
+    calories = obj['calories'];
+    remainingCalories = 0;
+    burnedCalories = 0;
+    eatenCalories = 0;
   }
+
   UserProfile.fromMap(Map<String, dynamic> data) {
     // _id =  data['id'];
     _name = data['name'];
@@ -32,7 +44,13 @@ class UserProfile {
     _weight = data['weight'];
     _gender = data['gender'];
     _activityLevel = data['activityLevel'];
-    _calories = data['calories'];
+    calories = data['calories'];
+    remainingCalories = data['_remainingCalories'];
+    burnedCalories = data['_burnedCalories'];
+    eatenCalories = data['_eatenCalories'];
+    breakfast = data['breakfast'];
+    lunch = data['lunch'];
+    dinner = data['dinner'];
   }
 
   Map<String, dynamic> toMap() => {
@@ -44,11 +62,17 @@ class UserProfile {
         'weight': _weight,
         'gender': _gender,
         'activityLevel': _activityLevel,
-        'calories': _calories,
+        'calories': calories,
+        'remainingCalories': remainingCalories,
+        'eatenCalories': eatenCalories,
+        'burnedCalories': eatenCalories,
+        'breakfast': breakfast,
+        'lunch': lunch,
+        'dinner': dinner,
       };
-   //   String getId() => _id;
+  //   String getId() => _id;
 
-      // setId(String id){
-      //     _id = id;
-      // }
+  // setId(String id){
+  //     _id = id;
+  // }
 }
