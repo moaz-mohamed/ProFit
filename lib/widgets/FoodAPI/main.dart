@@ -11,7 +11,6 @@ import 'package:profit/services/foodServices/barcode_service.dart';
 import 'package:profit/services/foodServices/post_food_service.dart';
 import 'package:profit/services/foodServices/search_service.dart';
 import 'package:profit/widgets/FoodAPI/foodscreen.dart';
-import 'package:profit/widgets/Screens/foodscreen.dart';
 
 void main() {
   runApp(MyApp());
