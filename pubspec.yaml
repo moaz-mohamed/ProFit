@@ -67,6 +67,7 @@ flutter:
     - assets/selector/maintain.png
     - assets/selector/muscleColor.png
     - assets/selector/muscle.png
+    - assets/calories/flame.png
   fonts:
     - family: Montserrat
       fonts:
