@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:profit/bloc/barcode/bar_item_bloc.dart';
 import 'package:profit/bloc/postapi/post_food_item_bloc.dart';
-
 import 'package:profit/bloc/search/search_bloc.dart';
 import 'package:profit/repositories/foodRepositories/barcode_repo.dart';
 import 'package:profit/repositories/foodRepositories/food_repo.dart';
@@ -11,7 +10,6 @@ import 'package:profit/services/foodServices/barcode_service.dart';
 import 'package:profit/services/foodServices/post_food_service.dart';
 import 'package:profit/services/foodServices/search_service.dart';
 import 'package:profit/widgets/FoodAPI/foodscreen.dart';
-import 'package:profit/widgets/Screens/foodscreen.dart';
 
 void main() {
   runApp(MyApp());

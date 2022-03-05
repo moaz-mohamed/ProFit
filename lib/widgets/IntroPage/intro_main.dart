@@ -10,6 +10,7 @@ import 'package:profit/widgets/IntroPage/Intro/loginsucess.dart';
 import 'package:profit/widgets/IntroPage/Intro/onboarding_screen.dart';
 import 'package:profit/widgets/IntroPage/Intro/physical_paramters_form.dart';
 import 'package:profit/widgets/IntroPage/Intro/signup_screen.dart';
+import 'package:profit/widgets/Dashboard/NavigationScreen.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -127,7 +128,8 @@ class _IntroPageState extends State<IntroPage> {
                 goal: _goalAchieved,
                 height: _heightController.text,
               ),
-          '/success': (context) => Sucess()
+          '/success': (context) => Sucess(),
+          '/dashboard': (context) => TabBarPage()
         },
       ),
     );
