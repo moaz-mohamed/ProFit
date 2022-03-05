@@ -9,7 +9,8 @@ class AuthenticationService {
   FirebaseAuth auth = FirebaseAuth.instance;
   final GoogleSignIn googleSignIn = GoogleSignIn();
   static String message = "";
-  final CollectionReference users = FirebaseFirestore.instance.collection('users');
+  final CollectionReference users =
+      FirebaseFirestore.instance.collection('users');
 //signup with email and password
   Future<void> signUpWithEmailAndPassword({
     required String name,
@@ -26,13 +27,9 @@ class AuthenticationService {
           .user;
       _user!.updateDisplayName(name);
       message = 'Register success!';
-     // message = _user.toString();
+      // message = _user.toString();
       // showMessage(message, context);
-      users.doc(_user.uid).set({
-        "name" : _user.displayName,
-        "email" : _user.email,
 
-      });
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         message = 'The password provided is too weak.';
@@ -44,10 +41,8 @@ class AuthenticationService {
       } else {
         message = e.message!;
       }
-     // message = _user.toString();
+      // message = _user.toString();
     }
-    
-
   }
 
 //---------------------------------------
@@ -56,18 +51,17 @@ class AuthenticationService {
   Future<void> signInWithEmailAndPassword({
     required String email,
     required String password,
-    
   }) async {
     User? _user;
     UserCredential? userCredential;
-    
+
     try {
       _user = (await auth.signInWithEmailAndPassword(
               email: email, password: password))
           .user!;
-         // _user.uid;s
+      // _user.uid;s
       message = 'Login success!';
-     // message = _user.toString();
+      // message = _user.toString();
 
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
@@ -79,16 +73,12 @@ class AuthenticationService {
       } else {
         message = e.message!;
       }
-  
-    
     }
-    
-    
   }
 
   Future<void> signInWithGoogle(
-   // {required BuildContext context}
-    ) async {
+      // {required BuildContext context}
+      ) async {
     User? _user;
 
     final GoogleSignInAccount? googleSignInAccount =
@@ -97,21 +87,20 @@ class AuthenticationService {
     if (googleSignInAccount != null) {
       final GoogleSignInAuthentication googleSignInAuthentication =
           await googleSignInAccount.authentication;
-     
+
       final AuthCredential credential = GoogleAuthProvider.credential(
         accessToken: googleSignInAuthentication.accessToken,
         idToken: googleSignInAuthentication.idToken,
       );
-      
 
       try {
         final UserCredential userCredential =
             await auth.signInWithCredential(credential);
-      // _user =  auth.currentUser;
-       _user = userCredential.user;
-     
-       message = 'sign in with Google success';
-     // message = _user.toString();
+        // _user =  auth.currentUser;
+        _user = userCredential.user;
+
+        message = 'sign in with Google success';
+        // message = _user.toString();
       } on FirebaseAuthException catch (e) {
         if (e.code == 'account-exists-with-different-credential') {
           message = e.code;
@@ -120,13 +109,11 @@ class AuthenticationService {
         }
       }
     }
-   // message = _user.toString();
-    
+    // message = _user.toString();
   }
 
   Future<void> signOut() async {
     await auth.signOut();
-    
   }
 
   Future<void> signOutGoogle() async {
@@ -139,7 +126,7 @@ class AuthenticationService {
         builder: (context) {
           return AlertDialog(
             title: const Text('ProFit Message'),
-            content:Text(message),
+            content: Text(message),
             actions: <Widget>[
               TextButton(
                 onPressed: () {
