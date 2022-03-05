@@ -11,12 +11,13 @@ class UserProfile {
   late bool _gender;
   late double _activityLevel;
   late double calories;
-  double remainingCalories = 0;
-  double eatenCalories = 0;
-  double burnedCalories = 0;
+  late double remainingCalories;
+  late double eatenCalories;
+  late double burnedCalories;
   List<Map<String, dynamic>> breakfast = [];
   List<Map<String, dynamic>> lunch = [];
   List<Map<String, dynamic>> dinner = [];
+  List<Map<String, dynamic>> workout = [];
 
   UserProfile(dynamic obj) {
     //  _id =  obj['id'];
@@ -30,8 +31,8 @@ class UserProfile {
     _activityLevel = obj['activityLevel'];
     calories = obj['calories'];
     remainingCalories = 0;
-    burnedCalories = 0;
     eatenCalories = 0;
+    burnedCalories = 0;
   }
 
   UserProfile.fromMap(Map<String, dynamic> data) {
@@ -46,11 +47,12 @@ class UserProfile {
     _activityLevel = data['activityLevel'];
     calories = data['calories'];
     remainingCalories = data['_remainingCalories'];
-    burnedCalories = data['_burnedCalories'];
     eatenCalories = data['_eatenCalories'];
+    burnedCalories = data['_burnedCalories'];
     breakfast = data['breakfast'];
     lunch = data['lunch'];
     dinner = data['dinner'];
+    workout = data['workout'];
   }
 
   Map<String, dynamic> toMap() => {
@@ -69,6 +71,7 @@ class UserProfile {
         'breakfast': breakfast,
         'lunch': lunch,
         'dinner': dinner,
+        'workout': workout,
       };
   //   String getId() => _id;
 
