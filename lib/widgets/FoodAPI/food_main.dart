@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:profit/bloc/barcode/bar_item_bloc.dart';
 import 'package:profit/bloc/postapi/post_food_item_bloc.dart';
-
 import 'package:profit/bloc/search/search_bloc.dart';
 import 'package:profit/repositories/foodRepositories/barcode_repo.dart';
 import 'package:profit/repositories/foodRepositories/food_repo.dart';
@@ -12,11 +11,7 @@ import 'package:profit/services/foodServices/post_food_service.dart';
 import 'package:profit/services/foodServices/search_service.dart';
 import 'package:profit/widgets/FoodAPI/foodscreen.dart';
 
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
+class FoodMain extends StatelessWidget {
   // This widget is the root of your application.
   @override
   // ignore: avoid_renaming_method_parameters
@@ -40,6 +35,7 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           title: 'Foodie App',
           home: FoodScreen(),
-        ));
+        ),
+    );
   }
 }

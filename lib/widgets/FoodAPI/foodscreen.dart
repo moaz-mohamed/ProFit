@@ -16,10 +16,6 @@ import 'package:profit/models/food_data_model.dart';
 import 'package:profit/widgets/FoodAPI/AddFoodScreen.dart';
 import 'package:profit/widgets/FoodAPI/bar_code_widget.dart';
 
-main() {
-  runApp(const FoodScreen());
-}
-
 class FoodScreen extends StatefulWidget {
   const FoodScreen({Key? key}) : super(key: key);
 
