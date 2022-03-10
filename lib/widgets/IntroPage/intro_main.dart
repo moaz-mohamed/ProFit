@@ -83,7 +83,7 @@ class _IntroPageState extends State<IntroPage> {
 
         routes: {
           // When navigating to the "/" route, build the HomeScreen widget.
-          '/': (context) => TabBarPage(),
+          '/': (context) => OnBoardingScreen(),
           '/goal': (context) => GoalAchievedForm(
                 // It is the form of the users goal whether it to lose/maintenance/build muscle.
                 onComplete: (int goalAchieved) {
