@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:profit/widgets/Dashboard/Screens/HomeScreen/home_screen.dart';
 import 'package:profit/widgets/Dashboard/Screens/geofencing.dart';
-import 'package:profit/widgets/Dashboard/Screens/home_screen.dart';
 import 'package:profit/widgets/Dashboard/Screens/food_screen.dart';
 import 'package:profit/widgets/Dashboard/Screens/workouts_screen.dart';
 import 'package:profit/widgets/Dashboard/NavigationBloc/tab_bar_bloc.dart';
 import 'package:profit/widgets/Dashboard/NavigationBloc/tab_bar_event.dart';
+import 'package:profit/themes/ThemeUI.dart';
 
 class TabBarPage extends StatelessWidget {
   const TabBarPage({Key? key}) : super(key: key);
@@ -13,7 +14,7 @@ class TabBarPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<TabBarBloc>(
-      create: (BuildContext context) => TabBarBloc(1),
+      create: (BuildContext context) => TabBarBloc(0),
       child: BlocBuilder<TabBarBloc, int>(
         builder: (context, state) {
           final bloc = BlocProvider.of<TabBarBloc>(context);
@@ -31,34 +32,26 @@ class TabBarPage extends StatelessWidget {
     final bloc = BlocProvider.of<TabBarBloc>(context);
     return BottomNavigationBar(
       currentIndex: bloc.currentIndex,
-      fixedColor: Colors.blueAccent,
-      // ignore: prefer_const_literals_to_create_immutables
       items: [
-        const BottomNavigationBarItem(
-          icon: Image(
-            image: AssetImage('assets/images/workouts.png'),
-          ),
-          label: 'Workout',
+        BottomNavigationBarItem(
+          icon: Image.asset('assets/dashboard/home.png', scale: 1.5,),
+          label: "Home",
         ),
-        const BottomNavigationBarItem(
-          icon: Image(
-            image: AssetImage('assets/images/home.png'),
-          ),
-          label: 'Home',
-        ),
-        const BottomNavigationBarItem(
-          icon: Image(
-            image: AssetImage('assets/images/food.png'),
-          ),
+        BottomNavigationBarItem(
+          icon: Image.asset('assets/dashboard/food.png', scale: 1.5,),
           label: 'Food',
         ),
-        const BottomNavigationBarItem(
-          icon: Image(
-            image: AssetImage('assets/images/geofence.png'),
-          ),
-          label: 'GeoFencing',
+        BottomNavigationBarItem(
+          icon: Image.asset('assets/dashboard/workout.png', scale: 1.5,),
+          label: 'Workout',
+        ),
+        BottomNavigationBarItem(
+          icon: Image.asset('assets/dashboard/geofence.png', scale: 1.5,),
+          label: 'GeoFence',
         ),
       ],
+      selectedLabelStyle: FitnessAppTheme.navScreen,
+      fixedColor: Colors.blue,
       onTap: (index) {
         bloc.add(NavBarTappedEvent(
             index: index)); //trigger and notifies the bloc a new event
@@ -67,7 +60,7 @@ class TabBarPage extends StatelessWidget {
   }
 
   Widget _createBody(BuildContext context, int index) {
-    final children = [WorkoutsPage(), HomePage(), FoodScreen(), GeoFencing()];
+    final children = [HomePage(),FoodScreen(), WorkoutsPage(), GeoFencing()];
     return children[index];
   }
 }

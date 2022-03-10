@@ -10,7 +10,7 @@ import 'package:profit/widgets/IntroPage/Intro/loginsucess.dart';
 import 'package:profit/widgets/IntroPage/Intro/onboarding_screen.dart';
 import 'package:profit/widgets/IntroPage/Intro/physical_paramters_form.dart';
 import 'package:profit/widgets/IntroPage/Intro/signup_screen.dart';
-import 'package:profit/widgets/Dashboard/NavigationScreen.dart';
+import 'package:profit/widgets/Dashboard/navigation_screen.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -58,7 +58,7 @@ class _IntroPageState extends State<IntroPage> {
           context,
           MaterialPageRoute(
             builder: (context) {
-              return Sucess();
+              return TabBarPage();
             },
           ),
         );
@@ -83,8 +83,7 @@ class _IntroPageState extends State<IntroPage> {
 
         routes: {
           // When navigating to the "/" route, build the HomeScreen widget.
-          '/': (context) => OnBoardingScreen(),
-
+          '/': (context) => TabBarPage(),
           '/goal': (context) => GoalAchievedForm(
                 // It is the form of the users goal whether it to lose/maintenance/build muscle.
                 onComplete: (int goalAchieved) {
@@ -128,8 +127,7 @@ class _IntroPageState extends State<IntroPage> {
                 goal: _goalAchieved,
                 height: _heightController.text,
               ),
-          '/success': (context) => Sucess(),
-          '/dashboard': (context) => TabBarPage()
+          '/success': (context) => TabBarPage(),
         },
       ),
     );

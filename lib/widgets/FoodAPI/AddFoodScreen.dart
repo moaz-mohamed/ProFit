@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:profit/bloc/postapi/post_food_item_bloc.dart';
@@ -40,10 +42,18 @@ class AddFoodScreen extends StatefulWidget {
 
 class _AddFoodScreenState extends State<AddFoodScreen> {
   late num foodQuantity;
+  late double totalCalories;
+  late double carbs;
+  late double protein;
+  late double fats;
 
   void initState() {
     super.initState();
     foodQuantity = 0;
+    totalCalories = 0;
+    carbs = 0;
+    protein = 0;
+    fats = 0;
     widget.calculateFoodBloc.add(
       calculateItemsEvent(
         quantity: 0,
@@ -111,6 +121,8 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                           style: fonts.totalCaloriesNumber,
                         );
                       } else if (state is FoodItemLoaded) {
+                        totalCalories =
+                            double.parse(state.items.calories.toString());
                         return Text(
                           state.items.calories.toString(),
                           style: fonts.totalCaloriesNumber,
@@ -164,7 +176,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                       style: fonts.textFieldText,
                       decoration: InputDecoration(
                         icon: Image.asset(
-                          "assets/scale.png",
+                          "assets/add_food_screen/scale.png",
                           scale: 2.5,
                         ),
                         constraints: BoxConstraints(
@@ -225,7 +237,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                             Row(
                               children: [
                                 Image.asset(
-                                  "assets/carbs.png",
+                                  "assets/add_food_screen/carbs.png",
                                   scale: 3,
                                 ),
                                 Text(
@@ -242,6 +254,10 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                                     style: fonts.nutrientsValue,
                                   );
                                 } else if (state is FoodItemLoaded) {
+                                  carbs = double.parse(state
+                                      .items
+                                      .totalNutrients!
+                                      .nutrientsValuesMap["Carbs"]);
                                   return Text(
                                     "${state.items.totalNutrients!.nutrientsValuesMap["Carbs"]} gm",
                                     style: fonts.nutrientsValue,
@@ -263,7 +279,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                             Row(
                               children: [
                                 Image.asset(
-                                  "assets/protein.png",
+                                  "assets/add_food_screen/protein.png",
                                   scale: 3,
                                 ),
                                 Text(
@@ -280,6 +296,10 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                                     style: fonts.nutrientsValue,
                                   );
                                 } else if (state is FoodItemLoaded) {
+                                  protein = double.parse(state
+                                      .items
+                                      .totalNutrients
+                                      ?.nutrientsValuesMap["Protein"]);
                                   return Text(
                                     "${state.items.totalNutrients?.nutrientsValuesMap["Protein"]} gm",
                                     style: fonts.nutrientsValue,
@@ -301,7 +321,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                             Row(
                               children: [
                                 Image.asset(
-                                  "assets/fats.png",
+                                  "assets/add_food_screen/fats.png",
                                   scale: 3,
                                 ),
                                 Text(
@@ -318,6 +338,8 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                                     style: fonts.nutrientsValue,
                                   );
                                 } else if (state is FoodItemLoaded) {
+                                  fats = double.parse(state.items.totalNutrients
+                                      ?.nutrientsValuesMap["Fats"]);
                                   return Text(
                                     "${state.items.totalNutrients?.nutrientsValuesMap["Fats"]} gm",
                                     style: fonts.nutrientsValue,
@@ -370,9 +392,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                             );
                           } else if (state is FoodItemLoaded) {
                             return Text(
-                              state.items.totalNutrients!.nutrientsValuesMap
-                                  .values
-                                  .toList()[index],
+                              "${state.items.totalNutrients!.nutrientsValuesMap.values.toList()[index]}",
                               style: fonts.nutrientsListValue,
                             );
                           } else if (state is FoodItemError) {
@@ -392,6 +412,19 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
             ),
           ),
         ],
+      ),
+      //////------>>>>>> Add food button
+      bottomNavigationBar: BottomAppBar(
+        child: ElevatedButton(
+          child: Icon(Icons.ac_unit),
+          // Checked and working
+          onPressed: () {
+            print("$totalCalories");
+            print("$carbs");
+            print("$protein");
+            print("$fats");
+          },
+        ),
       ),
     );
   }
