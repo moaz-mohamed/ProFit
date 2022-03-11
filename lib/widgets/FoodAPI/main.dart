@@ -12,6 +12,7 @@ import 'package:profit/services/foodServices/post_food_service.dart';
 import 'package:profit/services/foodServices/search_service.dart';
 import 'package:profit/widgets/FoodAPI/foodscreen.dart';
 
+enum FoodType { breakfast, lunch, dinner }
 void main() {
   runApp(MyApp());
 }
@@ -39,7 +40,8 @@ class MyApp extends StatelessWidget {
         child: const MaterialApp(
           debugShowCheckedModeBanner: false,
           title: 'Foodie App',
-          home: FoodScreen(),
+          home:
+              FoodScreen(foodtype: 1), //1 here means index of second enum lunch
         ));
   }
 }
