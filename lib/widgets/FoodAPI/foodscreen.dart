@@ -1,13 +1,7 @@
-import 'dart:convert';
-import 'package:flutter/services.dart';
-import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 
 import 'package:profit/bloc/barcode/bar_item_bloc.dart';
-import 'package:profit/bloc/barcode/bar_item_event.dart';
-import 'package:profit/bloc/barcode/bar_item_state.dart';
 import 'package:profit/bloc/postapi/post_food_item_bloc.dart';
 import 'package:profit/bloc/search/search_bloc.dart';
 import 'package:profit/bloc/search/search_event.dart';
@@ -17,7 +11,8 @@ import 'package:profit/widgets/FoodAPI/AddFoodScreen.dart';
 import 'package:profit/widgets/FoodAPI/bar_code_widget.dart';
 
 class FoodScreen extends StatefulWidget {
-  const FoodScreen({Key? key}) : super(key: key);
+  final int foodtype;
+  const FoodScreen({Key? key, required this.foodtype}) : super(key: key);
 
   @override
   State<FoodScreen> createState() => _FoodScreenState();
@@ -39,8 +34,8 @@ class _FoodScreenState extends State<FoodScreen> {
                   showSearch(
                     context: foodScreenContext,
                     delegate: FoodSearch(
-                      searchBloc: BlocProvider.of<SearchBloc>(context),
-                    ),
+                        searchBloc: BlocProvider.of<SearchBloc>(context),
+                        foodtype: widget.foodtype),
                   );
                 }),
             IconButton(
@@ -51,6 +46,7 @@ class _FoodScreenState extends State<FoodScreen> {
                     MaterialPageRoute(
                       builder: (context) => BarCodeSearch(
                         barcodebloc: BlocProvider.of<BarCodeBloc>(context),
+                        foodtype: widget.foodtype,
                       ),
                     ),
                   );
@@ -75,8 +71,9 @@ class FoodSearch extends SearchDelegate<List?> {
   late String measureUri = '';
 
   SearchBloc searchBloc;
+  int foodtype; //type of food from the enum
 
-  FoodSearch({required this.searchBloc});
+  FoodSearch({required this.searchBloc, required this.foodtype});
 
   @override
   List<Widget> buildActions(BuildContext context) {
@@ -143,11 +140,12 @@ class FoodSearch extends SearchDelegate<List?> {
                             context,
                             MaterialPageRoute(
                               builder: (context) => AddFoodScreen(
-                                calculateFoodBloc:
-                                    BlocProvider.of<CalculateFoodBloc>(context),
-                                foodLabel: items.hints[index].food.label,
-                                foodID: items.hints[index].food.foodId,
-                              ),
+                                  calculateFoodBloc:
+                                      BlocProvider.of<CalculateFoodBloc>(
+                                          context),
+                                  foodLabel: items.hints[index].food.label,
+                                  foodID: items.hints[index].food.foodId,
+                                  foodtype: foodtype),
                             ),
                           );
                         },

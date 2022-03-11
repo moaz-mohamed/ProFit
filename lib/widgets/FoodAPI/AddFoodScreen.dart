@@ -10,6 +10,7 @@ import 'package:profit/widgets/FoodAPI/fonts.dart';
 class AddFoodScreen extends StatefulWidget {
   late String foodLabel;
   late String foodID;
+  late int foodtype;
   CalculateFoodBloc calculateFoodBloc;
 
   List<String> nutrients = [
@@ -34,7 +35,8 @@ class AddFoodScreen extends StatefulWidget {
   AddFoodScreen(
       {required this.calculateFoodBloc,
       required this.foodLabel,
-      required this.foodID});
+      required this.foodID,
+      required this.foodtype});
 
   @override
   State<AddFoodScreen> createState() => _AddFoodScreenState();
@@ -46,6 +48,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
   late double carbs;
   late double protein;
   late double fats;
+  late int foodtype;
 
   void initState() {
     super.initState();
@@ -54,6 +57,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
     carbs = 0;
     protein = 0;
     fats = 0;
+    foodtype = widget.foodtype;
     widget.calculateFoodBloc.add(
       calculateItemsEvent(
         quantity: 0,
@@ -423,9 +427,20 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
             print("$carbs");
             print("$protein");
             print("$fats");
+            print("$foodtype");
           },
         ),
       ),
     );
   }
 }
+
+
+
+//ontap(foodtype){
+  // if(foodtype=0)
+  // {
+  //   addToBreakfast
+  // }
+
+//}

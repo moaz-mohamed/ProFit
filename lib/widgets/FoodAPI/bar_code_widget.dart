@@ -13,8 +13,9 @@ import 'AddFoodScreen.dart';
 
 class BarCodeSearch extends StatefulWidget {
   BarCodeBloc barcodebloc;
+  final int foodtype;
 
-  BarCodeSearch({required this.barcodebloc});
+  BarCodeSearch({required this.barcodebloc, required this.foodtype});
 
   @override
   State<BarCodeSearch> createState() => _BarCodeSearchState();
@@ -85,6 +86,7 @@ class _BarCodeSearchState extends State<BarCodeSearch> {
                                   BlocProvider.of<CalculateFoodBloc>(context),
                               foodLabel: items.hints[index].food.label,
                               foodID: items.hints[index].food.foodId,
+                              foodtype: widget.foodtype,
                             ),
                           ),
                         );
