@@ -1,11 +1,14 @@
 import 'dart:ffi';
 
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:profit/bloc/postapi/post_food_item_bloc.dart';
 import 'package:profit/bloc/postapi/post_food_item_event.dart';
 import 'package:profit/bloc/postapi/post_food_item_state.dart';
 import 'package:profit/widgets/FoodAPI/fonts.dart';
+import 'package:profit/services/firestore_database.dart';
 
 class AddFoodScreen extends StatefulWidget {
   late String foodLabel;
@@ -192,6 +195,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                         if (value == "") {
                           value = "0";
                         }
+                        //abdelnasser space input isnt handled
                         setState(() {
                           foodQuantity = num.parse(value);
                         });
@@ -423,24 +427,46 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
           child: Icon(Icons.ac_unit),
           // Checked and working
           onPressed: () {
-            print("$totalCalories");
-            print("$carbs");
-            print("$protein");
-            print("$fats");
-            print("$foodtype");
+            print(foodQuantity);
+            if (foodQuantity.toDouble() == 0) {
+              //widget called dialogue widget
+
+            } else {
+              if (foodtype == 1) {
+                DatabaseService().AddBreakfastToFirestoreUser(
+                    calories: totalCalories,
+                    name: widget.foodLabel,
+                    carbs: carbs,
+                    protein: protein,
+                    fat: fats,
+                    quantity: foodQuantity.toDouble(),
+                    id: FirebaseAuth.instance.currentUser!.uid);
+              } else if (foodtype == 2) {
+                print(
+                    'Dinnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnner is added');
+                DatabaseService().AddLunchToFirestoreUser(
+                    calories: totalCalories,
+                    name: widget.foodLabel,
+                    carbs: carbs,
+                    protein: protein,
+                    fat: fats,
+                    quantity: foodQuantity.toDouble(),
+                    id: FirebaseAuth.instance.currentUser!.uid);
+              } else {
+                DatabaseService().AddDinnerToFirestoreUser(
+                    calories: totalCalories,
+                    name: widget.foodLabel,
+                    carbs: carbs,
+                    protein: protein,
+                    fat: fats,
+                    quantity: foodQuantity.toDouble(),
+                    id: FirebaseAuth.instance.currentUser!.uid);
+              }
+            }
+            //Delay function to add
           },
         ),
       ),
     );
   }
 }
-
-
-
-//ontap(foodtype){
-  // if(foodtype=0)
-  // {
-  //   addToBreakfast
-  // }
-
-//}
