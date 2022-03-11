@@ -38,7 +38,7 @@ class DatabaseService {
       'fat': fat,
       'carbs': carbs,
     });
-    updateUserCalories(id: id, foodCalories: calories);
+    updateUserCalories(id: id, foodCalories: calories); //Adding this function
     return await FirebaseFirestore.instance
         .collection('users')
         .doc(id)
@@ -98,7 +98,7 @@ class DatabaseService {
       'fat': fat,
       'carbs': carbs,
     });
-    updateUserCalories(id: id, foodCalories: calories);
+    updateUserCalories(id: id, foodCalories: calories); //Adding this function
     return await FirebaseFirestore.instance
         .collection('users')
         .doc(id)
