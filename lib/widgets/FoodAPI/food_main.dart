@@ -11,14 +11,7 @@ import 'package:profit/services/foodServices/post_food_service.dart';
 import 'package:profit/services/foodServices/search_service.dart';
 import 'package:profit/widgets/FoodAPI/foodscreen.dart';
 
-<<<<<<< HEAD:lib/widgets/FoodAPI/main.dart
-enum FoodType { breakfast, lunch, dinner }
-
-
-class MyApp extends StatelessWidget {
-=======
 class FoodMain extends StatelessWidget {
->>>>>>> 0cae8c20ba45582d83a27bd840fa011c63b0b1dc:lib/widgets/FoodAPI/food_main.dart
   // This widget is the root of your application.
   @override
   // ignore: avoid_renaming_method_parameters
@@ -41,14 +34,8 @@ class FoodMain extends StatelessWidget {
         child: const MaterialApp(
           debugShowCheckedModeBanner: false,
           title: 'Foodie App',
-<<<<<<< HEAD:lib/widgets/FoodAPI/main.dart
           home:
               FoodScreen(foodtype: 1), //1 here means index of second enum lunch
         ));
-=======
-          home: FoodScreen(),
-        ),
-    );
->>>>>>> 0cae8c20ba45582d83a27bd840fa011c63b0b1dc:lib/widgets/FoodAPI/food_main.dart
   }
 }
