@@ -174,4 +174,11 @@ class FitnessAppTheme {
     letterSpacing: 0.27,
     color: Colors.lightBlue,
   );
+
+  // Navigation screen font
+  static const TextStyle navScreen = TextStyle(
+    fontFamily: fontName,
+    fontWeight: FontWeight.w600,
+    fontSize: 20,
+  );
 }
