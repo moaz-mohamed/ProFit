@@ -14,7 +14,6 @@ import 'package:profit/widgets/FoodAPI/foodscreen.dart';
 class FoodMain extends StatelessWidget {
   // This widget is the root of your application.
   @override
-  // ignore: avoid_renaming_method_parameters
   Widget build(BuildContext myAppContext) {
     return MultiBlocProvider(
         providers: [
@@ -35,7 +34,7 @@ class FoodMain extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           title: 'Foodie App',
           home:
-              FoodScreen(foodtype: 1), //1 here means index of second enum lunch
+              FoodScreen(foodtype: 2), //1 here means index of second enum lunch
         ));
   }
 }

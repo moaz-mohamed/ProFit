@@ -48,6 +48,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
   late double carbs;
   late double protein;
   late double fats;
+  late int foodtype;
 
   void initState() {
     super.initState();
@@ -56,6 +57,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
     carbs = 0;
     protein = 0;
     fats = 0;
+    foodtype = widget.foodtype;
     widget.calculateFoodBloc.add(
       calculateItemsEvent(
         quantity: 0,
@@ -425,6 +427,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
             print("$carbs");
             print("$protein");
             print("$fats");
+            print("$foodtype");
           },
         ),
       ),
