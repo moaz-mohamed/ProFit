@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:profit/models/user_profile.dart';
 
@@ -13,6 +14,10 @@ class DatabaseService {
     return await users
         .doc(id)
         .set(userProfile.toMap(), SetOptions(merge: true));
+  }
+
+  Stream<DocumentSnapshot> getUserDocStream({required String id}) {
+    return users.doc(id).snapshots();
   }
 
   Future AddBreakfastToFirestoreUser(
@@ -38,7 +43,12 @@ class DatabaseService {
       'fat': fat,
       'carbs': carbs,
     });
-    updateUserCalories(id: id, foodCalories: calories); //Adding this function
+    updateUserCalories(
+        id: id,
+        foodCalories: calories,
+        fats: fat,
+        carbs: carbs,
+        proteins: protein);
     return await FirebaseFirestore.instance
         .collection('users')
         .doc(id)
@@ -68,7 +78,12 @@ class DatabaseService {
       'fat': fat,
       'carbs': carbs,
     });
-    updateUserCalories(id: id, foodCalories: calories);
+    updateUserCalories(
+        id: id,
+        foodCalories: calories,
+        fats: fat,
+        carbs: carbs,
+        proteins: protein);
     return await FirebaseFirestore.instance
         .collection('users')
         .doc(id)
@@ -98,7 +113,12 @@ class DatabaseService {
       'fat': fat,
       'carbs': carbs,
     });
-    updateUserCalories(id: id, foodCalories: calories); //Adding this function
+    updateUserCalories(
+        id: id,
+        foodCalories: calories,
+        fats: fat,
+        carbs: carbs,
+        proteins: protein);
     return await FirebaseFirestore.instance
         .collection('users')
         .doc(id)
@@ -119,12 +139,15 @@ class DatabaseService {
 
 // update workout if exists else create new workout
     final List workout = user['workout'];
+
     workout.add({
       'name': name,
       'burnedCalories': burnedCalories,
       'duration': duration,
     });
 
+// update total burned calories
+    updateTotalBurnedCalories(id: id, burnedCalories: burnedCalories);
     return await FirebaseFirestore.instance
         .collection('users')
         .doc(id)
@@ -132,22 +155,55 @@ class DatabaseService {
   }
 
   Future updateUserCalories(
-      {required String id, required double foodCalories}) async {
+      {required String id,
+      required double foodCalories,
+      required double fats,
+      required double carbs,
+      required double proteins}) async {
     double remainingCalories = 0;
     double eatenCalories = 0;
+    double total_fats = 0;
+    double total_carbs = 0;
+    double total_proteins = 0;
+
     DocumentReference user =
         FirebaseFirestore.instance.collection("users").doc(id);
 
     await user.get().then((value) {
       remainingCalories = value.get('remainingCalories');
       eatenCalories = value.get('eatenCalories');
+      total_fats = value.get('totalFats');
+      total_carbs = value.get('totalCarbs');
+      total_proteins = value.get('totalProteins');
     });
     remainingCalories -= foodCalories;
     eatenCalories += foodCalories;
+    total_fats += fats;
+    total_carbs += carbs;
+    total_proteins += proteins;
 
     return await FirebaseFirestore.instance.collection('users').doc(id).update({
       'remainingCalories': remainingCalories,
       'eatenCalories': eatenCalories,
+      'totalFats': total_fats,
+      'totalCarbs': total_carbs,
+      'totalProteins': total_proteins,
+    });
+  }
+
+// update burned calories
+  Future updateTotalBurnedCalories(
+      {required String id, required double burnedCalories}) async {
+    double burnedCaloriesTotal = 0;
+    DocumentReference user =
+        FirebaseFirestore.instance.collection("users").doc(id);
+    await user.get().then((value) {
+      burnedCaloriesTotal = value.get('burnedCalories');
+    });
+    burnedCaloriesTotal += burnedCalories;
+    // update user document
+    return await FirebaseFirestore.instance.collection('users').doc(id).update({
+      'burnedCalories': burnedCaloriesTotal,
     });
   }
 

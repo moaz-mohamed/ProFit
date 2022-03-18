@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:profit/themes/ThemeUI.dart';
 import 'package:profit/utils/calculations/calculate_calories.dart';
+import 'package:profit/widgets/Dashboard/Screens/HomeScreen/first_dashboard.dart';
 import 'package:profit/widgets/IntroPage/Intro/activity_level.dart';
 import 'package:profit/widgets/IntroPage/Intro/goal_achieved_form.dart';
 import 'package:profit/widgets/IntroPage/Intro/login_screen.dart';
@@ -58,7 +59,7 @@ class _IntroPageState extends State<IntroPage> {
           context,
           MaterialPageRoute(
             builder: (context) {
-              return TabBarPage();
+              return Sucess();
             },
           ),
         );
@@ -83,7 +84,7 @@ class _IntroPageState extends State<IntroPage> {
 
         routes: {
           // When navigating to the "/" route, build the HomeScreen widget.
-          '/': (context) => TabBarPage(),
+          '/': (context) => OnBoardingScreen(),
           '/goal': (context) => GoalAchievedForm(
                 // It is the form of the users goal whether it to lose/maintenance/build muscle.
                 onComplete: (int goalAchieved) {
@@ -127,7 +128,7 @@ class _IntroPageState extends State<IntroPage> {
                 goal: _goalAchieved,
                 height: _heightController.text,
               ),
-          '/success': (context) => TabBarPage(),
+          '/success': (context) => Sucess(),
         },
       ),
     );
