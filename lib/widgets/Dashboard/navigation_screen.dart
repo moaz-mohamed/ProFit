@@ -19,6 +19,10 @@ class TabBarPage extends StatelessWidget {
         builder: (context, state) {
           final bloc = BlocProvider.of<TabBarBloc>(context);
           return Scaffold(
+            appBar: AppBar(
+              centerTitle: true,
+              title: const Text("ProFit"),
+            ),
             body: _createBody(context,
                 bloc.currentIndex), //return the index of the screen i want to route
             bottomNavigationBar: _createdBottomTabBar(context),
@@ -34,19 +38,19 @@ class TabBarPage extends StatelessWidget {
       currentIndex: bloc.currentIndex,
       items: [
         BottomNavigationBarItem(
-          icon: Image.asset('assets/dashboard/home.png', scale: 1.5,),
+          icon: Image.asset('assets/dashboard/home.png', scale: 2.6,),
           label: "Home",
         ),
         BottomNavigationBarItem(
-          icon: Image.asset('assets/dashboard/food.png', scale: 1.5,),
+          icon: Image.asset('assets/dashboard/food.png', scale: 2.6,),
           label: 'Food',
         ),
         BottomNavigationBarItem(
-          icon: Image.asset('assets/dashboard/workout.png', scale: 1.5,),
+          icon: Image.asset('assets/dashboard/workout.png', scale: 2.6,),
           label: 'Workout',
         ),
         BottomNavigationBarItem(
-          icon: Image.asset('assets/dashboard/geofence.png', scale: 1.5,),
+          icon: Image.asset('assets/dashboard/geofence.png', scale: 2.6,),
           label: 'GeoFence',
         ),
       ],

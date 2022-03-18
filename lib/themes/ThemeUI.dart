@@ -142,7 +142,7 @@ class FitnessAppTheme {
     color: selectorGrayText,
   );
 
-  // Onboarding screen fonts
+  ///--->>> Onboarding screen fonts
   static const TextStyle page_title = TextStyle(
     //fontFamily: fontName,
     fontWeight: FontWeight.w800,
@@ -175,10 +175,67 @@ class FitnessAppTheme {
     color: Colors.lightBlue,
   );
 
-  // Navigation screen font
+  ///--->>> Navigation screen font
   static const TextStyle navScreen = TextStyle(
     fontFamily: fontName,
     fontWeight: FontWeight.w600,
     fontSize: 20,
+  );
+
+  ///--->>> Home screen fonts
+  static const TextStyle caloriesIndicatorValue = TextStyle(
+    fontFamily: fontName,
+    fontWeight: FontWeight.w800,
+    fontSize: 24,
+    color: Colors.blue,
+  );
+
+  static const TextStyle caloriesIndicatorUnit = TextStyle(
+    fontFamily: fontName,
+    fontWeight: FontWeight.w600,
+    fontSize: 14,
+    color: Colors.black45,
+  );
+
+  static const TextStyle eatenIndicatorText = TextStyle(
+    fontFamily: fontName,
+    fontWeight: FontWeight.w600,
+    fontSize: 24,
+    color: Colors.black,
+  );
+
+  static const TextStyle eatenIndicatorValue = TextStyle(
+    fontFamily: fontName,
+    fontWeight: FontWeight.w800,
+    fontSize: 26,
+    color: Colors.blue,
+  );
+
+  static const TextStyle eatenIndicatorUnit = TextStyle(
+    fontFamily: fontName,
+    fontWeight: FontWeight.w600,
+    fontSize: 16,
+    color: Colors.black45,
+  );
+
+  static const TextStyle carbsIndicator = TextStyle(
+    fontFamily: fontName,
+    fontWeight: FontWeight.w600,
+    fontSize: 18,
+    color: Colors.black,
+  );
+
+  static const TextStyle carbsIndicatorValue = TextStyle(
+    fontFamily: fontName,
+    fontWeight: FontWeight.w800,
+    fontSize: 20,
+    color: Colors.blue,
+  );
+
+  static const TextStyle carbsIndicatorUnit = TextStyle(
+    fontFamily: fontName,
+    fontWeight: FontWeight.w600,
+    fontSize: 10,
+    color: Colors.black45,
   );
 }

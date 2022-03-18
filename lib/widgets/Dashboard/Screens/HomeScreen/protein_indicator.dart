@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/percent_indicator.dart';
+import 'package:profit/themes/ThemeUI.dart';
 import 'package:number_slide_animation/number_slide_animation.dart';
 
 class ProteinIndicator extends StatelessWidget {
@@ -8,82 +9,45 @@ class ProteinIndicator extends StatelessWidget {
     return LayoutBuilder(
       builder: (context, constraints) {
         return Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.end,
               children: <Widget>[
-                Container(
-                  height: constraints.maxHeight * 0.4,
-                  width: constraints.maxWidth * 0.2,
-                  child: FittedBox(
-                    child: Image.asset("assets/home_screen/Meat.png"),
-                    fit: BoxFit.fill,
-                  ),
-                ),
-                Container(
-                  height: constraints.maxHeight * 0.4,
-                  width: constraints.maxWidth * 0.7,
-                  padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                  child: FittedBox(
-                    child: Text("Protein", style: indicator,),
-                    fit: BoxFit.fill,
-                  ),
-                ),
+                Image.asset("assets/home_screen/Meat.png", scale: 2.6,),
+                Text(" Protein", style: FitnessAppTheme.carbsIndicator,),
               ],
             ),
-            Container(
-              height: constraints.maxHeight * 0.2,
+            LinearPercentIndicator(
+              percent: 0.6,
               width: constraints.maxWidth,
-              //color: Colors.blue,
-              child: LinearPercentIndicator(
-                percent: 0.8,
-                width: constraints.maxWidth,
-                lineHeight: constraints.maxHeight * 0.1,
-                backgroundColor: Colors.black26,
-                animation: true,
-                animationDuration: 2000,
-                linearGradient: LinearGradient(colors: <Color>[
-                  Colors.red.withOpacity(0.1),
-                  Colors.red.withOpacity(0.2),
-                  Colors.red.withOpacity(0.3),
-                  Colors.red.withOpacity(0.4),
-                  Colors.red.withOpacity(0.5),
-                  Colors.red.withOpacity(0.6),
-                  Colors.red.withOpacity(0.7),
-                  Colors.red.withOpacity(0.8),
-                  Colors.red.withOpacity(0.9),
-                  Colors.red.withOpacity(1),
-                ]),
-                clipLinearGradient: true,
-                linearStrokeCap: LinearStrokeCap.roundAll,
-              ),
+              lineHeight: constraints.maxHeight * 0.1,
+              backgroundColor: Colors.black26,
+              animation: true,
+              animationDuration: 2000,
+              linearGradient: LinearGradient(colors: <Color>[
+                Colors.red.withOpacity(0.1),
+                Colors.red.withOpacity(0.2),
+                Colors.red.withOpacity(0.3),
+                Colors.red.withOpacity(0.4),
+                Colors.red.withOpacity(0.5),
+                Colors.red.withOpacity(0.6),
+                Colors.red.withOpacity(0.7),
+                Colors.red.withOpacity(0.8),
+                Colors.red.withOpacity(0.9),
+                Colors.red.withOpacity(1),
+              ]),
+              clipLinearGradient: true,
+              linearStrokeCap: LinearStrokeCap.roundAll,
             ),
             Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Container(
-                  height: constraints.maxHeight * 0.4,
-                  width: constraints.maxWidth * 0.3,
-                  padding: EdgeInsets.fromLTRB(6, 0, 6, 0),
-                  child: FittedBox(
-                    child: NumberSlideAnimation(
-                      number: '16',
-                      duration: const Duration(milliseconds: 2000),
-                      textStyle: indicator2,
-                      curve: Curves.linear,
-                    ),
-                    fit: BoxFit.fill,
-                  ),
-                ),
-                Container(
-                  height: constraints.maxHeight * 0.4,
-                  width: constraints.maxWidth * 0.66,
-                  // color: Colors.blue,
-                  child: FittedBox(
-                    child: Text("Grams left", style: indicator3,),
-                    fit: BoxFit.fill,
-                  ),
-                ),
+                Text("160", style: FitnessAppTheme.carbsIndicatorValue,),
+                Text(" grams left", style: FitnessAppTheme.carbsIndicatorUnit,),
               ],
-            )
+            ),
           ],
         );
       },

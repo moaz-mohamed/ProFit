@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:profit/themes/ThemeUI.dart';
 import 'package:number_slide_animation/number_slide_animation.dart';
 
 class BurnedIndicator extends StatelessWidget {
@@ -7,51 +8,20 @@ class BurnedIndicator extends StatelessWidget {
     return LayoutBuilder(
       builder: (context, constraints) {
         return Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Container(
-              height: constraints.maxHeight * 0.5,
-              width: constraints.maxWidth * 0.5,
-              //color: Colors.blue,
-              child: FittedBox(
-                child: Text("Burned", style: indicator,),
-                fit: BoxFit.fill,
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Image.asset("assets/home_screen/Fire.png", scale: 2.6,),
+                Text("Burned", style: FitnessAppTheme.eatenIndicatorText,),
+              ],
             ),
             Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Container(
-                  height: constraints.maxHeight * 0.5,
-                  width: constraints.maxWidth * 0.2,
-                  //color: Colors.red,
-                  child: FittedBox(
-                    child: Image.asset("assets/home_screen/Fire.png"),
-                    fit: BoxFit.fill,
-                  ),
-                ),
-                Container(
-                  height: constraints.maxHeight * 0.5,
-                  width: constraints.maxWidth * 0.5,
-                  padding: EdgeInsets.fromLTRB(10, 0, 6, 0),
-                  //color: Colors.red,
-                  child: FittedBox(
-                    child: NumberSlideAnimation(
-                      number: '250',
-                      duration: const Duration(milliseconds: 2000),
-                      textStyle: indicator2,
-                      curve: Curves.linear,
-                    ),
-                    fit: BoxFit.fill,
-                  ),
-                ),
-                Container(
-                  height: constraints.maxHeight * 0.4,
-                  width: constraints.maxWidth * 0.3,
-                  // color: Colors.blue,
-                  child: FittedBox(
-                    child: Text("kCal", style: indicator3,),
-                    fit: BoxFit.fitHeight,
-                  ),
-                ),
+                Text("12345", style: FitnessAppTheme.eatenIndicatorValue,),
+                Text(" (kCal)", style: FitnessAppTheme.eatenIndicatorUnit,),
               ],
             )
           ],
@@ -59,19 +29,4 @@ class BurnedIndicator extends StatelessWidget {
       },
     );
   }
-
-  static const TextStyle indicator = TextStyle(
-    fontWeight: FontWeight.w800,
-    color: Colors.black,
-  );
-
-  static const TextStyle indicator2 = TextStyle(
-    fontWeight: FontWeight.w800,
-    color: Colors.blue,
-  );
-
-  static const TextStyle indicator3 = TextStyle(
-    fontWeight: FontWeight.w800,
-    color: Colors.black45,
-  );
 }

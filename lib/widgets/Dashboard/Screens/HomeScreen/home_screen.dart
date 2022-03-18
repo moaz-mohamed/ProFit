@@ -10,63 +10,63 @@ import 'package:flutter/material.dart';
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: const Text("ProFit"),
-      ),
-      body: Column(
+    return Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Container(
             height: MediaQuery.of(context).size.height * 0.3,
             width: MediaQuery.of(context).size.width,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              //borderRadius: BorderRadius.vertical(bottom: Radius.circular(25)),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.lightBlue,
-                  spreadRadius: 6,
-                  blurRadius: 10,
-                ),
-              ],
-            ),
+            // color: Colors.black12,
+            // decoration: BoxDecoration(
+            //   color: Colors.white,
+            //   //borderRadius: BorderRadius.vertical(bottom: Radius.circular(25)),
+            //   boxShadow: [
+            //     BoxShadow(
+            //       color: Colors.lightBlue,
+            //       spreadRadius: 6,
+            //       blurRadius: 10,
+            //     ),
+            //   ],
+            // ),
             child: LayoutBuilder(
               builder: (context, constraints) {
                 return Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
-                    // Upper container
+                    ///--->>> Upper container
                     Container(
-                      height: constraints.maxHeight * 0.7,
+                      height: constraints.maxHeight * 0.6,
                       width: constraints.maxWidth,
+                      // color: Colors.red,
                       child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          // Left container
+                          ///--->>> Right container
                           Container(
-                            height: constraints.maxHeight * 0.7,
+                            height: constraints.maxHeight * 0.6,
+                            width: constraints.maxWidth * 0.4,
+                            // color: Colors.green,
+                            child: CaloriesIndicator(),
+                          ),
+                          ///--->>> Left container
+                          Container(
+                            height: constraints.maxHeight * 0.6,
                             width: constraints.maxWidth * 0.5,
+                            // color: Colors.blue,
                             child: Column(
                               children: <Widget>[
                                 Container(
-                                  height: constraints.maxHeight * 0.35,
-                                  width: constraints.maxWidth * 0.5,
-                                  padding: EdgeInsets.all(6),
+                                  height: constraints.maxHeight * 0.3,
+                                  width: constraints.maxWidth * 0.4,
                                   child: EatenIndicator(),
                                 ),
                                 Container(
-                                  height: constraints.maxHeight * 0.35,
-                                  width: constraints.maxWidth * 0.5,
-                                  padding: EdgeInsets.all(6),
+                                  height: constraints.maxHeight * 0.3,
+                                  width: constraints.maxWidth * 0.4,
                                   child: BurnedIndicator(),
                                 ),
                               ],
                             ),
-                          ),
-                          // Right container
-                          Container(
-                            height: constraints.maxHeight * 0.7,
-                            width: constraints.maxWidth * 0.5,
-                            child: CaloriesIndicator(),
                           ),
                         ],
                       ),
@@ -75,24 +75,26 @@ class HomePage extends StatelessWidget {
                     Container(
                       height: constraints.maxHeight * 0.3,
                       width: constraints.maxWidth,
+                      // color: Colors.yellow,
                       child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: <Widget>[
                           Container(
                             height: constraints.maxHeight * 0.3,
-                            width: constraints.maxWidth / 3,
-                            padding: EdgeInsets.all(6),
+                            width: constraints.maxWidth * 0.3,
+                            // color: Colors.red,
                             child: CarbsIndicator(),
                           ),
                           Container(
                             height: constraints.maxHeight * 0.3,
-                            width: constraints.maxWidth / 3,
-                            padding: EdgeInsets.all(6),
+                            width: constraints.maxWidth * 0.3,
+                            // color: Colors.green,
                             child: ProteinIndicator(),
                           ),
                           Container(
                             height: constraints.maxHeight * 0.3,
-                            width: constraints.maxWidth / 3,
-                            padding: EdgeInsets.all(6),
+                            width: constraints.maxWidth * 0.3,
+                            // color: Colors.blue,
                             child: FatsIndicator(),
                           ),
                         ],
@@ -103,21 +105,26 @@ class HomePage extends StatelessWidget {
               },
             ),
           ),
+          ///--->>> Meals buttons
           Container(
-            child: ElevatedButton(
-              child: Icon(Icons.ac_unit),
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => FoodMain(),
-                    ),
-                );
-              },
-            ),
+            height: MediaQuery.of(context).size.height * 0.7,
+            width: MediaQuery.of(context).size.width,
+            ///--->>> Fangary's widget goes in here as a scrollable list under the indicators
           ),
+          // Container(
+          //   child: ElevatedButton(
+          //     child: Icon(Icons.ac_unit),
+          //     onPressed: () {
+          //       Navigator.push(
+          //           context,
+          //           MaterialPageRoute(
+          //               builder: (context) => FoodMain(),
+          //           ),
+          //       );
+          //     },
+          //   ),
+          // ),
         ],
-      ),
-    );
+      );
   }
 }
