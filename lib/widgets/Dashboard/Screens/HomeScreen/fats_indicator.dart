@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/percent_indicator.dart';
+import 'package:profit/themes/ThemeUI.dart';
 import 'package:number_slide_animation/number_slide_animation.dart';
 
 class FatsIndicator extends StatelessWidget {
@@ -8,29 +9,14 @@ class FatsIndicator extends StatelessWidget {
     return LayoutBuilder(
       builder: (context, constraints) {
         return Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.end,
               children: <Widget>[
-                Container(
-                  height: constraints.maxHeight * 0.4,
-                  width: constraints.maxWidth * 0.2,
-                  child: FittedBox(
-                    child: Image.asset("assets/home_screen/Fats.png"),
-                    fit: BoxFit.fill,
-                  ),
-                ),
-                Container(
-                  height: constraints.maxHeight * 0.4,
-                  width: constraints.maxWidth * 0.5,
-                  padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                  child: FittedBox(
-                    child: Text(
-                      "Fats",
-                      style: indicator,
-                    ),
-                    fit: BoxFit.fill,
-                  ),
-                ),
+                Image.asset("assets/home_screen/Fats.png", scale: 2.6,),
+                Text(" Fats", style: FitnessAppTheme.carbsIndicator,),
               ],
             ),
             Container(
@@ -61,53 +47,15 @@ class FatsIndicator extends StatelessWidget {
               ),
             ),
             Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Container(
-                  height: constraints.maxHeight * 0.4,
-                  width: constraints.maxWidth * 0.3,
-                  padding: EdgeInsets.fromLTRB(6, 0, 6, 0),
-                  child: FittedBox(
-                    child: NumberSlideAnimation(
-                      number: '10',
-                      duration: const Duration(milliseconds: 2000),
-                      textStyle: indicator2,
-                      curve: Curves.linear,
-                    ),
-                    fit: BoxFit.fill,
-                  ),
-                ),
-                Container(
-                  height: constraints.maxHeight * 0.4,
-                  width: constraints.maxWidth * 0.66,
-                  // color: Colors.blue,
-                  child: FittedBox(
-                    child: Text(
-                      "Grams left",
-                      style: indicator3,
-                    ),
-                    fit: BoxFit.fill,
-                  ),
-                ),
+                Text("16", style: FitnessAppTheme.carbsIndicatorValue,),
+                Text(" grams left", style: FitnessAppTheme.carbsIndicatorUnit,),
               ],
-            )
+            ),
           ],
         );
       },
     );
   }
-
-  static const TextStyle indicator = TextStyle(
-    fontWeight: FontWeight.w800,
-    color: Colors.black,
-  );
-
-  static const TextStyle indicator2 = TextStyle(
-    fontWeight: FontWeight.w800,
-    color: Colors.blue,
-  );
-
-  static const TextStyle indicator3 = TextStyle(
-    fontWeight: FontWeight.w800,
-    color: Colors.black45,
-  );
 }
