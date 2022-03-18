@@ -12,7 +12,7 @@ import 'package:profit/widgets/FoodAPI/bar_code_widget.dart';
 
 class FoodScreen extends StatefulWidget {
   final int foodtype;
-  const FoodScreen({Key? key, required this.foodtype}) : super(key: key);
+  FoodScreen({Key? key, required this.foodtype}) : super(key: key);
 
   @override
   State<FoodScreen> createState() => _FoodScreenState();
