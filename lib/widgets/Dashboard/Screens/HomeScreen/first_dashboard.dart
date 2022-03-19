@@ -1,14 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:profit/services/auth.dart';
+
 import 'package:profit/services/firestore_database.dart';
 import 'package:profit/themes/ThemeUI.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:profit/widgets/Dashboard/Screens/HomeScreen/custom_meal_text.dart';
-import 'package:profit/widgets/Dashboard/Screens/HomeScreen/workout_cubit/workout_cubit.dart';
+
 import 'package:profit/widgets/Dashboard/Screens/HomeScreen/workout_provider.dart';
-import 'package:profit/widgets/Dashboard/Screens/HomeScreen/workout_screen.dart';
+
 import 'package:profit/widgets/FoodAPI/food_main.dart';
 import 'package:profit/widgets/IntroPage/Intro/login_screen.dart';
 import 'package:profit/widgets/Dashboard/Screens/HomeScreen/custom_workout_text.dart';
@@ -22,9 +21,6 @@ class Dashboard extends StatelessWidget {
   ];
 
   Dashboard({Key? key}) : super(key: key);
-
-// init state
-  void initState() {}
 
   @override
   Widget build(BuildContext context) {
@@ -135,9 +131,7 @@ class Dashboard extends StatelessWidget {
                               itemBuilder: (context, curr) {
                                 if (dashboardHeaders[index] == "Workout") {
                                   return CustomWorkoutText(
-                                    text: dinner[curr]['name']
-                                            .toString()
-                                            .toUpperCase() +
+                                    text: dinner[curr]['name'].toString() +
                                         " " +
                                         dinner[curr]['burnedCalories']
                                             .toString() +
@@ -146,9 +140,7 @@ class Dashboard extends StatelessWidget {
                                   );
                                 } else {
                                   return CustomMealText(
-                                      text: dinner[curr]['name']
-                                              .toString()
-                                              .toUpperCase() +
+                                      text: dinner[curr]['name'].toString() +
                                           " " +
                                           dinner[curr]['calories'].toString() +
                                           " " +
@@ -157,7 +149,7 @@ class Dashboard extends StatelessWidget {
                               },
                             );
                           } else {
-                            return Text("No data");
+                            return Text("No Data");
                           }
                         }),
                   ]),

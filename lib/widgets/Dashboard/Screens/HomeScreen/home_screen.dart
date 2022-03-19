@@ -5,8 +5,6 @@ import 'package:profit/widgets/Dashboard/Screens/HomeScreen/carbs_indicator.dart
 import 'package:profit/widgets/Dashboard/Screens/HomeScreen/first_dashboard.dart';
 import 'package:profit/widgets/Dashboard/Screens/HomeScreen/protein_indicator.dart';
 import 'package:profit/widgets/Dashboard/Screens/HomeScreen/fats_indicator.dart';
-import 'package:profit/widgets/Dashboard/Screens/HomeScreen/second_dashboard.dart';
-import 'package:profit/widgets/FoodAPI/food_main.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
@@ -113,6 +111,7 @@ class HomePage extends StatelessWidget {
         Container(
           height: MediaQuery.of(context).size.height * 0.5,
           width: MediaQuery.of(context).size.width,
+          child: Dashboard(),
 
           ///--->>> Fangary's widget goes in here as a scrollable list under the indicators
 
