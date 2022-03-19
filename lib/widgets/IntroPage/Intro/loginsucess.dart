@@ -5,6 +5,7 @@ import 'package:profit/services/firestore_database.dart';
 import 'package:profit/themes/ThemeUI.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:profit/widgets/Dashboard/Screens/HomeScreen/first_dashboard.dart';
+import 'package:profit/widgets/Dashboard/navigation_screen.dart';
 import 'package:profit/widgets/IntroPage/Intro/login_screen.dart';
 // import dashboard from './dashboard';
 
@@ -74,55 +75,12 @@ class _SucessState extends State<Sucess> {
     // TODO: implement initState
 
     super.initState();
-    getName();
-    getCalories();
   }
 
   void signout() async {
     await authServices.signOutGoogle();
     await authServices.signOut();
     await checkAuthentication();
-  }
-
-  getName() async {
-    String? name;
-    //  final FirebaseFirestore db = FirebaseFirestore.instance;
-    //   final CollectionReference users =
-    //      FirebaseFirestore.instance.collection('users');
-    String userId = auth.currentUser!.uid;
-    print(userId);
-    DocumentReference doc =
-        FirebaseFirestore.instance.collection("users").doc(userId);
-
-    await doc.get().then((value) {
-      name = value.get('name').toString();
-    });
-
-    // username = name!.toString();
-    setState(() => username = name!);
-  }
-
-  getCalories() async {
-    double? calories;
-    //  final FirebaseFirestore db = FirebaseFirestore.instance;
-    //   final CollectionReference users =
-    //      FirebaseFirestore.instance.collection('users');
-    String userId = auth.currentUser!.uid;
-
-    DocumentReference doc =
-        FirebaseFirestore.instance.collection("users").doc(userId);
-
-    doc.snapshots().listen((snapshot) {
-      calories = snapshot.get('remainingCalories');
-
-      setState(() {
-        userCalories = calories!.toStringAsFixed(2);
-      });
-    });
-
-    // await doc.get().then((value) {
-    //   calories = value.get('calories');
-    // });
   }
 
   @override
@@ -133,6 +91,6 @@ class _SucessState extends State<Sucess> {
         },
         child: Scaffold(
             backgroundColor: FitnessAppTheme.selectorGrayBackGround,
-            body: Dashboard()));
+            body: TabBarPage()));
   }
 }

@@ -13,22 +13,46 @@ class CustomMealText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     splittedMeal = text.toString().split(" ");
-    return Column(
-      children: [
-        Card(
-          margin: EdgeInsets.all(3),
-          elevation: 1,
-          shape: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide:
-                  BorderSide(color: FitnessAppTheme.nearlyWhite, width: 1)),
-          child: ListTile(
-            title: Text(splittedMeal[0]),
-            subtitle: Text(
-                splittedMeal[1] + " kCal" + ", " + splittedMeal[2] + " gm"),
-          ),
-        ),
-      ],
-    );
+    return splittedMeal.length > 3
+        ? Column(
+            children: [
+              Card(
+                margin: EdgeInsets.all(3),
+                elevation: 1,
+                shape: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: BorderSide(
+                        color: FitnessAppTheme.nearlyWhite, width: 1)),
+                child: ListTile(
+                  title: Text(splittedMeal[0] + " " + splittedMeal[1]),
+                  subtitle: Text(splittedMeal[2] +
+                      " kCal" +
+                      ", " +
+                      splittedMeal[3] +
+                      " gm"),
+                ),
+              ),
+            ],
+          )
+        : Column(
+            children: [
+              Card(
+                margin: EdgeInsets.all(3),
+                elevation: 1,
+                shape: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: BorderSide(
+                        color: FitnessAppTheme.nearlyWhite, width: 1)),
+                child: ListTile(
+                  title: Text(splittedMeal[0]),
+                  subtitle: Text(splittedMeal[1] +
+                      " kCal" +
+                      ", " +
+                      splittedMeal[2] +
+                      " gm"),
+                ),
+              ),
+            ],
+          );
   }
 }
