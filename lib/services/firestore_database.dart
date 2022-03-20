@@ -10,6 +10,9 @@ class DatabaseService {
   Future createNewUser(
       {required String id, required UserProfile userProfile}) async {
     userProfile.remainingCalories = userProfile.calories;
+    userProfile.remainingProteins = (30 / 100) * userProfile.calories;
+    userProfile.remainingFats = (30 / 100) * userProfile.calories;
+    userProfile.remainingCarbs = (40 / 100) * userProfile.calories;
 
     return await users
         .doc(id)
@@ -165,6 +168,9 @@ class DatabaseService {
     double total_fats = 0;
     double total_carbs = 0;
     double total_proteins = 0;
+    double remaining_fats = 0;
+    double remaining_carbs = 0;
+    double remaining_proteins = 0;
 
     DocumentReference user =
         FirebaseFirestore.instance.collection("users").doc(id);
@@ -175,12 +181,18 @@ class DatabaseService {
       total_fats = value.get('totalFats');
       total_carbs = value.get('totalCarbs');
       total_proteins = value.get('totalProteins');
+      remaining_fats = value.get('remainingFats');
+      remaining_carbs = value.get('remainingCarbs');
+      remaining_proteins = value.get('remainingProteins');
     });
     remainingCalories -= foodCalories;
     eatenCalories += foodCalories;
     total_fats += fats;
     total_carbs += carbs;
     total_proteins += proteins;
+    remaining_fats -= fats;
+    remaining_carbs -= carbs;
+    remaining_proteins -= proteins;
 
     return await FirebaseFirestore.instance.collection('users').doc(id).update({
       'remainingCalories': remainingCalories,
@@ -188,6 +200,9 @@ class DatabaseService {
       'totalFats': total_fats,
       'totalCarbs': total_carbs,
       'totalProteins': total_proteins,
+      'remainingFats': remaining_fats,
+      'remainingCarbs': remaining_carbs,
+      'remainingProteins': remaining_proteins,
     });
   }
 
