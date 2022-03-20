@@ -1,5 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/percent_indicator.dart';
+import 'package:profit/services/firestore_database.dart';
 import 'package:profit/themes/ThemeUI.dart';
 import 'package:number_slide_animation/number_slide_animation.dart';
 
@@ -37,8 +40,31 @@ class CaloriesIndicator extends StatelessWidget {
           center: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Text("1234", style: FitnessAppTheme.caloriesIndicatorValue,),
-              Text(" kCal left", style: FitnessAppTheme.caloriesIndicatorUnit,),
+              StreamBuilder(
+                  stream: DatabaseService().getUserDocStream(
+                      id: FirebaseAuth.instance.currentUser!.uid),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      var data = snapshot.data as DocumentSnapshot;
+                      var totalCalories =
+                          double.parse(data['remainingCalories'].toString())
+                              .toInt()
+                              .toString();
+                      return Text(
+                        totalCalories,
+                        style: FitnessAppTheme.eatenIndicatorValue,
+                      );
+                    } else {
+                      return const Text(
+                        "",
+                        style: FitnessAppTheme.eatenIndicatorValue,
+                      );
+                    }
+                  }),
+              Text(
+                " kCal left",
+                style: FitnessAppTheme.caloriesIndicatorUnit,
+              ),
             ],
           ),
         );
