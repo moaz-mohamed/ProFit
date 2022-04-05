@@ -64,7 +64,7 @@ class TabBarPage extends StatelessWidget {
   }
 
   Widget _createBody(BuildContext context, int index) {
-    final children = [HomePage(),FoodScreen(), WorkoutsPage(), GeoFencing()];
+    final children = [HomePageOFF(),FoodScreen(), WorkoutsPage(), GeoFencing()];
     return children[index];
   }
 }
