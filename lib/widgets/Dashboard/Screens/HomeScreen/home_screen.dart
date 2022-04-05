@@ -19,10 +19,9 @@ class HomePage extends StatelessWidget {
           // color: Colors.black12,
           // decoration: BoxDecoration(
           //   color: Colors.white,
-          //   //borderRadius: BorderRadius.vertical(bottom: Radius.circular(25)),
+          //   borderRadius: BorderRadius.vertical(bottom: Radius.circular(25)),
           //   boxShadow: [
           //     BoxShadow(
-          //       color: Colors.lightBlue,
           //       spreadRadius: 6,
           //       blurRadius: 10,
           //     ),
