@@ -10,9 +10,9 @@ class DatabaseService {
   Future createNewUser(
       {required String id, required UserProfile userProfile}) async {
     userProfile.remainingCalories = userProfile.calories;
-    userProfile.remainingProteins = (30 / 100) * userProfile.calories;
-    userProfile.remainingFats = (30 / 100) * userProfile.calories;
-    userProfile.remainingCarbs = (40 / 100) * userProfile.calories;
+    userProfile.remainingProteins = ((30 / 100) * userProfile.calories) / 4;
+    userProfile.remainingFats = ((30 / 100) * userProfile.calories) / 9;
+    userProfile.remainingCarbs = ((40 / 100) * userProfile.calories) / 4;
 
     return await users
         .doc(id)
