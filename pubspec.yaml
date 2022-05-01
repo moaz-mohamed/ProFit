@@ -23,6 +23,9 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  location: ^4.3.0
+  loading_indicator: ^3.0.3
+  flutter_rating_bar: ^4.0.0
   animated_splash_screen: ^1.1.0
   cupertino_icons: ^1.0.2
   dio: ^4.0.4
@@ -41,6 +44,7 @@ dependencies:
   responsive_framework: ^0.1.5
   percent_indicator: ^3.4.0
   number_slide_animation: ^0.2.1
+  nice_buttons: ^0.0.2
 
 dev_dependencies:
   flutter_lints: ^1.0.0
@@ -74,6 +78,14 @@ flutter:
     - assets/selector/muscle.png
     - assets/calories/flame.png
   fonts:
+    - family: msmadi
+      fonts:
+         - asset: assets/fonts/MsMadi-Regular.ttf
+  #       - asset: fonts/Schyler-Italic.ttf
+  #         style: italic
+    - family: SourceSansPro
+      fonts:
+        - asset: assets/fonts/SourceSansPro-SemiBoldItalic.ttf
     - family: Montserrat
       fonts:
         - asset: assets/fonts/Montserrat-Black.ttf
