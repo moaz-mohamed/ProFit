@@ -3,7 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:profit/widgets/Dashboard/Screens/Geofencing/geofencing.dart';
 import 'package:profit/widgets/Dashboard/Screens/HomeScreen/first_dashboard.dart';
 import 'package:profit/widgets/Dashboard/Screens/HomeScreen/home_screen.dart';
-import 'package:profit/widgets/Dashboard/Screens/food_recommendation_screen.dart';
+import 'package:profit/widgets/Dashboard/Screens/HomeScreen/workout_screen.dart';
+import 'package:profit/widgets/Dashboard/Screens/FoodRecommendationScreen/recommendation_input.dart';
 import 'package:profit/widgets/Dashboard/Screens/food_screen.dart';
 import 'package:profit/widgets/Dashboard/Screens/workouts_screen.dart';
 import 'package:profit/widgets/Dashboard/NavigationBloc/tab_bar_bloc.dart';
@@ -67,11 +68,8 @@ class TabBarPage extends StatelessWidget {
           ),
           label: 'GeoFence',
         ),
-        BottomNavigationBarItem(
-          icon: Image.asset(
-            'assets/dashboard/food_recommendation.png',
-            scale: 2.6,
-          ),
+         BottomNavigationBarItem(
+          icon: Image.asset('assets/dashboard/food_recommendation.png', scale: 2,),
           label: "Recommend",
         ),
       ],
@@ -86,11 +84,11 @@ class TabBarPage extends StatelessWidget {
 
   Widget _createBody(BuildContext context, int index) {
     final children = [
-      HomePage(),
+      HomePageOFF(),
       FoodScreen(),
       WorkoutsPage(),
       Geofencing(),
-      FoodReccomendationScreen()
+      FoodRecommendationScreen()
     ];
     return children[index];
   }
