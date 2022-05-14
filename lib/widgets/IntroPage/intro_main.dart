@@ -1,6 +1,7 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:profit/services/food_recommendation.dart';
 import 'package:profit/themes/ThemeUI.dart';
 import 'package:profit/utils/calculations/calculate_calories.dart';
 import 'package:profit/widgets/Dashboard/Screens/HomeScreen/first_dashboard.dart';
@@ -51,7 +52,7 @@ class _IntroPageState extends State<IntroPage> {
   late bool _gender;
   late double calories;
   //Male or Female
-
+ 
   checkAuthentication() async {
     FirebaseAuth.instance.authStateChanges().listen((_user) {
       if (_user != null) {
@@ -69,6 +70,8 @@ class _IntroPageState extends State<IntroPage> {
 
   @override
   Widget build(BuildContext context) {
+     FoodRecommendationServiceAPI()
+        .getFoodRecommendation({"Diet": [], "Disease": [], "Nutirent": []});
     checkAuthentication();
     return GestureDetector(
       onTap: () {
