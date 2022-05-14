@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:profit/widgets/Dashboard/Screens/Geofencing/geofencing.dart';
+import 'package:profit/widgets/Dashboard/Screens/HomeScreen/first_dashboard.dart';
 import 'package:profit/widgets/Dashboard/Screens/HomeScreen/home_screen.dart';
 import 'package:profit/widgets/Dashboard/Screens/HomeScreen/workout_screen.dart';
-import 'package:profit/widgets/Dashboard/Screens/food_recommendation_screen.dart';
-import 'package:profit/widgets/Dashboard/Screens/geofencing.dart';
+import 'package:profit/widgets/Dashboard/Screens/FoodRecommendationScreen/recommendation_input.dart';
 import 'package:profit/widgets/Dashboard/Screens/food_screen.dart';
 import 'package:profit/widgets/Dashboard/Screens/workouts_screen.dart';
 import 'package:profit/widgets/Dashboard/NavigationBloc/tab_bar_bloc.dart';
@@ -40,20 +41,32 @@ class TabBarPage extends StatelessWidget {
       currentIndex: bloc.currentIndex,
       items: [
         BottomNavigationBarItem(
-          icon: Image.asset('assets/dashboard/home.png', scale: 2.6,),
+          icon: Image.asset(
+            'assets/dashboard/home.png',
+            scale: 2.6,
+          ),
           label: "Home",
         ),
         BottomNavigationBarItem(
-          icon: Image.asset('assets/dashboard/food.png', scale: 2.6,),
+          icon: Image.asset(
+            'assets/dashboard/food.png',
+            scale: 2.6,
+          ),
           label: 'Food',
         ),
         BottomNavigationBarItem(
-          icon: Image.asset('assets/dashboard/workout.png', scale: 2.6,),
+          icon: Image.asset(
+            'assets/dashboard/workout.png',
+            scale: 2.6,
+          ),
           label: 'Workout',
         ),
         BottomNavigationBarItem(
-          icon: Image.asset('assets/dashboard/geofence.png', scale: 2.6,),
-          label: 'GeoFence' , 
+          icon: Image.asset(
+            'assets/dashboard/geofence.png',
+            scale: 2.6,
+          ),
+          label: 'GeoFence',
         ),
          BottomNavigationBarItem(
           icon: Image.asset('assets/dashboard/food_recommendation.png', scale: 2,),
@@ -70,7 +83,13 @@ class TabBarPage extends StatelessWidget {
   }
 
   Widget _createBody(BuildContext context, int index) {
-    final children = [HomePageOFF(),FoodScreen(), WorkoutsPage(), GeoFencing(),FoodRecommendationScreen()];
+    final children = [
+      HomePageOFF(),
+      FoodScreen(),
+      WorkoutsPage(),
+      Geofencing(),
+      FoodRecommendationScreen()
+    ];
     return children[index];
   }
 }

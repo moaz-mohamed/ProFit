@@ -4,7 +4,8 @@ import 'dart:core';
 import 'package:flutter/material.dart';
 import 'package:profit/themes/ThemeUI.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
-
+import 'package:profit/services/food_recommendation.dart';
+import 'package:profit/widgets/Dashboard/Screens/FoodRecommendationScreen/recommended_food.dart';
 class FoodRecommendationScreen extends StatefulWidget {
   const FoodRecommendationScreen({Key? key}) : super(key: key);
 
@@ -199,7 +200,9 @@ class FoodRecommendationScreenState extends State<FoodRecommendationScreen> {
                 'Disease': selectedDiseases,
                 'Nutrient': selectedNutrients,
               });
-              print(userPreferences);
+             Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) =>  RecommendedFood(input: userPreferences,)));
+           //  FoodRecommendationServiceAPI().getFoodRecommendation(userPreferences);
+           
             },
           ) 
         ],
