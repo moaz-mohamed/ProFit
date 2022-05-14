@@ -6,7 +6,7 @@ class FoodRecommendationServiceAPI {
   // make a post request to the server
 
 // make a function that takes input body and returns a list of food recommendation items
-  Future<List<FoodRecommendationItem>>  getFoodRecommendation(var body) async {
+  Future<List<FoodRecommendationItem>> getFoodRecommendation(var body) async {
     var jsonBody = json.encode(body);
     print(jsonBody);
 
@@ -24,7 +24,7 @@ class FoodRecommendationServiceAPI {
       var foodRecomendationItems = (json.decode(response.body) as List)
           .map((i) => FoodRecommendationItem.fromJson(i))
           .toList();
-          print(response.body);
+      print(response.body);
       return foodRecomendationItems;
     } else {
       print(response.statusCode);
