@@ -11,7 +11,7 @@ class FoodRecommendationServiceAPI {
     print(jsonBody);
 
     var response = await http.post(
-      Uri.parse('https://food-calories-alternative.herokuapp.com/'),
+      Uri.parse('https://food-calories-nodejs.herokuapp.com/'),
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
