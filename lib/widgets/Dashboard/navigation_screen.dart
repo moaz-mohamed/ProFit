@@ -14,7 +14,7 @@ import 'package:profit/themes/ThemeUI.dart';
 
 class TabBarPage extends StatelessWidget {
   const TabBarPage({Key? key}) : super(key: key);
- 
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider<TabBarBloc>(
@@ -87,9 +87,8 @@ class TabBarPage extends StatelessWidget {
   }
 
   Widget _createBody(BuildContext context, int index) {
-   
     final children = [
-      HomePageOFF(),
+      Dashboard(),
       FoodScreen(),
       WorkoutsPage(),
       Geofencing(),

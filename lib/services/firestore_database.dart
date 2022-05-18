@@ -233,12 +233,120 @@ class DatabaseService {
       print(value.data().runtimeType);
     });
   }
+
+  // delete meal with id and type
+  Future deleteMealFromFirestoreUser(
+      {required String id, required String type, required int index}) async {
+    final DocumentSnapshot user =
+        await FirebaseFirestore.instance.collection('users').doc(id).get();
+
+    final List mealType = user[type.toLowerCase()];
+    ;
+
+    double calories = mealType[index]['calories'];
+    double fats = mealType[index]['fat'];
+    double carbs = mealType[index]['carbs'];
+    double proteins = mealType[index]['protein'];
+
+    // update user calories
+
+    updateUserCaloriesAfterDelete(
+        id: id,
+        foodCalories: calories,
+        fats: fats,
+        carbs: carbs,
+        proteins: proteins);
+    // remove meal from list
+    mealType.removeAt(index);
+    return await FirebaseFirestore.instance
+        .collection('users')
+        .doc(id)
+        .update({type.toLowerCase(): mealType});
+  }
+
+// update user calories after delete
+  Future updateUserCaloriesAfterDelete(
+      {required String id,
+      required double foodCalories,
+      required double fats,
+      required double carbs,
+      required double proteins}) async {
+    double remainingCalories = 0;
+    double eatenCalories = 0;
+    double total_fats = 0;
+    double total_carbs = 0;
+    double total_proteins = 0;
+    double remaining_fats = 0;
+    double remaining_carbs = 0;
+    double remaining_proteins = 0;
+
+    DocumentReference user =
+        FirebaseFirestore.instance.collection("users").doc(id);
+
+    await user.get().then((value) {
+      remainingCalories = value.get('remainingCalories');
+      eatenCalories = value.get('eatenCalories');
+      total_fats = value.get('totalFats');
+      total_carbs = value.get('totalCarbs');
+      total_proteins = value.get('totalProteins');
+      remaining_fats = value.get('remainingFats');
+      remaining_carbs = value.get('remainingCarbs');
+      remaining_proteins = value.get('remainingProteins');
+    });
+    remainingCalories += foodCalories;
+    eatenCalories -= foodCalories;
+    total_fats -= fats;
+    total_carbs -= carbs;
+    total_proteins -= proteins;
+    remaining_fats += fats;
+    remaining_carbs += carbs;
+    remaining_proteins += proteins;
+
+    return await FirebaseFirestore.instance.collection('users').doc(id).update({
+      'remainingCalories': remainingCalories,
+      'eatenCalories': eatenCalories,
+      'totalFats': total_fats,
+      'totalCarbs': total_carbs,
+      'totalProteins': total_proteins,
+      'remainingFats': remaining_fats,
+      'remainingCarbs': remaining_carbs,
+      'remainingProteins': remaining_proteins,
+    });
+  }
+
+// DeleteWorkoutFromFireStoreUser
+  Future deleteWorkoutFromFirestoreUser(
+      {required String id,
+      required int index,
+      required double calories}) async {
+    final DocumentSnapshot user =
+        await FirebaseFirestore.instance.collection('users').doc(id).get();
+
+    final List workout = user['workout'];
+
+    // update Burned Calories after delete
+    updateBurnedCaloriesAfterDelete(id: id, burnedCalories: calories);
+    // remove meal from list
+    workout.removeAt(index);
+    return await FirebaseFirestore.instance
+        .collection('users')
+        .doc(id)
+        .update({'workout': workout});
+  }
+
+//UpdateBurnedCaloriesAfterDelete
+  Future updateBurnedCaloriesAfterDelete(
+      {required String id, required double burnedCalories}) async {
+    double burnedCaloriesTotal = 0;
+    DocumentReference user =
+        FirebaseFirestore.instance.collection("users").doc(id);
+    await user.get().then((value) {
+      burnedCaloriesTotal = value.get('burnedCalories');
+    });
+    burnedCaloriesTotal -= burnedCalories;
+    // update user document
+    return await FirebaseFirestore.instance.collection('users').doc(id).update({
+      'burnedCalories': burnedCaloriesTotal,
+    });
+  }
 }
-// print all data in a document in firestore
-
- 
-
-
-
-
-
