@@ -238,4 +238,47 @@ class FitnessAppTheme {
     fontSize: 10,
     color: Colors.black45,
   );
+
+  ///--->>> Workout screen fonts
+  static const TextStyle spotMe1 = TextStyle(
+    fontFamily: fontName,
+    fontWeight: FontWeight.w800,
+    fontSize: 26,
+    color: Colors.blue,
+  );
+
+  static const TextStyle spotMe2 = TextStyle(
+    fontFamily: fontName,
+    fontWeight: FontWeight.w600,
+    fontSize: 22,
+    color: Colors.black45,
+  );
+
+  static const TextStyle pick = TextStyle(
+    fontFamily: fontName,
+    fontWeight: FontWeight.w600,
+    fontSize: 24,
+    color: Colors.black,
+  );
+
+  static const TextStyle workoutLabel = TextStyle(
+    fontFamily: fontName,
+    fontWeight: FontWeight.w600,
+    fontSize: 26,
+    color: Colors.blue,
+  );
+
+  static const TextStyle workoutData1 = TextStyle(
+    fontFamily: fontName,
+    fontWeight: FontWeight.w400,
+    fontSize: 12,
+    color: Colors.black45,
+  );
+
+  static const TextStyle workoutData2 = TextStyle(
+    fontFamily: fontName,
+    fontWeight: FontWeight.w600,
+    fontSize: 14,
+    color: Colors.black,
+  );
 }
