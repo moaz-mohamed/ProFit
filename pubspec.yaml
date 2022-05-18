@@ -71,6 +71,7 @@ flutter:
     - assets/dashboard/
     - assets/home_screen/
     - assets/add_food_screen/
+    - assets/workout_screen/
     - assets/selector/loseColor.png
     - assets/selector/lose.png
     - assets/selector/maintainColor.png
