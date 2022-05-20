@@ -41,6 +41,7 @@ class _RecommendedFoodState extends State<RecommendedFood> {
               return Scaffold(
               appBar:  AppBar(
               title: const Text("Food Recommendation"),
+              centerTitle: true,
               backgroundColor: Colors.blue,
             ),
                 body: ListView.builder(
@@ -75,6 +76,7 @@ class _RecommendedFoodState extends State<RecommendedFood> {
               return  Scaffold(
                appBar:  AppBar(
                 title: const Text("Loading......."),
+                centerTitle: true,
                 backgroundColor: Colors.blue,
               ),
                 body:  Center(

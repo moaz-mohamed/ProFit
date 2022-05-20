@@ -6,7 +6,7 @@ import 'package:profit/widgets/Dashboard/Screens/HomeScreen/first_dashboard.dart
 import 'package:profit/widgets/Dashboard/Screens/HomeScreen/home_screen.dart';
 import 'package:profit/widgets/Dashboard/Screens/HomeScreen/workout_screen.dart';
 import 'package:profit/widgets/Dashboard/Screens/FoodRecommendationScreen/recommendation_input.dart';
-import 'package:profit/widgets/Dashboard/Screens/food_screen.dart';
+import 'package:profit/widgets/Dashboard/Screens/steps_screen.dart';
 import 'package:profit/widgets/Dashboard/Screens/WorkoutScreen/workout_screen.dart';
 import 'package:profit/widgets/Dashboard/NavigationBloc/tab_bar_bloc.dart';
 import 'package:profit/widgets/Dashboard/NavigationBloc/tab_bar_event.dart';
@@ -50,10 +50,10 @@ class TabBarPage extends StatelessWidget {
         ),
         BottomNavigationBarItem(
           icon: Image.asset(
-            'assets/dashboard/food.png',
-            scale: 2.6,
+            'assets/dashboard/shoe.png',
+            scale: 2,
           ),
-          label: 'Food',
+          label: 'Steps',
         ),
         BottomNavigationBarItem(
           icon: Image.asset(
@@ -86,7 +86,7 @@ class TabBarPage extends StatelessWidget {
   }
 
   Widget _createBody(BuildContext context, int index) {
-    final children = [HomePageOFF(), FoodScreen(), WorkoutsPage(), Geofencing(), FoodRecommendationScreen()];
+    final children = [HomePage(), StepsScreen(), WorkoutsPage(), Geofencing(), FoodRecommendationScreen()];
     return children[index];
   }
 }

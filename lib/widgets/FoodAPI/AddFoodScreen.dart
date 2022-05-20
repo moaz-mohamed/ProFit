@@ -7,8 +7,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:profit/bloc/postapi/post_food_item_bloc.dart';
 import 'package:profit/bloc/postapi/post_food_item_event.dart';
 import 'package:profit/bloc/postapi/post_food_item_state.dart';
+import 'package:profit/widgets/Dashboard/Screens/HomeScreen/home_screen.dart';
+import 'package:profit/widgets/Dashboard/navigation_screen.dart';
 import 'package:profit/widgets/FoodAPI/fonts.dart';
 import 'package:profit/services/firestore_database.dart';
+import 'package:profit/widgets/IntroPage/Intro/login_screen.dart';
 
 class AddFoodScreen extends StatefulWidget {
   late String foodLabel;
@@ -441,6 +444,11 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                     fat: fats,
                     quantity: foodQuantity.toDouble(),
                     id: FirebaseAuth.instance.currentUser!.uid);
+                //         Navigator.of(context).popUntil(ModalRoute.withName('/sucess'));
+                Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(builder: (context) => TabBarPage()),
+                    ModalRoute.withName('/success'));
               } else if (foodtype == 2) {
                 print(
                     'Dinnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnner is added');
@@ -452,6 +460,10 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                     fat: fats,
                     quantity: foodQuantity.toDouble(),
                     id: FirebaseAuth.instance.currentUser!.uid);
+                     Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(builder: (context) => TabBarPage()),
+                    ModalRoute.withName('/success'));
               } else {
                 DatabaseService().AddDinnerToFirestoreUser(
                     calories: totalCalories,
@@ -461,6 +473,10 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                     fat: fats,
                     quantity: foodQuantity.toDouble(),
                     id: FirebaseAuth.instance.currentUser!.uid);
+                     Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(builder: (context) => TabBarPage()),
+                    ModalRoute.withName('/success'));
               }
             }
             //Delay function to add
