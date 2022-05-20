@@ -46,6 +46,9 @@ dependencies:
   number_slide_animation: ^0.2.1
   multi_select_flutter: ^4.1.2
   nice_buttons: ^0.0.2
+  pedometer: ^3.0.0
+  shared_preferences: ^2.0.11
+  permission_handler: ^7.2.0
 
 dev_dependencies:
   flutter_lints: ^1.0.0
@@ -78,7 +81,7 @@ flutter:
     - assets/selector/maintain.png
     - assets/selector/muscleColor.png
     - assets/selector/muscle.png
-    - assets/calories/flame.png
+    - assets/steps/shoe.png
   fonts:
     - family: msmadi
       fonts:

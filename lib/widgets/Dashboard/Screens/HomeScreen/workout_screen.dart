@@ -5,6 +5,7 @@ import 'package:profit/services/firestore_database.dart';
 import 'package:profit/themes/ThemeUI.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:profit/widgets/Dashboard/Screens/HomeScreen/workout_cubit/workout_cubit.dart';
+import 'package:profit/widgets/Dashboard/navigation_screen.dart';
 
 class WorkoutScreen extends StatefulWidget {
   const WorkoutScreen({Key? key}) : super(key: key);
@@ -19,8 +20,12 @@ class _WorkoutScreenState extends State<WorkoutScreen> {
   String? _text;
   @override
   Widget build(BuildContext context) {
-    return Material(
-      child: Center(
+    return Scaffold(
+       appBar: AppBar(
+        title: const Text('Select Your Workout'),
+        centerTitle: true,
+      ),
+      body: Center(
         child: SingleChildScrollView(
           child: Center(
             child: Container(
@@ -146,6 +151,10 @@ class _WorkoutScreenState extends State<WorkoutScreen> {
                                   .toStringAsFixed(2))),
                           duration: double.parse(_text!),
                         );
+                         Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(builder: (context) => TabBarPage()),
+                    ModalRoute.withName('/success'));
                       }
                     },
                   )

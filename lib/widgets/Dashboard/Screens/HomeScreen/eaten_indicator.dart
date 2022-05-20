@@ -10,53 +10,55 @@ class EatenIndicator extends StatelessWidget {
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints) {
-        return Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Image.asset(
-                  "assets/home_screen/Apple.png",
-                  scale: 2.6,
-                ),
-                Text(
-                  " Eaten",
-                  style: FitnessAppTheme.eatenIndicatorText,
-                ),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                StreamBuilder(
-                    stream: DatabaseService().getUserDocStream(
-                        id: FirebaseAuth.instance.currentUser!.uid),
-                    builder: (context, snapshot) {
-                      if (snapshot.hasData) {
-                        var data = snapshot.data as DocumentSnapshot;
-                        var eaten =
-                            double.parse(data['eatenCalories'].toString())
-                                .toInt()
-                                .toString();
-                        return Text(
-                          eaten,
-                          style: FitnessAppTheme.eatenIndicatorValue,
-                        );
-                      } else {
-                        return const Text(
-                          "0",
-                          style: FitnessAppTheme.eatenIndicatorValue,
-                        );
-                      }
-                    }),
-                const Text(
-                  " (kCal)",
-                  style: FitnessAppTheme.eatenIndicatorUnit,
-                ),
-              ],
-            )
-          ],
+        return SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Image.asset(
+                    "assets/home_screen/Apple.png",
+                    scale: 2.6,
+                  ),
+                  Text(
+                    " Eaten",
+                    style: FitnessAppTheme.eatenIndicatorText,
+                  ),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  StreamBuilder(
+                      stream: DatabaseService().getUserDocStream(
+                          id: FirebaseAuth.instance.currentUser!.uid),
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData) {
+                          var data = snapshot.data as DocumentSnapshot;
+                          var eaten =
+                              double.parse(data['eatenCalories'].toString())
+                                  .toInt()
+                                  .toString();
+                          return Text(
+                            eaten,
+                            style: FitnessAppTheme.eatenIndicatorValue,
+                          );
+                        } else {
+                          return const Text(
+                            "0",
+                            style: FitnessAppTheme.eatenIndicatorValue,
+                          );
+                        }
+                      }),
+                  const Text(
+                    " (kCal)",
+                    style: FitnessAppTheme.eatenIndicatorUnit,
+                  ),
+                ],
+              )
+            ],
+          ),
         );
       },
     );

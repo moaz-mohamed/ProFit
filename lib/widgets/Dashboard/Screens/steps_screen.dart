@@ -1,0 +1,343 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/material.dart';
+import 'package:profit/services/auth.dart';
+import 'package:profit/themes/ThemeUI.dart';
+import 'dart:async';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:pedometer/pedometer.dart';
+import 'package:permission_handler/permission_handler.dart';
+
+
+
+class StepsScreen extends StatefulWidget {
+  @override
+  StepsScreenState createState() => StepsScreenState();
+}
+
+class StepsScreenState extends State<StepsScreen> {
+  Stream<StepCount>? _stepCountStream;
+  FirebaseAuth auth = FirebaseAuth.instance;
+  
+  AuthenticationService authServices = AuthenticationService();
+  final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+ // StepCount? event;
+  // Stream<PedestrianStatus>? _pedestrianStatusStream;
+  String
+      _totalSteps = '0' , _todaySteps ='0';
+     
+   String ?
+      _savedSteps;
+
+  int? lastDay = 0;
+
+  int? currentDay = 0;
+//   checkAuthentication() async {
+//     auth.authStateChanges().listen((User? user) {
+//       if (user == null) {
+//         // Navigator.pushNamedAndRemoveUntil(context, '/login', (route) => true);
+//         // Navigator.pop(context);
+//         // Navigator.pushReplacementNamed(context, '/login');
+
+//         // Navigator.push(
+//         //   context,
+//         //   MaterialPageRoute(
+//         //     builder: (context) {
+//         //       return LoginScreen();
+//         //     },
+//         //   ),
+//         // );
+//         //  Navigator.removeRoute(context, (Route<dynamic> route) => false)
+//         Navigator.pushAndRemoveUntil(
+//           context,
+//           MaterialPageRoute(builder: (context) => LoginScreen()),
+//           ModalRoute.withName('/steps'),
+//         );
+//         // Navigator.of(context).popUntil(ModalRoute.withName('/sucess'));
+
+//         //   Navigator.pushNamedAndRemoveUntil
+//         //Navigator.pushNamedAndRemoveUntil(context, '/login', ModalRoute.withName('/success'));
+
+// //Navigator.of(context).pushNamedAndRemoveUntil('/login', ModalRoute.withName('/success'));
+// //Navigator.push(context,  MaterialPageRoute(builder: (context) => LoginScreen()));
+
+//       }
+//     });
+//   }
+
+  // void signout() async {
+  //   await authServices.signOutGoogle();
+  //   await authServices.signOut();
+  // //  await checkAuthentication();
+  // }
+  //    await users.doc(auth.currentUser!.uid).get().then((value) {
+  //      print(value.data());
+  //  });
+// DocumentSnapshot userDocument =
+  //String name = await users.doc(auth.currentUser!.uid).get().then((value) => null)
+  //return name;
+//    if (userDocument.exists) {
+//      print("fuckkkkkkkk");
+// Map<String, dynamic>? data = userDocument.data() as Map<String, dynamic>?;
+// String name = data!['name'];
+//  print(name);
+//    }
+/*
+    String? name = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(auth.currentUser!.uid)
+       .get()
+        .then((value) {
+      return value.data()!['name']; // Access your after your get the data
+    });
+    print(name); */
+  // }
+
+  @override
+  initState() {
+  
+    super.initState();
+   initPlatformState();
+     print("inside initstateeeeeeeeeeeee");
+    // getName();
+    // getCalories();
+    //getSteps();
+    
+   // getSteps();
+   // _savedSteps = _totalSteps;
+    // prefs.setString('savedSteps', _savedSteps!);
+    
+
+    // day = 0;
+    // currentdate= DateTime.now().minute;
+    // _savedSteps = _totalSteps;
+   
+  }
+
+ 
+
+  Future<void> onStepCount(StepCount event) async {
+   SharedPreferences prefs = await _prefs;
+    _savedSteps = prefs.getString('savedSteps');
+    //Todo
+   // _savedSteps = prefs.getString('savedSteps') ?? event.steps.toString();
+   
+    if(_savedSteps == null){
+      _savedSteps = event.steps.toString();
+       prefs.setString('savedSteps', _savedSteps! );
+    }
+    prefs.setInt('lastDay', lastDay!);
+    print(event);
+    
+    currentDay = DateTime.now().minute;
+    lastDay = prefs.getInt('lastDay');
+
+    if (currentDay != lastDay) {
+      lastDay = currentDay;
+      _savedSteps = event.steps.toString();
+      prefs.setInt('lastDay', lastDay!);
+      prefs.setString('savedSteps', _savedSteps!);
+    }
+
+    setState(() {
+      _todaySteps =(event.steps - int.parse(_savedSteps!)).toString();});
+     prefs.setString('todaySteps', _todaySteps);
+  }
+
+
+  void onStepCountError(error) {
+    print('onStepCountError: $error');
+    setState(() {
+      _todaySteps = 'Step Count not available';
+    });
+  }
+
+
+
+  void initPlatformState() async {
+    
+
+    if (await Permission.activityRecognition.request().isGranted) {
+      print("requesteddddddd");
+
+      _stepCountStream = Pedometer.stepCountStream;
+
+      _stepCountStream!.listen(onStepCount).onError(onStepCountError);
+      
+      // Either the permission was already granted before or the user just granted it.
+      
+    }
+
+    if (!mounted) return;
+  }
+
+  // getName() async {
+  //   String? name;
+  //   //  final FirebaseFirestore db = FirebaseFirestore.instance;
+  //   //   final CollectionReference users =
+  //   //      FirebaseFirestore.instance.collection('users');
+  //   String userId = auth.currentUser!.uid;
+  //   print(userId);
+  //   DocumentReference doc =
+  //       FirebaseFirestore.instance.collection("users").doc(userId);
+
+  //   await doc.get().then((value) {
+  //     name = value.get('name').toString();
+  //   });
+  //   print(name);
+  //   // username = name!.toString();
+  //   setState(() => username = name!);
+  // }
+  // getCalories() async {
+  //   double? calories;
+  //   //  final FirebaseFirestore db = FirebaseFirestore.instance;
+  //   //   final CollectionReference users =
+  //   //      FirebaseFirestore.instance.collection('users');
+  //   String userId = auth.currentUser!.uid;
+
+  //   DocumentReference doc =
+  //       FirebaseFirestore.instance.collection("users").doc(userId);
+
+  //   await doc.get().then((value) {
+  //     calories = value.get('calories');
+  //   });
+  //   print(calories);
+  //   setState(() => userCalories = calories!.toString());
+  // }
+
+
+  
+
+  // Future<String?> getSteps()  async {
+  //   late Future<String?> steps;
+  //   SharedPreferences prefs = await _prefs;
+    
+  //   // _totalSteps = event!.steps.toString();
+  // steps = _prefs.then((SharedPreferences prefs) {
+  //     return prefs.getString('savedSteps') ?? '0';
+  //   });
+    
+  //   setState(() => _savedSteps =  steps as String );
+  // }
+
+  @override
+  Widget build(BuildContext context) {
+    print("inside build");
+    // print(getName());
+    // getState();
+    // print(s);
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          //  Text('Welcome ' + users.doc(auth.currentUser!.uid).toString()),
+        
+          Container(
+            width: MediaQuery.of(context).size.width * 0.3,
+            height: MediaQuery.of(context).size.width * 0.3,
+            padding: const EdgeInsets.all(15),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(100),
+            ),
+            child: Image.asset(
+              'assets/steps/shoe.png',
+              width:MediaQuery.of(context).size.width * 0.3,
+              height:MediaQuery.of(context).size.width * 0.3,
+              //  color: Colo,
+            ),
+          ),
+           SizedBox(height: MediaQuery.of(context).size.height * 0.03),
+          Text(
+            'Today\'s Steps',
+            style: TextStyle(
+              color: Theme.of(context).primaryColor,
+              fontSize: 30,
+              fontFamily: 'SourceSansPro',
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+           SizedBox(height: MediaQuery.of(context).size.height * 0.05),
+          Text(
+            
+            _todaySteps,
+            style: TextStyle(
+              color: Theme.of(context).primaryColor,
+              fontSize: 50,
+              fontFamily: 'Bebas',
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          const Padding(
+            padding: EdgeInsets.only(top: 15),
+          ),
+          const SizedBox(height: 40),
+          // ElevatedButton(
+          //     child: const Text('Signout'),
+          //     onPressed: signout,
+          //     style: ElevatedButton.styleFrom(
+          //       primary: FitnessAppTheme.nearlyBlue,
+          //       elevation: 20,
+          //       padding: const EdgeInsets.symmetric(horizontal: 30),
+          //       textStyle: const TextStyle(
+          //           fontSize: 20, fontWeight: FontWeight.bold),
+          //       fixedSize: const Size(130, 50),
+          //       shape: RoundedRectangleBorder(
+          //           borderRadius: BorderRadius.circular(50)),
+          //     )),
+        ],
+      ),
+    );
+  }
+}
+
+/*
+ children: <Widget>[
+                  const SizedBox(
+                    height: 50,
+                    width: 15,
+                  ),
+                  //  Text('Welcome ' + users.doc(auth.currentUser!.uid).toString()),
+                  Center(
+                    child: Container(
+                      width: 90,
+                      height: 90,
+                      padding: EdgeInsets.all(15),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(100),
+                      ),
+                      child: Image.asset(
+                        'assets/steps/shoe.png',
+                        width: 90,
+                        height: 90,
+                        //  color: Colo,
+                      ),
+                    ),
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.only(top: 10),
+                  ),
+                  Text(
+                    'steps',
+                    style: TextStyle(
+                      color: Theme.of(context).primaryColor,
+                      fontSize: 20,
+                      fontFamily: 'Bebas',
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+
+                  Text(
+                    _todaySteps!,
+                    style: TextStyle(
+                      color: Theme.of(context).primaryColor,
+                      fontSize: 50,
+                      fontFamily: 'Bebas',
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.only(top: 15),
+                  ),
+                ],
+                */
