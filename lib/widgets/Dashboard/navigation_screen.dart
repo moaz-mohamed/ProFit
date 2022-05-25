@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:profit/services/food_recommendation.dart';
 import 'package:profit/widgets/Dashboard/Screens/Geofencing/geofencing.dart';
 import 'package:profit/widgets/Dashboard/Screens/HomeScreen/first_dashboard.dart';
 import 'package:profit/widgets/Dashboard/Screens/HomeScreen/home_screen.dart';
-import 'package:profit/widgets/Dashboard/Screens/food_recommendation_screen.dart';
-import 'package:profit/widgets/Dashboard/Screens/food_screen.dart';
-import 'package:profit/widgets/Dashboard/Screens/workouts_screen.dart';
+import 'package:profit/widgets/Dashboard/Screens/HomeScreen/workout_screen.dart';
+import 'package:profit/widgets/Dashboard/Screens/FoodRecommendationScreen/recommendation_input.dart';
+import 'package:profit/widgets/Dashboard/Screens/steps_screen.dart';
+import 'package:profit/widgets/Dashboard/Screens/WorkoutScreen/workout_screen.dart';
 import 'package:profit/widgets/Dashboard/NavigationBloc/tab_bar_bloc.dart';
 import 'package:profit/widgets/Dashboard/NavigationBloc/tab_bar_event.dart';
 import 'package:profit/themes/ThemeUI.dart';
@@ -25,8 +27,8 @@ class TabBarPage extends StatelessWidget {
               centerTitle: true,
               title: const Text("ProFit"),
             ),
-            body: _createBody(context,
-                bloc.currentIndex), //return the index of the screen i want to route
+            body: _createBody(context, bloc.currentIndex), //return the index of the screen i want to route
+            backgroundColor: Colors.white,
             bottomNavigationBar: _createdBottomTabBar(context),
           );
         },
@@ -48,10 +50,10 @@ class TabBarPage extends StatelessWidget {
         ),
         BottomNavigationBarItem(
           icon: Image.asset(
-            'assets/dashboard/food.png',
-            scale: 2.6,
+            'assets/dashboard/shoe.png',
+            scale: 2,
           ),
-          label: 'Food',
+          label: 'Steps',
         ),
         BottomNavigationBarItem(
           icon: Image.asset(
@@ -70,7 +72,7 @@ class TabBarPage extends StatelessWidget {
         BottomNavigationBarItem(
           icon: Image.asset(
             'assets/dashboard/food_recommendation.png',
-            scale: 2.6,
+            scale: 2,
           ),
           label: "Recommend",
         ),
@@ -78,20 +80,13 @@ class TabBarPage extends StatelessWidget {
       selectedLabelStyle: FitnessAppTheme.navScreen,
       fixedColor: Colors.blue,
       onTap: (index) {
-        bloc.add(NavBarTappedEvent(
-            index: index)); //trigger and notifies the bloc a new event
+        bloc.add(NavBarTappedEvent(index: index)); //trigger and notifies the bloc a new event
       },
     );
   }
 
   Widget _createBody(BuildContext context, int index) {
-    final children = [
-      HomePage(),
-      FoodScreen(),
-      WorkoutsPage(),
-      Geofencing(),
-      FoodReccomendationScreen()
-    ];
+    final children = [HomePage(), StepsScreen(), WorkoutsPage(), Geofencing(), FoodRecommendationScreen()];
     return children[index];
   }
 }

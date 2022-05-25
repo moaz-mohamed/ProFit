@@ -24,6 +24,7 @@ class FoodRecommendationServiceAPI {
       var foodRecomendationItems = (json.decode(response.body) as List)
           .map((i) => FoodRecommendationItem.fromJson(i))
           .toList();
+      print(response.body);
       return foodRecomendationItems;
     } else {
       print(response.statusCode);

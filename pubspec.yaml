@@ -31,7 +31,7 @@ dependencies:
   dio: ^4.0.4
   firebase_auth: ^3.2.0
   firebase_core: ^1.10.0
-  firebase_messaging: ^5.1.2
+  firebase_messaging: ^10.0.5
   cloud_firestore: ^3.1.4
   flutter:
     sdk: flutter
@@ -45,7 +45,12 @@ dependencies:
   responsive_framework: ^0.1.5
   percent_indicator: ^3.4.0
   number_slide_animation: ^0.2.1
+  multi_select_flutter: ^4.1.2
   nice_buttons: ^0.0.2
+  pedometer: ^3.0.0
+  shared_preferences: ^2.0.11
+  permission_handler: ^7.2.0
+  camera: ^0.8.0
 
 dev_dependencies:
   flutter_lints: ^1.0.0
@@ -71,13 +76,14 @@ flutter:
     - assets/dashboard/
     - assets/home_screen/
     - assets/add_food_screen/
+    - assets/workout_screen/
     - assets/selector/loseColor.png
     - assets/selector/lose.png
     - assets/selector/maintainColor.png
     - assets/selector/maintain.png
     - assets/selector/muscleColor.png
     - assets/selector/muscle.png
-    - assets/calories/flame.png
+    - assets/steps/shoe.png
   fonts:
     - family: msmadi
       fonts:

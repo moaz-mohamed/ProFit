@@ -4,7 +4,7 @@ class PushNotification {
   PushNotification._();
   factory PushNotification() => _instance;
   static final PushNotification _instance = PushNotification._();
-  final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
+  final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
   bool initialized = false;
   Future<void> init() async {
     if (!initialized) {

@@ -4,13 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:profit/services/firestore_database.dart';
 import 'package:profit/themes/ThemeUI.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:profit/widgets/Dashboard/Screens/HomeScreen/custom_meal_text.dart';
 
 import 'package:profit/widgets/Dashboard/Screens/HomeScreen/workout_provider.dart';
 
 import 'package:profit/widgets/FoodAPI/food_main.dart';
 import 'package:profit/widgets/IntroPage/Intro/login_screen.dart';
-import 'package:profit/widgets/Dashboard/Screens/HomeScreen/custom_workout_text.dart';
 
 class Dashboard extends StatelessWidget {
   List<String> dashboardHeaders = [
@@ -130,21 +128,62 @@ class Dashboard extends StatelessWidget {
                               itemCount: dinner.length,
                               itemBuilder: (context, curr) {
                                 if (dashboardHeaders[index] == "Workout") {
-                                  return CustomWorkoutText(
-                                    text: dinner[curr]['name'].toString() +
-                                        " " +
-                                        dinner[curr]['burnedCalories']
-                                            .toString() +
-                                        " " +
-                                        dinner[curr]['duration'].toString(),
-                                  );
+                                  return Column(children: [
+                                    Card(
+                                      child: ListTile(
+                                        title: Text(
+                                            dinner[curr]['name'].toString()),
+                                        subtitle: Text(dinner[curr]
+                                                ['burnedCalories']
+                                            .toString()),
+                                        trailing: IconButton(
+                                          icon: Icon(Icons.delete),
+                                          onPressed: () {
+                                            DatabaseService()
+                                                .deleteWorkoutFromFirestoreUser(
+                                                    id: FirebaseAuth.instance
+                                                        .currentUser!.uid,
+                                                    index: curr,
+                                                    calories: dinner[curr]
+                                                        ['burnedCalories']);
+                                          },
+                                        ),
+                                      ),
+                                    ),
+                                  ]);
                                 } else {
-                                  return CustomMealText(
-                                      text: dinner[curr]['name'].toString() +
-                                          " " +
-                                          dinner[curr]['calories'].toString() +
-                                          " " +
-                                          dinner[curr]['quantity'].toString());
+                                  return Column(children: [
+                                    Card(
+                                      margin: EdgeInsets.all(3),
+                                      elevation: 1,
+                                      shape: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          borderSide: BorderSide(
+                                              color:
+                                                  FitnessAppTheme.nearlyWhite,
+                                              width: 1)),
+                                      child: ListTile(
+                                        title: Text(
+                                            dinner[curr]['name'].toString()),
+                                        subtitle: Text(dinner[curr]['calories']
+                                                .toString() +
+                                            " kCal"),
+                                        trailing: IconButton(
+                                          icon: Icon(Icons.delete_outline),
+                                          onPressed: () {
+                                            DatabaseService()
+                                                .deleteMealFromFirestoreUser(
+                                                    id: FirebaseAuth.instance
+                                                        .currentUser!.uid,
+                                                    type:
+                                                        dashboardHeaders[index],
+                                                    index: curr);
+                                          },
+                                        ),
+                                      ),
+                                    )
+                                  ]);
                                 }
                               },
                             );
