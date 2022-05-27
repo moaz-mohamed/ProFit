@@ -84,6 +84,10 @@ flutter:
     - assets/selector/muscleColor.png
     - assets/selector/muscle.png
     - assets/steps/shoe.png
+    - assets/Attributions/Edamam_Badge_White.png
+    - assets/Food/food.png
+
+
   fonts:
     - family: msmadi
       fonts:

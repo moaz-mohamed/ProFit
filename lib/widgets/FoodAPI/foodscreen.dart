@@ -19,8 +19,6 @@ class FoodScreen extends StatefulWidget {
 }
 
 class _FoodScreenState extends State<FoodScreen> {
-  final _searchTextController = TextEditingController();
-
   @override
   Widget build(BuildContext foodScreenContext) {
     return Scaffold(
@@ -53,11 +51,44 @@ class _FoodScreenState extends State<FoodScreen> {
                 }),
           ],
         ),
-        body: const Center(
-          child: Text(
-            "No Food found",
-            style: TextStyle(color: Colors.black, fontSize: 28.0),
-            textAlign: TextAlign.center,
+        body: Center(
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Image.asset(
+                        'assets/Food/food.png',
+                        width: 200,
+                      ),
+                    ),
+                    const Text(
+                      "Search for Food",
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 25.0,
+                          fontFamily: 'SourceSansPro',
+                          color: Colors.blue),
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
+                ),
+              ),
+              Positioned(
+                bottom: 0,
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Image.asset(
+                    'assets/Attributions/Edamam_Badge_White.png',
+                    width: 200,
+                  ),
+                ),
+              ),
+            ],
           ),
         ));
   }
@@ -110,7 +141,6 @@ class FoodSearch extends SearchDelegate<List?> {
           } else {
             foodId = items.parsed[0].food!.foodId;
             measureUri = items.hints[0].measures[0].uri;
-            print(foodId + '' + measureUri);
 
             if (state.recipes.hints.isEmpty) {
               return const Center(
@@ -119,36 +149,44 @@ class FoodSearch extends SearchDelegate<List?> {
             } else {
               return ListView.builder(
                 itemBuilder: (BuildContext context, int index) {
-                  return Card(
-                    margin: const EdgeInsets.all(20.0),
-                    child: InkWell(
-                      child: ListTile(
-                        leading: const Icon(Icons.food_bank_outlined),
-                        title: Text(
-                          state.recipes.hints[index].food.label,
-                          style: const TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.blueGrey),
+                  return Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: Card(
+                      shape: RoundedRectangleBorder(
+                        side: BorderSide(
+                            color: Colors.blueGrey.shade100, width: 4),
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      child: InkWell(
+                        child: ListTile(
+                          leading: Image.asset(
+                            'assets/Food/food.png',
+                          ),
+                          title: Text(state.recipes.hints[index].food.label,
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontFamily: "SourceSansPro",
+                                  fontSize: 20.0,
+                                  color: Colors.blue)),
+                          subtitle: Text(state
+                              .recipes.hints[index].food.nutrients.ENERCKCAL
+                              .toString()),
+                          trailing: const Icon(Icons.keyboard_arrow_right),
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => AddFoodScreen(
+                                    calculateFoodBloc:
+                                        BlocProvider.of<CalculateFoodBloc>(
+                                            context),
+                                    foodLabel: items.hints[index].food.label,
+                                    foodID: items.hints[index].food.foodId,
+                                    foodtype: foodtype),
+                              ),
+                            );
+                          },
                         ),
-                        subtitle: Text(state
-                            .recipes.hints[index].food.nutrients.ENERCKCAL
-                            .toString()),
-                        trailing: const Icon(Icons.keyboard_arrow_right),
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => AddFoodScreen(
-                                  calculateFoodBloc:
-                                      BlocProvider.of<CalculateFoodBloc>(
-                                          context),
-                                  foodLabel: items.hints[index].food.label,
-                                  foodID: items.hints[index].food.foodId,
-                                  foodtype: foodtype),
-                            ),
-                          );
-                        },
                       ),
                     ),
                   );
