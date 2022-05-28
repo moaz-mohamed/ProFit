@@ -75,9 +75,8 @@ class FoodSearch extends SearchDelegate<List?> {
                       ),
                       child: InkWell(
                         child: ListTile(
-                          leading: Image.asset(
-                            'assets/Food/food.png',
-                          ),
+                          leading: Image.network(
+                              state.recipes.hints[index].food.image!),
                           title: Text(state.recipes.hints[index].food.label,
                               style: const TextStyle(
                                   fontWeight: FontWeight.bold,
