@@ -122,7 +122,7 @@ class Placestate extends State<PlacesPage> {
                           decoration: BoxDecoration(
                               border: Border.all(color: Colors.blue.shade800),
                               borderRadius:
-                                  BorderRadius.all(Radius.circular(20))),
+                                  const BorderRadius.all(Radius.circular(20))),
                           padding: const EdgeInsets.all(4)),
                       Text(f.vicinity),
                     ],
