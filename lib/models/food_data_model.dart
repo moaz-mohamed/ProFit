@@ -38,16 +38,16 @@ class Food {
     required this.foodId,
     required this.label,
     required this.nutrients,
+    required this.image,
     // required this.category,
     // required this.categoryLabel,
-    // required this.image,
   });
   late final String foodId;
   late final String label;
   late final Nutrients nutrients;
   // late final String category;
   // late final String categoryLabel;
-  // late final String? image;
+  late final String? image;
 
   Food.fromJson(Map<String, dynamic> json) {
     foodId = json['foodId'];
@@ -55,7 +55,7 @@ class Food {
     nutrients = Nutrients.fromJson(json['nutrients']);
     // category = json['category'];
     // categoryLabel = json['categoryLabel'];
-    // image = json['image'];
+    image = json['image'];
   }
 
   // Map<String, dynamic> toJson() {
