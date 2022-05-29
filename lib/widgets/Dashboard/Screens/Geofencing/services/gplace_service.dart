@@ -15,9 +15,6 @@ class LocationService {
     return _locationService;
   }
 
-  final String detailUrl =
-      "https://maps.googleapis.com/maps/api/place/details/json?fields=&key=AIzaSyADZ3j2p_LPKzCn8YeMg7ViekUgFnSDDJE&place_id=";
-
   Future getNearbyPlaces(LocationData loc) async {
     String longitude = loc.longitude.toString();
     String latitude = loc.latitude.toString();
@@ -52,6 +49,9 @@ class LocationService {
   }
 
   Future getPlace(String placeId) async {
+    String key2 = Constants.googleKey;
+    String detailUrl =
+        "https://maps.googleapis.com/maps/api/place/details/json?fields=&key=${key2}&place_id=";
     var response = await http.get(Uri.parse(detailUrl + placeId),
         headers: {"Accept": "application/json"});
     var result = json.decode(response.body)["result"];
