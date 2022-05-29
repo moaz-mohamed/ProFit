@@ -6,7 +6,6 @@ import 'package:profit/bloc/search/search_bloc.dart';
 import 'package:profit/bloc/search/search_event.dart';
 import 'package:profit/bloc/search/search_state.dart';
 import 'package:profit/models/food_data_model.dart';
-
 import 'AddFoodScreen.dart';
 
 class FoodSearch extends SearchDelegate<List?> {
@@ -43,6 +42,10 @@ class FoodSearch extends SearchDelegate<List?> {
 
   @override
   Widget buildResults(BuildContext context) {
+    String img =
+        "https://icones.pro/wp-content/uploads/2021/04/icone-de-nourriture-noire-symbole-png.png";
+    String errorImg =
+        "https://www.edamam.com/food-img/963/9633e24decdc42ed674fdc787623b492.png";
     searchBloc.add(Search(query: query));
     return BlocBuilder<SearchBloc, SearchState>(
       builder: (BuildContext context, SearchState state) {
@@ -70,22 +73,28 @@ class FoodSearch extends SearchDelegate<List?> {
                     child: Card(
                       shape: RoundedRectangleBorder(
                         side: BorderSide(
-                            color: Colors.blueGrey.shade100, width: 4),
-                        borderRadius: BorderRadius.circular(10.0),
+                            color: Colors.blueGrey.shade100, width: 2),
+                        borderRadius: BorderRadius.circular(20.0),
                       ),
                       child: InkWell(
                         child: ListTile(
                           leading: Image.network(
-                              state.recipes.hints[index].food.image!),
+                            state.recipes.hints[index].food.image ?? img,
+                            errorBuilder: (BuildContext context,
+                                Object exception, StackTrace? stackTrace) {
+                              return Image.network(img);
+                            },
+                          ),
                           title: Text(state.recipes.hints[index].food.label,
                               style: const TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontFamily: "SourceSansPro",
                                   fontSize: 20.0,
                                   color: Colors.blue)),
-                          subtitle: Text(state
-                              .recipes.hints[index].food.nutrients.ENERCKCAL
-                              .toString()),
+                          subtitle: Text(state.recipes.hints[index].food
+                                  .nutrients.ENERCKCAL!
+                                  .toStringAsFixed(1) +
+                              " KCAL"),
                           trailing: const Icon(Icons.keyboard_arrow_right),
                           onTap: () {
                             Navigator.push(
