@@ -8,16 +8,12 @@ import 'package:profit/widgets/Dashboard/Screens/HomeScreen/first_dashboard.dart
 import 'package:profit/widgets/Dashboard/Screens/HomeScreen/home_screen.dart';
 import 'package:profit/widgets/Dashboard/Screens/HomeScreen/workout_screen.dart';
 import 'package:profit/widgets/Dashboard/Screens/FoodRecommendationScreen/recommendation_input.dart';
+import 'package:profit/widgets/Dashboard/Screens/my_drawer_header.dart';
 import 'package:profit/widgets/Dashboard/Screens/steps_screen.dart';
 import 'package:profit/widgets/Dashboard/Screens/WorkoutScreen/workout_screen.dart';
 import 'package:profit/widgets/Dashboard/NavigationBloc/tab_bar_bloc.dart';
 import 'package:profit/widgets/Dashboard/NavigationBloc/tab_bar_event.dart';
 import 'package:profit/themes/ThemeUI.dart';
-import 'package:profit/widgets/IntroPage/intro_main.dart';
-import 'package:profit/widgets/IntroPage/Intro/login_screen.dart';
-
-import 'package:profit/widgets/IntroPage/Intro/login_screen.dart';
-import 'package:profit/widgets/IntroPage/Intro/onboarding_screen.dart';
 
 class TabBarPage extends StatefulWidget {
   const TabBarPage({Key? key}) : super(key: key);
@@ -48,30 +44,21 @@ class _TabBarPageState extends State<TabBarPage> {
             appBar: AppBar(
               centerTitle: true,
               title: const Text("ProFit"),
-              actions: [
-                Row(
-                  children: [
-                    Text("logout"),
-                    IconButton(
-                        icon: const Icon(Icons.logout_rounded),
-                        onPressed: () {
-                          _signOut();
-                          FirebaseAuth.instance
-                              .authStateChanges()
-                              .listen((User? user) {
-                            if (user == null) {
-                              print('User is currently signed out!');
-                            } else {
-                              print('User is signed in!');
-                            }
-                          });
-
-                          checkAuthentication();
-                        }),
-                  ],
-                )
-              ],
             ),
+            drawer: Container(
+              width: 250,
+              child: Drawer(
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      MyHeaderDrawer(),
+                      myDrawerList(),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+
             body: _createBody(context,
                 bloc.currentIndex), //return the index of the screen i want to route
             backgroundColor: Colors.white,
@@ -84,6 +71,20 @@ class _TabBarPageState extends State<TabBarPage> {
 
   Future<void> _signOut() async {
     await FirebaseAuth.instance.signOut();
+  }
+
+  Widget myDrawerList() {
+    return Container(
+      height: 50,
+      padding: const EdgeInsets.only(
+        top: 10,
+      ),
+      child: Column(
+        children: [
+          logoutbutton(),
+        ],
+      ),
+    );
   }
 
   Widget _createdBottomTabBar(BuildContext context) {
@@ -145,5 +146,42 @@ class _TabBarPageState extends State<TabBarPage> {
       FoodRecommendationScreen()
     ];
     return children[index];
+  }
+
+  logoutbutton() {
+    return Material(
+      child: InkWell(
+        onTap: () {
+          _signOut();
+          checkAuthentication();
+        },
+        child: Padding(
+          padding: EdgeInsets.all(5.0),
+          child: Container(
+            child: Row(
+              children: const [
+                Expanded(
+                  child: Icon(
+                    Icons.logout_rounded,
+                    size: 20,
+                    color: Colors.black,
+                  ),
+                ),
+                Expanded(
+                  flex: 3,
+                  child: Text(
+                    "Logout",
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 16,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }
