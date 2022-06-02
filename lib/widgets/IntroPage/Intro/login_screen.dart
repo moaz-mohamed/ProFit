@@ -23,15 +23,11 @@ class _LoginScreenState extends State<LoginScreen> {
   final AuthenticationService authServices = AuthenticationService();
 
   final FirebaseAuth auth = FirebaseAuth.instance;
-  
-  
 
   checkAuthentication() async {
     auth.userChanges().listen((User? user) {
       if (user != null) {
-        Navigator.pushNamed(
-          context, '/success'
-        );
+        Navigator.pushNamed(context, '/success');
       }
     });
   }
@@ -45,7 +41,8 @@ class _LoginScreenState extends State<LoginScreen> {
       if (formKey!.validate()) {
         formKey.save();
         await authServices.signInWithEmailAndPassword(
-            email: _emailController.text, password: _passController.text);
+            email: _emailController.text.trim(),
+            password: _passController.text);
         AuthenticationService.showMessage(
             AuthenticationService.message, context);
       }
@@ -55,8 +52,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
     void signInWithGoogle() async {
       await authServices.signInWithGoogle();
-      AuthenticationService.showMessage(
-            AuthenticationService.message, context);
+      AuthenticationService.showMessage(AuthenticationService.message, context);
       await checkAuthentication();
     }
 
@@ -79,7 +75,6 @@ class _LoginScreenState extends State<LoginScreen> {
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 50),
         child: SingleChildScrollView(
           child: Form(
-            
             child: Column(
               children: [
                 // ignore: prefer_const_constructors
@@ -98,7 +93,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   controller: _emailController,
                   obscureText: false,
                   decoration: const InputDecoration(
-                    border:  OutlineInputBorder( 
+                    border: OutlineInputBorder(
                       borderRadius: BorderRadius.all(
                         Radius.circular(10.0),
                       ),
@@ -117,7 +112,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     //border: InputBorder.none,
                   ),
                   validator: (value) {
-                    if (!Validators.validateEmail(value!)) {
+                    if (!Validators.validateEmail(value!.trim())) {
                       return "Enter Correct Email";
                     } else {
                       return null;
@@ -189,7 +184,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   elevation: 20,
                 ),
                 const SizedBox(height: 20),
-               
               ],
             ),
             key: formGlobalKey,
