@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'dart:ui';
@@ -6,8 +5,6 @@ import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:profit/services/validate.dart';
 import 'package:profit/services/auth.dart';
 import 'package:profit/themes/ThemeUI.dart';
-
-import 'loginsucess.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -28,6 +25,9 @@ class _LoginScreenState extends State<LoginScreen> {
     auth.userChanges().listen((User? user) {
       if (user != null) {
         Navigator.pushNamed(context, '/success');
+        WidgetsBinding.instance!.addPostFrameCallback((_) =>
+            ScaffoldMessenger.of(context)
+                .showSnackBar(const SnackBar(content: Text("ddd"))));
       }
     });
   }
@@ -140,13 +140,11 @@ class _LoginScreenState extends State<LoginScreen> {
                       Icons.lock,
                       color: FitnessAppTheme.nearlyBlue,
                     ),
-                    //border: InputBorder.none,
                   ),
                   validator: (value) {
-                    if (!Validators.validatePassword(value!)) {
+                    if (!Validators.validatePassword(value!.trim())) {
                       return "Enter Correct Password";
                     } else {
-                      // print(_pass.text);
                       return null;
                     }
                   },
@@ -154,7 +152,10 @@ class _LoginScreenState extends State<LoginScreen> {
                 const SizedBox(height: 40),
                 ElevatedButton(
                     child: const Text('LOGIN'),
-                    onPressed: signIn,
+                    onPressed: () {
+                      snackbar(' Processing ....');
+                      signIn();
+                    },
                     style: ElevatedButton.styleFrom(
                       primary: FitnessAppTheme.nearlyBlue,
                       elevation: 20,
@@ -191,5 +192,22 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
       ),
     );
+  }
+
+  void snackbar(String text) {
+    final snackBar = SnackBar(
+      duration: const Duration(seconds: 3),
+      content: Row(
+        children: [
+          const Icon(
+            Icons.info_outline,
+            size: 32,
+          ),
+          Text(text),
+        ],
+      ),
+    );
+
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 }
