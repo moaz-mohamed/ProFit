@@ -436,7 +436,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
 
             } else {
               if (foodtype == 1) {
-                DatabaseService().AddBreakfastToFirestoreUser(
+                DatabaseService().addBreakfastToFirestoreUser(
                     calories: totalCalories,
                     name: widget.foodLabel,
                     carbs: carbs,
@@ -452,7 +452,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
               } else if (foodtype == 2) {
                 print(
                     'Dinnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnner is added');
-                DatabaseService().AddLunchToFirestoreUser(
+                DatabaseService().addLunchToFirestoreUser(
                     calories: totalCalories,
                     name: widget.foodLabel,
                     carbs: carbs,
@@ -460,12 +460,12 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                     fat: fats,
                     quantity: foodQuantity.toDouble(),
                     id: FirebaseAuth.instance.currentUser!.uid);
-                     Navigator.pushAndRemoveUntil(
+                Navigator.pushAndRemoveUntil(
                     context,
                     MaterialPageRoute(builder: (context) => TabBarPage()),
                     ModalRoute.withName('/success'));
               } else {
-                DatabaseService().AddDinnerToFirestoreUser(
+                DatabaseService().addDinnerToFirestoreUser(
                     calories: totalCalories,
                     name: widget.foodLabel,
                     carbs: carbs,
@@ -473,7 +473,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                     fat: fats,
                     quantity: foodQuantity.toDouble(),
                     id: FirebaseAuth.instance.currentUser!.uid);
-                     Navigator.pushAndRemoveUntil(
+                Navigator.pushAndRemoveUntil(
                     context,
                     MaterialPageRoute(builder: (context) => TabBarPage()),
                     ModalRoute.withName('/success'));

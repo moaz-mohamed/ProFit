@@ -25,9 +25,6 @@ class _LoginScreenState extends State<LoginScreen> {
     auth.userChanges().listen((User? user) {
       if (user != null) {
         Navigator.pushNamed(context, '/success');
-        WidgetsBinding.instance!.addPostFrameCallback((_) =>
-            ScaffoldMessenger.of(context)
-                .showSnackBar(const SnackBar(content: Text("ddd"))));
       }
     });
   }
@@ -43,6 +40,7 @@ class _LoginScreenState extends State<LoginScreen> {
         await authServices.signInWithEmailAndPassword(
             email: _emailController.text.trim(),
             password: _passController.text);
+
         AuthenticationService.showMessage(
             AuthenticationService.message, context);
       }
@@ -52,6 +50,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
     void signInWithGoogle() async {
       await authServices.signInWithGoogle();
+
       AuthenticationService.showMessage(AuthenticationService.message, context);
       await checkAuthentication();
     }
@@ -81,12 +80,12 @@ class _LoginScreenState extends State<LoginScreen> {
                 Text(
                   'Welcome to ProFit, Login to continue',
                   textAlign: TextAlign.center,
-                  style: TextStyle(
+                  style: const TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
                       color: Colors.black),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 40,
                 ),
                 TextFormField(
@@ -142,7 +141,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                   validator: (value) {
-                    if (!Validators.validatePassword(value!.trim())) {
+                    if (!Validators.validatePassword(value!)) {
                       return "Enter Correct Password";
                     } else {
                       return null;
@@ -166,18 +165,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(50)),
                     )),
-                // TextButton(
-                //   onPressed: () {
-                //     Navigator.pushNamed(context, '/signup');
-                //   },
-                //   child: const Text(
-                //     'Dont\'t have an account? Create New One',
-                //     style: TextStyle(
-                //       fontSize: 15,
-                //       color: Colors.grey,
-                //     ),
-                //   ),
-                // ),
+
                 const SizedBox(height: 40),
                 SignInButton(
                   Buttons.Google,
@@ -200,8 +188,9 @@ class _LoginScreenState extends State<LoginScreen> {
       content: Row(
         children: [
           const Icon(
-            Icons.info_outline,
+            Icons.info_outlined,
             size: 32,
+            color: Colors.blue,
           ),
           Text(text),
         ],

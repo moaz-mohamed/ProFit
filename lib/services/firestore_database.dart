@@ -23,7 +23,7 @@ class DatabaseService {
     return users.doc(id).snapshots();
   }
 
-  Future AddBreakfastToFirestoreUser(
+  Future addBreakfastToFirestoreUser(
       {required String id,
       required String name,
       required double calories,
@@ -59,7 +59,7 @@ class DatabaseService {
   }
 
 // Add lunch
-  Future AddLunchToFirestoreUser(
+  Future addLunchToFirestoreUser(
       {required String id,
       required String name,
       required double calories,
@@ -94,7 +94,7 @@ class DatabaseService {
   }
 
 // Add dinner
-  Future AddDinnerToFirestoreUser(
+  Future addDinnerToFirestoreUser(
       {required String id,
       required String name,
       required double calories,
@@ -129,7 +129,7 @@ class DatabaseService {
   }
 
 // Add workout
-  Future AddWorkoutToFirestoreUser({
+  Future addWorkoutToFirestoreUser({
     required String id,
     required String name,
     required double burnedCalories,
