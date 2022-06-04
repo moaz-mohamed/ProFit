@@ -41,11 +41,12 @@ class _LoginScreenState extends State<LoginScreen> {
             email: _emailController.text.trim(),
             password: _passController.text);
 
-        AuthenticationService.showMessage(
-            AuthenticationService.message, context);
+        // AuthenticationService.showMessage(
+        //     AuthenticationService.message, context);
       }
+      print(AuthenticationService.message);
 
-      await checkAuthentication();
+      // await checkAuthentication();
     }
 
     void signInWithGoogle() async {
@@ -151,9 +152,21 @@ class _LoginScreenState extends State<LoginScreen> {
                 const SizedBox(height: 40),
                 ElevatedButton(
                     child: const Text('LOGIN'),
-                    onPressed: () {
-                      snackbar(' Processing ....');
+                    onPressed: () async {
                       signIn();
+                      await Future.delayed(Duration(seconds: 1));
+                      if (AuthenticationService.message == "Login success!") {
+                        snackbar(AuthenticationService.message, Icons.verified,
+                            Colors.green);
+                      } else {
+                        snackbar(AuthenticationService.message,
+                            Icons.warning_amber, Colors.amber);
+                      }
+                      await Future.delayed(Duration(seconds: 10));
+
+                      ScaffoldMessenger.of(context).hideCurrentSnackBar();
+
+                      //  await checkAuthentication();
                     },
                     style: ElevatedButton.styleFrom(
                       primary: FitnessAppTheme.nearlyBlue,
@@ -182,17 +195,19 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  void snackbar(String text) {
+  void snackbar(String text, IconData iconData, MaterialColor color) {
     final snackBar = SnackBar(
-      duration: const Duration(seconds: 3),
       content: Row(
         children: [
-          const Icon(
-            Icons.info_outlined,
-            size: 32,
-            color: Colors.blue,
+          Padding(
+            padding: const EdgeInsets.all(5.0),
+            child: Icon(
+              iconData,
+              size: 28,
+              color: color,
+            ),
           ),
-          Text(text),
+          Flexible(child: Text(text)),
         ],
       ),
     );
