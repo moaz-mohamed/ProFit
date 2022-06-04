@@ -242,7 +242,8 @@ class _SignupScreenState extends State<SignupScreen> {
                             "Register success!") {
                           snackbar(AuthenticationService.message,
                               Icons.verified, Colors.green);
-                        } else {
+                        } else if (AuthenticationService.message ==
+                            ('The account already exists for that email, try different email.')) {
                           snackbar(AuthenticationService.message,
                               Icons.warning_amber, Colors.amber);
                         }

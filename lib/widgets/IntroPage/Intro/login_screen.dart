@@ -158,7 +158,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       if (AuthenticationService.message == "Login success!") {
                         snackbar(AuthenticationService.message, Icons.verified,
                             Colors.green);
-                      } else {
+                      } else if (AuthenticationService.message.isNotEmpty) {
                         snackbar(AuthenticationService.message,
                             Icons.warning_amber, Colors.amber);
                       }
