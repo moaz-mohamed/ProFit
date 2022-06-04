@@ -130,7 +130,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       //border: InputBorder.none,
                     ),
                     validator: (value) {
-                      if (!Validators.validateEmail(value!)) {
+                      if (!Validators.validateEmail(value!.trim())) {
                         return "Enter Correct Email";
                       } else {
                         return null;
