@@ -53,21 +53,6 @@ class _IntroPageState extends State<IntroPage> {
   late double calories;
   //Male or Female
 
-  checkAuthentication() async {
-    FirebaseAuth.instance.authStateChanges().listen((_user) {
-      if (_user != null) {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) {
-              return Sucess();
-            },
-          ),
-        );
-      }
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     FoodRecommendationServiceAPI()

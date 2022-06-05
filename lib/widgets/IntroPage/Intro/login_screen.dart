@@ -21,14 +21,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
   final FirebaseAuth auth = FirebaseAuth.instance;
 
-  checkAuthentication() async {
-    auth.userChanges().listen((User? user) {
-      if (user != null) {
-        Navigator.pushNamed(context, '/success');
-      }
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     //  final formGlobalKey = GlobalKey<FormState>();
@@ -53,7 +45,7 @@ class _LoginScreenState extends State<LoginScreen> {
       await authServices.signInWithGoogle();
 
       AuthenticationService.showMessage(AuthenticationService.message, context);
-      await checkAuthentication();
+      await AuthenticationService.checkAuthentication(context);
     }
 
     return Scaffold(
@@ -154,19 +146,23 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: const Text('LOGIN'),
                     onPressed: () async {
                       signIn();
-                      await Future.delayed(Duration(seconds: 1));
+                      await Future.delayed(Duration(seconds: 2));
                       if (AuthenticationService.message == "Login success!") {
-                        snackbar(AuthenticationService.message, Icons.verified,
-                            Colors.green);
+                        AuthenticationService.snackbar(
+                            AuthenticationService.message,
+                            Icons.verified,
+                            Colors.green,
+                            context);
                       } else if (AuthenticationService.message.isNotEmpty) {
-                        snackbar(AuthenticationService.message,
-                            Icons.warning_amber, Colors.amber);
+                        AuthenticationService.snackbar(
+                            AuthenticationService.message,
+                            Icons.warning_amber,
+                            Colors.amber,
+                            context);
                       }
-                      await Future.delayed(Duration(seconds: 10));
+                      await Future.delayed(Duration(seconds: 8));
 
                       ScaffoldMessenger.of(context).hideCurrentSnackBar();
-
-                      //  await checkAuthentication();
                     },
                     style: ElevatedButton.styleFrom(
                       primary: FitnessAppTheme.nearlyBlue,
@@ -193,25 +189,5 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
       ),
     );
-  }
-
-  void snackbar(String text, IconData iconData, MaterialColor color) {
-    final snackBar = SnackBar(
-      content: Row(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(5.0),
-            child: Icon(
-              iconData,
-              size: 28,
-              color: color,
-            ),
-          ),
-          Flexible(child: Text(text)),
-        ],
-      ),
-    );
-
-    ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 }

@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:introduction_screen/introduction_screen.dart';
+import 'package:profit/services/auth.dart';
 import 'package:profit/themes/ThemeUI.dart';
 import 'package:profit/widgets/IntroPage/Intro/loginsucess.dart';
 
@@ -11,24 +12,9 @@ class OnBoardingScreen extends StatefulWidget {
 }
 
 class _OnBoardingScreenState extends State<OnBoardingScreen> {
-  checkAuthentication() async {
-    FirebaseAuth.instance.authStateChanges().listen((_user) {
-      if (_user != null) {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) {
-              return Sucess();
-            },
-          ),
-        );
-      }
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
-    checkAuthentication();
+    AuthenticationService.checkAuthentication(context);
     //--->>> Status bar
     SystemChrome.setSystemUIOverlayStyle(
       const SystemUiOverlayStyle(statusBarColor: Colors.lightBlue),

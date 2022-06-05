@@ -240,18 +240,22 @@ class _SignupScreenState extends State<SignupScreen> {
                         await Future.delayed(Duration(seconds: 2));
                         if (AuthenticationService.message ==
                             "Register success!") {
-                          snackbar(AuthenticationService.message,
-                              Icons.verified, Colors.green);
+                          AuthenticationService.snackbar(
+                              AuthenticationService.message,
+                              Icons.verified,
+                              Colors.green,
+                              context);
                         } else if (AuthenticationService.message ==
                             ('The account already exists for that email, try different email.')) {
-                          snackbar(AuthenticationService.message,
-                              Icons.warning_amber, Colors.amber);
+                          AuthenticationService.snackbar(
+                              AuthenticationService.message,
+                              Icons.warning_amber,
+                              Colors.amber,
+                              context);
                         }
                         await Future.delayed(Duration(seconds: 8));
 
                         ScaffoldMessenger.of(context).hideCurrentSnackBar();
-
-                        //  await checkAuthentication();
                       },
                       style: ElevatedButton.styleFrom(
                         shape: RoundedRectangleBorder(
@@ -284,25 +288,5 @@ class _SignupScreenState extends State<SignupScreen> {
                 ])),
           ),
         ));
-  }
-
-  void snackbar(String text, IconData iconData, MaterialColor color) {
-    final snackBar = SnackBar(
-      content: Row(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(5.0),
-            child: Icon(
-              iconData,
-              size: 28,
-              color: color,
-            ),
-          ),
-          Flexible(child: Text(text)),
-        ],
-      ),
-    );
-
-    ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 }

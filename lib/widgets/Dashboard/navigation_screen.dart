@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:profit/main.dart';
+import 'package:profit/services/auth.dart';
 import 'package:profit/services/food_recommendation.dart';
 import 'package:profit/widgets/Dashboard/Screens/Geofencing/geofencing.dart';
 import 'package:profit/widgets/Dashboard/Screens/HomeScreen/first_dashboard.dart';
@@ -23,7 +24,8 @@ class TabBarPage extends StatefulWidget {
 }
 
 class _TabBarPageState extends State<TabBarPage> {
-  checkAuthentication() async {
+  AuthenticationService auth = AuthenticationService();
+  checkLogout() async {
     FirebaseAuth.instance.authStateChanges().listen((_user) {
       if (_user == null) {
         Navigator.of(context).pushAndRemoveUntil(
@@ -69,9 +71,9 @@ class _TabBarPageState extends State<TabBarPage> {
     );
   }
 
-  Future<void> _signOut() async {
-    await FirebaseAuth.instance.signOut();
-  }
+  // Future<void> _signOut() async {
+  //   await FirebaseAuth.instance.signOut();
+  // }
 
   Widget myDrawerList() {
     return Container(
@@ -152,8 +154,8 @@ class _TabBarPageState extends State<TabBarPage> {
     return Material(
       child: InkWell(
         onTap: () {
-          _signOut();
-          checkAuthentication();
+          auth.signOut();
+          checkLogout();
         },
         child: Padding(
           padding: EdgeInsets.all(5.0),
