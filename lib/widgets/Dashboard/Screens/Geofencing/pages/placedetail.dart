@@ -55,13 +55,13 @@ class PlaceDetailState extends State<PlaceDetailPage> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: <Widget>[
                     if (!_place!.formattedAddress.isEmpty)
-                      newcard("Address ", _place!.formattedAddress,
+                      addressCard("Address ", _place!.formattedAddress,
                           Icons.location_on),
                     if (!_place!.rating.isEmpty)
                       // getCard("Rating ", _place!.rating, Icons.star_rate),
-                      newcardRate("Rating ", Icons.star_rate),
+                      ratingCard("Rating ", Icons.star_rate),
                     if (!_place!.internationalPhoneNumber.isEmpty)
-                      newcard("Phone ", _place!.internationalPhoneNumber,
+                      addressCard("Phone ", _place!.internationalPhoneNumber,
                           Icons.phone),
                     if (!_place!.reviews.isEmpty)
                       listCard("Reviews ", Icons.comment, buildreviews()),
@@ -87,74 +87,6 @@ class PlaceDetailState extends State<PlaceDetailPage> {
     });
   }
 
-  getCard(String header, String content, IconData iconData) {
-    return Card(
-        shape: RoundedRectangleBorder(
-          side: const BorderSide(color: Colors.blueGrey, width: 3),
-          borderRadius: BorderRadius.circular(10.0),
-        ),
-        color: Colors.white,
-        child: Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            mainAxisSize: MainAxisSize.max,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Row(
-                children: <Widget>[
-                  Text(header,
-                      style: const TextStyle(
-                          fontWeight: FontWeight.bold, fontSize: 18.0)),
-                  Icon(
-                    iconData,
-                    color: Colors.blue,
-                  )
-                ],
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 10.0, bottom: 10.0),
-                child: Text(
-                  content,
-                  textAlign: TextAlign.start,
-                  style: const TextStyle(fontSize: 20),
-                ),
-              )
-            ],
-          ),
-        ));
-  }
-
-  getCard2(String header, IconData iconData) {
-    return Card(
-        shape: RoundedRectangleBorder(
-          side: const BorderSide(color: Colors.blueGrey, width: 3),
-          borderRadius: BorderRadius.circular(10.0),
-        ),
-        color: Colors.white,
-        child: Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            mainAxisSize: MainAxisSize.max,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              Row(
-                children: <Widget>[
-                  Text(header,
-                      style: const TextStyle(
-                          fontWeight: FontWeight.bold, fontSize: 18.0)),
-                  Icon(
-                    iconData,
-                    color: Colors.blue,
-                  )
-                ],
-              ),
-            ],
-          ),
-        ));
-  }
-
   ListView buildPhotos() {
     List<Widget> list = [];
     list.add(SizedBox(
@@ -167,8 +99,16 @@ class PlaceDetailState extends State<PlaceDetailPage> {
                   padding: const EdgeInsets.only(right: 5),
                   child: SizedBox(
                     height: 100,
-                    child: InkWell(
-                      onTap: () {},
+                    child: GestureDetector(
+                      onTap: () async {
+                        await showDialog(
+                            context: context,
+                            builder: (_) => imageDialog(
+                                'My Image',
+                                buildPhotoURL(
+                                    _place!.photos[index].photoReference),
+                                context));
+                      },
                       child: Image.network(
                         buildPhotoURL(_place!.photos[index].photoReference),
                       ),
@@ -226,7 +166,7 @@ class PlaceDetailState extends State<PlaceDetailPage> {
     return "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${photoReference}&key=${key}";
   }
 
-  newcard(String header, String content, IconData iconData) {
+  addressCard(String header, String content, IconData iconData) {
     return Card(
       clipBehavior: Clip.antiAlias,
       shape: RoundedRectangleBorder(
@@ -271,7 +211,7 @@ class PlaceDetailState extends State<PlaceDetailPage> {
     );
   }
 
-  newcardRate(String header, IconData iconData) {
+  ratingCard(String header, IconData iconData) {
     return Card(
       clipBehavior: Clip.antiAlias,
       shape: RoundedRectangleBorder(
@@ -363,6 +303,28 @@ class PlaceDetailState extends State<PlaceDetailPage> {
             listView,
           ],
         ),
+      ),
+    );
+  }
+
+  Widget imageDialog(text, path, context) {
+    return Dialog(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          const Padding(
+            padding: EdgeInsets.only(left: 8.0),
+          ),
+          SizedBox(
+            width: 220,
+            height: 200,
+            child: Image.network(
+              '$path',
+              fit: BoxFit.cover,
+            ),
+          ),
+        ],
       ),
     );
   }
