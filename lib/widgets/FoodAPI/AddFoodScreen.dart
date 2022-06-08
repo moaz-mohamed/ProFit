@@ -460,7 +460,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                     fat: fats,
                     quantity: foodQuantity.toDouble(),
                     id: FirebaseAuth.instance.currentUser!.uid);
-                     Navigator.pushAndRemoveUntil(
+                    Navigator.pushAndRemoveUntil(
                     context,
                     MaterialPageRoute(builder: (context) => TabBarPage()),
                     ModalRoute.withName('/success'));

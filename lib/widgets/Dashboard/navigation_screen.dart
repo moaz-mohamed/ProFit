@@ -37,7 +37,7 @@ class TabBarPage extends StatelessWidget {
   }
 
   Widget _createdBottomTabBar(BuildContext context) {
-    final bloc = BlocProvider.of<TabBarBloc>(context);
+     final  bloc = BlocProvider.of<TabBarBloc>(context);
     return BottomNavigationBar(
       currentIndex: bloc.currentIndex,
       items: [
