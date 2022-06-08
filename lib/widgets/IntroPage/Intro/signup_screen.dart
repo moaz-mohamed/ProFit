@@ -87,6 +87,24 @@ class _SignupScreenState extends State<SignupScreen> {
       }
     }
 
+    void signupPogress() async {
+      await AuthenticationService.snackbar("Processing....",
+          Icons.wifi_protected_setup_outlined, Colors.grey, context);
+      signup();
+      await Future.delayed(Duration(seconds: 3));
+      if (AuthenticationService.message == "Register success!") {
+        AuthenticationService.snackbar(AuthenticationService.message,
+            Icons.verified, Colors.green, context);
+      } else if (AuthenticationService.message ==
+          ('The account already exists for that email, try different email.')) {
+        AuthenticationService.snackbar(AuthenticationService.message,
+            Icons.warning_amber, Colors.amber, context);
+      }
+      await Future.delayed(Duration(seconds: 8));
+
+      ScaffoldMessenger.of(context).hideCurrentSnackBar();
+    }
+
     return Scaffold(
         backgroundColor: FitnessAppTheme.selectorGrayBackGround,
         appBar: AppBar(
@@ -236,26 +254,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       child:
                           const Text('Sign Up', style: TextStyle(fontSize: 24)),
                       onPressed: () async {
-                        signup();
-                        await Future.delayed(Duration(seconds: 2));
-                        if (AuthenticationService.message ==
-                            "Register success!") {
-                          AuthenticationService.snackbar(
-                              AuthenticationService.message,
-                              Icons.verified,
-                              Colors.green,
-                              context);
-                        } else if (AuthenticationService.message ==
-                            ('The account already exists for that email, try different email.')) {
-                          AuthenticationService.snackbar(
-                              AuthenticationService.message,
-                              Icons.warning_amber,
-                              Colors.amber,
-                              context);
-                        }
-                        await Future.delayed(Duration(seconds: 8));
-
-                        ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                        signupPogress();
                       },
                       style: ElevatedButton.styleFrom(
                         shape: RoundedRectangleBorder(

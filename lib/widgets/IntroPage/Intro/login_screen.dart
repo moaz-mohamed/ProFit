@@ -145,8 +145,13 @@ class _LoginScreenState extends State<LoginScreen> {
                 ElevatedButton(
                     child: const Text('LOGIN'),
                     onPressed: () async {
+                      await AuthenticationService.snackbar(
+                          "Processing....",
+                          Icons.wifi_protected_setup_outlined,
+                          Colors.grey,
+                          context);
                       signIn();
-                      await Future.delayed(Duration(seconds: 2));
+                      await Future.delayed(Duration(seconds: 3));
                       if (AuthenticationService.message == "Login success!") {
                         AuthenticationService.snackbar(
                             AuthenticationService.message,

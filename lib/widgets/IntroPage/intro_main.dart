@@ -5,6 +5,7 @@ import 'package:profit/services/food_recommendation.dart';
 import 'package:profit/themes/ThemeUI.dart';
 import 'package:profit/utils/calculations/calculate_calories.dart';
 import 'package:profit/widgets/Dashboard/Screens/HomeScreen/first_dashboard.dart';
+import 'package:profit/widgets/Dashboard/Screens/my_account.dart';
 import 'package:profit/widgets/IntroPage/Intro/activity_level.dart';
 import 'package:profit/widgets/IntroPage/Intro/goal_achieved_form.dart';
 import 'package:profit/widgets/IntroPage/Intro/login_screen.dart';
@@ -73,6 +74,8 @@ class _IntroPageState extends State<IntroPage> {
         routes: {
           // When navigating to the "/" route, build the HomeScreen widget.
           '/': (context) => OnBoardingScreen(),
+          '/myaccount': (context) => MyAccountScreen(),
+
           '/goal': (context) => GoalAchievedForm(
                 // It is the form of the users goal whether it to lose/maintenance/build muscle.
                 onComplete: (int goalAchieved) {

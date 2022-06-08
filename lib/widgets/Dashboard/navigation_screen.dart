@@ -9,6 +9,7 @@ import 'package:profit/widgets/Dashboard/Screens/HomeScreen/first_dashboard.dart
 import 'package:profit/widgets/Dashboard/Screens/HomeScreen/home_screen.dart';
 import 'package:profit/widgets/Dashboard/Screens/HomeScreen/workout_screen.dart';
 import 'package:profit/widgets/Dashboard/Screens/FoodRecommendationScreen/recommendation_input.dart';
+import 'package:profit/widgets/Dashboard/Screens/my_account.dart';
 import 'package:profit/widgets/Dashboard/Screens/my_drawer_header.dart';
 import 'package:profit/widgets/Dashboard/Screens/steps_screen.dart';
 import 'package:profit/widgets/Dashboard/Screens/WorkoutScreen/workout_screen.dart';
@@ -77,13 +78,24 @@ class _TabBarPageState extends State<TabBarPage> {
 
   Widget myDrawerList() {
     return Container(
-      height: 50,
-      padding: const EdgeInsets.only(
-        top: 10,
-      ),
-      child: Column(
+      child: Wrap(
         children: [
-          logoutbutton(),
+          ListTile(
+            leading: const Icon(Icons.person),
+            title: const Text("My Account"),
+            onTap: () {
+              // Navigator.pushNamed(context, '/myaccount');
+              Navigator.pushNamed(context, '/myaccount');
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.logout),
+            title: Text("Sign Out"),
+            onTap: () {
+              auth.signOut();
+              checkLogout();
+            },
+          ),
         ],
       ),
     );
@@ -148,42 +160,5 @@ class _TabBarPageState extends State<TabBarPage> {
       FoodRecommendationScreen()
     ];
     return children[index];
-  }
-
-  logoutbutton() {
-    return Material(
-      child: InkWell(
-        onTap: () {
-          auth.signOut();
-          checkLogout();
-        },
-        child: Padding(
-          padding: EdgeInsets.all(5.0),
-          child: Container(
-            child: Row(
-              children: const [
-                Expanded(
-                  child: Icon(
-                    Icons.logout_rounded,
-                    size: 20,
-                    color: Colors.black,
-                  ),
-                ),
-                Expanded(
-                  flex: 3,
-                  child: Text(
-                    "Logout",
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 16,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
   }
 }
