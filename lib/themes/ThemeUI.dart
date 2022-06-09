@@ -373,4 +373,47 @@ class FitnessAppTheme {
     fontSize: 14,
     color: Colors.black,
   );
+
+  // Upload workout screen fonts
+  static const TextStyle workoutTitle = TextStyle(
+    fontFamily: fontName,
+    fontWeight: FontWeight.w600,
+    fontSize: 26,
+    color: Colors.black,
+  );
+
+  static const TextStyle repsCountTitle = TextStyle(
+    fontFamily: fontName,
+    fontWeight: FontWeight.w500,
+    fontSize: 26,
+    color: Colors.black,
+  );
+
+  static const TextStyle repsCountValue = TextStyle(
+    fontFamily: fontName,
+    fontWeight: FontWeight.w400,
+    fontSize: 66,
+    color: Colors.blue,
+  );
+
+  static const TextStyle repsCountUnit = TextStyle(
+    fontFamily: fontName,
+    fontWeight: FontWeight.w400,
+    fontSize: 26,
+    color: Colors.black45,
+  );
+
+  static const TextStyle upload = TextStyle(
+    fontFamily: fontName,
+    fontWeight: FontWeight.w600,
+    fontSize: 24,
+    color: Colors.black,
+  );
+
+  static const TextStyle instructions = TextStyle(
+    fontFamily: fontName,
+    fontWeight: FontWeight.w400,
+    fontSize: 14,
+    color: Colors.black,
+  );
 }
