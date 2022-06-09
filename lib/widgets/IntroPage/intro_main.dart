@@ -1,6 +1,7 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:profit/services/auth.dart';
 import 'package:profit/services/food_recommendation.dart';
 import 'package:profit/themes/ThemeUI.dart';
 import 'package:profit/utils/calculations/calculate_calories.dart';
@@ -56,9 +57,10 @@ class _IntroPageState extends State<IntroPage> {
 
   @override
   Widget build(BuildContext context) {
+    AuthenticationService.checkAuthentication(context);
     FoodRecommendationServiceAPI()
         .getFoodRecommendation({"Diet": [], "Disease": [], "Nutirent": []});
-    // checkAuthentication();
+    //AuthenticationService.checkAuthentication(context);
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).requestFocus(
@@ -102,9 +104,9 @@ class _IntroPageState extends State<IntroPage> {
                 setState(() => _activityLevel = level);
                 calories = CalculateCalories(
                     _goalAchieved,
-                    _ageController,
-                    _heightController,
-                    _weightController,
+                    _ageController.text,
+                    _heightController.text,
+                    _weightController.text,
                     _gender,
                     _activityLevel);
               }),

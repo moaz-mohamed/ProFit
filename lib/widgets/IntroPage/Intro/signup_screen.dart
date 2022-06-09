@@ -91,11 +91,7 @@ class _SignupScreenState extends State<SignupScreen> {
       await AuthenticationService.snackbar("Processing....",
           Icons.wifi_protected_setup_outlined, Colors.grey, context);
       signup();
-      await Future.delayed(Duration(seconds: 3));
-      if (AuthenticationService.message == "Register success!") {
-        AuthenticationService.snackbar(AuthenticationService.message,
-            Icons.verified, Colors.green, context);
-      } else if (AuthenticationService.message ==
+      if (AuthenticationService.message ==
           ('The account already exists for that email, try different email.')) {
         AuthenticationService.snackbar(AuthenticationService.message,
             Icons.warning_amber, Colors.amber, context);
@@ -178,7 +174,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       ),
                     ),
                     validator: (value) {
-                      if (!Validators.validateName(value!)) {
+                      if (!Validators.validateName(value!.trim())) {
                         return "Enter Correct Name";
                       } else {
                         return null;

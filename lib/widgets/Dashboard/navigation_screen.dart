@@ -26,6 +26,7 @@ class TabBarPage extends StatefulWidget {
 
 class _TabBarPageState extends State<TabBarPage> {
   AuthenticationService auth = AuthenticationService();
+
   checkLogout() async {
     FirebaseAuth.instance.authStateChanges().listen((_user) {
       if (_user == null) {
@@ -81,11 +82,15 @@ class _TabBarPageState extends State<TabBarPage> {
       child: Wrap(
         children: [
           ListTile(
-            leading: const Icon(Icons.person),
-            title: const Text("My Account"),
+            leading: Icon(Icons.person),
+            title: Text("My Account"),
             onTap: () {
-              // Navigator.pushNamed(context, '/myaccount');
-              Navigator.pushNamed(context, '/myaccount');
+              Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(builder: (context) => MyAccountScreen()),
+                  (Route<dynamic> route) => false);
+              // Navigator.push(context,
+              //     MaterialPageRoute(builder: (context) => MyAccountScreen()));
             },
           ),
           ListTile(

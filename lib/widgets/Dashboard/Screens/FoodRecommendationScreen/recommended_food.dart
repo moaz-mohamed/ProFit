@@ -6,7 +6,6 @@ import 'package:profit/services/food_recommendation.dart';
 class RecommendedFood extends StatefulWidget {
   const RecommendedFood({Key? key, required this.input}) : super(key: key);
   final Map<String, dynamic> input;
-  
 
   @override
   State<RecommendedFood> createState() => _RecommendedFoodState();
@@ -33,38 +32,39 @@ class _RecommendedFoodState extends State<RecommendedFood> {
 
   Widget foodBuilder() {
     return Material(
-      
       child: FutureBuilder(
           future: foodRecommendationItems,
           builder: (context, AsyncSnapshot snapshot) {
             if (snapshot.hasData) {
               return Scaffold(
-              appBar:  AppBar(
-              title: const Text("Food Recommendation"),
-              centerTitle: true,
-              backgroundColor: Colors.blue,
-            ),
+                appBar: AppBar(
+                  title: const Text("Food Recommendation"),
+                  centerTitle: true,
+                  backgroundColor: Colors.blue,
+                ),
                 body: ListView.builder(
                     padding: const EdgeInsets.all(10.0),
                     itemCount: snapshot.data!.length,
                     itemBuilder: (context, index) {
                       return Card(
                         shape: RoundedRectangleBorder(
-                          side:
-                              BorderSide(color: Colors.blueGrey.shade100, width: 4),
+                          side: BorderSide(
+                              color: Colors.blueGrey.shade100, width: 4),
                           borderRadius: BorderRadius.circular(10.0),
                         ),
                         child: ListTile(
                           leading: Image.network(foodPhoto),
                           title: Text(
-                            snapshot.data[index].name,
+                            snapshot.data[index].names,
                             style: const TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontFamily: "SourceSansPro",
                                 fontSize: 18.0,
                                 color: Colors.blue),
                           ),
-                          subtitle: Text("Serving Size: ${snapshot.data[index].servingSizeG} gm\n" "Calories: ${snapshot.data[index].calories}"),
+                          subtitle: Text(
+                              "Serving Size: ${snapshot.data[index].servingSizeG} gm\n"
+                              "Calories: ${snapshot.data[index].calories}"),
                           isThreeLine: true,
                           trailing: Icon(Icons.more_vert),
                         ),
@@ -72,16 +72,16 @@ class _RecommendedFoodState extends State<RecommendedFood> {
                     }),
               );
             } else {
-             // const double size =  MediaQuery.of(context).size.width;
-              return  Scaffold(
-               appBar:  AppBar(
-                title: const Text("Loading......."),
-                centerTitle: true,
-                backgroundColor: Colors.blue,
-              ),
-                body:  Center(
+              // const double size =  MediaQuery.of(context).size.width;
+              return Scaffold(
+                appBar: AppBar(
+                  title: const Text("Loading......."),
+                  centerTitle: true,
+                  backgroundColor: Colors.blue,
+                ),
+                body: Center(
                   child: SizedBox(
-                    width:  MediaQuery.of(context).size.width/2,
+                    width: MediaQuery.of(context).size.width / 2,
                     child: const LoadingIndicator(
                       indicatorType: Indicator.pacman,
                       colors: [Colors.blue, Colors.red, Colors.yellow],

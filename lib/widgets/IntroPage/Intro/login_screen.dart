@@ -152,13 +152,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           context);
                       signIn();
                       await Future.delayed(Duration(seconds: 3));
-                      if (AuthenticationService.message == "Login success!") {
-                        AuthenticationService.snackbar(
-                            AuthenticationService.message,
-                            Icons.verified,
-                            Colors.green,
-                            context);
-                      } else if (AuthenticationService.message.isNotEmpty) {
+                      if (AuthenticationService.message.isNotEmpty) {
                         AuthenticationService.snackbar(
                             AuthenticationService.message,
                             Icons.warning_amber,

@@ -1,7 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:profit/main.dart';
 import 'package:profit/services/firestore_database.dart';
+import 'package:profit/services/validate.dart';
+import 'package:profit/themes/ThemeUI.dart';
+import 'package:profit/utils/calculations/calculate_calories.dart';
+
+import '../navigation_screen.dart';
 
 class MyAccountScreen extends StatefulWidget {
   @override
@@ -9,102 +16,250 @@ class MyAccountScreen extends StatefulWidget {
 }
 
 class _MyAccountScreenState extends State<MyAccountScreen> {
-  TextEditingController _nameController = TextEditingController();
-  // TextEditingController _genderController = TextEditingController();
-  // TextEditingController _ageController = TextEditingController();
-
-  // List userProfilesList = [];
-
-  // String userID = "";
+  DatabaseService dbService = DatabaseService();
+  final formGlobalKey = GlobalKey<FormState>();
+  final _nameController = TextEditingController();
+  final _ageController = TextEditingController();
+  final _weightController = TextEditingController();
+  final _heightController = TextEditingController();
 
   FirebaseAuth auth = FirebaseAuth.instance;
-  String username = "";
-  String useremail = "";
-  String userage = "";
+  String? userId;
 
-  getData() async {
-    String? name;
-    String? email;
-    String? age;
-    String userId = auth.currentUser!.uid;
-    DocumentReference doc =
-        FirebaseFirestore.instance.collection("users").doc(userId);
+  String userName = "";
+  String userWeight = "";
+  String userAge = "";
+  String userHeight = "";
 
-    await doc.get().then((value) {
-      name = value.get('name').toString();
-      email = value.get('email').toString();
-      age = value.get('age').toString();
-    });
-
-    setState(() => username = name!);
-    setState(() => useremail = email!);
-    setState(() => userage = age!);
+  getInitialData() async {
+    await dbService.getFields();
+    // updateCalories();
+    updateState();
   }
 
   @override
   void initState() {
-    getData();
+    userId = auth.currentUser!.uid;
+    getInitialData();
     super.initState();
   }
-
-  // fetchuserdata() async {
-  //    await doc.get().then((value) {
-  //     name = value.get('name').toString();
-  //     email = value.get('email').toString();
-  //   });
-  //   if (username == null) {
-  //     print('Unable to retrieve');
-  //   } else {
-  //     setState(() {
-  //       username = name!;
-  //     });
-  //   }
-  // }
-
-  // updateData(String name, String userID) async {
-  //   await DatabaseService().updateUserList(name, userID);
-  //   // fetchDatabaseList();
-  // }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
           title: Text("My info"),
-          automaticallyImplyLeading: false,
+          // automaticallyImplyLeading: false,
         ),
-        body: ListView(children: <Widget>[
-          Card(
-            child: ListTile(
-              title: Text("Name"),
-              subtitle: Text(username),
-              leading: const CircleAvatar(
-                  // child: Image(
-                  //   image: AssetImage('assets/Profile_Image.png'),
-                  // ),
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              card("Name", userName, Icons.person_rounded, _nameController),
+              card("Age", userAge, Icons.calendar_today, _ageController),
+              card("Weight", userWeight + " kg", Icons.fitness_center_sharp,
+                  _weightController),
+              card("Height", userHeight + " cm", Icons.height_outlined,
+                  _heightController),
+              const SizedBox(
+                height: 100,
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).pushAndRemoveUntil(
+                      MaterialPageRoute(builder: (context) => MyApp()),
+                      (Route<dynamic> route) => false);
+                },
+                child: const Padding(
+                  padding: EdgeInsets.all(15.0),
+                  child: Flexible(
+                    child: Text(
+                      "Submit",
+                      style: TextStyle(fontSize: 25),
+                    ),
                   ),
-              //  trailing: Text('${userProfilesList[index]['score']}'),
-            ),
+                ),
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.blue,
+                  minimumSize: const Size.fromHeight(50),
+                ),
+              )
+            ],
           ),
-          Card(
-            child: ListTile(
-              title: Text("Email"),
-              subtitle: Text(useremail),
-              leading: const CircleAvatar(
-                backgroundColor: Colors.red,
-              ),
-              //  trailing: Text('${userProfilesList[index]['score']}'),
-            ),
-          ),
-          Card(
-            child: ListTile(
-              title: Text("Age"),
-              subtitle: Text(userage),
-              leading: const CircleAvatar(
-                backgroundColor: Colors.green,
-              ),
-            ),
-          ),
-        ]));
+        ));
   }
+
+  openDialogueBox(BuildContext context, String attribute,
+      TextEditingController controller) {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          if (attribute == 'Name') {
+            return AlertDialog(
+              title: Text('Edit ' + attribute),
+              content: SingleChildScrollView(
+                child: Form(
+                  key: formGlobalKey,
+                  child: Column(
+                    children: [
+                      TextFormField(
+                          controller: controller,
+                          decoration: InputDecoration(hintText: attribute),
+                          validator: (value) {
+                            if (!Validators.validateName(value!.trim())) {
+                              return "Enter Correct Name";
+                            } else {
+                              return null;
+                            }
+                          }),
+                    ],
+                  ),
+                ),
+              ),
+              actions: [
+                ElevatedButton(
+                  onPressed: () async {
+                    updatevalues(attribute.toLowerCase(), controller.text);
+
+                    final formKey1 = formGlobalKey.currentState;
+                    if (formKey1!.validate()) {
+                      formKey1.save();
+                      Navigator.pop(context);
+                      //controller.clear();
+                    }
+                  },
+                  child: Text('Edit'),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: Text('Cancel'),
+                )
+              ],
+            );
+          } else {
+            return AlertDialog(
+              title: Text('Edit ' + attribute),
+              content: SingleChildScrollView(
+                child: Form(
+                  key: formGlobalKey,
+                  child: Column(children: [
+                    numberField(controller, attribute),
+                  ]),
+                ),
+              ),
+              actions: [
+                ElevatedButton(
+                  onPressed: () async {
+                    updatevalues(attribute.toLowerCase(), controller.text);
+                    final formKey1 = formGlobalKey.currentState;
+                    if (formKey1!.validate()) {
+                      formKey1.save();
+                      Navigator.pop(context);
+                      //controller.clear();
+                    }
+                  },
+                  child: Text('Edit'),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: Text('Cancel'),
+                )
+              ],
+            );
+          }
+        });
+  }
+
+  updatevalues(String field, String text) async {
+    final formKey = formGlobalKey.currentState;
+    if (formKey!.validate()) {
+      formKey.save();
+      final docUser =
+          FirebaseFirestore.instance.collection('users').doc(userId);
+      docUser.update({
+        field: text.trim(),
+      });
+      await dbService.getFields();
+      dbService.updateCalories();
+      dbService.resetMeals(userId!);
+      updateState2();
+    }
+  }
+
+  card(String attribute, String attributeValue, IconData iconData,
+      TextEditingController controller) {
+    return Card(
+      elevation: 7,
+      child: ListTile(
+        title: Text(attribute,
+            style: const TextStyle(color: Colors.black, fontSize: 18.0)),
+        subtitle: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 2),
+          child: Text(attributeValue,
+              style:
+                  const TextStyle(fontSize: 15, fontStyle: FontStyle.italic)),
+        ),
+        leading: Icon(
+          iconData,
+          color: Colors.grey,
+        ),
+        trailing: ElevatedButton(
+          onPressed: () {
+            openDialogueBox(context, attribute, controller);
+          },
+          child: const Icon(
+            Icons.edit,
+            color: Colors.white,
+          ),
+        ),
+      ),
+    );
+  }
+
+  numberField(TextEditingController controler, String fieldName) {
+    return TextFormField(
+        controller: controler,
+        decoration: InputDecoration(hintText: fieldName),
+        keyboardType: TextInputType.number,
+        inputFormatters: [
+          FilteringTextInputFormatter.allow(RegExp("[1-9][0-9]*")),
+          FilteringTextInputFormatter.digitsOnly
+        ],
+        validator: (value) {
+          if (value == null || value.isEmpty) {
+            return fieldName + ' is required';
+          }
+        });
+  }
+
+  updateState() {
+    setState(() {
+      userName = dbService.updatedName!;
+      userAge = dbService.updatedage!;
+      userWeight = dbService.updatedWeight!;
+      userHeight = dbService.updatedheight!;
+    });
+  }
+
+  updateState2() {
+    setState(() {
+      if (_nameController.text.isNotEmpty) {
+        userName = _nameController.text;
+      }
+      if (_heightController.text.isNotEmpty) {
+        userHeight = _heightController.text;
+      }
+      if (_weightController.text.isNotEmpty) {
+        userWeight = _weightController.text;
+      }
+      if (_ageController.text.isNotEmpty) {
+        userAge = _ageController.text;
+      }
+    });
+  }
+
+  //resetAlldata() {}
 }
