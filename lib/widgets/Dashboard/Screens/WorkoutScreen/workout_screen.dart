@@ -96,7 +96,7 @@ class WorkoutsPage extends StatelessWidget {
                       ),
                       Image.asset(
                         'assets/workout_screen/bicep.gif',
-                        scale: 8,
+                        scale: 10,
                       ),
                     ],
                   ),
@@ -173,7 +173,7 @@ class WorkoutsPage extends StatelessWidget {
                       ),
                       Image.asset(
                         'assets/workout_screen/shoulder_press.gif',
-                        scale: 8,
+                        scale: 10,
                       ),
                     ],
                   ),
@@ -249,7 +249,7 @@ class WorkoutsPage extends StatelessWidget {
                       ),
                       Image.asset(
                         'assets/workout_screen/squats.gif',
-                        scale: 8,
+                        scale: 10,
                       ),
                     ],
                   ),
