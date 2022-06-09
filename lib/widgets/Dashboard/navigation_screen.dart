@@ -88,7 +88,7 @@ class _TabBarPageState extends State<TabBarPage> {
   }
 
   Widget _createdBottomTabBar(BuildContext context) {
-    final bloc = BlocProvider.of<TabBarBloc>(context);
+     final  bloc = BlocProvider.of<TabBarBloc>(context);
     return BottomNavigationBar(
       currentIndex: bloc.currentIndex,
       items: [

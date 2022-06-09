@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:profit/services/food_recommendation.dart';
 import 'package:profit/themes/ThemeUI.dart';
 import 'package:profit/utils/calculations/calculate_calories.dart';
-import 'package:profit/widgets/Dashboard/Screens/HomeScreen/first_dashboard.dart';
 import 'package:profit/widgets/IntroPage/Intro/activity_level.dart';
 import 'package:profit/widgets/IntroPage/Intro/goal_achieved_form.dart';
 import 'package:profit/widgets/IntroPage/Intro/login_screen.dart';
@@ -12,7 +11,6 @@ import 'package:profit/widgets/IntroPage/Intro/loginsucess.dart';
 import 'package:profit/widgets/IntroPage/Intro/onboarding_screen.dart';
 import 'package:profit/widgets/IntroPage/Intro/physical_paramters_form.dart';
 import 'package:profit/widgets/IntroPage/Intro/signup_screen.dart';
-import 'package:profit/widgets/Dashboard/navigation_screen.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -55,6 +53,7 @@ class _IntroPageState extends State<IntroPage> {
  
   checkAuthentication() async {
     FirebaseAuth.instance.authStateChanges().listen((_user) {
+      print(_user);
       if (_user != null) {
         Navigator.push(
           context,
@@ -65,14 +64,23 @@ class _IntroPageState extends State<IntroPage> {
           ),
         );
       }
+      else{
+       Navigator.popUntil(context, (route) => route.isFirst);
+       
+      }
     });
   }
-
+ @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    checkAuthentication();
+  }
   @override
   Widget build(BuildContext context) {
      FoodRecommendationServiceAPI()
         .getFoodRecommendation({"Diet": [], "Disease": [], "Nutirent": []});
-    checkAuthentication();
+ 
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).requestFocus(
