@@ -17,6 +17,7 @@ class _FoodScreenState extends State<FoodScreen> {
   @override
   Widget build(BuildContext foodScreenContext) {
     return Scaffold(
+      backgroundColor: Colors.white,
         appBar: AppBar(
           title: const Text('Search'),
           backgroundColor: Colors.blueAccent,

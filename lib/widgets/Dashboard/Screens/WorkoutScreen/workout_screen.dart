@@ -1,4 +1,3 @@
-import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:profit/themes/ThemeUI.dart';
@@ -110,20 +109,7 @@ class WorkoutsPage extends StatelessWidget {
                     side: MaterialStateProperty.all(const BorderSide(color: Colors.blue, width: 2)),
                     // overlayColor: MaterialStateProperty.all(Colors.black12),
                   ),
-                  onPressed: () async {
-                    late List<CameraDescription> cameras;
-                    try {
-                      cameras = await availableCameras();
-                    } on CameraException catch (e) {
-                      print('Error: $e.code\nError Message: $e.message');
-                    }
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => BicepCamera(cameras: cameras),
-                      ),
-                    );
-                  },
+                  onPressed: null,
                 ),
                 Divider(
                   color: Colors.black,

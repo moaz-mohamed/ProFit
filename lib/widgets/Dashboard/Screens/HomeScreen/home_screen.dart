@@ -49,7 +49,7 @@ class HomePage extends StatelessWidget {
                               // color: Colors.green,
                               child: CaloriesIndicator(),
                             ),
-                    
+
                             ///--->>> Left container
                             Container(
                               height: constraints.maxHeight * 0.6,
@@ -110,15 +110,15 @@ class HomePage extends StatelessWidget {
               },
             ),
           ),
-    
+
           ///--->>> Meals buttons
           Container(
             height: MediaQuery.of(context).size.height * 0.5,
             width: MediaQuery.of(context).size.width,
             child: Dashboard(),
-    
+
             ///--->>> Fangary's widget goes in here as a scrollable list under the indicators
-    
+
             ///
           ),
           // Container(

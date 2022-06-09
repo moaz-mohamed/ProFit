@@ -58,7 +58,6 @@ class _TabBarPageState extends State<TabBarPage> {
                 ),
               ),
             ),
-
             body: _createBody(context,
                 bloc.currentIndex), //return the index of the screen i want to route
             backgroundColor: Colors.white,
