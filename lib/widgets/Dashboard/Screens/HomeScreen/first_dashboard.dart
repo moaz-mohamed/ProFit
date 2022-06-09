@@ -134,10 +134,11 @@ class Dashboard extends StatelessWidget {
                                         title: Text(
                                             dinner[curr]['name'].toString()),
                                         subtitle: Text(dinner[curr]
-                                                ['burnedCalories']
-                                            .toString()),
+                                                    ['burnedCalories']
+                                                .toString() +
+                                            " kCal"),
                                         trailing: IconButton(
-                                          icon: Icon(Icons.delete),
+                                          icon: Icon(Icons.delete_outline),
                                           onPressed: () {
                                             DatabaseService()
                                                 .deleteWorkoutFromFirestoreUser(
@@ -188,7 +189,7 @@ class Dashboard extends StatelessWidget {
                               },
                             );
                           } else {
-                            return Text("No Data");
+                            return Text(" ");
                           }
                         }),
                   ]),
