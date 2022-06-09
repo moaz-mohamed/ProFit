@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:profit/themes/ThemeUI.dart';
-
-// import 'package:intent/intent.dart';
 import 'package:profit/widgets/Dashboard/Screens/WorkoutScreen/biceps_curl.dart';
 
 class WorkoutsPage extends StatelessWidget {
