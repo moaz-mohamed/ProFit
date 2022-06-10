@@ -148,7 +148,7 @@ class _WorkoutScreenState extends State<WorkoutScreen> {
                           name: state.workout.toString(),
                           burnedCalories: double.parse(
                               (double.parse(state.workoutCalculation)
-                                  .toStringAsFixed(2))),
+                                  .toStringAsFixed(0))),
                           duration: double.parse(_text!),
                         );
                         Navigator.pushAndRemoveUntil(

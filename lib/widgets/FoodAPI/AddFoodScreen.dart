@@ -1,17 +1,12 @@
-import 'dart:ffi';
-
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:profit/bloc/postapi/post_food_item_bloc.dart';
 import 'package:profit/bloc/postapi/post_food_item_event.dart';
 import 'package:profit/bloc/postapi/post_food_item_state.dart';
-import 'package:profit/widgets/Dashboard/Screens/HomeScreen/home_screen.dart';
 import 'package:profit/widgets/Dashboard/navigation_screen.dart';
-import 'package:profit/widgets/FoodAPI/fonts.dart';
 import 'package:profit/services/firestore_database.dart';
-import 'package:profit/widgets/IntroPage/Intro/login_screen.dart';
+import 'package:profit/themes/ThemeUI.dart';
 
 class AddFoodScreen extends StatefulWidget {
   late String foodLabel;
@@ -81,7 +76,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
         foregroundColor: Colors.black,
         title: Text(
           "Add Food",
-          style: fonts.AppBar1,
+          style: FitnessAppTheme.AppBar1,
         ),
         centerTitle: true,
       ),
@@ -93,7 +88,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
             pinned: true,
             title: Text(
               widget.foodLabel,
-              style: fonts.silverAppBar1,
+              style: FitnessAppTheme.silverAppBar1,
             ),
           ),
           // BlocBuilder<CalculateFoodBloc, FoodItemState>(
@@ -121,34 +116,34 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                 children: <Widget>[
                   Text(
                     "Total Calories",
-                    style: fonts.totalCaloriesTitle,
+                    style: FitnessAppTheme.totalCaloriesTitle,
                   ),
                   BlocBuilder<CalculateFoodBloc, FoodItemState>(
                     builder: (context, state) {
                       if (state is FoodItemLoading) {
                         return Text(
                           "",
-                          style: fonts.totalCaloriesNumber,
+                          style: FitnessAppTheme.totalCaloriesNumber,
                         );
                       } else if (state is FoodItemLoaded) {
                         totalCalories =
                             double.parse(state.items.calories.toString());
                         return Text(
                           state.items.calories.toString(),
-                          style: fonts.totalCaloriesNumber,
+                          style: FitnessAppTheme.totalCaloriesNumber,
                         );
                       } else if (state is FoodItemError) {
                         return Text(state.message);
                       }
                       return Text(
                         "",
-                        style: fonts.totalCaloriesNumber,
+                        style: FitnessAppTheme.totalCaloriesNumber,
                       );
                     },
                   ),
                   Text(
                     "KCal",
-                    style: fonts.totalCaloriesUnit,
+                    style: FitnessAppTheme.totalCaloriesUnit,
                   ),
                 ],
               ),
@@ -171,7 +166,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                     ),
                     child: Text(
                       "Quantity",
-                      style: fonts.quantityText,
+                      style: FitnessAppTheme.quantityText,
                     ),
                   ),
                   Container(
@@ -183,7 +178,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                       maxLines: 1,
                       showCursor: true,
                       keyboardType: TextInputType.number,
-                      style: fonts.textFieldText,
+                      style: FitnessAppTheme.textFieldText,
                       decoration: InputDecoration(
                         icon: Image.asset(
                           "assets/add_food_screen/scale.png",
@@ -192,7 +187,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                         constraints: BoxConstraints(
                             maxWidth: MediaQuery.of(context).size.width * 0.8),
                         hintText: "Enter quantity in grams",
-                        hintStyle: fonts.textFieldHint,
+                        hintStyle: FitnessAppTheme.textFieldHint,
                       ),
                       onChanged: (String value) {
                         if (value == "") {
@@ -225,7 +220,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                     ),
                     child: Text(
                       "Nutrition Facts",
-                      style: fonts.nutritionFactsText,
+                      style: FitnessAppTheme.nutritionFactsText,
                     ),
                   ),
                   Container(
@@ -253,7 +248,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                                 ),
                                 Text(
                                   " Carbs",
-                                  style: fonts.nutrientsText,
+                                  style: FitnessAppTheme.nutrientsText,
                                 ),
                               ],
                             ),
@@ -262,7 +257,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                                 if (state is FoodItemLoading) {
                                   return Text(
                                     "",
-                                    style: fonts.nutrientsValue,
+                                    style: FitnessAppTheme.nutrientsValue,
                                   );
                                 } else if (state is FoodItemLoaded) {
                                   carbs = double.parse(state
@@ -271,14 +266,14 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                                       .nutrientsValuesMap["Carbs"]);
                                   return Text(
                                     "${state.items.totalNutrients!.nutrientsValuesMap["Carbs"]} gm",
-                                    style: fonts.nutrientsValue,
+                                    style: FitnessAppTheme.nutrientsValue,
                                   );
                                 } else if (state is FoodItemError) {
                                   return Text(state.message);
                                 }
                                 return Text(
                                   "",
-                                  style: fonts.nutrientsValue,
+                                  style: FitnessAppTheme.nutrientsValue,
                                 );
                               },
                             ),
@@ -295,7 +290,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                                 ),
                                 Text(
                                   " Protein",
-                                  style: fonts.nutrientsText,
+                                  style: FitnessAppTheme.nutrientsText,
                                 ),
                               ],
                             ),
@@ -304,7 +299,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                                 if (state is FoodItemLoading) {
                                   return Text(
                                     "",
-                                    style: fonts.nutrientsValue,
+                                    style: FitnessAppTheme.nutrientsValue,
                                   );
                                 } else if (state is FoodItemLoaded) {
                                   protein = double.parse(state
@@ -313,14 +308,14 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                                       ?.nutrientsValuesMap["Protein"]);
                                   return Text(
                                     "${state.items.totalNutrients?.nutrientsValuesMap["Protein"]} gm",
-                                    style: fonts.nutrientsValue,
+                                    style: FitnessAppTheme.nutrientsValue,
                                   );
                                 } else if (state is FoodItemError) {
                                   return Text(state.message);
                                 }
                                 return Text(
                                   "",
-                                  style: fonts.nutrientsValue,
+                                  style: FitnessAppTheme.nutrientsValue,
                                 );
                               },
                             ),
@@ -337,7 +332,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                                 ),
                                 Text(
                                   " Fats",
-                                  style: fonts.nutrientsText,
+                                  style: FitnessAppTheme.nutrientsText,
                                 ),
                               ],
                             ),
@@ -346,21 +341,21 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                                 if (state is FoodItemLoading) {
                                   return Text(
                                     "",
-                                    style: fonts.nutrientsValue,
+                                    style: FitnessAppTheme.nutrientsValue,
                                   );
                                 } else if (state is FoodItemLoaded) {
                                   fats = double.parse(state.items.totalNutrients
                                       ?.nutrientsValuesMap["Fats"]);
                                   return Text(
                                     "${state.items.totalNutrients?.nutrientsValuesMap["Fats"]} gm",
-                                    style: fonts.nutrientsValue,
+                                    style: FitnessAppTheme.nutrientsValue,
                                   );
                                 } else if (state is FoodItemError) {
                                   return Text(state.message);
                                 }
                                 return Text(
                                   "",
-                                  style: fonts.nutrientsValue,
+                                  style: FitnessAppTheme.nutrientsValue,
                                 );
                               },
                             ),
@@ -392,26 +387,26 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                     children: <Widget>[
                       Text(
                         widget.nutrients[index],
-                        style: fonts.nutrientsList,
+                        style: FitnessAppTheme.nutrientsList,
                       ),
                       BlocBuilder<CalculateFoodBloc, FoodItemState>(
                         builder: (context, state) {
                           if (state is FoodItemLoading) {
                             return Text(
                               "",
-                              style: fonts.nutrientsListValue,
+                              style: FitnessAppTheme.nutrientsListValue,
                             );
                           } else if (state is FoodItemLoaded) {
                             return Text(
                               "${state.items.totalNutrients!.nutrientsValuesMap.values.toList()[index]}",
-                              style: fonts.nutrientsListValue,
+                              style: FitnessAppTheme.nutrientsListValue,
                             );
                           } else if (state is FoodItemError) {
                             return Text(state.message);
                           }
                           return Text(
                             "",
-                            style: fonts.nutrientsListValue,
+                            style: FitnessAppTheme.nutrientsListValue,
                           );
                         },
                       ),

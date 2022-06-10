@@ -16,8 +16,10 @@ class CarbsIndicator extends StatelessWidget {
               if (snapshot.hasData) {
                 var data = snapshot.data as DocumentSnapshot;
                 var remainingCarbs = double.parse((data['remainingCarbs']).toString()).toInt();
-                var recoCarbs = (((double.parse((data['calories']).toString()).toDouble()) * (40 / 100)) / 4).toInt();
+                var recoCarbs =
+                    (((double.parse((data['calories']).toString()).toDouble()) * (40 / 100)) / 4).toInt();
                 double carbsPercent = (recoCarbs - remainingCarbs) / recoCarbs;
+                carbsPercent <= 1 ? carbsPercent = carbsPercent : carbsPercent = 1;
                 return Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
