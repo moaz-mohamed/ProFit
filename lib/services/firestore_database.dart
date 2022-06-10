@@ -51,10 +51,10 @@ class DatabaseService {
 
   updateCalories() async {
     final docUser = FirebaseFirestore.instance.collection('users').doc(userId);
-    double? newRemainCalories = updatedRemainingCalories;
-    double? newRemainProtien = updatedRemainingProtein;
-    double? newRemainFats = updatedRemainingFats;
-    double? newRemainCarbs = updatedRemainingCarbs;
+    double? newRemainCalories;
+    double? newRemainProtien;
+    double? newRemainFats;
+    double? newRemainCarbs;
     double? eatenCalories;
     double? totalFats;
     double? totalCarbs;

@@ -9,7 +9,6 @@ class PushNotification {
   Future<void> init() async {
     if (!initialized) {
       String? token = await _firebaseMessaging.getToken();
-      print("my token =$token");
       initialized = true;
     }
   }

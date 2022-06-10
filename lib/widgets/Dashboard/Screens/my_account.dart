@@ -2,11 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:profit/main.dart';
 import 'package:profit/services/firestore_database.dart';
 import 'package:profit/services/validate.dart';
 import 'package:profit/themes/ThemeUI.dart';
-import 'package:profit/utils/calculations/calculate_calories.dart';
 
 import '../navigation_screen.dart';
 
@@ -25,7 +23,6 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
 
   FirebaseAuth auth = FirebaseAuth.instance;
   String? userId;
-
   String userName = "";
   String userWeight = "";
   String userAge = "";
@@ -33,7 +30,6 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
 
   getInitialData() async {
     await dbService.getFields();
-    // updateCalories();
     updateState();
   }
 
@@ -48,8 +44,7 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("My info"),
-          // automaticallyImplyLeading: false,
+          title: const Text("My info"),
         ),
         body: SingleChildScrollView(
           child: Column(
@@ -66,9 +61,14 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
               ElevatedButton(
                 onPressed: () {
                   updatevalues();
-                  Navigator.of(context).pushAndRemoveUntil(
-                      MaterialPageRoute(builder: (context) => MyApp()),
-                      (Route<dynamic> route) => false);
+                  // Navigator.of(context).pushAndRemoveUntil(
+                  //     MaterialPageRoute(builder: (context) => MyApp()),
+                  //     (Route<dynamic> route) => false);
+                  Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const TabBarPage()),
+                      ModalRoute.withName('/success'));
                 },
                 child: const Padding(
                   padding: EdgeInsets.all(15.0),
@@ -81,26 +81,6 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
                 ),
                 style: ElevatedButton.styleFrom(
                   primary: Colors.blue,
-                  minimumSize: const Size.fromHeight(50),
-                ),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.of(context).pushAndRemoveUntil(
-                      MaterialPageRoute(builder: (context) => MyApp()),
-                      (Route<dynamic> route) => false);
-                },
-                child: const Padding(
-                  padding: EdgeInsets.all(15.0),
-                  child: Flexible(
-                    child: Text(
-                      "Return",
-                      style: TextStyle(fontSize: 25, color: Colors.white),
-                    ),
-                  ),
-                ),
-                style: ElevatedButton.styleFrom(
-                  primary: Colors.grey,
                   minimumSize: const Size.fromHeight(50),
                 ),
               ),
@@ -144,16 +124,16 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
                       formKey.save();
                       updateTextField();
                       Navigator.pop(context);
-                      //controller.clear();
+                      controller.clear();
                     }
                   },
-                  child: Text('Edit'),
+                  child: const Text('Edit'),
                 ),
                 ElevatedButton(
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  child: Text('Cancel'),
+                  child: const Text('Cancel'),
                 )
               ],
             );
@@ -176,7 +156,7 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
                       formKey.save();
                       updateTextField();
                       Navigator.pop(context);
-                      //controller.clear();
+                      controller.clear();
                     }
                   },
                   child: const Text('Edit'),

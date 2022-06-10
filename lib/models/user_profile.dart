@@ -1,5 +1,3 @@
-import 'package:profit/widgets/IntroPage/Intro/activity_level.dart';
-
 class UserProfile {
   // late String _id;
   late String _name;

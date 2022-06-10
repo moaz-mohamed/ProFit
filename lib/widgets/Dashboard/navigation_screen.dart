@@ -76,12 +76,12 @@ class _TabBarPageState extends State<TabBarPage> {
           leading: const Icon(Icons.person),
           title: const Text("My Account"),
           onTap: () {
-            Navigator.pushAndRemoveUntil(
-                context,
-                MaterialPageRoute(builder: (context) => MyAccountScreen()),
-                (Route<dynamic> route) => false);
-            // Navigator.push(context,
-            //     MaterialPageRoute(builder: (context) => MyAccountScreen()));
+            // Navigator.pushAndRemoveUntil(
+            //     context,
+            //     MaterialPageRoute(builder: (context) => MyAccountScreen()),
+            //     (Route<dynamic> route) => false);
+            Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => MyAccountScreen()));
           },
         ),
         ListTile(
@@ -97,7 +97,7 @@ class _TabBarPageState extends State<TabBarPage> {
   }
 
   Widget _createdBottomTabBar(BuildContext context) {
-     final  bloc = BlocProvider.of<TabBarBloc>(context);
+    final bloc = BlocProvider.of<TabBarBloc>(context);
     return BottomNavigationBar(
       currentIndex: bloc.currentIndex,
       items: [

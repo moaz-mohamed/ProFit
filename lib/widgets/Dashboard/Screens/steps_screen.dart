@@ -1,9 +1,6 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:profit/services/auth.dart';
-import 'package:profit/themes/ThemeUI.dart';
 import 'dart:async';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:pedometer/pedometer.dart';
@@ -23,7 +20,7 @@ class StepsScreenState extends State<StepsScreen> {
   // StepCount? event;
   // Stream<PedestrianStatus>? _pedestrianStatusStream;
 
-  late String _todaySteps ='0', _totalSteps, _savedSteps;
+  late String _todaySteps = '0', _totalSteps, _savedSteps;
   //  String ?
   //     _savedSteps;
 
@@ -93,18 +90,14 @@ class StepsScreenState extends State<StepsScreen> {
   loadData() async {
     final SharedPreferences prefs = await _prefs;
     _currentDay = prefs.getInt('currentDay') ?? DateTime.now().hour;
-  
-       _todaySteps = prefs.getString('todaySteps') ?? '0';
-      print("today steps from shared preferences : " + _todaySteps ) ;
-       print("current day from shared preferences : " + _currentDay.toString() ) ;
-   
-    
+
+    _todaySteps = prefs.getString('todaySteps') ?? '0';
+    print("today steps from shared preferences : " + _todaySteps);
+    print("current day from shared preferences : " + _currentDay.toString());
   }
 
   @override
-  initState()  {
-    
-
+  initState() {
     // _todaySteps = _prefs.then((SharedPreferences prefs) {
     //   return prefs.getString('todaySteps') ?? '0';
     // });
@@ -126,9 +119,7 @@ class StepsScreenState extends State<StepsScreen> {
   }
 
   @override
-  void dispose()  {
-    
-    
+  void dispose() {
     _prefs.then((SharedPreferences prefs) {
       prefs.setString('todaySteps', _todaySteps);
       prefs.setInt('currentDay', _currentDay);
@@ -140,12 +131,10 @@ class StepsScreenState extends State<StepsScreen> {
   Future<void> onStepCount(StepCount event) async {
     final SharedPreferences prefs = await _prefs;
     _savedSteps = prefs.getString('savedSteps') ?? event.steps.toString();
-     prefs.setString('savedSteps',_savedSteps);
+    prefs.setString('savedSteps', _savedSteps);
     //Todo
     // _savedSteps = prefs.getString('savedSteps') ?? event.steps.toString();
 
-    
-    
     print(event);
 
     _currentDay = DateTime.now().hour;
@@ -155,7 +144,7 @@ class StepsScreenState extends State<StepsScreen> {
       print("New dayyyyyyyyy");
       lastDay = _currentDay;
       _savedSteps = event.steps.toString();
-      _todaySteps ='0';
+      _todaySteps = '0';
       prefs.setInt('lastDay', lastDay!);
       prefs.setString('savedSteps', _savedSteps);
       prefs.setString('todaySteps', _todaySteps);
@@ -165,7 +154,7 @@ class StepsScreenState extends State<StepsScreen> {
       _todaySteps = (event.steps - int.parse(_savedSteps)).toString();
       print(_savedSteps);
     });
-   // prefs.setString('todaySteps', _todaySteps);
+    // prefs.setString('todaySteps', _todaySteps);
   }
 
   void onStepCountError(error) {
@@ -243,22 +232,22 @@ class StepsScreenState extends State<StepsScreen> {
     // getState();
     // print(s);
     return WillPopScope(
-   onWillPop: () async {
-     print("inside pop scopeeeeeeeeeeee");
-       _prefs.then((SharedPreferences prefs) {
-      prefs.setString('todaySteps', _todaySteps);
-      prefs.setInt('currentDay', _currentDay);
-    });
-    // You can do some work here.
-    // Returning true allows the pop to happen, returning false prevents it.
-    return true;
-  },
+      onWillPop: () async {
+        print("inside pop scopeeeeeeeeeeee");
+        _prefs.then((SharedPreferences prefs) {
+          prefs.setString('todaySteps', _todaySteps);
+          prefs.setInt('currentDay', _currentDay);
+        });
+        // You can do some work here.
+        // Returning true allows the pop to happen, returning false prevents it.
+        return true;
+      },
       child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             //  Text('Welcome ' + users.doc(auth.currentUser!.uid).toString()),
-        
+
             Container(
               width: MediaQuery.of(context).size.width * 0.3,
               height: MediaQuery.of(context).size.width * 0.3,

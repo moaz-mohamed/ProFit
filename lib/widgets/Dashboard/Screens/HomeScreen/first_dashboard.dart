@@ -102,7 +102,7 @@ class Dashboard extends StatelessWidget {
                           },
                           child: Icon(Icons.add, color: Colors.white),
                           style: ElevatedButton.styleFrom(
-                            shape: CircleBorder(),
+                            shape: const CircleBorder(),
                             padding: EdgeInsets.zero,
                             primary: FitnessAppTheme.nearlyBlue,
                             onPrimary: Colors.black,

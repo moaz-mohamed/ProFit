@@ -92,7 +92,7 @@ class FoodSearch extends SearchDelegate<List?> {
                                   fontSize: 20.0,
                                   color: Colors.blue)),
                           subtitle: Text(state.recipes.hints[index].food
-                                  .nutrients.ENERCKCAL!
+                                  .nutrients.enercKcal!
                                   .toStringAsFixed(1) +
                               " KCAL"),
                           trailing: const Icon(Icons.keyboard_arrow_right),
