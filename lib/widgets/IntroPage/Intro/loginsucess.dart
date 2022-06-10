@@ -1,10 +1,8 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:profit/services/auth.dart';
 import 'package:profit/services/firestore_database.dart';
 import 'package:profit/themes/ThemeUI.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:profit/widgets/Dashboard/Screens/HomeScreen/first_dashboard.dart';
 import 'package:profit/widgets/Dashboard/navigation_screen.dart';
 import 'package:profit/widgets/IntroPage/Intro/login_screen.dart';
 // import dashboard from './dashboard';

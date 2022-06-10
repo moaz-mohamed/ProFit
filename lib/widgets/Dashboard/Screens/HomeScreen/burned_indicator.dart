@@ -3,7 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:profit/services/firestore_database.dart';
 import 'package:profit/themes/ThemeUI.dart';
-import 'package:number_slide_animation/number_slide_animation.dart';
 
 class BurnedIndicator extends StatelessWidget {
   @override
