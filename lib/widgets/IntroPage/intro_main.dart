@@ -1,9 +1,11 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:profit/services/auth.dart';
 import 'package:profit/services/food_recommendation.dart';
 import 'package:profit/themes/ThemeUI.dart';
 import 'package:profit/utils/calculations/calculate_calories.dart';
+import 'package:profit/widgets/Dashboard/Screens/my_account.dart';
 import 'package:profit/widgets/IntroPage/Intro/activity_level.dart';
 import 'package:profit/widgets/IntroPage/Intro/goal_achieved_form.dart';
 import 'package:profit/widgets/IntroPage/Intro/login_screen.dart';
@@ -78,7 +80,7 @@ class _IntroPageState extends State<IntroPage> {
   }
   @override
   Widget build(BuildContext context) {
-     FoodRecommendationServiceAPI()
+    FoodRecommendationServiceAPI()
         .getFoodRecommendation({"Diet": [], "Disease": [], "Nutirent": []});
  
     return GestureDetector(
@@ -96,6 +98,8 @@ class _IntroPageState extends State<IntroPage> {
         routes: {
           // When navigating to the "/" route, build the HomeScreen widget.
           '/': (context) => OnBoardingScreen(),
+          '/myaccount': (context) => MyAccountScreen(),
+
           '/goal': (context) => GoalAchievedForm(
                 // It is the form of the users goal whether it to lose/maintenance/build muscle.
                 onComplete: (int goalAchieved) {
@@ -122,9 +126,9 @@ class _IntroPageState extends State<IntroPage> {
                 setState(() => _activityLevel = level);
                 calories = CalculateCalories(
                     _goalAchieved,
-                    _ageController,
-                    _heightController,
-                    _weightController,
+                    _ageController.text,
+                    _heightController.text,
+                    _weightController.text,
                     _gender,
                     _activityLevel);
               }),

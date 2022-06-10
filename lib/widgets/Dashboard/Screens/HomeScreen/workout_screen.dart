@@ -143,7 +143,7 @@ class _WorkoutScreenState extends State<WorkoutScreen> {
                       if (state is WorkoutCalculationState) {
                         // add workout to firestore
 
-                        DatabaseService().AddWorkoutToFirestoreUser(
+                        DatabaseService().addWorkoutToFirestoreUser(
                           id: FirebaseAuth.instance.currentUser!.uid,
                           name: state.workout.toString(),
                           burnedCalories: double.parse(

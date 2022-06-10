@@ -1,9 +1,9 @@
 // ignore: non_constant_identifier_names
 double CalculateCalories(_goalAchieved, _ageController, _heightController,
     _weightController, _gender, _activityLevel) {
-  final weight = double.tryParse(_weightController.text);
-  final height = double.tryParse(_heightController.text);
-  final age = double.tryParse(_ageController.text);
+  final weight = double.tryParse(_weightController);
+  final height = double.tryParse(_heightController);
+  final age = double.tryParse(_ageController);
   final goalAcieheved = _goalAchieved;
   final activityLevel = _activityLevel;
   final gender = _gender;

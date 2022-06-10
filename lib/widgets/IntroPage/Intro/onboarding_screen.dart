@@ -1,9 +1,17 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:introduction_screen/introduction_screen.dart';
+import 'package:profit/services/auth.dart';
 import 'package:profit/themes/ThemeUI.dart';
+import 'package:profit/widgets/IntroPage/Intro/loginsucess.dart';
 
-class OnBoardingScreen extends StatelessWidget {
+class OnBoardingScreen extends StatefulWidget {
+  @override
+  State<OnBoardingScreen> createState() => _OnBoardingScreenState();
+}
+
+class _OnBoardingScreenState extends State<OnBoardingScreen> {
   @override
   Widget build(BuildContext context) {
     //--->>> Status bar
@@ -19,8 +27,7 @@ class OnBoardingScreen extends StatelessWidget {
           PageViewModel(
             image: buildImage('assets/onboarding/Page1.png', 600),
             title: 'Get the body you want',
-            body:
-            'Packed with\nour recommendations of\ndiet and workout plans',
+            body: 'Packed with\nour recommendations of\ndiet and workout plans',
             decoration: pageDecoration,
             footer: TextButton(
                 onPressed: () {
@@ -38,21 +45,21 @@ class OnBoardingScreen extends StatelessWidget {
             image: buildImage('assets/onboarding/Page2.png', 600),
             title: 'Personalized for you',
             body:
-            'Diet and workout plans\nmade for you based on\nyour own biometrics and goal',
+                'Diet and workout plans\nmade for you based on\nyour own biometrics and goal',
             decoration: pageDecoration,
           ),
           PageViewModel(
             image: buildImage('assets/onboarding/Page3.png', 600),
             title: 'Stay lean & healthy',
             body:
-            'Provided with\ncalories and workout trackers,\ntrack your achievements\ntowards your goal',
+                'Provided with\ncalories and workout trackers,\ntrack your achievements\ntowards your goal',
             decoration: pageDecoration,
           ),
           PageViewModel(
             image: buildImage('assets/onboarding/Page4.jpg', 600),
             title: 'Science is your coach',
             body:
-            'Get AI-based recommendation plans for both\nyour diet and workout',
+                'Get AI-based recommendation plans for both\nyour diet and workout',
             decoration: pageDecoration,
           ),
         ],
@@ -137,7 +144,7 @@ class OnBoardingScreen extends StatelessWidget {
   final ButtonStyle nextButtonStyle = ButtonStyle(
     shape: MaterialStateProperty.all(const CircleBorder()),
     backgroundColor:
-    MaterialStateProperty.all(FitnessAppTheme.selectorGrayBackGround),
+        MaterialStateProperty.all(FitnessAppTheme.selectorGrayBackGround),
     fixedSize: MaterialStateProperty.all(const Size(60, 60)),
     elevation: MaterialStateProperty.all(6),
     shadowColor: MaterialStateProperty.all(Colors.lightBlue),
@@ -147,7 +154,7 @@ class OnBoardingScreen extends StatelessWidget {
 
   final ButtonStyle skipButtonStyle = ButtonStyle(
     backgroundColor:
-    MaterialStateProperty.all(FitnessAppTheme.selectorGrayBackGround),
+        MaterialStateProperty.all(FitnessAppTheme.selectorGrayBackGround),
     fixedSize: MaterialStateProperty.all(const Size(160, 45)),
     elevation: MaterialStateProperty.all(6),
     shadowColor: MaterialStateProperty.all(Colors.lightBlue),

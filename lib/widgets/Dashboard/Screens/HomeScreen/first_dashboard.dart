@@ -8,7 +8,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:profit/widgets/Dashboard/Screens/HomeScreen/workout_provider.dart';
 
 import 'package:profit/widgets/FoodAPI/food_main.dart';
-import 'package:profit/widgets/IntroPage/Intro/login_screen.dart';
 
 class Dashboard extends StatelessWidget {
   List<String> dashboardHeaders = [

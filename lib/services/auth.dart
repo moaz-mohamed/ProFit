@@ -2,8 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-
-import 'package:profit/widgets/IntroPage/Intro/login_screen.dart';
+import 'package:profit/widgets/IntroPage/Intro/loginsucess.dart';
 
 class AuthenticationService {
   FirebaseAuth auth = FirebaseAuth.instance;
@@ -137,5 +136,41 @@ class AuthenticationService {
             ],
           );
         });
+  }
+
+  static Future<void> checkAuthentication(BuildContext context) async {
+    FirebaseAuth.instance.authStateChanges().listen((_user) {
+      if (_user != null) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) {
+              return Sucess();
+            },
+          ),
+        );
+      }
+    });
+  }
+
+  static Future<void> snackbar(String text, IconData iconData,
+      MaterialColor color, BuildContext context) async {
+    final snackBar = SnackBar(
+      content: Row(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(5.0),
+            child: Icon(
+              iconData,
+              size: 28,
+              color: color,
+            ),
+          ),
+          Flexible(child: Text(text)),
+        ],
+      ),
+    );
+
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 }

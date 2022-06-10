@@ -34,7 +34,10 @@ class AddFoodScreen extends StatefulWidget {
   ];
 
   AddFoodScreen(
-      {required this.calculateFoodBloc, required this.foodLabel, required this.foodID, required this.foodtype});
+      {required this.calculateFoodBloc,
+      required this.foodLabel,
+      required this.foodID,
+      required this.foodtype});
 
   @override
   State<AddFoodScreen> createState() => _AddFoodScreenState();
@@ -123,7 +126,8 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                           style: FitnessAppTheme.totalCaloriesNumber,
                         );
                       } else if (state is FoodItemLoaded) {
-                        totalCalories = double.parse(state.items.calories.toString());
+                        totalCalories =
+                            double.parse(state.items.calories.toString());
                         return Text(
                           state.items.calories.toString(),
                           style: FitnessAppTheme.totalCaloriesNumber,
@@ -180,7 +184,8 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                           "assets/add_food_screen/scale.png",
                           scale: 2.5,
                         ),
-                        constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width * 0.8),
+                        constraints: BoxConstraints(
+                            maxWidth: MediaQuery.of(context).size.width * 0.8),
                         hintText: "Enter quantity in grams",
                         hintStyle: FitnessAppTheme.textFieldHint,
                       ),
@@ -255,7 +260,10 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                                     style: FitnessAppTheme.nutrientsValue,
                                   );
                                 } else if (state is FoodItemLoaded) {
-                                  carbs = double.parse(state.items.totalNutrients!.nutrientsValuesMap["Carbs"]);
+                                  carbs = double.parse(state
+                                      .items
+                                      .totalNutrients!
+                                      .nutrientsValuesMap["Carbs"]);
                                   return Text(
                                     "${state.items.totalNutrients!.nutrientsValuesMap["Carbs"]} gm",
                                     style: FitnessAppTheme.nutrientsValue,
@@ -294,7 +302,10 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                                     style: FitnessAppTheme.nutrientsValue,
                                   );
                                 } else if (state is FoodItemLoaded) {
-                                  protein = double.parse(state.items.totalNutrients?.nutrientsValuesMap["Protein"]);
+                                  protein = double.parse(state
+                                      .items
+                                      .totalNutrients
+                                      ?.nutrientsValuesMap["Protein"]);
                                   return Text(
                                     "${state.items.totalNutrients?.nutrientsValuesMap["Protein"]} gm",
                                     style: FitnessAppTheme.nutrientsValue,
@@ -333,7 +344,8 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                                     style: FitnessAppTheme.nutrientsValue,
                                   );
                                 } else if (state is FoodItemLoaded) {
-                                  fats = double.parse(state.items.totalNutrients?.nutrientsValuesMap["Fats"]);
+                                  fats = double.parse(state.items.totalNutrients
+                                      ?.nutrientsValuesMap["Fats"]);
                                   return Text(
                                     "${state.items.totalNutrients?.nutrientsValuesMap["Fats"]} gm",
                                     style: FitnessAppTheme.nutrientsValue,
@@ -419,7 +431,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
 
             } else {
               if (foodtype == 1) {
-                DatabaseService().AddBreakfastToFirestoreUser(
+                DatabaseService().addBreakfastToFirestoreUser(
                     calories: totalCalories,
                     name: widget.foodLabel,
                     carbs: carbs,
@@ -428,11 +440,14 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                     quantity: foodQuantity.toDouble(),
                     id: FirebaseAuth.instance.currentUser!.uid);
                 //         Navigator.of(context).popUntil(ModalRoute.withName('/sucess'));
-                Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => TabBarPage()),
+                Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(builder: (context) => TabBarPage()),
                     ModalRoute.withName('/success'));
               } else if (foodtype == 2) {
-                print('Dinnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnner is added');
-                DatabaseService().AddLunchToFirestoreUser(
+                print(
+                    'Dinnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnner is added');
+                DatabaseService().addLunchToFirestoreUser(
                     calories: totalCalories,
                     name: widget.foodLabel,
                     carbs: carbs,
@@ -440,10 +455,12 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                     fat: fats,
                     quantity: foodQuantity.toDouble(),
                     id: FirebaseAuth.instance.currentUser!.uid);
-                Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => TabBarPage()),
+                Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(builder: (context) => TabBarPage()),
                     ModalRoute.withName('/success'));
               } else {
-                DatabaseService().AddDinnerToFirestoreUser(
+                DatabaseService().addDinnerToFirestoreUser(
                     calories: totalCalories,
                     name: widget.foodLabel,
                     carbs: carbs,
@@ -451,7 +468,9 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                     fat: fats,
                     quantity: foodQuantity.toDouble(),
                     id: FirebaseAuth.instance.currentUser!.uid);
-                Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => TabBarPage()),
+                Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(builder: (context) => TabBarPage()),
                     ModalRoute.withName('/success'));
               }
             }

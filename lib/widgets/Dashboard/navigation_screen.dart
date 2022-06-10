@@ -2,12 +2,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:profit/main.dart';
-import 'package:profit/services/food_recommendation.dart';
+import 'package:profit/services/auth.dart';
 import 'package:profit/widgets/Dashboard/Screens/Geofencing/geofencing.dart';
-import 'package:profit/widgets/Dashboard/Screens/HomeScreen/first_dashboard.dart';
 import 'package:profit/widgets/Dashboard/Screens/HomeScreen/home_screen.dart';
-import 'package:profit/widgets/Dashboard/Screens/HomeScreen/workout_screen.dart';
 import 'package:profit/widgets/Dashboard/Screens/FoodRecommendationScreen/recommendation_input.dart';
+import 'package:profit/widgets/Dashboard/Screens/my_account.dart';
 import 'package:profit/widgets/Dashboard/Screens/my_drawer_header.dart';
 import 'package:profit/widgets/Dashboard/Screens/steps_screen.dart';
 import 'package:profit/widgets/Dashboard/Screens/WorkoutScreen/workout_screen.dart';
@@ -23,7 +22,9 @@ class TabBarPage extends StatefulWidget {
 }
 
 class _TabBarPageState extends State<TabBarPage> {
-  checkAuthentication() async {
+  AuthenticationService auth = AuthenticationService();
+
+  checkLogout() async {
     FirebaseAuth.instance.authStateChanges().listen((_user) {
       if (_user == null) {
         Navigator.of(context).pushAndRemoveUntil(
@@ -68,21 +69,30 @@ class _TabBarPageState extends State<TabBarPage> {
     );
   }
 
-  Future<void> _signOut() async {
-    await FirebaseAuth.instance.signOut();
-  }
-
   Widget myDrawerList() {
-    return Container(
-      height: 50,
-      padding: const EdgeInsets.only(
-        top: 10,
-      ),
-      child: Column(
-        children: [
-          logoutbutton(),
-        ],
-      ),
+    return Wrap(
+      children: [
+        ListTile(
+          leading: const Icon(Icons.person),
+          title: const Text("My Account"),
+          onTap: () {
+            Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(builder: (context) => MyAccountScreen()),
+                (Route<dynamic> route) => false);
+            // Navigator.push(context,
+            //     MaterialPageRoute(builder: (context) => MyAccountScreen()));
+          },
+        ),
+        ListTile(
+          leading: Icon(Icons.logout),
+          title: Text("Sign Out"),
+          onTap: () {
+            auth.signOut();
+            checkLogout();
+          },
+        ),
+      ],
     );
   }
 
@@ -145,42 +155,5 @@ class _TabBarPageState extends State<TabBarPage> {
       FoodRecommendationScreen()
     ];
     return children[index];
-  }
-
-  logoutbutton() {
-    return Material(
-      child: InkWell(
-        onTap: () {
-          _signOut();
-          checkAuthentication();
-        },
-        child: Padding(
-          padding: EdgeInsets.all(5.0),
-          child: Container(
-            child: Row(
-              children: const [
-                Expanded(
-                  child: Icon(
-                    Icons.logout_rounded,
-                    size: 20,
-                    color: Colors.black,
-                  ),
-                ),
-                Expanded(
-                  flex: 3,
-                  child: Text(
-                    "Logout",
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 16,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
   }
 }
