@@ -59,7 +59,6 @@ class _TabBarPageState extends State<TabBarPage> {
                 ),
               ),
             ),
-
             body: _createBody(context,
                 bloc.currentIndex), //return the index of the screen i want to route
             backgroundColor: Colors.white,
@@ -98,7 +97,7 @@ class _TabBarPageState extends State<TabBarPage> {
   }
 
   Widget _createdBottomTabBar(BuildContext context) {
-    final bloc = BlocProvider.of<TabBarBloc>(context);
+     final  bloc = BlocProvider.of<TabBarBloc>(context);
     return BottomNavigationBar(
       currentIndex: bloc.currentIndex,
       items: [

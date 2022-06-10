@@ -1,7 +1,14 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loading_indicator/loading_indicator.dart';
 import 'package:profit/models/food_recommendation.dart';
+import 'package:profit/services/firestore_database.dart';
 import 'package:profit/services/food_recommendation.dart';
+import 'package:profit/widgets/Dashboard/NavigationBloc/tab_bar_bloc.dart';
+import 'package:profit/widgets/Dashboard/NavigationBloc/tab_bar_event.dart';
+import 'package:profit/widgets/Dashboard/Screens/HomeScreen/home_screen.dart';
+import 'package:profit/widgets/Dashboard/navigation_screen.dart';
 
 class RecommendedFood extends StatefulWidget {
   const RecommendedFood({Key? key, required this.input}) : super(key: key);
@@ -24,6 +31,21 @@ class _RecommendedFoodState extends State<RecommendedFood> {
         FoodRecommendationServiceAPI().getFoodRecommendation(widget.input);
     super.initState();
   }
+
+  // handleFoodTap(snapshot, index) {
+  //   DatabaseService().AddLunchToFirestoreUser(
+  //       calories: snapshot.data[index].calories,
+  //       name: snapshot.data[index].name,
+  //       carbs: snapshot.data[index].carbs,
+  //       protein: snapshot.data[index].protein,
+  //       fat: snapshot.data[index].fats,
+  //       quantity: snapshot.data[index].servingSizeG.toDouble(),
+  //       id: FirebaseAuth.instance.currentUser!.uid);
+  //   // Navigator.of(context).pushAndRemoveUntil(
+
+  //   //bloc.currentIndex=0;
+  // // BlocProvider.of<TabBarBloc>(context).add(NavBarTappedEvent(index: 0));
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +77,7 @@ class _RecommendedFoodState extends State<RecommendedFood> {
                         child: ListTile(
                           leading: Image.network(foodPhoto),
                           title: Text(
-                            snapshot.data[index].names,
+                            snapshot.data[index].name,
                             style: const TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontFamily: "SourceSansPro",
@@ -66,7 +88,11 @@ class _RecommendedFoodState extends State<RecommendedFood> {
                               "Serving Size: ${snapshot.data[index].servingSizeG} gm\n"
                               "Calories: ${snapshot.data[index].calories}"),
                           isThreeLine: true,
-                          trailing: Icon(Icons.more_vert),
+                          trailing: const Icon(
+                            Icons.add_task_rounded,
+                            color: Colors.blue,
+                          ),
+                          //         Navigator.of(context).popUntil(ModalRoute.withName('/sucess'));
                         ),
                       );
                     }),
