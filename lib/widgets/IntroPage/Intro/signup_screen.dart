@@ -90,8 +90,9 @@ class _SignupScreenState extends State<SignupScreen> {
       await AuthenticationService.snackbar("Processing....",
           Icons.wifi_protected_setup_outlined, Colors.grey, context);
       signup();
-      if (AuthenticationService.message ==
-          ('The account already exists for that email, try different email.')) {
+      await Future.delayed(Duration(seconds: 3));
+
+      if (AuthenticationService.message.isNotEmpty) {
         AuthenticationService.snackbar(AuthenticationService.message,
             Icons.warning_amber, Colors.amber, context);
       }
