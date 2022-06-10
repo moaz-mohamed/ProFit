@@ -6,7 +6,7 @@ import 'package:profit/bloc/search/search_bloc.dart';
 import 'package:profit/bloc/search/search_event.dart';
 import 'package:profit/bloc/search/search_state.dart';
 import 'package:profit/models/food_data_model.dart';
-import 'addfoodscreen.dart';
+import 'AddFoodScreen.dart';
 
 class FoodSearch extends SearchDelegate<List?> {
   late Items items;

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 class fonts {
-
   static const String fontName = 'Montserrat';
 
   // Add Food Scree Fonts
@@ -95,5 +94,4 @@ class fonts {
     fontSize: 26,
     color: Colors.blue,
   );
-
 }

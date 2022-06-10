@@ -65,6 +65,7 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
               ),
               ElevatedButton(
                 onPressed: () {
+                  updatevalues();
                   Navigator.of(context).pushAndRemoveUntil(
                       MaterialPageRoute(builder: (context) => MyApp()),
                       (Route<dynamic> route) => false);
@@ -73,7 +74,7 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
                   padding: EdgeInsets.all(15.0),
                   child: Flexible(
                     child: Text(
-                      "Submit",
+                      "Save",
                       style: TextStyle(fontSize: 25),
                     ),
                   ),
@@ -82,7 +83,27 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
                   primary: Colors.blue,
                   minimumSize: const Size.fromHeight(50),
                 ),
-              )
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).pushAndRemoveUntil(
+                      MaterialPageRoute(builder: (context) => MyApp()),
+                      (Route<dynamic> route) => false);
+                },
+                child: const Padding(
+                  padding: EdgeInsets.all(15.0),
+                  child: Flexible(
+                    child: Text(
+                      "Return",
+                      style: TextStyle(fontSize: 25, color: Colors.white),
+                    ),
+                  ),
+                ),
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.grey,
+                  minimumSize: const Size.fromHeight(50),
+                ),
+              ),
             ],
           ),
         ));
@@ -118,11 +139,10 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
               actions: [
                 ElevatedButton(
                   onPressed: () async {
-                    updatevalues(attribute.toLowerCase(), controller.text);
-
-                    final formKey1 = formGlobalKey.currentState;
-                    if (formKey1!.validate()) {
-                      formKey1.save();
+                    final formKey = formGlobalKey.currentState;
+                    if (formKey!.validate()) {
+                      formKey.save();
+                      updateTextField();
                       Navigator.pop(context);
                       //controller.clear();
                     }
@@ -151,21 +171,21 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
               actions: [
                 ElevatedButton(
                   onPressed: () async {
-                    updatevalues(attribute.toLowerCase(), controller.text);
-                    final formKey1 = formGlobalKey.currentState;
-                    if (formKey1!.validate()) {
-                      formKey1.save();
+                    final formKey = formGlobalKey.currentState;
+                    if (formKey!.validate()) {
+                      formKey.save();
+                      updateTextField();
                       Navigator.pop(context);
                       //controller.clear();
                     }
                   },
-                  child: Text('Edit'),
+                  child: const Text('Edit'),
                 ),
                 ElevatedButton(
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  child: Text('Cancel'),
+                  child: const Text('Cancel'),
                 )
               ],
             );
@@ -173,20 +193,17 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
         });
   }
 
-  updatevalues(String field, String text) async {
-    final formKey = formGlobalKey.currentState;
-    if (formKey!.validate()) {
-      formKey.save();
-      final docUser =
-          FirebaseFirestore.instance.collection('users').doc(userId);
-      docUser.update({
-        field: text.trim(),
-      });
-      await dbService.getFields();
-      dbService.updateCalories();
-      dbService.resetMeals(userId!);
-      updateState2();
-    }
+  updatevalues() async {
+    final docUser = FirebaseFirestore.instance.collection('users').doc(userId);
+    docUser.update({
+      'name': userName,
+      'age': userAge,
+      'weight': userWeight,
+      'height': userHeight,
+    });
+    await dbService.getFields();
+    dbService.updateCalories();
+    // dbService.resetMeals(userId!);
   }
 
   card(String attribute, String attributeValue, IconData iconData,
@@ -207,6 +224,12 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
           color: Colors.grey,
         ),
         trailing: ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            shape: const CircleBorder(),
+            padding: EdgeInsets.zero,
+            primary: FitnessAppTheme.nearlyBlue,
+            onPrimary: Colors.black,
+          ),
           onPressed: () {
             openDialogueBox(context, attribute, controller);
           },
@@ -244,7 +267,7 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
     });
   }
 
-  updateState2() {
+  updateTextField() {
     setState(() {
       if (_nameController.text.isNotEmpty) {
         userName = _nameController.text;

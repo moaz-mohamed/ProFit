@@ -55,18 +55,29 @@ class DatabaseService {
     double? newRemainProtien = updatedRemainingProtein;
     double? newRemainFats = updatedRemainingFats;
     double? newRemainCarbs = updatedRemainingCarbs;
+    double? eatenCalories;
+    double? totalFats;
+    double? totalCarbs;
+    double? totalProteins;
+    await docUser.get().then((value) {
+      eatenCalories = value.get('eatenCalories');
+      totalFats = value.get('totalFats');
+      totalCarbs = value.get('totalCarbs');
+      totalProteins = value.get('totalProteins');
+    });
     double calories = CalculateCalories(updatedGoal, updatedage, updatedheight,
         updatedWeight, updatedgender, updatedActivityLevel);
+
     newRemainCalories = calories;
     newRemainProtien = ((30 / 100) * calories) / 4;
     newRemainFats = ((30 / 100) * calories) / 9;
     newRemainCarbs = ((40 / 100) * calories) / 4;
     docUser.update({
       'calories': calories,
-      'remainingCalories': newRemainCalories,
-      'remainingFats': newRemainFats,
-      'remainingCarbs': newRemainCarbs,
-      'remainingProteins': newRemainProtien,
+      'remainingCalories': newRemainCalories - eatenCalories!,
+      'remainingFats': newRemainFats - totalFats!,
+      'remainingCarbs': newRemainCarbs - totalCarbs!,
+      'remainingProteins': newRemainProtien - totalProteins!,
     });
   }
 

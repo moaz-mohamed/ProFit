@@ -9,7 +9,7 @@ import 'package:profit/bloc/barcode/bar_item_state.dart';
 import 'package:profit/bloc/postapi/post_food_item_bloc.dart';
 import 'package:profit/models/food_data_model.dart';
 
-import 'addfoodscreen.dart';
+import 'AddFoodScreen.dart';
 
 class BarCodeSearch extends StatefulWidget {
   BarCodeBloc barcodebloc;

@@ -3,11 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:profit/main.dart';
 import 'package:profit/services/auth.dart';
-import 'package:profit/services/food_recommendation.dart';
 import 'package:profit/widgets/Dashboard/Screens/Geofencing/geofencing.dart';
-import 'package:profit/widgets/Dashboard/Screens/HomeScreen/first_dashboard.dart';
 import 'package:profit/widgets/Dashboard/Screens/HomeScreen/home_screen.dart';
-import 'package:profit/widgets/Dashboard/Screens/HomeScreen/workout_screen.dart';
 import 'package:profit/widgets/Dashboard/Screens/FoodRecommendationScreen/recommendation_input.dart';
 import 'package:profit/widgets/Dashboard/Screens/my_account.dart';
 import 'package:profit/widgets/Dashboard/Screens/my_drawer_header.dart';
@@ -73,36 +70,30 @@ class _TabBarPageState extends State<TabBarPage> {
     );
   }
 
-  // Future<void> _signOut() async {
-  //   await FirebaseAuth.instance.signOut();
-  // }
-
   Widget myDrawerList() {
-    return Container(
-      child: Wrap(
-        children: [
-          ListTile(
-            leading: Icon(Icons.person),
-            title: Text("My Account"),
-            onTap: () {
-              Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(builder: (context) => MyAccountScreen()),
-                  (Route<dynamic> route) => false);
-              // Navigator.push(context,
-              //     MaterialPageRoute(builder: (context) => MyAccountScreen()));
-            },
-          ),
-          ListTile(
-            leading: Icon(Icons.logout),
-            title: Text("Sign Out"),
-            onTap: () {
-              auth.signOut();
-              checkLogout();
-            },
-          ),
-        ],
-      ),
+    return Wrap(
+      children: [
+        ListTile(
+          leading: const Icon(Icons.person),
+          title: const Text("My Account"),
+          onTap: () {
+            Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(builder: (context) => MyAccountScreen()),
+                (Route<dynamic> route) => false);
+            // Navigator.push(context,
+            //     MaterialPageRoute(builder: (context) => MyAccountScreen()));
+          },
+        ),
+        ListTile(
+          leading: Icon(Icons.logout),
+          title: Text("Sign Out"),
+          onTap: () {
+            auth.signOut();
+            checkLogout();
+          },
+        ),
+      ],
     );
   }
 

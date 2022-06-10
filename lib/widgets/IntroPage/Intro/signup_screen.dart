@@ -8,7 +8,6 @@ import 'package:profit/themes/ThemeUI.dart';
 import 'dart:ui';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:profit/widgets/IntroPage/Intro/login_screen.dart';
-import 'package:profit/widgets/IntroPage/Intro/loginsucess.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen(
