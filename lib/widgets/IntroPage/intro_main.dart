@@ -1,8 +1,6 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:profit/services/auth.dart';
-import 'package:profit/services/food_recommendation.dart';
 import 'package:profit/themes/ThemeUI.dart';
 import 'package:profit/utils/calculations/calculate_calories.dart';
 import 'package:profit/widgets/Dashboard/Screens/my_account.dart';
@@ -16,11 +14,21 @@ import 'package:profit/widgets/IntroPage/Intro/signup_screen.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({Key? key}) : super(key: key);
+  
 
+  
   @override
   Widget build(BuildContext context) {
+    Widget nextScreen;
+    if(FirebaseAuth.instance.currentUser != null){
+      nextScreen = Sucess();
+    }
+    else{
+      nextScreen = const IntroPage();
+      
+    }
     return AnimatedSplashScreen(
-      nextScreen: const IntroPage(),
+      nextScreen: nextScreen,
       splash: 'assets/splash/Logo.png',
       //duration: ,
       splashTransition: SplashTransition.fadeTransition,
@@ -53,35 +61,11 @@ class _IntroPageState extends State<IntroPage> {
   late double calories;
   //Male or Female
  
-  checkAuthentication() async {
-    FirebaseAuth.instance.authStateChanges().listen((_user) {
-      print(_user);
-      if (_user != null) {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) {
-              return Sucess();
-            },
-          ),
-        );
-      }
-      else{
-       Navigator.popUntil(context, (route) => route.isFirst);
-       
-      }
-    });
-  }
- @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    checkAuthentication();
-  }
+  
+ 
   @override
   Widget build(BuildContext context) {
-    FoodRecommendationServiceAPI()
-        .getFoodRecommendation({"Diet": [], "Disease": [], "Nutirent": []});
+    
  
     return GestureDetector(
       onTap: () {

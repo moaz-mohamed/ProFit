@@ -38,7 +38,7 @@ class _LoginScreenState extends State<LoginScreen> {
       }
       print(AuthenticationService.message);
 
-      // await checkAuthentication();
+      await AuthenticationService.checkAuthentication(context);
     }
 
     void signInWithGoogle() async {

@@ -83,6 +83,7 @@ class _SignupScreenState extends State<SignupScreen> {
 
         await databaseService.createNewUser(
             id: auth.currentUser!.uid, userProfile: userProfile);
+        await AuthenticationService.checkAuthentication(context);
       }
     }
 
@@ -90,13 +91,13 @@ class _SignupScreenState extends State<SignupScreen> {
       await AuthenticationService.snackbar("Processing....",
           Icons.wifi_protected_setup_outlined, Colors.grey, context);
       signup();
-      await Future.delayed(Duration(seconds: 3));
+      await Future.delayed(const Duration(seconds: 3));
 
       if (AuthenticationService.message.isNotEmpty) {
         AuthenticationService.snackbar(AuthenticationService.message,
             Icons.warning_amber, Colors.amber, context);
       }
-      await Future.delayed(Duration(seconds: 8));
+      await Future.delayed(const Duration(seconds: 8));
 
       ScaffoldMessenger.of(context).hideCurrentSnackBar();
     }
