@@ -63,7 +63,7 @@ class FoodRecommendationScreenState extends State<FoodRecommendationScreen> {
       width: MediaQuery.of(context).size.width / 0.3,
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 50),
       alignment: Alignment.center,
-    
+      
       // Align however you like (i.e .centerRight, centerLeft)
       child: SingleChildScrollView(
         child: Column(
