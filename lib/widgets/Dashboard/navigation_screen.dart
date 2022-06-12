@@ -35,6 +35,8 @@ class _TabBarPageState extends State<TabBarPage> {
 
   @override
   Widget build(BuildContext context) {
+     FoodRecommendationServiceAPI()
+        .getFoodRecommendation({"Diet": [], "Disease": [], "Nutirent": []});
     return BlocProvider<TabBarBloc>(
       create: (BuildContext context) => TabBarBloc(0),
       child: BlocBuilder<TabBarBloc, int>(
