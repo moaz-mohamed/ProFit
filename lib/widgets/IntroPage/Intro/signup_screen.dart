@@ -93,7 +93,10 @@ class _SignupScreenState extends State<SignupScreen> {
       signup();
       await Future.delayed(const Duration(seconds: 3));
 
-      if (AuthenticationService.message.isNotEmpty) {
+      if (AuthenticationService.message == 'Register success!') {
+        AuthenticationService.snackbar(AuthenticationService.message,
+            Icons.verified, Colors.green, context);
+      } else if (AuthenticationService.message.isNotEmpty) {
         AuthenticationService.snackbar(AuthenticationService.message,
             Icons.warning_amber, Colors.amber, context);
       }
