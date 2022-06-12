@@ -6,7 +6,13 @@ class FoodRecommendationItem {
   double? protein;
   double? fats;
 
-  FoodRecommendationItem({this.name, this.calories, this.servingSizeG, this.carbs, this.protein, this.fats});
+  FoodRecommendationItem(
+      {this.name,
+      this.calories,
+      this.servingSizeG,
+      this.carbs,
+      this.protein,
+      this.fats});
 
   FoodRecommendationItem.fromJson(Map<String, dynamic> json) {
     name = json['name'];
@@ -23,15 +29,14 @@ class FoodRecommendationItem {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['name'] = this.name;
-    data['calories'] = this.calories;
-    data['serving_size_g'] = this.servingSizeG;
-    data['carbohydrates_total_g'] = this.carbs;
-    data['protein_g'] = this.protein;
-    data['fat_total_g'] = this.fats;
+    final Map<String, dynamic> data = Map<String, dynamic>();
+    data['name'] = name;
+    data['calories'] = calories;
+    data['serving_size_g'] = servingSizeG;
+    data['carbohydrates_total_g'] = carbs;
+    data['protein_g'] = protein;
+    data['fat_total_g'] = fats;
 
-  
     return data;
   }
 }

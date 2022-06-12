@@ -82,21 +82,30 @@ class TotalNutrients {
     potassium = json['K'] != null ? ENERCKCAL.fromJson(json['K']) : null;
     iron = json['FE'] != null ? FAT.fromJson(json['FE']) : null;
     water = json['WATER'] != null ? FAT.fromJson(json['WATER']) : null;
-    nutrientsValuesMap["Calories"] = calories?.quantity?.toStringAsFixed(1) ?? "0";
+    nutrientsValuesMap["Calories"] =
+        calories?.quantity?.toStringAsFixed(1) ?? "0";
     nutrientsValuesMap["Carbs"] = carbs?.quantity?.toStringAsFixed(1) ?? "0";
     nutrientsValuesMap["Fibers"] = fibers?.quantity?.toStringAsFixed(1) ?? "0";
     nutrientsValuesMap["Sugars"] = sugar?.quantity?.toStringAsFixed(1) ?? "0";
-    nutrientsValuesMap["Cholesterol"] = cholosterol?.quantity?.toStringAsFixed(1) ?? "0";
+    nutrientsValuesMap["Cholesterol"] =
+        cholosterol?.quantity?.toStringAsFixed(1) ?? "0";
     nutrientsValuesMap["Fats"] = fat?.quantity?.toStringAsFixed(1) ?? "0";
     nutrientsValuesMap["Sat Fat"] = fatSat?.quantity?.toStringAsFixed(1) ?? "0";
-    nutrientsValuesMap["Trans Fat"] = fatTotTrans?.quantity?.toStringAsFixed(1) ?? "0";
-    nutrientsValuesMap["Mono Fats"] = fatTotMono?.quantity?.toStringAsFixed(1) ?? "0";
-    nutrientsValuesMap["Poly Fats"] = fatTotPoly?.quantity?.toStringAsFixed(1) ?? "0";
-    nutrientsValuesMap["Protein"] = protein?.quantity?.toStringAsFixed(1) ?? "0";
+    nutrientsValuesMap["Trans Fat"] =
+        fatTotTrans?.quantity?.toStringAsFixed(1) ?? "0";
+    nutrientsValuesMap["Mono Fats"] =
+        fatTotMono?.quantity?.toStringAsFixed(1) ?? "0";
+    nutrientsValuesMap["Poly Fats"] =
+        fatTotPoly?.quantity?.toStringAsFixed(1) ?? "0";
+    nutrientsValuesMap["Protein"] =
+        protein?.quantity?.toStringAsFixed(1) ?? "0";
     nutrientsValuesMap["Sodium"] = sodim?.quantity?.toStringAsFixed(1) ?? "0";
-    nutrientsValuesMap["Calcium"] = calcium?.quantity?.toStringAsFixed(1) ?? "0";
-    nutrientsValuesMap["Magnesium"] = magensium?.quantity?.toStringAsFixed(1) ?? "0";
-    nutrientsValuesMap["Potassium"] = potassium?.quantity?.toStringAsFixed(1) ?? "0";
+    nutrientsValuesMap["Calcium"] =
+        calcium?.quantity?.toStringAsFixed(1) ?? "0";
+    nutrientsValuesMap["Magnesium"] =
+        magensium?.quantity?.toStringAsFixed(1) ?? "0";
+    nutrientsValuesMap["Potassium"] =
+        potassium?.quantity?.toStringAsFixed(1) ?? "0";
     nutrientsValuesMap["Iron"] = iron?.quantity?.toStringAsFixed(1) ?? "0";
     nutrientsValuesMap["Water"] = water?.quantity?.toStringAsFixed(1) ?? "0";
   }
@@ -117,9 +126,9 @@ class ENERCKCAL {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = Map<String, dynamic>();
-    data['label'] = this.label;
-    data['quantity'] = this.quantity;
-    data['unit'] = this.unit;
+    data['label'] = label;
+    data['quantity'] = quantity;
+    data['unit'] = unit;
     return data;
   }
 }
@@ -139,9 +148,9 @@ class FAT {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = Map<String, dynamic>();
-    data['label'] = this.label;
-    data['quantity'] = this.quantity;
-    data['unit'] = this.unit;
+    data['label'] = label;
+    data['quantity'] = quantity;
+    data['unit'] = unit;
     return data;
   }
 }
@@ -202,14 +211,14 @@ class Parsed {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = Map<String, dynamic>();
-    data['quantity'] = this.quantity;
-    data['measure'] = this.measure;
-    data['food'] = this.food;
-    data['foodId'] = this.foodId;
-    data['weight'] = this.weight;
-    data['retainedWeight'] = this.retainedWeight;
-    data['measureURI'] = this.measureURI;
-    data['status'] = this.status;
+    data['quantity'] = quantity;
+    data['measure'] = measure;
+    data['food'] = food;
+    data['foodId'] = foodId;
+    data['weight'] = weight;
+    data['retainedWeight'] = retainedWeight;
+    data['measureURI'] = measureURI;
+    data['status'] = status;
     return data;
   }
 }

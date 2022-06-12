@@ -74,7 +74,7 @@ class _BarCodeSearchState extends State<BarCodeSearch> {
                             color: Colors.blueGrey),
                       ),
                       subtitle: Text(state
-                          .items.hints[index].food.nutrients.ENERCKCAL
+                          .items.hints[index].food.nutrients.enercKcal
                           .toString()),
                       trailing: const Icon(Icons.keyboard_arrow_right),
                       onTap: () {

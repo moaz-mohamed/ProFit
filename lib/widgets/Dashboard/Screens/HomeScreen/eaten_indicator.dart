@@ -3,7 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:profit/services/firestore_database.dart';
 import 'package:profit/themes/ThemeUI.dart';
-import 'package:number_slide_animation/number_slide_animation.dart';
 
 class EatenIndicator extends StatelessWidget {
   @override
@@ -21,7 +20,7 @@ class EatenIndicator extends StatelessWidget {
                     "assets/home_screen/Apple.png",
                     scale: 2.6,
                   ),
-                  Text(
+                  const Text(
                     " Eaten",
                     style: FitnessAppTheme.eatenIndicatorText,
                   ),

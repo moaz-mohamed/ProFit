@@ -1,14 +1,7 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loading_indicator/loading_indicator.dart';
 import 'package:profit/models/food_recommendation.dart';
-import 'package:profit/services/firestore_database.dart';
 import 'package:profit/services/food_recommendation.dart';
-import 'package:profit/widgets/Dashboard/NavigationBloc/tab_bar_bloc.dart';
-import 'package:profit/widgets/Dashboard/NavigationBloc/tab_bar_event.dart';
-import 'package:profit/widgets/Dashboard/Screens/HomeScreen/home_screen.dart';
-import 'package:profit/widgets/Dashboard/navigation_screen.dart';
 
 class RecommendedFood extends StatefulWidget {
   const RecommendedFood({Key? key, required this.input}) : super(key: key);

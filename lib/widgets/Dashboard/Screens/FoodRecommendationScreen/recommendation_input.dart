@@ -1,11 +1,8 @@
 import 'dart:core';
-import 'dart:core';
-
 import 'package:flutter/material.dart';
-import 'package:profit/themes/ThemeUI.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
-import 'package:profit/services/food_recommendation.dart';
 import 'package:profit/widgets/Dashboard/Screens/FoodRecommendationScreen/recommended_food.dart';
+
 class FoodRecommendationScreen extends StatefulWidget {
   const FoodRecommendationScreen({Key? key}) : super(key: key);
 
@@ -16,7 +13,11 @@ class FoodRecommendationScreen extends StatefulWidget {
 
 class FoodRecommendationScreenState extends State<FoodRecommendationScreen> {
   //String? selectedValue;
-  Map<String , dynamic> userPreferences = {"Diet": [] , "Disease": [], "Nutrient": []};
+  Map<String, dynamic> userPreferences = {
+    "Diet": [],
+    "Disease": [],
+    "Nutrient": []
+  };
   List<String> selectedDiets = [];
   List<String> selectedDiseases = [];
   List<String> selectedNutrients = [];
@@ -63,7 +64,7 @@ class FoodRecommendationScreenState extends State<FoodRecommendationScreen> {
       width: MediaQuery.of(context).size.width / 0.3,
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 50),
       alignment: Alignment.center,
-      
+
       // Align however you like (i.e .centerRight, centerLeft)
       child: SingleChildScrollView(
         child: Column(
@@ -102,7 +103,8 @@ class FoodRecommendationScreenState extends State<FoodRecommendationScreen> {
               selectedTextStyle: const TextStyle(
                   color: Colors.white, fontWeight: FontWeight.bold),
               onTap: (values) {
-                selectedDiets = values.map((value) => value.toString()).toList();
+                selectedDiets =
+                    values.map((value) => value.toString()).toList();
                 // selectedDiet.addAll(values.map((value) => value.toString()).toList());
                 print(selectedDiets);
               },
@@ -188,12 +190,10 @@ class FoodRecommendationScreenState extends State<FoodRecommendationScreen> {
                 elevation: 10,
                 padding: const EdgeInsets.symmetric(horizontal: 30),
                 primary: Colors.blue,
-                textStyle: const TextStyle(
-                                fontSize: 20),
+                textStyle: const TextStyle(fontSize: 20),
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(40)),
+                    borderRadius: BorderRadius.circular(40)),
               ),
-              
               child: const Text('Recommend '),
               onPressed: () {
                 userPreferences.addAll({
@@ -201,11 +201,15 @@ class FoodRecommendationScreenState extends State<FoodRecommendationScreen> {
                   'Disease': selectedDiseases,
                   'Nutrient': selectedNutrients,
                 });
-               Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) =>  RecommendedFood(input: userPreferences,)));
-             //  FoodRecommendationServiceAPI().getFoodRecommendation(userPreferences);
-             
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (BuildContext context) => RecommendedFood(
+                              input: userPreferences,
+                            )));
+                //  FoodRecommendationServiceAPI().getFoodRecommendation(userPreferences);
               },
-            ) 
+            )
           ],
         ),
       ),

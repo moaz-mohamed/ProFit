@@ -10,6 +10,7 @@ class DatabaseService {
   FirebaseAuth auth = FirebaseAuth.instance;
   String? userId;
   String? updatedName;
+  String? foodName;
   String? updatedWeight;
   String? updatedage;
   String? updatedheight;
@@ -51,10 +52,10 @@ class DatabaseService {
 
   updateCalories() async {
     final docUser = FirebaseFirestore.instance.collection('users').doc(userId);
-    double? newRemainCalories = updatedRemainingCalories;
-    double? newRemainProtien = updatedRemainingProtein;
-    double? newRemainFats = updatedRemainingFats;
-    double? newRemainCarbs = updatedRemainingCarbs;
+    double? newRemainCalories;
+    double? newRemainProtien;
+    double? newRemainFats;
+    double? newRemainCarbs;
     double? eatenCalories;
     double? totalFats;
     double? totalCarbs;
@@ -303,7 +304,6 @@ class DatabaseService {
         await FirebaseFirestore.instance.collection('users').doc(id).get();
 
     final List mealType = user[type.toLowerCase()];
-    ;
 
     double calories = mealType[index]['calories'];
     double fats = mealType[index]['fat'];
@@ -396,6 +396,70 @@ class DatabaseService {
         .update({'workout': workout});
   }
 
+  // make function that takes food and calories and add them to user favorite list
+
+  Future addFoodToFavoriteList(
+      {required String id,
+      required int index,
+      required String name,
+      required double calories,
+      required double fats,
+      required double quantity,
+      required double carbs,
+      required double proteins}) async {
+    final DocumentSnapshot user =
+        await FirebaseFirestore.instance.collection('users').doc(id).get();
+    final List favoriteFoods = user['favourites'];
+
+    favoriteFoods.add({
+      'name': name,
+      'calories': calories,
+      'fat': fats,
+      'carbs': carbs,
+      'protein': proteins,
+      'quantity': quantity,
+    });
+
+    return await FirebaseFirestore.instance
+        .collection('users')
+        .doc(id)
+        .update({'favourites': favoriteFoods});
+  }
+//Future addBreakfastToFirestoreUser(
+//       {required String id,
+//       required String name,
+//       required double calories,
+//       required double quantity,
+//       required double protein,
+//       required double fat,
+//       required double carbs}) async {
+// // get snapshot and update breakfast
+//     final DocumentSnapshot user =
+//         await FirebaseFirestore.instance.collection('users').doc(id).get();
+//     //printAllDataInDocument(id: id);
+
+// // update breakfast if exists else create new breakfast
+//     final List breakfast = user['breakfast'];
+//     breakfast.add({
+//       'name': name,
+//       'calories': calories,
+//       'quantity': quantity,
+//       'protein': protein,
+//       'fat': fat,
+//       'carbs': carbs,
+//     });
+//     updateUserCalories(
+//         id: id,
+//         foodCalories: calories,
+//         fats: fat,
+//         carbs: carbs,
+//         proteins: protein);
+//     return await FirebaseFirestore.instance
+//         .collection('users')
+//         .doc(id)
+//         .update({'breakfast': breakfast});
+//   }
+
 //UpdateBurnedCaloriesAfterDelete
   Future updateBurnedCaloriesAfterDelete(
       {required String id, required double burnedCalories}) async {
@@ -429,5 +493,37 @@ class DatabaseService {
       updatedRemainingFats = value.get('remainingFats');
       updatedRemainingProtein = value.get('remainingProteins');
     });
+  }
+
+  getFavourites() async {
+    userId = auth.currentUser!.uid;
+    final docUser = FirebaseFirestore.instance.collection('users').doc(userId);
+
+    await docUser.get().then((value) {
+      foodName = value.get('foodName').toString();
+    });
+  }
+  // make function that retrieves food name and calories from favorite list from firestore
+
+  Future getFavouriteFoods() async {
+    List favouriteFoods = [];
+
+    userId = auth.currentUser!.uid;
+    final docUser = FirebaseFirestore.instance.collection('users').doc(userId);
+    await docUser.get().then((value) {
+      return favouriteFoods = value.get('favourites');
+    });
+  }
+
+  deleteFavouriteFromFirestoreUser(
+      {required String id, required int index}) async {
+    final DocumentSnapshot user =
+        await FirebaseFirestore.instance.collection('users').doc(id).get();
+    final List favourite = user['favourites'];
+    favourite.removeAt(index);
+    return await FirebaseFirestore.instance
+        .collection('users')
+        .doc(id)
+        .update({'favourites': favourite});
   }
 }

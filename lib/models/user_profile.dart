@@ -1,5 +1,3 @@
-import 'package:profit/widgets/IntroPage/Intro/activity_level.dart';
-
 class UserProfile {
   // late String _id;
   late String _name;
@@ -25,6 +23,7 @@ class UserProfile {
   List<Map<String, dynamic>> lunch = [];
   List<Map<String, dynamic>> dinner = [];
   List<Map<String, dynamic>> workout = [];
+  List<Map<String, dynamic>> favourites = [];
 
   UserProfile(dynamic obj) {
     //  _id =  obj['id'];
@@ -63,6 +62,8 @@ class UserProfile {
     eatenCalories = data['_eatenCalories'];
     burnedCalories = data['_burnedCalories'];
     breakfast = data['breakfast'];
+    favourites = data['favourites'];
+
     lunch = data['lunch'];
     dinner = data['dinner'];
     workout = data['workout'];
@@ -85,6 +86,7 @@ class UserProfile {
         'eatenCalories': eatenCalories,
         'burnedCalories': eatenCalories,
         'breakfast': breakfast,
+        'favourites': favourites,
         'lunch': lunch,
         'dinner': dinner,
         'workout': workout,

@@ -15,6 +15,8 @@ import 'package:profit/widgets/Dashboard/NavigationBloc/tab_bar_bloc.dart';
 import 'package:profit/widgets/Dashboard/NavigationBloc/tab_bar_event.dart';
 import 'package:profit/themes/ThemeUI.dart';
 
+import 'Screens/favourites.dart';
+
 class TabBarPage extends StatefulWidget {
   const TabBarPage({Key? key}) : super(key: key);
 
@@ -79,12 +81,24 @@ class _TabBarPageState extends State<TabBarPage> {
           leading: const Icon(Icons.person),
           title: const Text("My Account"),
           onTap: () {
-            Navigator.pushAndRemoveUntil(
-                context,
-                MaterialPageRoute(builder: (context) => MyAccountScreen()),
-                (Route<dynamic> route) => false);
-            // Navigator.push(context,
-            //     MaterialPageRoute(builder: (context) => MyAccountScreen()));
+            // Navigator.pushAndRemoveUntil(
+            //     context,
+            //     MaterialPageRoute(builder: (context) => MyAccountScreen()),
+            //     (Route<dynamic> route) => false);
+            Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => MyAccountScreen()));
+          },
+        ),
+        ListTile(
+          leading: const Icon(Icons.favorite),
+          title: const Text("My Favourites"),
+          onTap: () {
+            // Navigator.pushAndRemoveUntil(
+            //     context,
+            //     MaterialPageRoute(builder: (context) => MyAccountScreen()),
+            //     (Route<dynamic> route) => false);
+            Navigator.of(context)
+                .push(MaterialPageRoute(builder: (context) => MyFavourite()));
           },
         ),
         ListTile(
@@ -100,7 +114,7 @@ class _TabBarPageState extends State<TabBarPage> {
   }
 
   Widget _createdBottomTabBar(BuildContext context) {
-     final  bloc = BlocProvider.of<TabBarBloc>(context);
+    final bloc = BlocProvider.of<TabBarBloc>(context);
     return BottomNavigationBar(
       currentIndex: bloc.currentIndex,
       items: [

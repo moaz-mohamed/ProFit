@@ -14,18 +14,14 @@ import 'package:profit/widgets/IntroPage/Intro/signup_screen.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({Key? key}) : super(key: key);
-  
 
-  
   @override
   Widget build(BuildContext context) {
     Widget nextScreen;
-    if(FirebaseAuth.instance.currentUser != null){
+    if (FirebaseAuth.instance.currentUser != null) {
       nextScreen = Sucess();
-    }
-    else{
+    } else {
       nextScreen = const IntroPage();
-      
     }
     return AnimatedSplashScreen(
       nextScreen: nextScreen,
@@ -60,13 +56,9 @@ class _IntroPageState extends State<IntroPage> {
   late bool _gender;
   late double calories;
   //Male or Female
- 
-  
- 
+
   @override
   Widget build(BuildContext context) {
-    
- 
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).requestFocus(

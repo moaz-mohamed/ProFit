@@ -1,9 +1,6 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:profit/services/auth.dart';
-import 'package:profit/themes/ThemeUI.dart';
 import 'dart:async';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:pedometer/pedometer.dart';
@@ -71,7 +68,7 @@ class StepsScreenState extends State<StepsScreen> {
 
     setState(() {
       _todaySteps = (event.steps - int.parse(_savedSteps)).toString();
-    //  print(_savedSteps);
+      //  print(_savedSteps);
     });
     // prefs.setString('todaySteps', _todaySteps);
   }

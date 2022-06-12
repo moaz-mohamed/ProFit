@@ -72,18 +72,18 @@ class Food {
 
 class Nutrients {
   Nutrients({
-    required this.ENERCKCAL,
+    required this.enercKcal,
     // required this.PROCNT,
     // required this.FAT,
     // required this.CHOCDF,
   });
-  late num? ENERCKCAL;
+  late num? enercKcal;
   // late num? PROCNT;
   // late num? FAT;
   // late num? CHOCDF;
 
   Nutrients.fromJson(Map<String, dynamic> json) {
-    ENERCKCAL = json['ENERC_KCAL'];
+    enercKcal = json['ENERC_KCAL'];
     // PROCNT = json['PROCNT'];
     // FAT = json['FAT'];
     // CHOCDF = json['CHOCDF'];

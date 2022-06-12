@@ -104,7 +104,8 @@ class WorkoutsPage extends StatelessWidget {
                         MediaQuery.of(context).size.height * 0.12,
                       )),
                       backgroundColor: MaterialStateProperty.all(Colors.white),
-                      side: MaterialStateProperty.all(const BorderSide(color: Colors.blue, width: 2)),
+                      side: MaterialStateProperty.all(
+                          const BorderSide(color: Colors.blue, width: 2)),
                       // overlayColor: MaterialStateProperty.all(Colors.black12),
                     ),
                     onPressed: () {
@@ -205,13 +206,13 @@ class WorkoutsPage extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Text(
+                          const Text(
                             "Leg Squats",
                             style: FitnessAppTheme.workoutLabel,
                           ),
                           Row(
                             children: <Widget>[
-                              Text(
+                              const Text(
                                 "Primary: ",
                                 style: FitnessAppTheme.workoutData1,
                               ),
@@ -219,7 +220,7 @@ class WorkoutsPage extends StatelessWidget {
                                 'assets/workout_screen/quads_icon.png',
                                 scale: 6,
                               ),
-                              Text(
+                              const Text(
                                 " Quads  ",
                                 style: FitnessAppTheme.workoutData2,
                               ),
@@ -227,7 +228,7 @@ class WorkoutsPage extends StatelessWidget {
                                 'assets/workout_screen/glutes_icon.png',
                                 scale: 6,
                               ),
-                              Text(
+                              const Text(
                                 " Glutes",
                                 style: FitnessAppTheme.workoutData2,
                               ),
@@ -235,7 +236,7 @@ class WorkoutsPage extends StatelessWidget {
                           ),
                           Row(
                             children: <Widget>[
-                              Text(
+                              const Text(
                                 "Secondary Muscles: ",
                                 style: FitnessAppTheme.workoutData1,
                               ),
@@ -243,7 +244,7 @@ class WorkoutsPage extends StatelessWidget {
                                 'assets/workout_screen/abs_icon.png',
                                 scale: 6,
                               ),
-                              Text(
+                              const Text(
                                 " Abs",
                                 style: FitnessAppTheme.workoutData2,
                               ),
