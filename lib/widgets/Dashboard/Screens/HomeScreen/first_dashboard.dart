@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:profit/services/auth.dart';
 
 import 'package:profit/services/firestore_database.dart';
 import 'package:profit/themes/ThemeUI.dart';
@@ -16,6 +17,7 @@ class Dashboard extends StatelessWidget {
     "Dinner",
     "Workout",
   ];
+  DatabaseService dbService = DatabaseService();
 
   Dashboard({Key? key}) : super(key: key);
 
@@ -30,7 +32,7 @@ class Dashboard extends StatelessWidget {
           itemCount: 4,
           itemBuilder: (BuildContext, int index) {
             return Container(
-              constraints: BoxConstraints(
+              constraints: const BoxConstraints(
                 maxHeight: double.infinity,
               ),
               margin: EdgeInsets.all(30),
@@ -60,7 +62,7 @@ class Dashboard extends StatelessWidget {
                             fit: BoxFit.fill,
                             width: 30,
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 5,
                           ),
                           Text(dashboardHeaders[index],
@@ -97,7 +99,8 @@ class Dashboard extends StatelessWidget {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => WorkoutProvider()));
+                                      builder: (context) =>
+                                          const WorkoutProvider()));
                             }
                           },
                           child: Icon(Icons.add, color: Colors.white),
@@ -119,20 +122,20 @@ class Dashboard extends StatelessWidget {
                         builder: (context, snapshot) {
                           if (snapshot.hasData) {
                             var data = snapshot.data as DocumentSnapshot;
-                            var dinner =
+                            var meal =
                                 data[dashboardHeaders[index].toLowerCase()];
                             return ListView.builder(
                               shrinkWrap: true,
-                              physics: NeverScrollableScrollPhysics(),
-                              itemCount: dinner.length,
+                              physics: const NeverScrollableScrollPhysics(),
+                              itemCount: meal.length,
                               itemBuilder: (context, curr) {
                                 if (dashboardHeaders[index] == "Workout") {
                                   return Column(children: [
                                     Card(
                                       child: ListTile(
-                                        title: Text(
-                                            dinner[curr]['name'].toString()),
-                                        subtitle: Text(dinner[curr]
+                                        title:
+                                            Text(meal[curr]['name'].toString()),
+                                        subtitle: Text(meal[curr]
                                                     ['burnedCalories']
                                                 .toString() +
                                             " kCal"),
@@ -144,7 +147,7 @@ class Dashboard extends StatelessWidget {
                                                     id: FirebaseAuth.instance
                                                         .currentUser!.uid,
                                                     index: curr,
-                                                    calories: dinner[curr]
+                                                    calories: meal[curr]
                                                         ['burnedCalories']);
                                           },
                                         ),
@@ -159,27 +162,65 @@ class Dashboard extends StatelessWidget {
                                       shape: OutlineInputBorder(
                                           borderRadius:
                                               BorderRadius.circular(10),
-                                          borderSide: BorderSide(
+                                          borderSide: const BorderSide(
                                               color:
                                                   FitnessAppTheme.nearlyWhite,
                                               width: 1)),
                                       child: ListTile(
-                                        title: Text(
-                                            dinner[curr]['name'].toString()),
-                                        subtitle: Text(dinner[curr]['calories']
-                                                .toString() +
-                                            " kCal"),
-                                        trailing: IconButton(
-                                          icon: Icon(Icons.delete_outline),
-                                          onPressed: () {
-                                            DatabaseService()
-                                                .deleteMealFromFirestoreUser(
-                                                    id: FirebaseAuth.instance
-                                                        .currentUser!.uid,
-                                                    type:
-                                                        dashboardHeaders[index],
-                                                    index: curr);
-                                          },
+                                        title: Row(
+                                          children: [
+                                            Text(meal[curr]['name'].toString()),
+                                          ],
+                                        ),
+                                        subtitle: Text(
+                                            meal[curr]['calories'].toString() +
+                                                " kCal"),
+                                        trailing: Row(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            IconButton(
+                                              onPressed: () {
+                                                dbService.addFoodToFavoriteList(
+                                                  id: FirebaseAuth.instance
+                                                      .currentUser!.uid,
+                                                  index: curr,
+                                                  name: meal[curr]['name'],
+                                                  calories: meal[curr]
+                                                      ['calories'],
+                                                  fats: meal[curr]['fat'],
+                                                  carbs: meal[curr]['carbs'],
+                                                  proteins: meal[curr]
+                                                      ['protein'],
+                                                  quantity: meal[curr]
+                                                      ['quantity'],
+                                                );
+                                                AuthenticationService.snackbar(
+                                                    meal[curr]['name'] +
+                                                        " is added to favourites",
+                                                    Icons.add,
+                                                    Colors.green,
+                                                    context);
+                                              },
+                                              icon: const Icon(
+                                                Icons.favorite,
+                                                color: Colors.pink,
+                                              ),
+                                            ),
+                                            IconButton(
+                                              icon: Icon(Icons.delete_outline),
+                                              onPressed: () {
+                                                dbService
+                                                    .deleteMealFromFirestoreUser(
+                                                        id: FirebaseAuth
+                                                            .instance
+                                                            .currentUser!
+                                                            .uid,
+                                                        type: dashboardHeaders[
+                                                            index],
+                                                        index: curr);
+                                              },
+                                            ),
+                                          ],
                                         ),
                                       ),
                                     )

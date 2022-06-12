@@ -20,7 +20,7 @@ class BurnedIndicator extends StatelessWidget {
                     "assets/home_screen/Fire.png",
                     scale: 2.6,
                   ),
-                  Text(
+                  const Text(
                     "Burned",
                     style: FitnessAppTheme.eatenIndicatorText,
                   ),
