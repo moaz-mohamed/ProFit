@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:profit/main.dart';
 import 'package:profit/services/auth.dart';
+import 'package:profit/services/food_recommendation.dart';
 import 'package:profit/widgets/Dashboard/Screens/Geofencing/geofencing.dart';
 import 'package:profit/widgets/Dashboard/Screens/HomeScreen/home_screen.dart';
 import 'package:profit/widgets/Dashboard/Screens/FoodRecommendationScreen/recommendation_input.dart';
@@ -38,6 +39,8 @@ class _TabBarPageState extends State<TabBarPage> {
 
   @override
   Widget build(BuildContext context) {
+     FoodRecommendationServiceAPI()
+        .getFoodRecommendation({"Diet": [], "Disease": [], "Nutirent": []});
     return BlocProvider<TabBarBloc>(
       create: (BuildContext context) => TabBarBloc(0),
       child: BlocBuilder<TabBarBloc, int>(

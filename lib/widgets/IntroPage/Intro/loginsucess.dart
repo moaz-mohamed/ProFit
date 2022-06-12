@@ -20,38 +20,38 @@ class _SucessState extends State<Sucess> {
   FirebaseAuth auth = FirebaseAuth.instance;
   String username = "";
   String userCalories = "";
-  checkAuthentication() async {
-    auth.authStateChanges().listen((User? user) {
-      if (user == null) {
-        // Navigator.pushNamedAndRemoveUntil(context, '/login', (route) => true);
-        // Navigator.pop(context);
-        // Navigator.pushReplacementNamed(context, '/login');
+//   checkAuthentication() async {
+//     auth.authStateChanges().listen((User? user) {
+//       if (user == null) {
+//         // Navigator.pushNamedAndRemoveUntil(context, '/login', (route) => true);
+//         // Navigator.pop(context);
+//         // Navigator.pushReplacementNamed(context, '/login');
 
-        // Navigator.push(
-        //   context,
-        //   MaterialPageRoute(
-        //     builder: (context) {
-        //       return LoginScreen();
-        //     },
-        //   ),
-        // );
-        //  Navigator.removeRoute(context, (Route<dynamic> route) => false)
-        Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(builder: (context) => LoginScreen()),
-          ModalRoute.withName('/sucess'),
-        );
-        // Navigator.of(context).popUntil(ModalRoute.withName('/sucess'));
+//         // Navigator.push(
+//         //   context,
+//         //   MaterialPageRoute(
+//         //     builder: (context) {
+//         //       return LoginScreen();
+//         //     },
+//         //   ),
+//         // );
+//         //  Navigator.removeRoute(context, (Route<dynamic> route) => false)
+//         Navigator.pushAndRemoveUntil(
+//           context,
+//           MaterialPageRoute(builder: (context) => LoginScreen()),
+//           ModalRoute.withName('/sucess'),
+//         );
+//         // Navigator.of(context).popUntil(ModalRoute.withName('/sucess'));
 
-        //   Navigator.pushNamedAndRemoveUntil
-        //Navigator.pushNamedAndRemoveUntil(context, '/login', ModalRoute.withName('/success'));
+//         //   Navigator.pushNamedAndRemoveUntil
+//         //Navigator.pushNamedAndRemoveUntil(context, '/login', ModalRoute.withName('/success'));
 
-//Navigator.of(context).pushNamedAndRemoveUntil('/login', ModalRoute.withName('/success'));
-//Navigator.push(context,  MaterialPageRoute(builder: (context) => LoginScreen()));
+// //Navigator.of(context).pushNamedAndRemoveUntil('/login', ModalRoute.withName('/success'));
+// //Navigator.push(context,  MaterialPageRoute(builder: (context) => LoginScreen()));
 
-      }
-    });
-  }
+//       }
+//     });
+//   }
 
   // checkAuthenticationGoogle() async {
   //   User? googleUser = await auth.currentUser;
@@ -78,7 +78,7 @@ class _SucessState extends State<Sucess> {
   void signout() async {
     await authServices.signOutGoogle();
     await authServices.signOut();
-    await checkAuthentication();
+    //await checkAuthentication();
   }
 
   @override
@@ -87,7 +87,7 @@ class _SucessState extends State<Sucess> {
         onWillPop: () async {
           return false;
         },
-        child: Scaffold(
+        child: const Scaffold(
             backgroundColor: FitnessAppTheme.selectorGrayBackGround,
             body: TabBarPage()));
   }
