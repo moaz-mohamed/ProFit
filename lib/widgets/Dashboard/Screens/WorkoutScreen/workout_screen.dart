@@ -1,9 +1,6 @@
-import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:profit/themes/ThemeUI.dart';
-
-// import 'package:intent/intent.dart';
 import 'package:profit/widgets/Dashboard/Screens/WorkoutScreen/biceps_curl.dart';
 
 class WorkoutsPage extends StatelessWidget {
@@ -50,81 +47,74 @@ class WorkoutsPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
                 ElevatedButton(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text(
-                            "Bicep Curl",
-                            style: FitnessAppTheme.workoutLabel,
-                          ),
-                          Row(
-                            children: <Widget>[
-                              Text(
-                                "Primary Muscles: ",
-                                style: FitnessAppTheme.workoutData1,
-                              ),
-                              Image.asset(
-                                'assets/workout_screen/bicep_icon.png',
-                                scale: 6,
-                              ),
-                              Text(
-                                " Biceps",
-                                style: FitnessAppTheme.workoutData2,
-                              ),
-                            ],
-                          ),
-                          Row(
-                            children: <Widget>[
-                              Text(
-                                "Secondary Muscles: ",
-                                style: FitnessAppTheme.workoutData1,
-                              ),
-                              Image.asset(
-                                'assets/workout_screen/forearms_icon.png',
-                                scale: 6,
-                              ),
-                              Text(
-                                " Forearms",
-                                style: FitnessAppTheme.workoutData2,
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                      Image.asset(
-                        'assets/workout_screen/bicep.gif',
-                        scale: 8,
-                      ),
-                    ],
-                  ),
-                  style: ButtonStyle(
-                    fixedSize: MaterialStateProperty.all(Size(
-                      MediaQuery.of(context).size.width - 40,
-                      MediaQuery.of(context).size.height * 0.12,
-                    )),
-                    backgroundColor: MaterialStateProperty.all(Colors.white),
-                    side: MaterialStateProperty.all(const BorderSide(color: Colors.blue, width: 2)),
-                    // overlayColor: MaterialStateProperty.all(Colors.black12),
-                  ),
-                  onPressed: () async {
-                    late List<CameraDescription> cameras;
-                    try {
-                      cameras = await availableCameras();
-                    } on CameraException catch (e) {
-                      print('Error: $e.code\nError Message: $e.message');
-                    }
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => BicepCamera(cameras: cameras),
-                      ),
-                    );
-                  },
-                ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Text(
+                              "Bicep Curl",
+                              style: FitnessAppTheme.workoutLabel,
+                            ),
+                            Row(
+                              children: <Widget>[
+                                Text(
+                                  "Primary Muscles: ",
+                                  style: FitnessAppTheme.workoutData1,
+                                ),
+                                Image.asset(
+                                  'assets/workout_screen/bicep_icon.png',
+                                  scale: 6,
+                                ),
+                                Text(
+                                  " Biceps",
+                                  style: FitnessAppTheme.workoutData2,
+                                ),
+                              ],
+                            ),
+                            Row(
+                              children: <Widget>[
+                                Text(
+                                  "Secondary Muscles: ",
+                                  style: FitnessAppTheme.workoutData1,
+                                ),
+                                Image.asset(
+                                  'assets/workout_screen/forearms_icon.png',
+                                  scale: 6,
+                                ),
+                                Text(
+                                  " Forearms",
+                                  style: FitnessAppTheme.workoutData2,
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                        Image.asset(
+                          'assets/workout_screen/bicep.gif',
+                          scale: 10,
+                        ),
+                      ],
+                    ),
+                    style: ButtonStyle(
+                      fixedSize: MaterialStateProperty.all(Size(
+                        MediaQuery.of(context).size.width - 40,
+                        MediaQuery.of(context).size.height * 0.12,
+                      )),
+                      backgroundColor: MaterialStateProperty.all(Colors.white),
+                      side: MaterialStateProperty.all(const BorderSide(color: Colors.blue, width: 2)),
+                      // overlayColor: MaterialStateProperty.all(Colors.black12),
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => BicepCurls(),
+                        ),
+                      );
+                    }),
                 Divider(
                   color: Colors.black,
                   thickness: 1,
@@ -187,7 +177,7 @@ class WorkoutsPage extends StatelessWidget {
                       ),
                       Image.asset(
                         'assets/workout_screen/shoulder_press.gif',
-                        scale: 8,
+                        scale: 10,
                       ),
                     ],
                   ),
@@ -263,7 +253,7 @@ class WorkoutsPage extends StatelessWidget {
                       ),
                       Image.asset(
                         'assets/workout_screen/squats.gif',
-                        scale: 8,
+                        scale: 10,
                       ),
                     ],
                   ),

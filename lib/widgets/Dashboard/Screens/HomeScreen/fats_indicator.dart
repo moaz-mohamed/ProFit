@@ -17,7 +17,8 @@ class FatsIndicator extends StatelessWidget {
                 var data = snapshot.data as DocumentSnapshot;
                 var remainingFats = double.parse((data['remainingFats']).toString()).toInt();
                 var recoFats = (((double.parse((data['calories']).toString()).toDouble()) * (30 / 100)) / 9).toInt();
-                double carbsPercent = (recoFats - remainingFats) / recoFats;
+                double fatsPercent = (recoFats - remainingFats) / recoFats;
+                fatsPercent <= 1 ? fatsPercent = fatsPercent : fatsPercent = 1;
                 return Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
@@ -36,7 +37,7 @@ class FatsIndicator extends StatelessWidget {
                       ],
                     ),
                     LinearPercentIndicator(
-                      percent: carbsPercent,
+                      percent: fatsPercent,
                       width: constraints.maxWidth,
                       lineHeight: constraints.maxHeight * 0.1,
                       backgroundColor: Colors.black26,

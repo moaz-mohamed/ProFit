@@ -239,6 +239,98 @@ class FitnessAppTheme {
     color: Colors.black45,
   );
 
+  // Add Food Scree Fonts
+  static const TextStyle AppBar1 = TextStyle(
+    fontFamily: fontName,
+    fontWeight: FontWeight.w800,
+    fontSize: 20,
+    color: Colors.black,
+  );
+
+  static const TextStyle silverAppBar1 = TextStyle(
+    fontFamily: fontName,
+    fontWeight: FontWeight.w600,
+    fontSize: 26,
+    color: Colors.blue,
+  );
+
+  static const TextStyle totalCaloriesTitle = TextStyle(
+    fontFamily: fontName,
+    fontWeight: FontWeight.w600,
+    fontSize: 16,
+    color: Colors.black,
+  );
+
+  static const TextStyle totalCaloriesNumber = TextStyle(
+    fontFamily: fontName,
+    fontWeight: FontWeight.w600,
+    fontSize: 20,
+    color: Colors.blue,
+  );
+
+  static const TextStyle totalCaloriesUnit = TextStyle(
+    fontFamily: fontName,
+    fontWeight: FontWeight.w600,
+    fontSize: 16,
+    color: Colors.black45,
+  );
+
+  static const TextStyle quantityText = TextStyle(
+    fontFamily: fontName,
+    fontWeight: FontWeight.w500,
+    fontSize: 26,
+    color: Colors.black,
+  );
+
+  static const TextStyle textFieldHint = TextStyle(
+    fontFamily: fontName,
+    fontWeight: FontWeight.w400,
+    fontSize: 20,
+    color: Colors.black45,
+  );
+
+  static const TextStyle textFieldText = TextStyle(
+    fontFamily: fontName,
+    fontWeight: FontWeight.w400,
+    fontSize: 20,
+    color: Colors.blue,
+  );
+
+  static const TextStyle nutritionFactsText = TextStyle(
+    fontFamily: fontName,
+    fontWeight: FontWeight.w500,
+    fontSize: 26,
+    color: Colors.black,
+  );
+
+  static const TextStyle nutrientsText = TextStyle(
+    fontFamily: fontName,
+    fontWeight: FontWeight.w500,
+    fontSize: 20,
+    color: Colors.blue,
+  );
+
+  static const TextStyle nutrientsValue = TextStyle(
+    fontFamily: fontName,
+    fontWeight: FontWeight.w400,
+    fontSize: 20,
+    color: Colors.black,
+  );
+
+  static const TextStyle nutrientsList = TextStyle(
+    fontFamily: fontName,
+    fontWeight: FontWeight.w500,
+    fontSize: 26,
+    color: Colors.black,
+  );
+
+  static const TextStyle nutrientsListValue = TextStyle(
+    fontFamily: fontName,
+    fontWeight: FontWeight.w400,
+    fontSize: 26,
+    color: Colors.blue,
+  );
+
   ///--->>> Workout screen fonts
   static const TextStyle spotMe1 = TextStyle(
     fontFamily: fontName,
@@ -278,6 +370,49 @@ class FitnessAppTheme {
   static const TextStyle workoutData2 = TextStyle(
     fontFamily: fontName,
     fontWeight: FontWeight.w600,
+    fontSize: 14,
+    color: Colors.black,
+  );
+
+  // Upload workout screen fonts
+  static const TextStyle workoutTitle = TextStyle(
+    fontFamily: fontName,
+    fontWeight: FontWeight.w600,
+    fontSize: 26,
+    color: Colors.black,
+  );
+
+  static const TextStyle repsCountTitle = TextStyle(
+    fontFamily: fontName,
+    fontWeight: FontWeight.w500,
+    fontSize: 26,
+    color: Colors.black,
+  );
+
+  static const TextStyle repsCountValue = TextStyle(
+    fontFamily: fontName,
+    fontWeight: FontWeight.w400,
+    fontSize: 66,
+    color: Colors.blue,
+  );
+
+  static const TextStyle repsCountUnit = TextStyle(
+    fontFamily: fontName,
+    fontWeight: FontWeight.w400,
+    fontSize: 26,
+    color: Colors.black45,
+  );
+
+  static const TextStyle upload = TextStyle(
+    fontFamily: fontName,
+    fontWeight: FontWeight.w600,
+    fontSize: 24,
+    color: Colors.black,
+  );
+
+  static const TextStyle instructions = TextStyle(
+    fontFamily: fontName,
+    fontWeight: FontWeight.w400,
     fontSize: 14,
     color: Colors.black,
   );

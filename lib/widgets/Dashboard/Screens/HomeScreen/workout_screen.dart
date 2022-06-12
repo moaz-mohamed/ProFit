@@ -21,7 +21,7 @@ class _WorkoutScreenState extends State<WorkoutScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-       appBar: AppBar(
+      appBar: AppBar(
         title: const Text('Select Your Workout'),
         centerTitle: true,
       ),
@@ -143,18 +143,19 @@ class _WorkoutScreenState extends State<WorkoutScreen> {
                       if (state is WorkoutCalculationState) {
                         // add workout to firestore
 
-                        DatabaseService().AddWorkoutToFirestoreUser(
+                        DatabaseService().addWorkoutToFirestoreUser(
                           id: FirebaseAuth.instance.currentUser!.uid,
                           name: state.workout.toString(),
                           burnedCalories: double.parse(
                               (double.parse(state.workoutCalculation)
-                                  .toStringAsFixed(2))),
+                                  .toStringAsFixed(0))),
                           duration: double.parse(_text!),
                         );
-                         Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(builder: (context) => TabBarPage()),
-                    ModalRoute.withName('/success'));
+                        Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => TabBarPage()),
+                            ModalRoute.withName('/success'));
                       }
                     },
                   )

@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:profit/services/firestore_database.dart';
 
 class MyHeaderDrawer extends StatefulWidget {
   @override
@@ -10,6 +11,7 @@ class MyHeaderDrawer extends StatefulWidget {
 
 class _MyHeaderDrawerState extends State<MyHeaderDrawer> {
   FirebaseAuth auth = FirebaseAuth.instance;
+
   String username = "";
   String useremail = "";
   getData() async {
@@ -19,14 +21,21 @@ class _MyHeaderDrawerState extends State<MyHeaderDrawer> {
     String userId = auth.currentUser!.uid;
     DocumentReference doc =
         FirebaseFirestore.instance.collection("users").doc(userId);
+    DatabaseService dbService = DatabaseService();
+
+    await dbService.getFields();
 
     await doc.get().then((value) {
       name = value.get('name').toString();
       email = value.get('email').toString();
     });
 
-    setState(() => username = name!);
-    setState(() => useremail = email!);
+    //setState(() => username = name!);
+    setState(() {
+      username = name!;
+      useremail = email!;
+    });
+    // setState(() => useremail = email!);
   }
 
   @override

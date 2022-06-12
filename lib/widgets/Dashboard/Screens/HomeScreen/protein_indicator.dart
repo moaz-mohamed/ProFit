@@ -17,7 +17,8 @@ class ProteinIndicator extends StatelessWidget {
                 var data = snapshot.data as DocumentSnapshot;
                 var remainingProtein = double.parse((data['remainingProteins']).toString()).toInt();
                 var recoProtein = (((double.parse((data['calories']).toString()).toDouble()) * (30 / 100)) / 4).toInt();
-                double carbsPercent = (recoProtein - remainingProtein) / recoProtein;
+                double proteinPercent = (recoProtein - remainingProtein) / recoProtein;
+                proteinPercent <= 1 ? proteinPercent = proteinPercent : proteinPercent = 1;
                 return Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
@@ -36,7 +37,7 @@ class ProteinIndicator extends StatelessWidget {
                       ],
                     ),
                     LinearPercentIndicator(
-                      percent: carbsPercent,
+                      percent: proteinPercent,
                       width: constraints.maxWidth,
                       lineHeight: constraints.maxHeight * 0.1,
                       backgroundColor: Colors.black26,

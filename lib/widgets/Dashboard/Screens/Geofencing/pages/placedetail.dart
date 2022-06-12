@@ -7,8 +7,8 @@ import 'package:profit/widgets/Dashboard/Screens/Geofencing/constants.dart'
     as Constants;
 
 class PlaceDetailPage extends StatefulWidget {
-  String? _place_id;
-  PlaceDetailPage(this._place_id, {Key? key}) : super(key: key);
+  String? place_id;
+  PlaceDetailPage(this.place_id, {Key? key}) : super(key: key);
   @override
   State createState() => PlaceDetailState();
 }
@@ -54,18 +54,17 @@ class PlaceDetailState extends State<PlaceDetailPage> {
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: <Widget>[
-                    if (!_place!.formattedAddress.isEmpty)
+                    if (_place!.formattedAddress.isNotEmpty)
                       addressCard("Address ", _place!.formattedAddress,
                           Icons.location_on),
-                    if (!_place!.rating.isEmpty)
-                      // getCard("Rating ", _place!.rating, Icons.star_rate),
+                    if (_place!.rating.isNotEmpty)
                       ratingCard("Rating ", Icons.star_rate),
-                    if (!_place!.internationalPhoneNumber.isEmpty)
+                    if (_place!.internationalPhoneNumber.isNotEmpty)
                       addressCard("Phone ", _place!.internationalPhoneNumber,
                           Icons.phone),
-                    if (!_place!.reviews.isEmpty)
+                    if (_place!.reviews.isNotEmpty)
                       listCard("Reviews ", Icons.comment, buildreviews()),
-                    if (!_place!.photos.isEmpty)
+                    if (_place!.photos.isNotEmpty)
                       listCard("Photos ", Icons.image, buildPhotos()),
                   ],
                 ),
@@ -79,7 +78,7 @@ class PlaceDetailState extends State<PlaceDetailPage> {
   void initState() {
     super.initState();
     LocationService.get()
-        .getPlace(widget._place_id ?? "ChIJv3c4jz-uEmsRNQT_5kJNMG8")
+        .getPlace(widget.place_id ?? "ChIJv3c4jz-uEmsRNQT_5kJNMG8")
         .then((data) {
       setState(() {
         _place = data;
@@ -272,8 +271,9 @@ class PlaceDetailState extends State<PlaceDetailPage> {
     return Card(
       clipBehavior: Clip.antiAlias,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(24),
+        borderRadius: BorderRadius.circular(15.0),
       ),
+      elevation: 7,
       child: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(

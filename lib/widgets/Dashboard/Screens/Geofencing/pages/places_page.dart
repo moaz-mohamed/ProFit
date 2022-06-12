@@ -86,9 +86,9 @@ class Placestate extends State<PlacesPage> {
             padding: const EdgeInsets.all(5.0),
             child: Card(
               shape: RoundedRectangleBorder(
-                side: BorderSide(color: Colors.blueGrey.shade100, width: 4),
-                borderRadius: BorderRadius.circular(10.0),
+                borderRadius: BorderRadius.circular(15.0),
               ),
+              elevation: 7,
               child: ListTile(
                   title: Text(f.name,
                       style: const TextStyle(
@@ -102,7 +102,7 @@ class Placestate extends State<PlacesPage> {
                     children: [
                       Container(
                           margin: const EdgeInsets.symmetric(
-                              horizontal: 4, vertical: 3),
+                              horizontal: 2, vertical: 2),
                           child: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
@@ -119,12 +119,11 @@ class Placestate extends State<PlacesPage> {
                               Text(" " + f.rating.toString()),
                             ],
                           ),
-                          decoration: BoxDecoration(
-                              border: Border.all(color: Colors.blue.shade800),
-                              borderRadius:
-                                  const BorderRadius.all(Radius.circular(20))),
-                          padding: const EdgeInsets.all(4)),
-                      Text(f.vicinity),
+                          padding: const EdgeInsets.all(2)),
+                      Padding(
+                        padding: const EdgeInsets.all(4.0),
+                        child: Text(f.vicinity),
+                      ),
                     ],
                   ),
                   onTap: () {

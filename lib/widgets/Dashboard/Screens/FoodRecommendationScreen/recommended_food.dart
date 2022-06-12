@@ -23,7 +23,7 @@ class _RecommendedFoodState extends State<RecommendedFood> {
   final String foodPhoto =
       "https://image.similarpng.com/very-thumbnail/2021/09/Good-food-logo-design-on-transparent-background-PNG.png";
 //  late List<FoodRecommendationItem> foodRecommendationIte;
- 
+
   @override
   void initState() {
     // TODO: implement initState
@@ -42,15 +42,13 @@ class _RecommendedFoodState extends State<RecommendedFood> {
   //       quantity: snapshot.data[index].servingSizeG.toDouble(),
   //       id: FirebaseAuth.instance.currentUser!.uid);
   //   // Navigator.of(context).pushAndRemoveUntil(
-        
+
   //   //bloc.currentIndex=0;
   // // BlocProvider.of<TabBarBloc>(context).add(NavBarTappedEvent(index: 0));
   // }
 
   @override
   Widget build(BuildContext context) {
-     
-     
     return foodBuilder();
   }
 
@@ -77,25 +75,25 @@ class _RecommendedFoodState extends State<RecommendedFood> {
                           borderRadius: BorderRadius.circular(10.0),
                         ),
                         child: ListTile(
-                            leading: Image.network(foodPhoto),
-                            title: Text(
-                              snapshot.data[index].name,
-                              style: const TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: "SourceSansPro",
-                                  fontSize: 18.0,
-                                  color: Colors.blue),
-                            ),
-                            subtitle: Text(
-                                "Serving Size: ${snapshot.data[index].servingSizeG} gm\n"
-                                "Calories: ${snapshot.data[index].calories}"),
-                            isThreeLine: true,
-                            trailing: const Icon(
-                              Icons.add_task_rounded,
-                              color: Colors.blue,
-                            ),
-                            //         Navigator.of(context).popUntil(ModalRoute.withName('/sucess'));
-                            ),
+                          leading: Image.network(foodPhoto),
+                          title: Text(
+                            snapshot.data[index].name,
+                            style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontFamily: "SourceSansPro",
+                                fontSize: 18.0,
+                                color: Colors.blue),
+                          ),
+                          subtitle: Text(
+                              "Serving Size: ${snapshot.data[index].servingSizeG} gm\n"
+                              "Calories: ${snapshot.data[index].calories}"),
+                          isThreeLine: true,
+                          trailing: const Icon(
+                            Icons.add_task_rounded,
+                            color: Colors.blue,
+                          ),
+                          //         Navigator.of(context).popUntil(ModalRoute.withName('/sucess'));
+                        ),
                       );
                     }),
               );

@@ -2,10 +2,26 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:profit/models/user_profile.dart';
+import 'package:profit/utils/calculations/calculate_calories.dart';
 
 class DatabaseService {
   // collection reference for tracker
   CollectionReference users = FirebaseFirestore.instance.collection('users');
+  FirebaseAuth auth = FirebaseAuth.instance;
+  String? userId;
+  String? updatedName;
+  String? updatedWeight;
+  String? updatedage;
+  String? updatedheight;
+  int? updatedGoal;
+  double? updatedcalories;
+  double? updatedRemainingCalories;
+  double? updatedRemainingFats;
+  double? updatedRemainingCarbs;
+  double? updatedRemainingProtein;
+
+  double? updatedActivityLevel;
+  bool? updatedgender;
 
   Future createNewUser(
       {required String id, required UserProfile userProfile}) async {
@@ -19,11 +35,57 @@ class DatabaseService {
         .set(userProfile.toMap(), SetOptions(merge: true));
   }
 
+  Future resetMeals(String id) async {
+    return await users.doc(id).update(
+      {
+        'totalCarbs': 0.0,
+        'totalProteins': 0.0,
+        'totalFats': 0.0,
+        'lunch': [],
+        'dinner': [],
+        'breakfast': [],
+        'eatenCalories': 0.0,
+      },
+    );
+  }
+
+  updateCalories() async {
+    final docUser = FirebaseFirestore.instance.collection('users').doc(userId);
+    double? newRemainCalories = updatedRemainingCalories;
+    double? newRemainProtien = updatedRemainingProtein;
+    double? newRemainFats = updatedRemainingFats;
+    double? newRemainCarbs = updatedRemainingCarbs;
+    double? eatenCalories;
+    double? totalFats;
+    double? totalCarbs;
+    double? totalProteins;
+    await docUser.get().then((value) {
+      eatenCalories = value.get('eatenCalories');
+      totalFats = value.get('totalFats');
+      totalCarbs = value.get('totalCarbs');
+      totalProteins = value.get('totalProteins');
+    });
+    double calories = CalculateCalories(updatedGoal, updatedage, updatedheight,
+        updatedWeight, updatedgender, updatedActivityLevel);
+
+    newRemainCalories = calories;
+    newRemainProtien = ((30 / 100) * calories) / 4;
+    newRemainFats = ((30 / 100) * calories) / 9;
+    newRemainCarbs = ((40 / 100) * calories) / 4;
+    docUser.update({
+      'calories': calories,
+      'remainingCalories': newRemainCalories - eatenCalories!,
+      'remainingFats': newRemainFats - totalFats!,
+      'remainingCarbs': newRemainCarbs - totalCarbs!,
+      'remainingProteins': newRemainProtien - totalProteins!,
+    });
+  }
+
   Stream<DocumentSnapshot> getUserDocStream({required String id}) {
     return users.doc(id).snapshots();
   }
 
-  Future AddBreakfastToFirestoreUser(
+  Future addBreakfastToFirestoreUser(
       {required String id,
       required String name,
       required double calories,
@@ -59,7 +121,7 @@ class DatabaseService {
   }
 
 // Add lunch
-  Future AddLunchToFirestoreUser(
+  Future addLunchToFirestoreUser(
       {required String id,
       required String name,
       required double calories,
@@ -94,7 +156,7 @@ class DatabaseService {
   }
 
 // Add dinner
-  Future AddDinnerToFirestoreUser(
+  Future addDinnerToFirestoreUser(
       {required String id,
       required String name,
       required double calories,
@@ -129,7 +191,7 @@ class DatabaseService {
   }
 
 // Add workout
-  Future AddWorkoutToFirestoreUser({
+  Future addWorkoutToFirestoreUser({
     required String id,
     required String name,
     required double burnedCalories,
@@ -347,6 +409,25 @@ class DatabaseService {
     // update user document
     return await FirebaseFirestore.instance.collection('users').doc(id).update({
       'burnedCalories': burnedCaloriesTotal,
+    });
+  }
+
+  getFields() async {
+    userId = auth.currentUser!.uid;
+    final docUser = FirebaseFirestore.instance.collection('users').doc(userId);
+    await docUser.get().then((value) {
+      updatedName = value.get('name').toString();
+      updatedWeight = value.get('weight').toString();
+      updatedage = value.get('age').toString();
+      updatedheight = value.get('height').toString();
+      updatedGoal = value.get('goal');
+      updatedgender = value.get('gender');
+      updatedcalories = value.get('calories');
+      updatedActivityLevel = value.get('activityLevel');
+      updatedRemainingCalories = value.get('remainingCalories');
+      updatedRemainingCarbs = value.get('remainingCarbs');
+      updatedRemainingFats = value.get('remainingFats');
+      updatedRemainingProtein = value.get('remainingProteins');
     });
   }
 }
