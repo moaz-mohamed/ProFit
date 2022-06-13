@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:http/http.dart' as http;
 
-const baseWorkoutAPI = "https://99e3-102-47-149-92.eu.ngrok.io";
+const baseWorkoutAPI = "https://profit-workout-counter.herokuapp.com/";
 
 class WorkoutServices {
   getFile() async {
@@ -17,7 +17,7 @@ class WorkoutServices {
   }
 
   uploadFile(File workoutVideo, String workoutName) async {
-    final String URI = baseWorkoutAPI + "/$workoutName";
+    final String URI = baseWorkoutAPI + workoutName;
     final request = http.MultipartRequest('POST', Uri.parse(URI));
     final headers = {"Content-type": "multipart/form-data"};
     request.files.add(
