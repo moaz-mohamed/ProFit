@@ -4,12 +4,12 @@ import 'package:flutter/widgets.dart';
 import 'package:profit/themes/ThemeUI.dart';
 import 'package:profit/services/workout_services.dart';
 
-class BicepCurls extends StatefulWidget {
+class ShoulderRaises extends StatefulWidget {
   @override
-  State<BicepCurls> createState() => _BicepCurlsState();
+  State<ShoulderRaises> createState() => _ShoulderRaisesState();
 }
 
-class _BicepCurlsState extends State<BicepCurls> {
+class _ShoulderRaisesState extends State<ShoulderRaises> {
   late String _responseMessage;
   late String _caloriesBurnt;
   WorkoutServices workoutServices = WorkoutServices();
@@ -27,7 +27,7 @@ class _BicepCurlsState extends State<BicepCurls> {
       _responseMessage = "...";
       _caloriesBurnt = "...";
     });
-    final _response = await workoutServices.uploadFile(_pickedFile, "biceps");
+    final _response = await workoutServices.uploadFile(_pickedFile, "shoulders");
     setState(() {
       _responseMessage = _response;
       _caloriesBurnt = (double.parse(_responseMessage) * 0.2).toStringAsFixed(3);
@@ -51,15 +51,15 @@ class _BicepCurlsState extends State<BicepCurls> {
               crossAxisAlignment: CrossAxisAlignment.end,
               children: <Widget>[
                 Image.asset(
-                  'assets/workout_screen/bicep_icon_flipped.png',
+                  'assets/workout_screen/shoulder_icon.png',
                   scale: 3,
                 ),
                 Text(
-                  " BICEP CURLS ",
+                  " Sholder Raises ",
                   style: FitnessAppTheme.workoutTitle,
                 ),
                 Image.asset(
-                  'assets/workout_screen/bicep_icon.png',
+                  'assets/workout_screen/shoulder_icon_flipped.png',
                   scale: 3,
                 ),
               ],
@@ -137,7 +137,7 @@ class _BicepCurlsState extends State<BicepCurls> {
               ),
             ),
             Image.asset(
-              'assets/workout_screen/bicep.gif',
+              'assets/workout_screen/shoulder_press.gif',
               scale: 5,
             ),
             // Row(
