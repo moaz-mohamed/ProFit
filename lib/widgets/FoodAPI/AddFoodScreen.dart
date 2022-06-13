@@ -422,13 +422,30 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
       //////------>>>>>> Add food button
       bottomNavigationBar: BottomAppBar(
         child: ElevatedButton(
-          child: Icon(Icons.ac_unit),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Icon(Icons.add_circle_outline),
+              Text(
+                "  Add to daily macros",
+                style: FitnessAppTheme.addFood,
+              ),
+            ],
+          ),
+          style: ButtonStyle(
+            fixedSize: MaterialStateProperty.all(Size(
+              MediaQuery.of(context).size.width,
+              MediaQuery.of(context).size.height * 0.06,
+            )),
+            backgroundColor: MaterialStateProperty.all(Colors.blue),
+            // side: MaterialStateProperty.all(const BorderSide(color: Colors.blue, width: 2)),
+            overlayColor: MaterialStateProperty.all(Colors.white),
+          ),
           // Checked and working
           onPressed: () {
             print(foodQuantity);
             if (foodQuantity.toDouble() == 0) {
               //widget called dialogue widget
-
             } else {
               if (foodtype == 1) {
                 DatabaseService().addBreakfastToFirestoreUser(

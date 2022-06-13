@@ -239,7 +239,7 @@ class FitnessAppTheme {
     color: Colors.black45,
   );
 
-  // Add Food Scree Fonts
+  // Add Food Screen Fonts
   static const TextStyle AppBar1 = TextStyle(
     fontFamily: fontName,
     fontWeight: FontWeight.w800,
@@ -329,6 +329,13 @@ class FitnessAppTheme {
     fontWeight: FontWeight.w400,
     fontSize: 26,
     color: Colors.blue,
+  );
+
+  static const TextStyle addFood = TextStyle(
+    fontFamily: fontName,
+    fontWeight: FontWeight.w600,
+    fontSize: 16,
+    color: Colors.white,
   );
 
   ///--->>> Workout screen fonts
