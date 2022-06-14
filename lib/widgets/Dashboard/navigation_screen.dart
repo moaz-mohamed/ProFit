@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:profit/main.dart';
 import 'package:profit/services/auth.dart';
+import 'package:profit/services/firestore_database.dart';
 import 'package:profit/services/food_recommendation.dart';
 import 'package:profit/widgets/Dashboard/Screens/Geofencing/geofencing.dart';
 import 'package:profit/widgets/Dashboard/Screens/HomeScreen/home_screen.dart';
@@ -25,7 +26,9 @@ class TabBarPage extends StatefulWidget {
 }
 
 class _TabBarPageState extends State<TabBarPage> {
-  AuthenticationService auth = AuthenticationService();
+  DatabaseService databaseService = DatabaseService();
+  FirebaseAuth auth = FirebaseAuth.instance;
+  late DateTime date;
 
   checkLogout() async {
     FirebaseAuth.instance.authStateChanges().listen((_user) {
@@ -38,8 +41,34 @@ class _TabBarPageState extends State<TabBarPage> {
   }
 
   @override
+  void initState() {
+    // TODO: implement initState
+
+    _CheckDate();
+    //databaseService.getDateFromFirestore(auth.currentUser!.uid);
+    super.initState();
+  }
+
+  _CheckDate() async {
+    date = await getDate();
+    print(date);
+
+    // if date.month == currentDate.month && date.day == currentDate.day {
+
+    if (date.month != DateTime.now().month || date.day != DateTime.now().day) {
+      print("im in");
+      databaseService.resetAllData(auth.currentUser!.uid);
+      databaseService.updateDate(auth.currentUser!.uid, DateTime.now());
+    }
+  }
+
+  getDate() async {
+    return await databaseService.getDateFromFirestore(auth.currentUser!.uid);
+  }
+
+  @override
   Widget build(BuildContext context) {
-     FoodRecommendationServiceAPI()
+    FoodRecommendationServiceAPI()
         .getFoodRecommendation({"Diet": [], "Disease": [], "Nutirent": []});
     return BlocProvider<TabBarBloc>(
       create: (BuildContext context) => TabBarBloc(0),

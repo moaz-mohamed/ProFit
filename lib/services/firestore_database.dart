@@ -526,4 +526,47 @@ class DatabaseService {
         .doc(id)
         .update({'favourites': favourite});
   }
+
+  getDateFromFirestore(String id) async {
+    late Timestamp date;
+    final DocumentSnapshot user =
+        await FirebaseFirestore.instance.collection('users').doc(id).get();
+    date = user.get('date') as Timestamp;
+    return date.toDate();
+  }
+
+// reset all data
+  resetAllData(String id) async {
+    // get calories from firestore
+    final DocumentSnapshot user =
+        await FirebaseFirestore.instance.collection('users').doc(id).get();
+    final double calories = user.get('calories');
+    final double remainingCarbs = user.get('remainingCarbs');
+    final double remainingFats = user.get('remainingFats');
+    final double remainingProtein = user.get('remainingProteins');
+
+    return await users.doc(id).update(
+      {
+        'totalCarbs': 0.0,
+        'totalProteins': 0.0,
+        'totalFats': 0.0,
+        'lunch': [],
+        'dinner': [],
+        'breakfast': [],
+        'eatenCalories': 0.0,
+        'burnedCalories': 0.0,
+        'remainingCalories': calories,
+        'remainingCarbs': ((40 / 100) * calories) / 4,
+        'remainingFats': ((30 / 100) * calories) / 9,
+        'remainingProteins': ((30 / 100) * calories) / 4,
+      },
+    );
+  }
+
+// update date of user id
+  updateDate(String id, DateTime date) async {
+    return await users.doc(id).update({
+      'date': Timestamp.fromDate(date),
+    });
+  }
 }
