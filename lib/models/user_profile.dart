@@ -18,6 +18,8 @@ class UserProfile {
   late double remainingProteins;
   late double remainingFats;
   late double remainingCarbs;
+  // current date
+  late DateTime date;
 
   List<Map<String, dynamic>> breakfast = [];
   List<Map<String, dynamic>> lunch = [];
@@ -45,6 +47,7 @@ class UserProfile {
     remainingProteins = 0;
     remainingFats = 0;
     remainingCarbs = 0;
+    date = DateTime.now();
   }
 
   UserProfile.fromMap(Map<String, dynamic> data) {
@@ -70,6 +73,7 @@ class UserProfile {
     totalProteins = data['_totalProteins'];
     totalCarbs = data['_totalCarbs'];
     totalFats = data['_totalFats'];
+    date = data['date'];
   }
 
   Map<String, dynamic> toMap() => {
@@ -96,6 +100,7 @@ class UserProfile {
         'remainingFats': remainingFats,
         'remainingCarbs': remainingCarbs,
         'remainingProteins': remainingProteins,
+        'date': date,
       };
   //   String getId() => _id;
 
