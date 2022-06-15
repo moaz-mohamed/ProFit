@@ -60,10 +60,12 @@ class DatabaseService {
     double? totalFats;
     double? totalCarbs;
     double? totalProteins;
+    double? burnedCalories;
     await docUser.get().then((value) {
       eatenCalories = value.get('eatenCalories');
       totalFats = value.get('totalFats');
       totalCarbs = value.get('totalCarbs');
+      burnedCalories = value.get('burnedCalories') ?? 0;
       totalProteins = value.get('totalProteins');
     });
     double calories = CalculateCalories(updatedGoal, updatedage, updatedheight,
@@ -75,7 +77,7 @@ class DatabaseService {
     newRemainCarbs = ((40 / 100) * calories) / 4;
     docUser.update({
       'calories': calories,
-      'remainingCalories': newRemainCalories - eatenCalories!,
+      'remainingCalories': newRemainCalories - eatenCalories! + burnedCalories!,
       'remainingFats': newRemainFats - totalFats!,
       'remainingCarbs': newRemainCarbs - totalCarbs!,
       'remainingProteins': newRemainProtien - totalProteins!,
@@ -273,15 +275,19 @@ class DatabaseService {
   Future updateTotalBurnedCalories(
       {required String id, required double burnedCalories}) async {
     double burnedCaloriesTotal = 0;
+    late double remainingCalories;
     DocumentReference user =
         FirebaseFirestore.instance.collection("users").doc(id);
     await user.get().then((value) {
       burnedCaloriesTotal = value.get('burnedCalories');
+      remainingCalories = value.get('remainingCalories');
     });
     burnedCaloriesTotal += burnedCalories;
+    remainingCalories += burnedCalories;
     // update user document
     return await FirebaseFirestore.instance.collection('users').doc(id).update({
       'burnedCalories': burnedCaloriesTotal,
+      'remainingCalories': remainingCalories,
     });
   }
 
@@ -464,15 +470,19 @@ class DatabaseService {
   Future updateBurnedCaloriesAfterDelete(
       {required String id, required double burnedCalories}) async {
     double burnedCaloriesTotal = 0;
+    late double remainingCalories;
     DocumentReference user =
         FirebaseFirestore.instance.collection("users").doc(id);
     await user.get().then((value) {
       burnedCaloriesTotal = value.get('burnedCalories');
+      remainingCalories = value.get('remainingCalories');
     });
     burnedCaloriesTotal -= burnedCalories;
+    remainingCalories -= burnedCalories;
     // update user document
     return await FirebaseFirestore.instance.collection('users').doc(id).update({
       'burnedCalories': burnedCaloriesTotal,
+      'remainingCalories': remainingCalories,
     });
   }
 
@@ -553,6 +563,7 @@ class DatabaseService {
         'lunch': [],
         'dinner': [],
         'breakfast': [],
+        'workout': [],
         'eatenCalories': 0.0,
         'burnedCalories': 0.0,
         'remainingCalories': calories,
