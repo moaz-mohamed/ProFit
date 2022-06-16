@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:profit/models/radio_item.dart';
-import 'package:profit/themes/ThemeUI.dart';
+import 'package:profit/themes/theme_ui.dart';
 
 class CustomRadioActivity extends StatefulWidget {
   const CustomRadioActivity({
@@ -83,7 +83,7 @@ class _RadioItem extends StatelessWidget {
         mainAxisSize: MainAxisSize.max,
         children: <Widget>[
           Padding(
-            padding: EdgeInsets.only(left: 0),
+            padding: const EdgeInsets.only(left: 0),
             child: Container(
               height: 25.0,
               width: 25.0,
