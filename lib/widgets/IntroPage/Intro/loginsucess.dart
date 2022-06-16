@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:profit/services/auth.dart';
 import 'package:profit/services/firestore_database.dart';
-import 'package:profit/themes/ThemeUI.dart';
+import 'package:profit/themes/theme_ui.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:profit/widgets/Dashboard/navigation_screen.dart';
-import 'package:profit/widgets/IntroPage/Intro/login_screen.dart';
 // import dashboard from './dashboard';
 
 // import firestore
@@ -68,12 +67,6 @@ class _SucessState extends State<Sucess> {
   //     );
   //   }
   // }
-  @override
-  void initState() {
-    // TODO: implement initState
-
-    super.initState();
-  }
 
   void signout() async {
     await authServices.signOutGoogle();

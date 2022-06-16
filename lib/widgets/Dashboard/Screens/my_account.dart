@@ -1,10 +1,9 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:profit/services/firestore_database.dart';
 import 'package:profit/services/validate.dart';
-import 'package:profit/themes/ThemeUI.dart';
+import 'package:profit/themes/theme_ui.dart';
 
 import '../navigation_screen.dart';
 
@@ -60,7 +59,8 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
               ),
               ElevatedButton(
                 onPressed: () {
-                  updatevalues();
+                  dbService.updateInfo(
+                      userAge, userHeight, userWeight, userName);
                   // Navigator.of(context).pushAndRemoveUntil(
                   //     MaterialPageRoute(builder: (context) => MyApp()),
                   //     (Route<dynamic> route) => false);
@@ -171,20 +171,6 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
             );
           }
         });
-  }
-
-  updatevalues() async {
-    final docUser = FirebaseFirestore.instance.collection('users').doc(userId);
-
-    // await dbService.getFields();
-    // docUser.update({
-    //   'name': userName,
-    //   'age': userAge,
-    //   'weight': userWeight,
-    //   'height': userHeight,
-    // });
-    dbService.updateCalories(userAge, userHeight, userWeight, userName);
-    // dbService.resetMeals(userId!);
   }
 
   card(String attribute, String attributeValue, IconData iconData,

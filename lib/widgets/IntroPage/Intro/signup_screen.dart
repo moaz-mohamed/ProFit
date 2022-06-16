@@ -4,7 +4,7 @@ import 'package:profit/models/user_profile.dart';
 import 'package:profit/services/auth.dart';
 import 'package:profit/services/firestore_database.dart';
 import 'package:profit/services/validate.dart';
-import 'package:profit/themes/ThemeUI.dart';
+import 'package:profit/themes/theme_ui.dart';
 import 'dart:ui';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:profit/widgets/IntroPage/Intro/login_screen.dart';
@@ -45,8 +45,6 @@ class _SignupScreenState extends State<SignupScreen> {
   final FirebaseFirestore db = FirebaseFirestore.instance;
   final CollectionReference users =
       FirebaseFirestore.instance.collection('users');
-
-  User? _user;
 
   @override
   Widget build(BuildContext context) {

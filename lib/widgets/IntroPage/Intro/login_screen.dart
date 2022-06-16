@@ -4,7 +4,7 @@ import 'dart:ui';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:profit/services/validate.dart';
 import 'package:profit/services/auth.dart';
-import 'package:profit/themes/ThemeUI.dart';
+import 'package:profit/themes/theme_ui.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -36,7 +36,6 @@ class _LoginScreenState extends State<LoginScreen> {
         // AuthenticationService.showMessage(
         //     AuthenticationService.message, context);
       }
-      print(AuthenticationService.message);
 
       await AuthenticationService.checkAuthentication(context);
     }
@@ -151,8 +150,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           Colors.grey,
                           context);
                       signIn();
-                      await Future.delayed(Duration(seconds: 3));
-                      print(AuthenticationService.message);
+                      await Future.delayed(const Duration(seconds: 3));
                       if (AuthenticationService.message == 'Login success!') {
                         AuthenticationService.snackbar(
                             AuthenticationService.message,

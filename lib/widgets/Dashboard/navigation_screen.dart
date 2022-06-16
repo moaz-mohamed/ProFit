@@ -14,7 +14,7 @@ import 'package:profit/widgets/Dashboard/Screens/steps_screen.dart';
 import 'package:profit/widgets/Dashboard/Screens/WorkoutScreen/workout_screen.dart';
 import 'package:profit/widgets/Dashboard/NavigationBloc/tab_bar_bloc.dart';
 import 'package:profit/widgets/Dashboard/NavigationBloc/tab_bar_event.dart';
-import 'package:profit/themes/ThemeUI.dart';
+import 'package:profit/themes/theme_ui.dart';
 
 import 'Screens/favourites.dart';
 
