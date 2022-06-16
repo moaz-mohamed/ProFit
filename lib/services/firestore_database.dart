@@ -50,7 +50,8 @@ class DatabaseService {
     );
   }
 
-  updateCalories() async {
+  updateCalories(String userAge, String userHeight, String userWeight,
+      String userName) async {
     final docUser = FirebaseFirestore.instance.collection('users').doc(userId);
     double? newRemainCalories;
     double? newRemainProtien;
@@ -68,14 +69,18 @@ class DatabaseService {
       burnedCalories = value.get('burnedCalories') ?? 0;
       totalProteins = value.get('totalProteins');
     });
-    double calories = CalculateCalories(updatedGoal, updatedage, updatedheight,
-        updatedWeight, updatedgender, updatedActivityLevel);
+    double calories = CalculateCalories(updatedGoal, userAge, userHeight,
+        userWeight, updatedgender, updatedActivityLevel);
 
     newRemainCalories = calories;
     newRemainProtien = ((30 / 100) * calories) / 4;
     newRemainFats = ((30 / 100) * calories) / 9;
     newRemainCarbs = ((40 / 100) * calories) / 4;
     docUser.update({
+      'name': userName,
+      'age': userAge,
+      'weight': userWeight,
+      'height': userHeight,
       'calories': calories,
       'remainingCalories': newRemainCalories - eatenCalories! + burnedCalories!,
       'remainingFats': newRemainFats - totalFats!,
