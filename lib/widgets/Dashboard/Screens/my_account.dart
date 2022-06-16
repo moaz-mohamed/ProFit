@@ -175,14 +175,15 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
 
   updatevalues() async {
     final docUser = FirebaseFirestore.instance.collection('users').doc(userId);
-    docUser.update({
-      'name': userName,
-      'age': userAge,
-      'weight': userWeight,
-      'height': userHeight,
-    });
-    await dbService.getFields();
-    dbService.updateCalories();
+
+    // await dbService.getFields();
+    // docUser.update({
+    //   'name': userName,
+    //   'age': userAge,
+    //   'weight': userWeight,
+    //   'height': userHeight,
+    // });
+    dbService.updateCalories(userAge, userHeight, userWeight, userName);
     // dbService.resetMeals(userId!);
   }
 
