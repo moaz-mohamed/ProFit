@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:profit/services/firestore_database.dart';
-import 'package:profit/themes/ThemeUI.dart';
+import 'package:profit/themes/theme_ui.dart';
 
 class CaloriesIndicator extends StatelessWidget {
   @override
@@ -22,7 +22,9 @@ class CaloriesIndicator extends StatelessWidget {
                     double.parse(data['calories'].toString()).toInt();
                 double caloriesPercent =
                     (recoCalories - remainingCalories) / recoCalories;
-                caloriesPercent <= 1 ? caloriesPercent = caloriesPercent : caloriesPercent = 1;
+                caloriesPercent <= 1
+                    ? caloriesPercent = caloriesPercent
+                    : caloriesPercent = 1;
                 return CircularPercentIndicator(
                   radius: constraints.maxHeight * 0.9,
                   percent: caloriesPercent,

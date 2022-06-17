@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:profit/themes/ThemeUI.dart';
+import 'package:profit/themes/theme_ui.dart';
 import 'package:profit/widgets/Dashboard/Screens/WorkoutScreen/biceps_curl.dart';
 import 'package:profit/widgets/Dashboard/Screens/WorkoutScreen/shoulder_raises.dart';
 
@@ -105,7 +105,8 @@ class WorkoutsPage extends StatelessWidget {
                       MediaQuery.of(context).size.height * 0.12,
                     )),
                     backgroundColor: MaterialStateProperty.all(Colors.white),
-                    side: MaterialStateProperty.all(const BorderSide(color: Colors.blue, width: 2)),
+                    side: MaterialStateProperty.all(
+                        const BorderSide(color: Colors.blue, width: 2)),
                     // overlayColor: MaterialStateProperty.all(Colors.black12),
                   ),
                   onPressed: () {
@@ -181,7 +182,8 @@ class WorkoutsPage extends StatelessWidget {
                       MediaQuery.of(context).size.height * 0.12,
                     )),
                     backgroundColor: MaterialStateProperty.all(Colors.white),
-                    side: MaterialStateProperty.all(const BorderSide(color: Colors.blue, width: 2)),
+                    side: MaterialStateProperty.all(
+                        const BorderSide(color: Colors.blue, width: 2)),
                     // overlayColor: MaterialStateProperty.all(Colors.black12),
                   ),
                   onPressed: () {

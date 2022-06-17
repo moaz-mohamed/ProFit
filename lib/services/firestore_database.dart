@@ -50,7 +50,7 @@ class DatabaseService {
     );
   }
 
-  updateCalories(String userAge, String userHeight, String userWeight,
+  updateInfo(String userAge, String userHeight, String userWeight,
       String userName) async {
     final docUser = FirebaseFirestore.instance.collection('users').doc(userId);
     double? newRemainCalories;
@@ -346,12 +346,12 @@ class DatabaseService {
       required double proteins}) async {
     double remainingCalories = 0;
     double eatenCalories = 0;
-    double total_fats = 0;
-    double total_carbs = 0;
-    double total_proteins = 0;
-    double remaining_fats = 0;
-    double remaining_carbs = 0;
-    double remaining_proteins = 0;
+    double totalFats = 0;
+    double totalCarbs = 0;
+    double totalProteins = 0;
+    double remainingFats = 0;
+    double remainingCarbs = 0;
+    double remainingProteins = 0;
 
     DocumentReference user =
         FirebaseFirestore.instance.collection("users").doc(id);
@@ -359,31 +359,31 @@ class DatabaseService {
     await user.get().then((value) {
       remainingCalories = value.get('remainingCalories');
       eatenCalories = value.get('eatenCalories');
-      total_fats = value.get('totalFats');
-      total_carbs = value.get('totalCarbs');
-      total_proteins = value.get('totalProteins');
-      remaining_fats = value.get('remainingFats');
-      remaining_carbs = value.get('remainingCarbs');
-      remaining_proteins = value.get('remainingProteins');
+      totalFats = value.get('totalFats');
+      totalCarbs = value.get('totalCarbs');
+      totalProteins = value.get('totalProteins');
+      remainingFats = value.get('remainingFats');
+      remainingCarbs = value.get('remainingCarbs');
+      remainingProteins = value.get('remainingProteins');
     });
     remainingCalories += foodCalories;
     eatenCalories -= foodCalories;
-    total_fats -= fats;
-    total_carbs -= carbs;
-    total_proteins -= proteins;
-    remaining_fats += fats;
-    remaining_carbs += carbs;
-    remaining_proteins += proteins;
+    totalFats -= fats;
+    totalCarbs -= carbs;
+    totalProteins -= proteins;
+    remainingFats += fats;
+    remainingCarbs += carbs;
+    remainingProteins += proteins;
 
     return await FirebaseFirestore.instance.collection('users').doc(id).update({
       'remainingCalories': remainingCalories,
       'eatenCalories': eatenCalories,
-      'totalFats': total_fats,
-      'totalCarbs': total_carbs,
-      'totalProteins': total_proteins,
-      'remainingFats': remaining_fats,
-      'remainingCarbs': remaining_carbs,
-      'remainingProteins': remaining_proteins,
+      'totalFats': totalFats,
+      'totalCarbs': totalCarbs,
+      'totalProteins': totalProteins,
+      'remainingFats': remainingFats,
+      'remainingCarbs': remainingCarbs,
+      'remainingProteins': remainingProteins,
     });
   }
 

@@ -1,7 +1,7 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:profit/themes/ThemeUI.dart';
+import 'package:profit/themes/theme_ui.dart';
 import 'package:profit/utils/calculations/calculate_calories.dart';
 import 'package:profit/widgets/Dashboard/Screens/my_account.dart';
 import 'package:profit/widgets/IntroPage/Intro/activity_level.dart';
@@ -108,7 +108,7 @@ class _IntroPageState extends State<IntroPage> {
                     _gender,
                     _activityLevel);
               }),
-          '/login': (context) => LoginScreen(),
+          '/login': (context) => const LoginScreen(),
 
           '/signup': (context) => SignupScreen(
                 age: _ageController.text,

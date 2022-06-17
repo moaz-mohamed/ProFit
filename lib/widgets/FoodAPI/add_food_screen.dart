@@ -6,7 +6,7 @@ import 'package:profit/bloc/postapi/post_food_item_event.dart';
 import 'package:profit/bloc/postapi/post_food_item_state.dart';
 import 'package:profit/widgets/Dashboard/navigation_screen.dart';
 import 'package:profit/services/firestore_database.dart';
-import 'package:profit/themes/ThemeUI.dart';
+import 'package:profit/themes/theme_ui.dart';
 
 class AddFoodScreen extends StatefulWidget {
   late String foodLabel;
@@ -51,6 +51,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
   late double fats;
   late int foodtype;
 
+  @override
   void initState() {
     super.initState();
     foodQuantity = 0;
@@ -74,7 +75,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         foregroundColor: Colors.black,
-        title: Text(
+        title: const Text(
           "Add Food",
           style: FitnessAppTheme.AppBar1,
         ),
@@ -114,14 +115,14 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  Text(
+                  const Text(
                     "Total Calories",
                     style: FitnessAppTheme.totalCaloriesTitle,
                   ),
                   BlocBuilder<CalculateFoodBloc, FoodItemState>(
                     builder: (context, state) {
                       if (state is FoodItemLoading) {
-                        return Text(
+                        return const Text(
                           "",
                           style: FitnessAppTheme.totalCaloriesNumber,
                         );
@@ -135,13 +136,13 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                       } else if (state is FoodItemError) {
                         return Text(state.message);
                       }
-                      return Text(
+                      return const Text(
                         "",
                         style: FitnessAppTheme.totalCaloriesNumber,
                       );
                     },
                   ),
-                  Text(
+                  const Text(
                     "KCal",
                     style: FitnessAppTheme.totalCaloriesUnit,
                   ),
@@ -154,9 +155,9 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                   Container(
                     height: MediaQuery.of(context).size.height * 0.06,
                     width: MediaQuery.of(context).size.width,
-                    margin: EdgeInsets.only(top: 0.5),
+                    margin: const EdgeInsets.only(top: 0.5),
                     alignment: Alignment.bottomCenter,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       border: Border(
                         top: BorderSide(
                           width: 2,
@@ -164,7 +165,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                         ),
                       ),
                     ),
-                    child: Text(
+                    child: const Text(
                       "Quantity",
                       style: FitnessAppTheme.quantityText,
                     ),
@@ -210,7 +211,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                     height: MediaQuery.of(context).size.height * 0.06,
                     width: MediaQuery.of(context).size.width,
                     alignment: Alignment.bottomCenter,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       border: Border(
                         top: BorderSide(
                           width: 1,
@@ -218,7 +219,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                         ),
                       ),
                     ),
-                    child: Text(
+                    child: const Text(
                       "Nutrition Facts",
                       style: FitnessAppTheme.nutritionFactsText,
                     ),
@@ -226,7 +227,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                   Container(
                     height: MediaQuery.of(context).size.height * 0.1,
                     width: MediaQuery.of(context).size.width,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       border: Border(
                         bottom: BorderSide(
                           width: 2,
@@ -246,7 +247,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                                   "assets/add_food_screen/carbs.png",
                                   scale: 3,
                                 ),
-                                Text(
+                                const Text(
                                   " Carbs",
                                   style: FitnessAppTheme.nutrientsText,
                                 ),
@@ -255,7 +256,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                             BlocBuilder<CalculateFoodBloc, FoodItemState>(
                               builder: (context, state) {
                                 if (state is FoodItemLoading) {
-                                  return Text(
+                                  return const Text(
                                     "",
                                     style: FitnessAppTheme.nutrientsValue,
                                   );
@@ -271,7 +272,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                                 } else if (state is FoodItemError) {
                                   return Text(state.message);
                                 }
-                                return Text(
+                                return const Text(
                                   "",
                                   style: FitnessAppTheme.nutrientsValue,
                                 );
@@ -288,7 +289,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                                   "assets/add_food_screen/protein.png",
                                   scale: 3,
                                 ),
-                                Text(
+                                const Text(
                                   " Protein",
                                   style: FitnessAppTheme.nutrientsText,
                                 ),
@@ -297,7 +298,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                             BlocBuilder<CalculateFoodBloc, FoodItemState>(
                               builder: (context, state) {
                                 if (state is FoodItemLoading) {
-                                  return Text(
+                                  return const Text(
                                     "",
                                     style: FitnessAppTheme.nutrientsValue,
                                   );
@@ -313,7 +314,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                                 } else if (state is FoodItemError) {
                                   return Text(state.message);
                                 }
-                                return Text(
+                                return const Text(
                                   "",
                                   style: FitnessAppTheme.nutrientsValue,
                                 );
@@ -330,7 +331,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                                   "assets/add_food_screen/fats.png",
                                   scale: 3,
                                 ),
-                                Text(
+                                const Text(
                                   " Fats",
                                   style: FitnessAppTheme.nutrientsText,
                                 ),
@@ -339,7 +340,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                             BlocBuilder<CalculateFoodBloc, FoodItemState>(
                               builder: (context, state) {
                                 if (state is FoodItemLoading) {
-                                  return Text(
+                                  return const Text(
                                     "",
                                     style: FitnessAppTheme.nutrientsValue,
                                   );
@@ -353,7 +354,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                                 } else if (state is FoodItemError) {
                                   return Text(state.message);
                                 }
-                                return Text(
+                                return const Text(
                                   "",
                                   style: FitnessAppTheme.nutrientsValue,
                                 );
@@ -373,8 +374,8 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
             delegate: SliverChildBuilderDelegate(
               (BuildContext context, int index) {
                 return Container(
-                  padding: EdgeInsets.fromLTRB(26, 0, 26, 0),
-                  decoration: BoxDecoration(
+                  padding: const EdgeInsets.fromLTRB(26, 0, 26, 0),
+                  decoration: const BoxDecoration(
                     border: Border(
                       top: BorderSide(
                         width: 1,
@@ -392,7 +393,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                       BlocBuilder<CalculateFoodBloc, FoodItemState>(
                         builder: (context, state) {
                           if (state is FoodItemLoading) {
-                            return Text(
+                            return const Text(
                               "",
                               style: FitnessAppTheme.nutrientsListValue,
                             );
@@ -404,7 +405,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                           } else if (state is FoodItemError) {
                             return Text(state.message);
                           }
-                          return Text(
+                          return const Text(
                             "",
                             style: FitnessAppTheme.nutrientsListValue,
                           );
@@ -424,7 +425,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
         child: ElevatedButton(
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
+            children: const <Widget>[
               Icon(Icons.add_circle_outline),
               Text(
                 "  Add to daily macros",
@@ -443,7 +444,6 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
           ),
           // Checked and working
           onPressed: () {
-            print(foodQuantity);
             if (foodQuantity.toDouble() == 0) {
               //widget called dialogue widget
             } else {
@@ -459,11 +459,9 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                 //         Navigator.of(context).popUntil(ModalRoute.withName('/sucess'));
                 Navigator.pushAndRemoveUntil(
                     context,
-                    MaterialPageRoute(builder: (context) => TabBarPage()),
+                    MaterialPageRoute(builder: (context) => const TabBarPage()),
                     ModalRoute.withName('/success'));
               } else if (foodtype == 2) {
-                print(
-                    'Dinnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnner is added');
                 DatabaseService().addLunchToFirestoreUser(
                     calories: totalCalories,
                     name: widget.foodLabel,
@@ -474,7 +472,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                     id: FirebaseAuth.instance.currentUser!.uid);
                 Navigator.pushAndRemoveUntil(
                     context,
-                    MaterialPageRoute(builder: (context) => TabBarPage()),
+                    MaterialPageRoute(builder: (context) => const TabBarPage()),
                     ModalRoute.withName('/success'));
               } else {
                 DatabaseService().addDinnerToFirestoreUser(
@@ -487,7 +485,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                     id: FirebaseAuth.instance.currentUser!.uid);
                 Navigator.pushAndRemoveUntil(
                     context,
-                    MaterialPageRoute(builder: (context) => TabBarPage()),
+                    MaterialPageRoute(builder: (context) => const TabBarPage()),
                     ModalRoute.withName('/success'));
               }
             }

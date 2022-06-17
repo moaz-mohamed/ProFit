@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:profit/themes/ThemeUI.dart';
+import 'package:profit/themes/theme_ui.dart';
 import 'custom_radio_activity.dart';
 
 class ActivityLevelForm extends StatefulWidget {
@@ -15,11 +15,10 @@ class ActivityLevelForm extends StatefulWidget {
 }
 
 class _ActivityLevelFormState extends State<ActivityLevelForm> {
- double _activityLevel = 1.25;
+  double _activityLevel = 1.25;
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -48,7 +47,7 @@ class _ActivityLevelFormState extends State<ActivityLevelForm> {
               ],
             ),
             CustomRadioActivity(
-              onSelect: ( activityLevel) {
+              onSelect: (activityLevel) {
                 setState(() {
                   _activityLevel = activityLevel;
                 });

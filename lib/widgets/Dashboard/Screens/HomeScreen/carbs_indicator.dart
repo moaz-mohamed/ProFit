@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:profit/services/firestore_database.dart';
-import 'package:profit/themes/ThemeUI.dart';
+import 'package:profit/themes/theme_ui.dart';
 
 class CarbsIndicator extends StatelessWidget {
   @override
@@ -11,15 +11,22 @@ class CarbsIndicator extends StatelessWidget {
     return LayoutBuilder(
       builder: (context, constraints) {
         return StreamBuilder(
-            stream: DatabaseService().getUserDocStream(id: FirebaseAuth.instance.currentUser!.uid),
+            stream: DatabaseService()
+                .getUserDocStream(id: FirebaseAuth.instance.currentUser!.uid),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 var data = snapshot.data as DocumentSnapshot;
-                var remainingCarbs = double.parse((data['remainingCarbs']).toString()).toInt();
+                var remainingCarbs =
+                    double.parse((data['remainingCarbs']).toString()).toInt();
                 var recoCarbs =
-                    (((double.parse((data['calories']).toString()).toDouble()) * (40 / 100)) / 4).toInt();
+                    (((double.parse((data['calories']).toString()).toDouble()) *
+                                (40 / 100)) /
+                            4)
+                        .toInt();
                 double carbsPercent = (recoCarbs - remainingCarbs) / recoCarbs;
-                carbsPercent <= 1 ? carbsPercent = carbsPercent : carbsPercent = 1;
+                carbsPercent <= 1
+                    ? carbsPercent = carbsPercent
+                    : carbsPercent = 1;
                 return Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
