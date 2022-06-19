@@ -65,8 +65,8 @@ class Placestate extends State<PlacesPage> {
     );
   }
 
-  final String gymPhoto =
-      "https://cdn.iconscout.com/icon/free/png-256/gym-location-1-1147899.png";
+  final String gymPhoto = "assets/Geofencing/gym.png";
+
   Widget _createContent() {
     if (_places == null || _places!.isEmpty) {
       return const Center(
@@ -96,7 +96,7 @@ class Placestate extends State<PlacesPage> {
                           fontFamily: "SourceSansPro",
                           fontSize: 18.0,
                           color: Colors.blue)),
-                  leading: Image.network(gymPhoto),
+                  leading: Image.asset(gymPhoto),
                   subtitle: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
