@@ -93,6 +93,8 @@ flutter:
     - assets/selector/muscle.png
     - assets/steps/shoe.png
     - assets/Attributions/Edamam_Badge_White.png
+    - assets/Attributions/Powered_by_google.png
+    - assets/Geofencing/gym.png
     - assets/Food/food.png
 
 

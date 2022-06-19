@@ -24,10 +24,6 @@ class Dashboard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   title: Text("Dashboard"),
-
-      // ),
       body: ListView.builder(
           itemCount: 4,
           itemBuilder: (BuildContext, int index) {
@@ -35,7 +31,7 @@ class Dashboard extends StatelessWidget {
               constraints: const BoxConstraints(
                 maxHeight: double.infinity,
               ),
-              margin: EdgeInsets.all(30),
+              margin: const EdgeInsets.all(10),
               padding: const EdgeInsets.all(10.0),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
@@ -103,7 +99,7 @@ class Dashboard extends StatelessWidget {
                                           const WorkoutProvider()));
                             }
                           },
-                          child: Icon(Icons.add, color: Colors.white),
+                          child: const Icon(Icons.add, color: Colors.white),
                           style: ElevatedButton.styleFrom(
                             shape: const CircleBorder(),
                             padding: EdgeInsets.zero,
@@ -157,7 +153,7 @@ class Dashboard extends StatelessWidget {
                                 } else {
                                   return Column(children: [
                                     Card(
-                                      margin: EdgeInsets.all(3),
+                                      margin: const EdgeInsets.all(3),
                                       elevation: 1,
                                       shape: OutlineInputBorder(
                                           borderRadius:

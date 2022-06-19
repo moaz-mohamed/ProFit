@@ -5,10 +5,10 @@ import '../models/place_model.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'package:profit/widgets/Dashboard/Screens/Geofencing/constants.dart'
-    as Constants;
+    as constants;
 
 class LocationService {
-  String key = Constants.googleKey;
+  String key = constants.googleKey;
   static final _locationService = LocationService();
 
   static LocationService get() {
@@ -23,7 +23,7 @@ class LocationService {
   }
 
   String buildPhotoURL(String photoReference) {
-    return "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${photoReference}&key=${key}";
+    return "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=$photoReference&key=$key";
   }
 
   Future<List<PlaceDetail>> getPlaceList(List<String> pos) async {
@@ -49,7 +49,7 @@ class LocationService {
   }
 
   Future getPlace(String placeId) async {
-    String key2 = Constants.googleKey;
+    String key2 = constants.googleKey;
     String detailUrl =
         "https://maps.googleapis.com/maps/api/place/details/json?fields=&key=${key2}&place_id=";
     var response = await http.get(Uri.parse(detailUrl + placeId),

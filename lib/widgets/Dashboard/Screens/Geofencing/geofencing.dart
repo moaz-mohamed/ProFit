@@ -4,10 +4,8 @@ import 'package:nice_buttons/nice_buttons.dart';
 import 'pages/places_page.dart';
 
 class Geofencing extends StatelessWidget {
-  final String photo =
-      "https://cdn.iconscout.com/icon/free/png-256/gym-location-1-1147899.png";
-  final String googleAttribution =
-      "https://johnmeade-webdev.github.io/bookFinder/public/Powered_by_google.png";
+  final String gymPhoto = "assets/Geofencing/gym.png";
+  final String googleAttribution = "assets/Attributions/Powered_by_google.png";
 
   const Geofencing({Key? key}) : super(key: key);
   @override
@@ -22,8 +20,8 @@ class Geofencing extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: Center(
-                    child: Image.network(
-                      photo,
+                    child: Image.asset(
+                      gymPhoto,
                       width: 150,
                       height: 150,
                     ),
@@ -62,7 +60,7 @@ class Geofencing extends StatelessWidget {
           bottom: 0,
           child: Padding(
             padding: const EdgeInsets.all(10.0),
-            child: Image.network(
+            child: Image.asset(
               googleAttribution,
               width: 200,
             ),

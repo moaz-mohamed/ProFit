@@ -51,7 +51,6 @@ class _TabBarPageState extends State<TabBarPage> {
 
   _CheckDate() async {
     date = await getDate();
-    print(date);
 
     // if date.month == currentDate.month && date.day == currentDate.day {
 
@@ -131,7 +130,7 @@ class _TabBarPageState extends State<TabBarPage> {
           },
         ),
         ListTile(
-          leading: Icon(Icons.logout),
+          leading: const Icon(Icons.logout),
           title: Text("Sign Out"),
           onTap: () {
             auth.signOut();
