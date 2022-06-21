@@ -22,9 +22,11 @@ class CaloriesIndicator extends StatelessWidget {
                     double.parse(data['calories'].toString()).toInt();
                 double caloriesPercent =
                     (recoCalories - remainingCalories) / recoCalories;
-                caloriesPercent <= 1
-                    ? caloriesPercent = caloriesPercent
-                    : caloriesPercent = 1;
+                if (caloriesPercent < 0) {
+                  caloriesPercent = 0;
+                } else if (caloriesPercent > 1) {
+                  caloriesPercent = 1;
+                }
                 return CircularPercentIndicator(
                   radius: constraints.maxHeight * 0.9,
                   percent: caloriesPercent,

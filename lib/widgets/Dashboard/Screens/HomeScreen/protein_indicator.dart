@@ -11,24 +11,19 @@ class ProteinIndicator extends StatelessWidget {
     return LayoutBuilder(
       builder: (context, constraints) {
         return StreamBuilder(
-            stream: DatabaseService()
-                .getUserDocStream(id: FirebaseAuth.instance.currentUser!.uid),
+            stream: DatabaseService().getUserDocStream(id: FirebaseAuth.instance.currentUser!.uid),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 var data = snapshot.data as DocumentSnapshot;
-                var remainingProtein =
-                    double.parse((data['remainingProteins']).toString())
-                        .toInt();
+                var remainingProtein = double.parse((data['remainingProteins']).toString()).toInt();
                 var recoProtein =
-                    (((double.parse((data['calories']).toString()).toDouble()) *
-                                (30 / 100)) /
-                            4)
-                        .toInt();
-                double proteinPercent =
-                    (recoProtein - remainingProtein) / recoProtein;
-                proteinPercent <= 1
-                    ? proteinPercent = proteinPercent
-                    : proteinPercent = 1;
+                    (((double.parse((data['calories']).toString()).toDouble()) * (30 / 100)) / 4).toInt();
+                double proteinPercent = (recoProtein - remainingProtein) / recoProtein;
+                if (proteinPercent < 0) {
+                  proteinPercent = 0;
+                } else if (proteinPercent > 1) {
+                  proteinPercent = 1;
+                }
                 return Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[

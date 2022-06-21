@@ -24,9 +24,11 @@ class CarbsIndicator extends StatelessWidget {
                             4)
                         .toInt();
                 double carbsPercent = (recoCarbs - remainingCarbs) / recoCarbs;
-                carbsPercent <= 1
-                    ? carbsPercent = carbsPercent
-                    : carbsPercent = 1;
+                if (carbsPercent < 0) {
+                  carbsPercent = 0;
+                } else if (carbsPercent > 1) {
+                  carbsPercent = 1;
+                }
                 return Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
