@@ -455,6 +455,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                     protein: protein,
                     fat: fats,
                     quantity: foodQuantity.toDouble(),
+                    date: DateTime.now(),
                     id: FirebaseAuth.instance.currentUser!.uid);
                 //         Navigator.of(context).popUntil(ModalRoute.withName('/sucess'));
                 Navigator.pushAndRemoveUntil(
@@ -469,6 +470,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                     protein: protein,
                     fat: fats,
                     quantity: foodQuantity.toDouble(),
+                    date: DateTime.now(),
                     id: FirebaseAuth.instance.currentUser!.uid);
                 Navigator.pushAndRemoveUntil(
                     context,
@@ -482,6 +484,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                     protein: protein,
                     fat: fats,
                     quantity: foodQuantity.toDouble(),
+                    date: DateTime.now(),
                     id: FirebaseAuth.instance.currentUser!.uid);
                 Navigator.pushAndRemoveUntil(
                     context,
@@ -489,7 +492,6 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                     ModalRoute.withName('/success'));
               }
             }
-            //Delay function to add
           },
         ),
       ),
