@@ -26,6 +26,7 @@ class UserProfile {
   List<Map<String, dynamic>> dinner = [];
   List<Map<String, dynamic>> workout = [];
   List<Map<String, dynamic>> favourites = [];
+  List<Map<String, dynamic>> history = [];
 
   UserProfile(dynamic obj) {
     //  _id =  obj['id'];
@@ -66,6 +67,7 @@ class UserProfile {
     burnedCalories = data['_burnedCalories'];
     breakfast = data['breakfast'];
     favourites = data['favourites'];
+    history = data['history'];
 
     lunch = data['lunch'];
     dinner = data['dinner'];
@@ -91,6 +93,7 @@ class UserProfile {
         'burnedCalories': eatenCalories,
         'breakfast': breakfast,
         'favourites': favourites,
+        'history': history,
         'lunch': lunch,
         'dinner': dinner,
         'workout': workout,
