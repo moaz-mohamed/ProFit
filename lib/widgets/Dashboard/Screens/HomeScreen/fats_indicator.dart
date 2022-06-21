@@ -11,20 +11,19 @@ class FatsIndicator extends StatelessWidget {
     return LayoutBuilder(
       builder: (context, constraints) {
         return StreamBuilder(
-            stream: DatabaseService()
-                .getUserDocStream(id: FirebaseAuth.instance.currentUser!.uid),
+            stream: DatabaseService().getUserDocStream(id: FirebaseAuth.instance.currentUser!.uid),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 var data = snapshot.data as DocumentSnapshot;
-                var remainingFats =
-                    double.parse((data['remainingFats']).toString()).toInt();
+                var remainingFats = double.parse((data['remainingFats']).toString()).toInt();
                 var recoFats =
-                    (((double.parse((data['calories']).toString()).toDouble()) *
-                                (30 / 100)) /
-                            9)
-                        .toInt();
+                    (((double.parse((data['calories']).toString()).toDouble()) * (30 / 100)) / 9).toInt();
                 double fatsPercent = (recoFats - remainingFats) / recoFats;
-                fatsPercent <= 1 ? fatsPercent = fatsPercent : fatsPercent = 1;
+                if (fatsPercent < 0) {
+                  fatsPercent = 0;
+                } else if (fatsPercent > 1) {
+                  fatsPercent = 1;
+                }
                 return Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
