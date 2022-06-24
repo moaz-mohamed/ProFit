@@ -27,11 +27,11 @@ class _SquatsState extends State<Squats> {
       _responseMessage = "...";
       _caloriesBurnt = "...";
     });
-    final _response = await workoutServices.uploadFile(_pickedFile, "squats");
+    final _pickedFileCompressed = await workoutServices.compressFile(_pickedFile);
+    final _response = await workoutServices.uploadFile(_pickedFileCompressed, "squats");
     setState(() {
       _responseMessage = _response;
-      _caloriesBurnt =
-          (double.parse(_responseMessage) * 0.2).toStringAsFixed(3);
+      _caloriesBurnt = (double.parse(_responseMessage) * 0.2).toStringAsFixed(3);
     });
   }
 
@@ -133,8 +133,7 @@ class _SquatsState extends State<Squats> {
                   MediaQuery.of(context).size.height * 0.08,
                 )),
                 backgroundColor: MaterialStateProperty.all(Colors.white),
-                side: MaterialStateProperty.all(
-                    const BorderSide(color: Colors.blue, width: 2)),
+                side: MaterialStateProperty.all(const BorderSide(color: Colors.blue, width: 2)),
                 overlayColor: MaterialStateProperty.all(Colors.blue),
               ),
             ),

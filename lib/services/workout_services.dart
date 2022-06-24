@@ -17,6 +17,16 @@ class WorkoutServices {
     }
   }
 
+  compressFile(File workoutFile) async {
+    final compressedFile = await VideoCompress.compressVideo(
+      workoutFile.path,
+      quality: VideoQuality.DefaultQuality,
+      includeAudio: false,
+      deleteOrigin: false,
+    );
+    return File(compressedFile!.path!);
+  }
+
   uploadFile(File workoutVideo, String workoutName) async {
     final String URI = baseWorkoutAPI + workoutName;
     final request = http.MultipartRequest('POST', Uri.parse(URI));

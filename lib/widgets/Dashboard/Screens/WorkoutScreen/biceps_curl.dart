@@ -27,7 +27,8 @@ class _BicepCurlsState extends State<BicepCurls> {
       _responseMessage = "...";
       _caloriesBurnt = "...";
     });
-    final _response = await workoutServices.uploadFile(_pickedFile, "biceps");
+    final _pickedFileCompressed = await workoutServices.compressFile(_pickedFile);
+    final _response = await workoutServices.uploadFile(_pickedFileCompressed, "biceps");
     setState(() {
       _responseMessage = _response;
       _caloriesBurnt = (double.parse(_responseMessage) * 0.2).toStringAsFixed(3);
