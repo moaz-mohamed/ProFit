@@ -24,11 +24,6 @@ class _MyHistoryState extends State<MyHistory> {
     super.initState();
   }
 
-  // Future getHistory() async {
-  //   await dbService.getUserDocStream(
-  //       id: FirebaseAuth.instance.currentUser!.uid);
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,9 +53,11 @@ class _MyHistoryState extends State<MyHistory> {
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    StreamBuilder(
-                        stream: dbService.getUserDocStream(
-                            id: FirebaseAuth.instance.currentUser!.uid),
+                    FutureBuilder(
+                        future: FirebaseFirestore.instance
+                            .collection('users')
+                            .doc(userId)
+                            .get(),
                         builder: (context, snapshot) {
                           if (snapshot.hasData) {
                             var data = snapshot.data as DocumentSnapshot;
