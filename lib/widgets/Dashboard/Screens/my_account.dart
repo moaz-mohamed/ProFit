@@ -61,9 +61,7 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
                 onPressed: () {
                   dbService.updateInfo(
                       userAge, userHeight, userWeight, userName);
-                  // Navigator.of(context).pushAndRemoveUntil(
-                  //     MaterialPageRoute(builder: (context) => MyApp()),
-                  //     (Route<dynamic> route) => false);
+
                   Navigator.pushAndRemoveUntil(
                       context,
                       MaterialPageRoute(

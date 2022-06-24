@@ -15,7 +15,6 @@ class _MyFavouriteState extends State<MyFavourite> {
   FirebaseAuth auth = FirebaseAuth.instance;
   String? userId;
   String? foodName;
-  List? favourite;
   double? calories;
   double? quantity;
   double? protein;
@@ -75,26 +74,6 @@ class _MyFavouriteState extends State<MyFavourite> {
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(children: [
-                          Image.asset(
-                            'assets/home_screen/favourite.png',
-                            fit: BoxFit.fill,
-                            width: 30,
-                          ),
-                          const SizedBox(
-                            width: 5,
-                          ),
-                          const Text("Favourite Food",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20,
-                                  color: Colors.green)),
-                        ]),
-                      ],
-                    ),
                     StreamBuilder(
                         stream: dbService.getUserDocStream(
                             id: FirebaseAuth.instance.currentUser!.uid),
@@ -184,6 +163,7 @@ class _MyFavouriteState extends State<MyFavourite> {
       id: userId!,
       protein: protein!,
       quantity: quantity!,
+      date: DateTime.now(),
     );
   }
 
@@ -196,6 +176,7 @@ class _MyFavouriteState extends State<MyFavourite> {
       id: userId!,
       protein: protein!,
       quantity: quantity!,
+      date: DateTime.now(),
     );
   }
 
@@ -208,6 +189,7 @@ class _MyFavouriteState extends State<MyFavourite> {
       id: userId!,
       protein: protein!,
       quantity: quantity!,
+      date: DateTime.now(),
     );
   }
 

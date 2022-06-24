@@ -100,12 +100,19 @@ class DatabaseService {
       required double quantity,
       required double protein,
       required double fat,
-      required double carbs}) async {
+      required double carbs,
+      required date}) async {
 // get snapshot and update breakfast
     final DocumentSnapshot user =
         await FirebaseFirestore.instance.collection('users').doc(id).get();
     //printAllDataInDocument(id: id);
-
+    final List history = user['history'];
+    history.add({
+      'name': name,
+      'calories': calories,
+      'quantity': quantity,
+      'date': date,
+    });
 // update breakfast if exists else create new breakfast
     final List breakfast = user['breakfast'];
     breakfast.add({
@@ -125,7 +132,7 @@ class DatabaseService {
     return await FirebaseFirestore.instance
         .collection('users')
         .doc(id)
-        .update({'breakfast': breakfast});
+        .update({'breakfast': breakfast, 'history': history});
   }
 
 // Add lunch
@@ -136,12 +143,19 @@ class DatabaseService {
       required double quantity,
       required double protein,
       required double fat,
-      required double carbs}) async {
+      required double carbs,
+      required date}) async {
 // get snapshot and update breakfast
     final DocumentSnapshot user =
         await FirebaseFirestore.instance.collection('users').doc(id).get();
     //printAllDataInDocument(id: id);
-
+    final List history = user['history'];
+    history.add({
+      'name': name,
+      'calories': calories,
+      'quantity': quantity,
+      'date': date,
+    });
     final List lunch = user['lunch'];
     lunch.add({
       'name': name,
@@ -160,7 +174,7 @@ class DatabaseService {
     return await FirebaseFirestore.instance
         .collection('users')
         .doc(id)
-        .update({'lunch': lunch});
+        .update({'lunch': lunch, 'history': history});
   }
 
 // Add dinner
@@ -171,12 +185,18 @@ class DatabaseService {
       required double quantity,
       required double protein,
       required double fat,
-      required double carbs}) async {
+      required double carbs,
+      required date}) async {
 // get snapshot and update breakfast
     final DocumentSnapshot user =
         await FirebaseFirestore.instance.collection('users').doc(id).get();
-    //printAllDataInDocument(id: id);
-
+    final List history = user['history'];
+    history.add({
+      'name': name,
+      'calories': calories,
+      'quantity': quantity,
+      'date': date,
+    });
     final List dinner = user['dinner'];
     dinner.add({
       'name': name,
@@ -195,7 +215,7 @@ class DatabaseService {
     return await FirebaseFirestore.instance
         .collection('users')
         .doc(id)
-        .update({'dinner': dinner});
+        .update({'dinner': dinner, 'history': history});
   }
 
 // Add workout

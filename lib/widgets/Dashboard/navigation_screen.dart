@@ -17,6 +17,7 @@ import 'package:profit/widgets/Dashboard/NavigationBloc/tab_bar_event.dart';
 import 'package:profit/themes/theme_ui.dart';
 
 import 'Screens/favourites.dart';
+import 'Screens/history.dart';
 
 class TabBarPage extends StatefulWidget {
   const TabBarPage({Key? key}) : super(key: key);
@@ -42,10 +43,7 @@ class _TabBarPageState extends State<TabBarPage> {
 
   @override
   void initState() {
-    // TODO: implement initState
-
     _CheckDate();
-    //databaseService.getDateFromFirestore(auth.currentUser!.uid);
     super.initState();
   }
 
@@ -67,8 +65,6 @@ class _TabBarPageState extends State<TabBarPage> {
 
   @override
   Widget build(BuildContext context) {
-    FoodRecommendationServiceAPI()
-        .getFoodRecommendation({"Diet": [], "Disease": [], "Nutirent": []});
     return BlocProvider<TabBarBloc>(
       create: (BuildContext context) => TabBarBloc(0),
       child: BlocBuilder<TabBarBloc, int>(
@@ -109,10 +105,6 @@ class _TabBarPageState extends State<TabBarPage> {
           leading: const Icon(Icons.person),
           title: const Text("My Account"),
           onTap: () {
-            // Navigator.pushAndRemoveUntil(
-            //     context,
-            //     MaterialPageRoute(builder: (context) => MyAccountScreen()),
-            //     (Route<dynamic> route) => false);
             Navigator.of(context).push(
                 MaterialPageRoute(builder: (context) => MyAccountScreen()));
           },
@@ -121,12 +113,16 @@ class _TabBarPageState extends State<TabBarPage> {
           leading: const Icon(Icons.favorite),
           title: const Text("My Favourites"),
           onTap: () {
-            // Navigator.pushAndRemoveUntil(
-            //     context,
-            //     MaterialPageRoute(builder: (context) => MyAccountScreen()),
-            //     (Route<dynamic> route) => false);
             Navigator.of(context)
                 .push(MaterialPageRoute(builder: (context) => MyFavourite()));
+          },
+        ),
+        ListTile(
+          leading: const Icon(Icons.calendar_today),
+          title: const Text("My History"),
+          onTap: () {
+            Navigator.of(context)
+                .push(MaterialPageRoute(builder: (context) => MyHistory()));
           },
         ),
         ListTile(
