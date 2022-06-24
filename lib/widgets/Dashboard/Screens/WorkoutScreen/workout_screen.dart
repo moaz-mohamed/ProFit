@@ -96,7 +96,7 @@ class WorkoutsPage extends StatelessWidget {
                       ),
                       Image.asset(
                         'assets/workout_screen/bicep.gif',
-                        scale: 10,
+                        scale: MediaQuery.of(context).size.height * 0.01,
                       ),
                     ],
                   ),
@@ -172,7 +172,7 @@ class WorkoutsPage extends StatelessWidget {
                       ),
                       Image.asset(
                         'assets/workout_screen/shoulder_press.gif',
-                        scale: 10,
+                        scale: MediaQuery.of(context).size.height * 0.01,
                       ),
                     ],
                   ),
@@ -256,7 +256,7 @@ class WorkoutsPage extends StatelessWidget {
                       ),
                       Image.asset(
                         'assets/workout_screen/squats.gif',
-                        scale: 10,
+                        scale: MediaQuery.of(context).size.height * 0.01,
                       ),
                     ],
                   ),
