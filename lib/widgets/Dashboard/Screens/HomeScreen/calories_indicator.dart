@@ -51,7 +51,7 @@ class CaloriesIndicator extends StatelessWidget {
                   circularStrokeCap: CircularStrokeCap.round,
                   widgetIndicator: Image.asset(
                     "assets/home_screen/Plate.png",
-                    scale: 2.6,
+                    scale: 4,
                   ),
                   center: Column(
                     mainAxisAlignment: MainAxisAlignment.center,

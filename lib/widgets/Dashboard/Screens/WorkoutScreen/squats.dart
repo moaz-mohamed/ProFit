@@ -4,12 +4,12 @@ import 'package:flutter/widgets.dart';
 import 'package:profit/themes/theme_ui.dart';
 import 'package:profit/services/workout_services.dart';
 
-class ShoulderRaises extends StatefulWidget {
+class Squats extends StatefulWidget {
   @override
-  State<ShoulderRaises> createState() => _ShoulderRaisesState();
+  State<Squats> createState() => _SquatsState();
 }
 
-class _ShoulderRaisesState extends State<ShoulderRaises> {
+class _SquatsState extends State<Squats> {
   late String _responseMessage;
   late String _caloriesBurnt;
   WorkoutServices workoutServices = WorkoutServices();
@@ -27,10 +27,11 @@ class _ShoulderRaisesState extends State<ShoulderRaises> {
       _responseMessage = "...";
       _caloriesBurnt = "...";
     });
-    final _response = await workoutServices.uploadFile(_pickedFile, "shoulders");
+    final _response = await workoutServices.uploadFile(_pickedFile, "squats");
     setState(() {
       _responseMessage = _response;
-      _caloriesBurnt = (double.parse(_responseMessage) * 0.2).toStringAsFixed(3);
+      _caloriesBurnt =
+          (double.parse(_responseMessage) * 0.2).toStringAsFixed(3);
     });
   }
 
@@ -51,15 +52,15 @@ class _ShoulderRaisesState extends State<ShoulderRaises> {
               crossAxisAlignment: CrossAxisAlignment.end,
               children: <Widget>[
                 Image.asset(
-                  'assets/workout_screen/shoulder_icon.png',
+                  'assets/workout_screen/quads_icon_flipped.png',
                   scale: 3,
                 ),
                 Text(
-                  " Sholder Raises ",
+                  " LEG SQUATS ",
                   style: FitnessAppTheme.workoutTitle,
                 ),
                 Image.asset(
-                  'assets/workout_screen/shoulder_icon_flipped.png',
+                  'assets/workout_screen/quads_icon.png',
                   scale: 3,
                 ),
               ],
@@ -132,12 +133,13 @@ class _ShoulderRaisesState extends State<ShoulderRaises> {
                   MediaQuery.of(context).size.height * 0.08,
                 )),
                 backgroundColor: MaterialStateProperty.all(Colors.white),
-                side: MaterialStateProperty.all(const BorderSide(color: Colors.blue, width: 2)),
+                side: MaterialStateProperty.all(
+                    const BorderSide(color: Colors.blue, width: 2)),
                 overlayColor: MaterialStateProperty.all(Colors.blue),
               ),
             ),
             Image.asset(
-              'assets/workout_screen/shoulder_press.gif',
+              'assets/workout_screen/squats.gif',
               scale: 4,
             ),
             // Row(
