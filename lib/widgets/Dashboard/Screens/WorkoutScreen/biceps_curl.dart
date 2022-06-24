@@ -30,8 +30,7 @@ class _BicepCurlsState extends State<BicepCurls> {
     final _response = await workoutServices.uploadFile(_pickedFile, "biceps");
     setState(() {
       _responseMessage = _response;
-      _caloriesBurnt =
-          (double.parse(_responseMessage) * 0.2).toStringAsFixed(3);
+      _caloriesBurnt = (double.parse(_responseMessage) * 0.2).toStringAsFixed(3);
     });
   }
 
@@ -133,14 +132,13 @@ class _BicepCurlsState extends State<BicepCurls> {
                   MediaQuery.of(context).size.height * 0.08,
                 )),
                 backgroundColor: MaterialStateProperty.all(Colors.white),
-                side: MaterialStateProperty.all(
-                    const BorderSide(color: Colors.blue, width: 2)),
+                side: MaterialStateProperty.all(const BorderSide(color: Colors.blue, width: 2)),
                 overlayColor: MaterialStateProperty.all(Colors.blue),
               ),
             ),
             Image.asset(
               'assets/workout_screen/bicep.gif',
-              scale: 5,
+              scale: 4,
             ),
             // Row(
             //   mainAxisAlignment: MainAxisAlignment.spaceAround,
