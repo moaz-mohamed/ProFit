@@ -23,6 +23,8 @@ class Dashboard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String img =
+        "https://icones.pro/wp-content/uploads/2021/04/icone-de-nourriture-noire-symbole-png.png";
     return Scaffold(
       body: ListView.builder(
           itemCount: 4,
@@ -71,7 +73,7 @@ class Dashboard extends StatelessWidget {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => FoodMain(
+                                    builder: (context) => const FoodMain(
                                       foodtype: 1,
                                     ),
                                   ));
@@ -79,7 +81,7 @@ class Dashboard extends StatelessWidget {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => FoodMain(
+                                    builder: (context) => const FoodMain(
                                       foodtype: 2,
                                     ),
                                   ));
@@ -87,7 +89,7 @@ class Dashboard extends StatelessWidget {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => FoodMain(
+                                    builder: (context) => const FoodMain(
                                       foodtype: 3,
                                     ),
                                   ));
@@ -136,7 +138,8 @@ class Dashboard extends StatelessWidget {
                                                 .toString() +
                                             " kCal"),
                                         trailing: IconButton(
-                                          icon: Icon(Icons.delete_outline),
+                                          icon:
+                                              const Icon(Icons.delete_outline),
                                           onPressed: () {
                                             DatabaseService()
                                                 .deleteWorkoutFromFirestoreUser(
@@ -163,10 +166,18 @@ class Dashboard extends StatelessWidget {
                                                   FitnessAppTheme.nearlyWhite,
                                               width: 1)),
                                       child: ListTile(
-                                        title: Row(
+                                        title: Wrap(
                                           children: [
                                             Text(meal[curr]['name'].toString()),
                                           ],
+                                        ),
+                                        leading: Image.network(
+                                          meal[curr]['photo'] ?? img,
+                                          errorBuilder: (BuildContext context,
+                                              Object exception,
+                                              StackTrace? stackTrace) {
+                                            return Image.network(img);
+                                          },
                                         ),
                                         subtitle: Text(
                                             meal[curr]['calories'].toString() +
@@ -189,6 +200,7 @@ class Dashboard extends StatelessWidget {
                                                       ['protein'],
                                                   quantity: meal[curr]
                                                       ['quantity'],
+                                                  photo: meal[curr]['photo'],
                                                 );
                                                 AuthenticationService.snackbar(
                                                     meal[curr]['name'] +

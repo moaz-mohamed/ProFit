@@ -101,12 +101,15 @@ class FoodSearch extends SearchDelegate<List?> {
                               context,
                               MaterialPageRoute(
                                 builder: (context) => AddFoodScreen(
-                                    calculateFoodBloc:
-                                        BlocProvider.of<CalculateFoodBloc>(
-                                            context),
-                                    foodLabel: items.hints[index].food.label,
-                                    foodID: items.hints[index].food.foodId,
-                                    foodtype: foodtype),
+                                  calculateFoodBloc:
+                                      BlocProvider.of<CalculateFoodBloc>(
+                                          context),
+                                  foodLabel: items.hints[index].food.label,
+                                  foodID: items.hints[index].food.foodId,
+                                  foodtype: foodtype,
+                                  foodPicture: items.hints[index].food.image ??
+                                      "https://icon-library.com/images/food-icon-png/food-icon-png-1.jpg",
+                                ),
                               ),
                             );
                           },
@@ -120,14 +123,10 @@ class FoodSearch extends SearchDelegate<List?> {
             }
           }
         } else if (state is SearchInitial) {
-          //print('Initial state is yielded');
           return loadingindicator();
         } else {
-          //print('Seach error state is yielded');
           return loadingindicator();
         }
-
-        //updating the last conditional
       },
     );
   }

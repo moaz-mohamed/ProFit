@@ -11,6 +11,8 @@ import 'package:profit/themes/theme_ui.dart';
 class AddFoodScreen extends StatefulWidget {
   late String foodLabel;
   late String foodID;
+  late String foodPicture;
+
   late int foodtype;
   CalculateFoodBloc calculateFoodBloc;
 
@@ -37,7 +39,8 @@ class AddFoodScreen extends StatefulWidget {
       {required this.calculateFoodBloc,
       required this.foodLabel,
       required this.foodID,
-      required this.foodtype});
+      required this.foodtype,
+      required this.foodPicture});
 
   @override
   State<AddFoodScreen> createState() => _AddFoodScreenState();
@@ -50,6 +53,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
   late double protein;
   late double fats;
   late int foodtype;
+  late String foodphotos;
 
   @override
   void initState() {
@@ -60,6 +64,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
     protein = 0;
     fats = 0;
     foodtype = widget.foodtype;
+    foodphotos = widget.foodPicture;
     widget.calculateFoodBloc.add(
       calculateItemsEvent(
         quantity: 0,
@@ -449,6 +454,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
             } else {
               if (foodtype == 1) {
                 DatabaseService().addBreakfastToFirestoreUser(
+                    photo: foodphotos,
                     calories: totalCalories,
                     name: widget.foodLabel,
                     carbs: carbs,
@@ -464,6 +470,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                     ModalRoute.withName('/success'));
               } else if (foodtype == 2) {
                 DatabaseService().addLunchToFirestoreUser(
+                    photo: foodphotos,
                     calories: totalCalories,
                     name: widget.foodLabel,
                     carbs: carbs,
@@ -478,6 +485,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                     ModalRoute.withName('/success'));
               } else {
                 DatabaseService().addDinnerToFirestoreUser(
+                    photo: foodphotos,
                     calories: totalCalories,
                     name: widget.foodLabel,
                     carbs: carbs,

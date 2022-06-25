@@ -15,6 +15,8 @@ class _MyFavouriteState extends State<MyFavourite> {
   FirebaseAuth auth = FirebaseAuth.instance;
   String? userId;
   String? foodName;
+  late String foodphotos;
+
   double? calories;
   double? quantity;
   double? protein;
@@ -53,7 +55,7 @@ class _MyFavouriteState extends State<MyFavourite> {
       ),
       body: ListView.builder(
           itemCount: 1,
-          itemBuilder: (BuildContext, int index) {
+          itemBuilder: (context, int index) {
             return Container(
               constraints: const BoxConstraints(
                 maxHeight: double.infinity,
@@ -88,7 +90,7 @@ class _MyFavouriteState extends State<MyFavourite> {
                               itemBuilder: (context, curr) {
                                 return Column(children: [
                                   Card(
-                                    margin: EdgeInsets.all(3),
+                                    margin: const EdgeInsets.all(3),
                                     elevation: 1,
                                     shape: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(10),
@@ -116,8 +118,7 @@ class _MyFavouriteState extends State<MyFavourite> {
                                                     value: choice,
                                                     child: ElevatedButton(
                                                       onPressed: () {
-                                                        updateState(
-                                                            meal, index);
+                                                        updateState(meal, curr);
                                                         onSelect(choice);
                                                         Navigator.pop(
                                                             context, choice);
@@ -164,6 +165,7 @@ class _MyFavouriteState extends State<MyFavourite> {
       protein: protein!,
       quantity: quantity!,
       date: DateTime.now(),
+      photo: foodphotos,
     );
   }
 
@@ -177,11 +179,13 @@ class _MyFavouriteState extends State<MyFavourite> {
       protein: protein!,
       quantity: quantity!,
       date: DateTime.now(),
+      photo: foodphotos,
     );
   }
 
   addToDinner() {
     dbService.addDinnerToFirestoreUser(
+      photo: foodphotos,
       calories: calories!,
       carbs: carb!,
       fat: fat!,
@@ -201,6 +205,7 @@ class _MyFavouriteState extends State<MyFavourite> {
       fat = meal[index]['fat'];
       carb = meal[index]['carbs'];
       quantity = meal[index]['quantity'];
+      foodphotos = meal[index]['photo'];
     });
   }
 
