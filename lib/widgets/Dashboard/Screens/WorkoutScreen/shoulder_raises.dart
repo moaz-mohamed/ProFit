@@ -141,67 +141,6 @@ class _ShoulderRaisesState extends State<ShoulderRaises> {
               'assets/workout_screen/shoulder_press.gif',
               scale: 4,
             ),
-            // Row(
-            //   mainAxisAlignment: MainAxisAlignment.spaceAround,
-            //   children: <Widget>[
-            //     Column(
-            //       children: <Widget>[
-            //         Row(
-            //           children: <Widget>[
-            //             Image.asset(
-            //               'assets/workout_screen/step-1.png',
-            //               scale: 1.6,
-            //             ),
-            //             Container(
-            //               width: 180,
-            //               margin: EdgeInsets.fromLTRB(6, 0, 0, 0),
-            //               child: Text(
-            //                 "Stand with the feet hip distance apart.",
-            //                 style: FitnessAppTheme.instructions,
-            //               ),
-            //             ),
-            //           ],
-            //         ),
-            //         Row(
-            //           children: <Widget>[
-            //             Image.asset(
-            //               'assets/workout_screen/step-2.png',
-            //               scale: 1.6,
-            //             ),
-            //             Container(
-            //               width: 180,
-            //               margin: EdgeInsets.fromLTRB(6, 0, 0, 0),
-            //               child: Text(
-            //                 "Raise dumbbells up toward your shoulders.",
-            //                 style: FitnessAppTheme.instructions,
-            //               ),
-            //             ),
-            //           ],
-            //         ),
-            //         Row(
-            //           children: <Widget>[
-            //             Image.asset(
-            //               'assets/workout_screen/step-3.png',
-            //               scale: 1.6,
-            //             ),
-            //             Container(
-            //               width: 180,
-            //               margin: EdgeInsets.fromLTRB(6, 0, 0, 0),
-            //               child: Text(
-            //                 "Lower dumbbells back to the start position.",
-            //                 style: FitnessAppTheme.instructions,
-            //               ),
-            //             ),
-            //           ],
-            //         ),
-            //       ],
-            //     ),
-            //     Image.asset(
-            //       'assets/workout_screen/bicep.gif',
-            //       scale: 5,
-            //     ),
-            //   ],
-            // ),
           ],
         ),
       ),
