@@ -114,7 +114,6 @@ class PlaceDetailState extends State<PlaceDetailPage> {
                     ),
                   ));
             })));
-    ;
 
     return ListView(
       shrinkWrap: true,
@@ -162,7 +161,7 @@ class PlaceDetailState extends State<PlaceDetailPage> {
   }
 
   String buildPhotoURL(String photoReference) {
-    return "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${photoReference}&key=${key}";
+    return "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=$photoReference&key=$key";
   }
 
   addressCard(String header, String content, IconData iconData) {
