@@ -2,9 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:profit/main.dart';
-import 'package:profit/services/auth.dart';
 import 'package:profit/services/firestore_database.dart';
-import 'package:profit/services/food_recommendation.dart';
 import 'package:profit/widgets/Dashboard/Screens/Geofencing/geofencing.dart';
 import 'package:profit/widgets/Dashboard/Screens/HomeScreen/home_screen.dart';
 import 'package:profit/widgets/Dashboard/Screens/FoodRecommendationScreen/recommendation_input.dart';
@@ -35,7 +33,7 @@ class _TabBarPageState extends State<TabBarPage> {
     FirebaseAuth.instance.authStateChanges().listen((_user) {
       if (_user == null) {
         Navigator.of(context).pushAndRemoveUntil(
-            MaterialPageRoute(builder: (context) => MyApp()),
+            MaterialPageRoute(builder: (context) => const MyApp()),
             (Route<dynamic> route) => false);
       }
     });
@@ -127,7 +125,7 @@ class _TabBarPageState extends State<TabBarPage> {
         ),
         ListTile(
           leading: const Icon(Icons.logout),
-          title: Text("Sign Out"),
+          title: const Text("Sign Out"),
           onTap: () {
             auth.signOut();
             checkLogout();

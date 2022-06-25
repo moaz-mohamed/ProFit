@@ -26,7 +26,7 @@ class Dashboard extends StatelessWidget {
     return Scaffold(
       body: ListView.builder(
           itemCount: 4,
-          itemBuilder: (BuildContext, int index) {
+          itemBuilder: (context, int index) {
             return Container(
               constraints: const BoxConstraints(
                 maxHeight: double.infinity,
@@ -225,7 +225,7 @@ class Dashboard extends StatelessWidget {
                               },
                             );
                           } else {
-                            return Text(" ");
+                            return const Text(" ");
                           }
                         }),
                   ]),

@@ -321,14 +321,9 @@ class DatabaseService {
         .collection('users')
         .doc(id)
         .get()
-        .then((value) {
-      print(value.data().toString());
-      // print type of data
-      print(value.data().runtimeType);
-    });
+        .then((value) {});
   }
 
-  // delete meal with id and type
   Future deleteMealFromFirestoreUser(
       {required String id, required String type, required int index}) async {
     final DocumentSnapshot user =
@@ -541,12 +536,10 @@ class DatabaseService {
   // make function that retrieves food name and calories from favorite list from firestore
 
   Future getFavouriteFoods() async {
-    List favouriteFoods = [];
-
     userId = auth.currentUser!.uid;
     final docUser = FirebaseFirestore.instance.collection('users').doc(userId);
     await docUser.get().then((value) {
-      return favouriteFoods = value.get('favourites');
+      return value.get('favourites');
     });
   }
 
@@ -576,10 +569,6 @@ class DatabaseService {
     final DocumentSnapshot user =
         await FirebaseFirestore.instance.collection('users').doc(id).get();
     final double calories = user.get('calories');
-    final double remainingCarbs = user.get('remainingCarbs');
-    final double remainingFats = user.get('remainingFats');
-    final double remainingProtein = user.get('remainingProteins');
-
     return await users.doc(id).update(
       {
         'totalCarbs': 0.0,
