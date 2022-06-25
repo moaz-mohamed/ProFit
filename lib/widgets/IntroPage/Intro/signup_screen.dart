@@ -56,17 +56,6 @@ class _SignupScreenState extends State<SignupScreen> {
     final double _activityLevel = widget.activityLevel;
     final double _calories = widget.calories;
     //  final formGlobalKey = GlobalKey<FormState>();
-    final UserProfile userProfile = UserProfile({
-      'name': _nameController.text,
-      'email': _emailController.text,
-      'goal': _goal,
-      'age': _age,
-      'height': _height,
-      'weight': _weight,
-      'gender': _gender,
-      'activityLevel': _activityLevel,
-      'calories': _calories,
-    });
 
     void signup() async {
       final formKey = formGlobalKey.currentState;
@@ -78,6 +67,17 @@ class _SignupScreenState extends State<SignupScreen> {
             email: _emailController.text.trim(),
             password: _passController.text,
             confirmPassword: _confirmPassController.text);
+        final UserProfile userProfile = UserProfile({
+          'name': _nameController.text,
+          'email': _emailController.text,
+          'goal': _goal,
+          'age': _age,
+          'height': _height,
+          'weight': _weight,
+          'gender': _gender,
+          'activityLevel': _activityLevel,
+          'calories': _calories,
+        });
 
         await databaseService.createNewUser(
             id: auth.currentUser!.uid, userProfile: userProfile);
