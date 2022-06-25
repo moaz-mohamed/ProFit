@@ -164,7 +164,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             Colors.amber,
                             context);
                       }
-                      await Future.delayed(Duration(seconds: 8));
+                      await Future.delayed(const Duration(seconds: 7));
 
                       ScaffoldMessenger.of(context).hideCurrentSnackBar();
                     },

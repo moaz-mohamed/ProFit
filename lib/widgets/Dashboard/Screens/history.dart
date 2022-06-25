@@ -20,7 +20,6 @@ class _MyHistoryState extends State<MyHistory> {
   @override
   void initState() {
     userId = auth.currentUser!.uid;
-    // var future = getHistory();
     super.initState();
   }
 
@@ -90,11 +89,8 @@ class _MyHistoryState extends State<MyHistory> {
                                       trailing: Row(
                                         mainAxisSize: MainAxisSize.min,
                                         children: [
-                                          Text(DateTime
-                                                  .fromMicrosecondsSinceEpoch(
-                                                      historyList[curr]['date']
-                                                          .microsecondsSinceEpoch)
-                                              .toString())
+                                          Text(getDate(
+                                              historyList[curr]['date']))
                                         ],
                                       ),
                                     ),
@@ -110,5 +106,15 @@ class _MyHistoryState extends State<MyHistory> {
             );
           }),
     );
+  }
+
+  getDate(timeStamp) {
+    late Timestamp date;
+    date = timeStamp as Timestamp;
+    return date.toDate().year.toString() +
+        "-" +
+        date.toDate().month.toString() +
+        "-" +
+        date.toDate().day.toString();
   }
 }

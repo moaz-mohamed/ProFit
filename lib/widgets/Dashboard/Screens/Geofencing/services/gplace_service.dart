@@ -30,7 +30,7 @@ class LocationService {
     String longitude = pos[0];
     String latitude = pos[1];
     final String url =
-        "https://maps.googleapis.com/maps/api/place/nearbysearch/json?keyword=gym&location=${latitude}%2C$longitude&rankby=distance&key=$key";
+        "https://maps.googleapis.com/maps/api/place/nearbysearch/json?keyword=gym&location=$latitude%2C$longitude&rankby=distance&key=$key";
 
     var reponse =
         await http.get(Uri.parse(url), headers: {"Accept": "application/json"});
