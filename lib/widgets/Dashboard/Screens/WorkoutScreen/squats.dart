@@ -4,12 +4,12 @@ import 'package:flutter/widgets.dart';
 import 'package:profit/themes/theme_ui.dart';
 import 'package:profit/services/workout_services.dart';
 
-class BicepCurls extends StatefulWidget {
+class Squats extends StatefulWidget {
   @override
-  State<BicepCurls> createState() => _BicepCurlsState();
+  State<Squats> createState() => _SquatsState();
 }
 
-class _BicepCurlsState extends State<BicepCurls> {
+class _SquatsState extends State<Squats> {
   late String _responseMessage;
   late String _caloriesBurnt;
   WorkoutServices workoutServices = WorkoutServices();
@@ -28,7 +28,7 @@ class _BicepCurlsState extends State<BicepCurls> {
       _caloriesBurnt = "...";
     });
     final _pickedFileCompressed = await workoutServices.compressFile(_pickedFile);
-    final _response = await workoutServices.uploadFile(_pickedFileCompressed, "biceps");
+    final _response = await workoutServices.uploadFile(_pickedFileCompressed, "squats");
     setState(() {
       _responseMessage = _response;
       _caloriesBurnt = (double.parse(_responseMessage) * 0.2).toStringAsFixed(3);
@@ -52,15 +52,15 @@ class _BicepCurlsState extends State<BicepCurls> {
               crossAxisAlignment: CrossAxisAlignment.end,
               children: <Widget>[
                 Image.asset(
-                  'assets/workout_screen/bicep_icon_flipped.png',
+                  'assets/workout_screen/quads_icon_flipped.png',
                   scale: 3,
                 ),
                 Text(
-                  " BICEP CURLS ",
+                  " LEG SQUATS ",
                   style: FitnessAppTheme.workoutTitle,
                 ),
                 Image.asset(
-                  'assets/workout_screen/bicep_icon.png',
+                  'assets/workout_screen/quads_icon.png',
                   scale: 3,
                 ),
               ],
@@ -138,7 +138,7 @@ class _BicepCurlsState extends State<BicepCurls> {
               ),
             ),
             Image.asset(
-              'assets/workout_screen/bicep.gif',
+              'assets/workout_screen/squats.gif',
               scale: 4,
             ),
             // Row(

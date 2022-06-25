@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:http/http.dart' as http;
+import 'package:video_compress/video_compress.dart';
 
 const baseWorkoutAPI = "https://profit-workout-counter.herokuapp.com/";
 
@@ -14,6 +15,16 @@ class WorkoutServices {
       // User cancelled the picker
       throw Exception("No file selected");
     }
+  }
+
+  compressFile(File workoutFile) async {
+    final compressedFile = await VideoCompress.compressVideo(
+      workoutFile.path,
+      quality: VideoQuality.DefaultQuality,
+      includeAudio: false,
+      deleteOrigin: false,
+    );
+    return File(compressedFile!.path!);
   }
 
   uploadFile(File workoutVideo, String workoutName) async {

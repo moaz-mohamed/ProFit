@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:profit/themes/theme_ui.dart';
 import 'package:profit/widgets/Dashboard/Screens/WorkoutScreen/biceps_curl.dart';
 import 'package:profit/widgets/Dashboard/Screens/WorkoutScreen/shoulder_raises.dart';
+import 'package:profit/widgets/Dashboard/Screens/WorkoutScreen/squats.dart';
 
 class WorkoutsPage extends StatelessWidget {
   const WorkoutsPage({Key? key}) : super(key: key);
@@ -95,7 +96,7 @@ class WorkoutsPage extends StatelessWidget {
                       ),
                       Image.asset(
                         'assets/workout_screen/bicep.gif',
-                        scale: 10,
+                        scale: MediaQuery.of(context).size.height * 0.01,
                       ),
                     ],
                   ),
@@ -105,8 +106,7 @@ class WorkoutsPage extends StatelessWidget {
                       MediaQuery.of(context).size.height * 0.12,
                     )),
                     backgroundColor: MaterialStateProperty.all(Colors.white),
-                    side: MaterialStateProperty.all(
-                        const BorderSide(color: Colors.blue, width: 2)),
+                    side: MaterialStateProperty.all(const BorderSide(color: Colors.blue, width: 2)),
                     // overlayColor: MaterialStateProperty.all(Colors.black12),
                   ),
                   onPressed: () {
@@ -172,7 +172,7 @@ class WorkoutsPage extends StatelessWidget {
                       ),
                       Image.asset(
                         'assets/workout_screen/shoulder_press.gif',
-                        scale: 10,
+                        scale: MediaQuery.of(context).size.height * 0.01,
                       ),
                     ],
                   ),
@@ -182,8 +182,7 @@ class WorkoutsPage extends StatelessWidget {
                       MediaQuery.of(context).size.height * 0.12,
                     )),
                     backgroundColor: MaterialStateProperty.all(Colors.white),
-                    side: MaterialStateProperty.all(
-                        const BorderSide(color: Colors.blue, width: 2)),
+                    side: MaterialStateProperty.all(const BorderSide(color: Colors.blue, width: 2)),
                     // overlayColor: MaterialStateProperty.all(Colors.black12),
                   ),
                   onPressed: () {
@@ -202,14 +201,6 @@ class WorkoutsPage extends StatelessWidget {
                   endIndent: 20,
                 ),
                 ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    fixedSize: Size(
-                      MediaQuery.of(context).size.width - 40,
-                      MediaQuery.of(context).size.height * 0.12,
-                    ),
-                    onSurface: Colors.white,
-                    side: BorderSide(color: Colors.blue, width: 2),
-                  ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
@@ -265,11 +256,27 @@ class WorkoutsPage extends StatelessWidget {
                       ),
                       Image.asset(
                         'assets/workout_screen/squats.gif',
-                        scale: 10,
+                        scale: MediaQuery.of(context).size.height * 0.01,
                       ),
                     ],
                   ),
-                  onPressed: null,
+                  style: ButtonStyle(
+                    fixedSize: MaterialStateProperty.all(Size(
+                      MediaQuery.of(context).size.width - 40,
+                      MediaQuery.of(context).size.height * 0.12,
+                    )),
+                    backgroundColor: MaterialStateProperty.all(Colors.white),
+                    side: MaterialStateProperty.all(const BorderSide(color: Colors.blue, width: 2)),
+                    // overlayColor: MaterialStateProperty.all(Colors.black12),
+                  ),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => Squats(),
+                      ),
+                    );
+                  },
                 ),
               ],
             ),
