@@ -14,7 +14,7 @@ import 'package:profit/widgets/FoodAPI/foodscreen.dart';
 class FoodMain extends StatelessWidget {
   // This widget is the root of your application.
   final int foodtype;
-  FoodMain({required this.foodtype});
+  const FoodMain({required this.foodtype});
 
   @override
   Widget build(BuildContext myAppContext) {

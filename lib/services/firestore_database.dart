@@ -100,6 +100,7 @@ class DatabaseService {
       required double quantity,
       required double protein,
       required double fat,
+      required String photo,
       required double carbs,
       required date}) async {
 // get snapshot and update breakfast
@@ -121,6 +122,7 @@ class DatabaseService {
       'quantity': quantity,
       'protein': protein,
       'fat': fat,
+      'photo': photo,
       'carbs': carbs,
     });
     updateUserCalories(
@@ -142,13 +144,12 @@ class DatabaseService {
       required double calories,
       required double quantity,
       required double protein,
+      required String photo,
       required double fat,
       required double carbs,
       required date}) async {
-// get snapshot and update breakfast
     final DocumentSnapshot user =
         await FirebaseFirestore.instance.collection('users').doc(id).get();
-    //printAllDataInDocument(id: id);
     final List history = user['history'];
     history.add({
       'name': name,
@@ -161,6 +162,7 @@ class DatabaseService {
       'name': name,
       'calories': calories,
       'quantity': quantity,
+      'photo': photo,
       'protein': protein,
       'fat': fat,
       'carbs': carbs,
@@ -184,6 +186,7 @@ class DatabaseService {
       required double calories,
       required double quantity,
       required double protein,
+      required String photo,
       required double fat,
       required double carbs,
       required date}) async {
@@ -203,6 +206,7 @@ class DatabaseService {
       'calories': calories,
       'quantity': quantity,
       'protein': protein,
+      'photo': photo,
       'fat': fat,
       'carbs': carbs,
     });
@@ -412,9 +416,7 @@ class DatabaseService {
 
     final List workout = user['workout'];
 
-    // update Burned Calories after delete
     updateBurnedCaloriesAfterDelete(id: id, burnedCalories: calories);
-    // remove meal from list
     workout.removeAt(index);
     return await FirebaseFirestore.instance
         .collection('users')
@@ -431,6 +433,7 @@ class DatabaseService {
       required double calories,
       required double fats,
       required double quantity,
+      required String photo,
       required double carbs,
       required double proteins}) async {
     final DocumentSnapshot user =
@@ -440,6 +443,7 @@ class DatabaseService {
     favoriteFoods.add({
       'name': name,
       'calories': calories,
+      'photo': photo,
       'fat': fats,
       'carbs': carbs,
       'protein': proteins,
@@ -451,42 +455,7 @@ class DatabaseService {
         .doc(id)
         .update({'favourites': favoriteFoods});
   }
-//Future addBreakfastToFirestoreUser(
-//       {required String id,
-//       required String name,
-//       required double calories,
-//       required double quantity,
-//       required double protein,
-//       required double fat,
-//       required double carbs}) async {
-// // get snapshot and update breakfast
-//     final DocumentSnapshot user =
-//         await FirebaseFirestore.instance.collection('users').doc(id).get();
-//     //printAllDataInDocument(id: id);
 
-// // update breakfast if exists else create new breakfast
-//     final List breakfast = user['breakfast'];
-//     breakfast.add({
-//       'name': name,
-//       'calories': calories,
-//       'quantity': quantity,
-//       'protein': protein,
-//       'fat': fat,
-//       'carbs': carbs,
-//     });
-//     updateUserCalories(
-//         id: id,
-//         foodCalories: calories,
-//         fats: fat,
-//         carbs: carbs,
-//         proteins: protein);
-//     return await FirebaseFirestore.instance
-//         .collection('users')
-//         .doc(id)
-//         .update({'breakfast': breakfast});
-//   }
-
-//UpdateBurnedCaloriesAfterDelete
   Future updateBurnedCaloriesAfterDelete(
       {required String id, required double burnedCalories}) async {
     double burnedCaloriesTotal = 0;
