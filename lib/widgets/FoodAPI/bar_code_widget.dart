@@ -82,12 +82,13 @@ class _BarCodeSearchState extends State<BarCodeSearch> {
                           context,
                           MaterialPageRoute(
                             builder: (context) => AddFoodScreen(
-                              calculateFoodBloc:
-                                  BlocProvider.of<CalculateFoodBloc>(context),
-                              foodLabel: items.hints[index].food.label,
-                              foodID: items.hints[index].food.foodId,
-                              foodtype: widget.foodtype,
-                            ),
+                                calculateFoodBloc:
+                                    BlocProvider.of<CalculateFoodBloc>(context),
+                                foodLabel: items.hints[index].food.label,
+                                foodID: items.hints[index].food.foodId,
+                                foodtype: widget.foodtype,
+                                foodPicture: items.hints[index].food.image ??
+                                    "https://icon-library.com/images/food-icon-png/food-icon-png-1.jpg"),
                           ),
                         );
                       },

@@ -55,24 +55,23 @@ class _SignupScreenState extends State<SignupScreen> {
     final bool _gender = widget.gender;
     final double _activityLevel = widget.activityLevel;
     final double _calories = widget.calories;
-    //  final formGlobalKey = GlobalKey<FormState>();
-    final UserProfile userProfile = UserProfile({
-      'name': _nameController.text,
-      'email': _emailController.text,
-      'goal': _goal,
-      'age': _age,
-      'height': _height,
-      'weight': _weight,
-      'gender': _gender,
-      'activityLevel': _activityLevel,
-      'calories': _calories,
-    });
 
     void signup() async {
       final formKey = formGlobalKey.currentState;
 
       if (formKey!.validate()) {
         formKey.save();
+        final UserProfile userProfile = UserProfile({
+          'name': _nameController.text,
+          'email': _emailController.text,
+          'goal': _goal,
+          'age': _age,
+          'height': _height,
+          'weight': _weight,
+          'gender': _gender,
+          'activityLevel': _activityLevel,
+          'calories': _calories,
+        });
         await authServices.signUpWithEmailAndPassword(
             name: _nameController.text,
             email: _emailController.text.trim(),
