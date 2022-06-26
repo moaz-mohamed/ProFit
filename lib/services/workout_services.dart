@@ -20,7 +20,7 @@ class WorkoutServices {
   compressFile(File workoutFile) async {
     final compressedFile = await VideoCompress.compressVideo(
       workoutFile.path,
-      quality: VideoQuality.DefaultQuality,
+      quality: VideoQuality.Res640x480Quality,
       includeAudio: false,
       deleteOrigin: false,
     );
@@ -43,6 +43,7 @@ class WorkoutServices {
     final response = await request.send();
     http.Response httpResponse = await http.Response.fromStream(response);
     final jsonResponse = jsonDecode(httpResponse.body);
+    workoutVideo.delete();
     return jsonResponse['message'];
   }
 }

@@ -426,7 +426,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: const <Widget>[
-              Icon(Icons.add_circle_outline),
+              Icon(Icons.add_circle_outline, color: Colors.white,),
               Text(
                 "  Add to daily macros",
                 style: FitnessAppTheme.addFood,
@@ -434,6 +434,9 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
             ],
           ),
           style: ButtonStyle(
+            shape: MaterialStateProperty.all(RoundedRectangleBorder(
+              borderRadius: BorderRadius.zero,
+            )),
             fixedSize: MaterialStateProperty.all(Size(
               MediaQuery.of(context).size.width,
               MediaQuery.of(context).size.height * 0.06,
