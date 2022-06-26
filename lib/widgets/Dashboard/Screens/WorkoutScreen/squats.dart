@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:profit/themes/theme_ui.dart';
 import 'package:profit/services/workout_services.dart';
+import 'package:profit/services/firestore_database.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:profit/widgets/Dashboard/navigation_screen.dart';
 
 class Squats extends StatefulWidget {
   @override
@@ -17,8 +20,8 @@ class _SquatsState extends State<Squats> {
   @override
   void initState() {
     super.initState();
-    _responseMessage = "Zero";
-    _caloriesBurnt = "Zero";
+    _responseMessage = "0";
+    _caloriesBurnt = "0";
   }
 
   calculateReps() async {
@@ -142,6 +145,68 @@ class _SquatsState extends State<Squats> {
               scale: 4,
             ),
           ],
+        ),
+      ),
+      bottomNavigationBar: BottomAppBar(
+        child: ElevatedButton(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: const <Widget>[
+              Icon(
+                Icons.add_circle_outline,
+                color: Colors.white,
+              ),
+              Text(
+                "  Add to my workouts",
+                style: FitnessAppTheme.addFood,
+              ),
+            ],
+          ),
+          style: ButtonStyle(
+            shape: MaterialStateProperty.all(RoundedRectangleBorder(
+              borderRadius: BorderRadius.zero,
+            )),
+            fixedSize: MaterialStateProperty.all(Size(
+              MediaQuery.of(context).size.width,
+              MediaQuery.of(context).size.height * 0.06,
+            )),
+            backgroundColor: MaterialStateProperty.all(Colors.blue),
+            // side: MaterialStateProperty.all(const BorderSide(color: Colors.blue, width: 2)),
+            overlayColor: MaterialStateProperty.all(Colors.white),
+          ),
+          onPressed: () async => {
+            if (double.parse(_caloriesBurnt) == 0)
+              {
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) => AlertDialog(
+                    title: const Text("No Reps Detected"),
+                    content: const Text("Please upload your workout video"),
+                    elevation: 10,
+                    actions: <Widget>[
+                      TextButton(
+                        onPressed: () => Navigator.pop(context, 'OK'),
+                        child: const Text('OK'),
+                      ),
+                    ],
+                  ),
+                ),
+              }
+            else
+              {
+                DatabaseService().addWorkoutToFirestoreUser(
+                  id: FirebaseAuth.instance.currentUser!.uid,
+                  name: "Squats",
+                  burnedCalories: double.parse(_caloriesBurnt),
+                  duration: (double.parse(_responseMessage) * 2) / 60,
+                ),
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(builder: (context) => const TabBarPage()),
+                  ModalRoute.withName('/success'),
+                )
+              }
+          },
         ),
       ),
     );

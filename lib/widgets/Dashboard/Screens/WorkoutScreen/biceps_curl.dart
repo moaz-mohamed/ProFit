@@ -1,8 +1,11 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:profit/themes/theme_ui.dart';
 import 'package:profit/services/workout_services.dart';
+import 'package:profit/services/firestore_database.dart';
+import 'package:profit/widgets/Dashboard/navigation_screen.dart';
 
 class BicepCurls extends StatefulWidget {
   @override
@@ -12,13 +15,14 @@ class BicepCurls extends StatefulWidget {
 class _BicepCurlsState extends State<BicepCurls> {
   late String _responseMessage;
   late String _caloriesBurnt;
+  late double _userWeight;
   WorkoutServices workoutServices = WorkoutServices();
 
   @override
   void initState() {
     super.initState();
-    _responseMessage = "Zero";
-    _caloriesBurnt = "Zero";
+    _responseMessage = "0";
+    _caloriesBurnt = "0";
   }
 
   calculateReps() async {
@@ -29,9 +33,13 @@ class _BicepCurlsState extends State<BicepCurls> {
     });
     final _pickedFileCompressed = await workoutServices.compressFile(_pickedFile);
     final _response = await workoutServices.uploadFile(_pickedFileCompressed, "biceps");
+    _userWeight = await DatabaseService().getWeight(FirebaseAuth.instance.currentUser!.uid);
+    print(_userWeight);
     setState(() {
       _responseMessage = _response;
-      _caloriesBurnt = (double.parse(_responseMessage) * 0.2).toStringAsFixed(3);
+      // MET formula
+      _caloriesBurnt =
+          ((6 * 3.5 * _userWeight / 200) * (double.parse(_responseMessage) * 2) / 60).toStringAsFixed(3);
     });
   }
 
@@ -142,6 +150,68 @@ class _BicepCurlsState extends State<BicepCurls> {
               scale: 4,
             ),
           ],
+        ),
+      ),
+      bottomNavigationBar: BottomAppBar(
+        child: ElevatedButton(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: const <Widget>[
+              Icon(
+                Icons.add_circle_outline,
+                color: Colors.white,
+              ),
+              Text(
+                "  Add to my workouts",
+                style: FitnessAppTheme.addFood,
+              ),
+            ],
+          ),
+          style: ButtonStyle(
+            shape: MaterialStateProperty.all(RoundedRectangleBorder(
+              borderRadius: BorderRadius.zero,
+            )),
+            fixedSize: MaterialStateProperty.all(Size(
+              MediaQuery.of(context).size.width,
+              MediaQuery.of(context).size.height * 0.06,
+            )),
+            backgroundColor: MaterialStateProperty.all(Colors.blue),
+            // side: MaterialStateProperty.all(const BorderSide(color: Colors.blue, width: 2)),
+            overlayColor: MaterialStateProperty.all(Colors.white),
+          ),
+          onPressed: () async => {
+            if (double.parse(_caloriesBurnt) == 0)
+              {
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) => AlertDialog(
+                    title: const Text("No Reps Detected"),
+                    content: const Text("Please upload your workout video"),
+                    elevation: 10,
+                    actions: <Widget>[
+                      TextButton(
+                        onPressed: () => Navigator.pop(context, 'OK'),
+                        child: const Text('OK'),
+                      ),
+                    ],
+                  ),
+                ),
+              }
+            else
+              {
+                DatabaseService().addWorkoutToFirestoreUser(
+                  id: FirebaseAuth.instance.currentUser!.uid,
+                  name: "Bicep Curls",
+                  burnedCalories: double.parse(_caloriesBurnt),
+                  duration: (double.parse(_responseMessage) * 2) / 60,
+                ),
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(builder: (context) => const TabBarPage()),
+                  ModalRoute.withName('/success'),
+                )
+              }
+          },
         ),
       ),
     );

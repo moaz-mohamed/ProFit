@@ -563,4 +563,11 @@ class DatabaseService {
       'date': Timestamp.fromDate(date),
     });
   }
+
+  getWeight(String ID) async {
+    late double weight;
+    final docUser = await FirebaseFirestore.instance.collection('users').doc(ID).get();
+    weight = double.parse(docUser['weight']);
+    return weight;
+  }
 }
