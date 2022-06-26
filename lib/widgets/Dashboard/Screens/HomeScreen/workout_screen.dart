@@ -57,6 +57,8 @@ class _WorkoutScreenState extends State<WorkoutScreen> {
                       'Walking',
                       'Bicycling',
                       'Jogging',
+                      'Swimming',
+                      'Running',
                     ].map<DropdownMenuItem<String>>((String value) {
                       return DropdownMenuItem<String>(
                         value: value,
