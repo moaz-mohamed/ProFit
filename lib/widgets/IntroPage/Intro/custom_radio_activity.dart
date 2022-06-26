@@ -78,7 +78,7 @@ class _RadioItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(bottom: 10.0),
+      margin: const EdgeInsets.only(bottom: 10.0),
       child: Row(
         mainAxisSize: MainAxisSize.max,
         children: <Widget>[

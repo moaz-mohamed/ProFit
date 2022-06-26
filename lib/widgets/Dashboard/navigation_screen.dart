@@ -189,9 +189,9 @@ class _TabBarPageState extends State<TabBarPage> {
     final children = [
       HomePage(),
       StepsScreen(),
-      WorkoutsPage(),
-      Geofencing(),
-      FoodRecommendationScreen()
+      const WorkoutsPage(),
+      const Geofencing(),
+      const FoodRecommendationScreen()
     ];
     return children[index];
   }

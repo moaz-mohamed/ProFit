@@ -2,7 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:profit/services/firestore_database.dart';
 
 class MyHeaderDrawer extends StatefulWidget {
   @override
@@ -21,27 +20,20 @@ class _MyHeaderDrawerState extends State<MyHeaderDrawer> {
     String userId = auth.currentUser!.uid;
     DocumentReference doc =
         FirebaseFirestore.instance.collection("users").doc(userId);
-    DatabaseService dbService = DatabaseService();
-
-    await dbService.getFields();
-
     await doc.get().then((value) {
       name = value.get('name').toString();
       email = value.get('email').toString();
     });
 
-    //setState(() => username = name!);
     setState(() {
       username = name!;
       useremail = email!;
     });
-    // setState(() => useremail = email!);
   }
 
   @override
   void initState() {
     getData();
-    // getData('email');
     super.initState();
   }
 
@@ -51,12 +43,12 @@ class _MyHeaderDrawerState extends State<MyHeaderDrawer> {
       color: Colors.blue[700],
       width: double.infinity,
       height: 200,
-      padding: EdgeInsets.only(top: 20.0),
+      padding: const EdgeInsets.only(top: 20.0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
-            margin: EdgeInsets.only(bottom: 10),
+            margin: const EdgeInsets.only(bottom: 10),
             height: 70,
             decoration: const BoxDecoration(
               shape: BoxShape.circle,
