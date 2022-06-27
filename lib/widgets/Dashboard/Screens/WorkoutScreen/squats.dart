@@ -15,6 +15,7 @@ class Squats extends StatefulWidget {
 class _SquatsState extends State<Squats> {
   late String _responseMessage;
   late String _caloriesBurnt;
+  late double _userWeight;
   WorkoutServices workoutServices = WorkoutServices();
 
   @override
@@ -32,9 +33,12 @@ class _SquatsState extends State<Squats> {
     });
     final _pickedFileCompressed = await workoutServices.compressFile(_pickedFile);
     final _response = await workoutServices.uploadFile(_pickedFileCompressed, "squats");
+    _userWeight = await DatabaseService().getWeight(FirebaseAuth.instance.currentUser!.uid);
     setState(() {
       _responseMessage = _response;
-      _caloriesBurnt = (double.parse(_responseMessage) * 0.2).toStringAsFixed(3);
+      // MET formula
+      _caloriesBurnt =
+          ((6 * 3.5 * _userWeight / 200) * (double.parse(_responseMessage) * 2) / 60).toStringAsFixed(3);
     });
   }
 
