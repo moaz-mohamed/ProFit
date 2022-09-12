@@ -1,16 +1,18 @@
-# profit
+# ProFit
 
-A new Flutter project.
+Graduation Project of CESS 2022
 
-## Getting Started
+## What is ProFit?
 
-This project is a starting point for a Flutter application.
+* Fitness mobile application that helps people to achieve healthy lifestyle through tracking their daily calories taken or burned, display nearby gyms and record daily steps
+* Applying ML techniques to recommend healthy meals to users compatible with their lifestyle and health conditions
+* Built using flutter, firebase, bloc pattern
+* Developed REST APIs using Node.js and Flask
 
-A few resources to get you started if this is your first Flutter project:
+## Live Demo
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
+
+https://user-images.githubusercontent.com/49661363/189704797-af318b7d-0b41-45c8-bedf-329d5922b7c9.mp4
+
